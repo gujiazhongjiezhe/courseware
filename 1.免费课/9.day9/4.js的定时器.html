@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: orangered;
+      margin:  0 auto;
+      line-height: 200px;
+      /* display: none; */
+      position: relative;
+      top:-300px;
+      transition: all 3s;
+    }
+  </style>
+</head>
+<body>
+  <!-- <button id="btn">点击</button> -->
+  <div id="box">
+    我们是广告
+    <button id="btn">点击</button>
+  </div>
+  <script>
+    // 定时器
+    // setInterval
+    // setTimeout
+    // 定时器可以设置一个时间，当到了规定的时间之后，去做你想做的事
+
+    // setTimeout(function(n,m){
+    //   console.log('2s到了',n,m);
+    // },5000,100,200) // 只会执行一次
+
+
+    // setInterval(function(){
+    //   console.log(1);
+    // },2000) // 每间隔一段时间就会运行一次
+
+    // 传参情况：第一个参数是函数，第二个参数是间隔的时间(单位是毫秒)
+    // setTimeout(function(){
+    //   console.log(1);
+    // },1)
+
+    //------------------------------
+    // 定时器的返回值
+    // let time1 = setTimeout(function(){console.log(1);},1000);
+    // let time2 = setInterval(function(){console.log(2);},2000);
+    // let time3 = setInterval(function(){console.log(3);},3000);
+    // console.log(time3); // 1 2 3
+    // 定时器的返回值是数字，这个数字代表了当前定时器在页面中的位置(第几个)
+
+    // 清除当前定时器
+    // clearInterval(当前要清空的定时器的返回值)  clearTimeout(当前要清空的定时器的返回值) 
+
+
+      // let timer = setInterval(function(){
+      //   console.log(1);
+      // },2000);
+
+      // btn.onclick = function(){
+      //   clearInterval(timer)
+      // }
+
+      //----------------------------------------------------------------
+      // setTimeout(function(){
+      //   box.style.display = 'block';
+      // },5000);
+      // btn.onclick = function(){
+      //   box.style.display = 'none';
+      // }
+
+
+      setTimeout(function(){
+        box.style.top = '300px';
+      },5000);
+      btn.onclick = function(){
+        box.style.top = '-300px';
+      }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 数组的去重
+    var ary = [23, 23, 23, 34, 23, 34, 23]; // [23,34]
+
+    // 利用对象的属性名不能重复的特点进行数组去重
+    let obj = {
+      name: '11',
+      age: 10,
+      name: 100
+    }
+    // 把数组转化成对象，
+
+    function unique(ary) {
+      // 1.创建一个对象，把数组的每一项既当做属性名又当做属性值存储到obj中(把数组转化成对象)
+      // 2.把当前obj对象的所有属性值拿出来放到一个新的数组里边，那这个新数组就是去重之后的数组
+      // var obj = {
+      //   34:34,
+      //   23:23
+      // };
+
+      var obj = {};
+      for (var i = 0; i < ary.length; i++) {
+        // 循环第一次 i =0
+        obj[ary[i]] = ary[i];
+        // obj[23] = 23
+      }
+      // console.log(obj);
+      // 2.
+      var newAry = [];
+      for (var key in obj) {
+        // key代表每一个属性名
+        // obj[key] // 代表每一个属性值
+        newAry.push(obj[key]) // 把对象的每一个属性值放到数组里
+      }
+      // console.log(newAry);
+      return newAry
+
+
+    }
+    console.log(unique(ary));
+   // 不会改变原数组，函数的返回值会产生一个新的数组
+
+
+  //  var obj1 = {
+  //    10:1,
+  //    9:2,
+  //    1:6
+  //  }
+  //  console.log(obj1);
+  </script>
+</body>
+
+</html>

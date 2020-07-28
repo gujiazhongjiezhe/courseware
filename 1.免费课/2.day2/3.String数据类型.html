@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // String数据类型
+        // 1、那单引号，双引号，反引号包裹起来的就是字符串 '' "" ``
+
+        // 2、把其他数据类型转换为字符串
+        // String(value)
+        // value.toString()
+
+        // 基本值转字符串是直接加引号
+        // console.log(String(true)); // 'true'
+        // console.log(true.toString()); // 'true'
+        // console.log((100).toString()); // 如果是数字调用toString，要加上小括号
+        // null和unedfined不能够使用toString
+        // null.toString() // 会报错
+        // undefined.toString() // 会报错
+        // console.log(String(null)); // 'null'
+        //----------------------------------------------------------------------
+        // 1、普通对象转字符串是都是 '[object Object]'
+        // 2、数组转字符串：把数组的每一项都去转字符串，然后每一个小字符串和逗号拼接起来，形成一个大的字符串
+
+        //-------------------------------------------------------------------------------------------------------
+        // 四则运算
+        // 在运算的过程中，如果发现当前的值不是number类型的，要先默认转化为number值，然后在运算
+        // 如果在运算过程中出现NaN了，那最后的结果就是NaN
+        // console.log(100 + 23 / 1);
+        // console.log(true + true - false + null);
+        // //          1 + 1 - 0 -0-->2
+
+        // console.log(true + 2 + undefined + null);
+        //          1  + 2 + NaN + 0-->NaN
+        // 
+        // console.log(3468*9516/undefined); // NaN
+
+
+        // 在加法运算的过程中会出现两种情况
+        // 就是正常的运算
+        // 字符串拼接：在加法运算过程中一旦出现引号和加号相遇了，那就是字符串拼接，不在是正常的运算了
+        // 在拼接的过程中如果是基本值拼接，就不会再进行数据类型的转换，直接拼接
+        // 在拼接的过程中如果是引用值拼接，那照样进行数据类型的转换(转换为字符串在拼接)
+
+        // console.log('true' + 1); // 'true1'
+        // console.log('1' + true); // '1true'
+        // console.log('1' - true); // 1 - 1-->0
+
+
+        // console.log(1 + true + null + undefined + true + 'er');
+        // //          1+1 + 0 +  NaN +1 +'er'
+        // //                          NaN+'er'-->'NaNer'
+
+
+        // console.log(35 + 678 + undefined - true + 'erYa' + true + undefined); 
+        //              NaN + 'erYa'-->'NaNerYa'+true-->'NaNerYatrue' + undefined-->'NaNerYatrueundefined'
+        // NaNerYatrueundefined
+
+        //----------------------------------
+
+        // console.log(1 + []); // 1 + ''-->'1'
+        // 在加法运算过程中，数组不是number值，要转number，但是引用值要先转字符串，当转化成字符串的时候，引号和加号相遇了，那这时候就不在是正常的运算，就是字符串拼接了
+
+        // 在拼接的过程中如果是引用值拼接，那照样进行数据类型的转换(转换为字符串在拼接)
+        // console.log([] + []); // '' + []--->''+''-->'' 后面拼接的引用值会转化为字符换，在拼接
+        // //                       '' + true-->'true'    后面拼接的基本值不会转化，直接拼接
+
+
+        // console.log({} + {});
+        // 在拼接的时候如果拼接的基本值不需要类型转换，如果是引用值，转换为字符串在拼接
+        // '[object Object]' + {}
+        // '[object Object]' +'[object Object]'
+        // '[object Object][object Object]'
+
+        console.log(1 + undefined + {} + true + [1]);
+        //            NaN +{}--> NaN + '[object Object]'-->'NaN[object Object]'
+        // 'NaN[object Object]' + true-->'NaN[object Object]true'
+        // 'NaN[object Object]true' + [1]-->'NaN[object Object]true' + '1'-->'NaN[object Object]true1'
+    </script>
+</body>
+
+</html>

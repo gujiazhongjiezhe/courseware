@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖系统</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #box {
+            width: 800px;
+            margin: 200px auto;
+            text-align: center;
+        }
+        #show {
+            color: rgba(255, 0, 0, 0.918);
+            font-size: 60px;
+            font-weight: 700;
+            display: block;
+            /* width: 200px; */
+            height: 100px;
+            line-height: 100px;
+
+        }
+        button {
+            display: block;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            background: orangered;
+            color: white;
+            font-size: 20px;
+            margin:  10px auto;
+
+        }
+    </style>
+</head>
+<body>
+    <div id = "box">
+        <span id="show">请点击开始</span>
+        <button id="btn">开始</button>
+    </div>
+    <script>
+        let show = document.getElementById('show');
+        let btn = document.getElementById('btn');
+        let ss = null; // 创建一个变量，用来存储定时器的返回值
+
+        btn.onclick = function(){
+            let value = btn.innerText;
+            // 获取按钮的内容
+            // 如果按钮的内容是开始，那条件就成立
+            if(value === '开始'){
+                // 创建定时器，开始循环姓名
+                ss = setInterval(createName,10);
+                // 把btn的内容改为停止
+                btn.innerText = '停止'
+
+            }
+            else {
+                // 清空定时器
+                clearInterval(ss);
+                // 然后把btn的内容改为开始
+                btn.innerText = '开始'
+                // show.innerText = '任保森'
+            }
+        }
+
+        function createName(){
+            let ary = ['瑾瑜', '郭靖', '吴梦婷', '苏鑫', '乔岩','刘琨鹏', '杨扬', '成云开', '任保森', '刘胜', '王裴', '罗宏杰','肖依悦', '屈军军', '付任保森', '信为亚', '任保森', '赵猛', '刘刚 ', '蒋子彤','孙龙', '任保森', '刘文甜', '任保森', '邢民华', '刘宝华', '宋泽', '王小飞', '杨晨涛', '王兴楠', '冉德鹏', '王朝森', '孙彭贵'];
+            let index = Math.round(Math.random()*(ary.length-1+0)+0);
+            // 随机获取数组的额一个索引
+            let name = ary[index]; // 通过索引获取数组里的一个名字
+            show.innerText = name; // 把名字放到span标签的内容里
+        }
+    </script>
+</body>
+</html>

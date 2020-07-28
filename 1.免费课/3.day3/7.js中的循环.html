@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js中的循环 for
+        // for     for in   while
+
+        // js中的循环就是不断的重复去做某一件事
+
+        // 1、for循环
+        //     1、创建循环的初始值
+        //     2、创建/判断循环的条件是否成立
+        //     3、如果条件成立，就执行循环体的代码
+        //     4、进行步长累计
+
+        // 1-->2-->3-->4-->2-->3-->4-->2-->3-->4-->2
+        // for (var i = 0; i < 3; i++) { // i=1 2 3
+        //     // 循环体
+        //     // console.log(1); // 1 1 1
+        //     console.log(i); // 0 1 2
+        //     // 如果for循环执行不完，for循环下面的代码不会执行
+        // }
+
+        // console.log(i); // 3
+
+        // for(var i = 2;i>1;i++){
+        //     // 会陷入死循环
+        //     console.log(i); // 2 3 4
+        // }
+
+        // var ary = [100, 200, 300, 400, 500, 600];
+        // // 需求利用for循环输出数组的每一项
+        // // console.log(ary[0]);
+        // // console.log(ary[1]);
+        // // console.log(ary[2]);
+        // // console.log(ary[3]);
+
+        // for (var i = 0; i < ary.length; i++) {
+        //     // console.log(i); // 0 1 2 3
+        //     // 循环第一次 此时的i是0  
+        // i就是数组每一项的索引
+        //     console.log(ary[i]); // 100 
+        // }
+        // console.log(i);
+
+
+
+        // continue：结束当前轮的循环，然后进行下一轮循环
+        // break:结束整个循环
+        // for (var i = 0; i < 3; i++) {
+        //     break; // 结束整个循环
+        //     if (i === 1) {
+        //         continue;
+        //         // 遇见continue就会结束当前轮的循环，进行下一轮循环(不要忘了步长累计)
+        //     }
+        //     console.log(i); // 0 2
+
+        // }
+
+
+        // 1、for循环
+        //     1、创建循环的初始值
+        //     2、创建/判断循环的条件是否成立
+        //     3、如果条件成立，就执行循环体的代码
+        //     4、进行步长累计
+
+        // 1-->2-->3-->4-->2-->3-->4-->2-->3-->4-->2
+        // for (var i = 0; i < 10; i++) { // 1 2 4 5 7 8 10 11
+        //     if (i >= 2) {
+        //         i += 2;
+        //         continue;
+        //     }
+        //     if (i >= 6) {
+        //         break;
+        //     }
+        //     console.log(i++); // 0
+        // };
+
+        // console.log(i); // 11
+
+        // 练习里有死循环
+
+        // 周四  上午十一点左右
+        // 元素也是对象   隔行变色
+        // 明天在qq里开视频
+    </script>
+</body>
+
+</html>

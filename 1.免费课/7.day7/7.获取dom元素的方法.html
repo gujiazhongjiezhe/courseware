@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* ul {
+
+        } */
+    </style>
+</head>
+
+<body>
+    <ul id="box">
+        <li id="a" class="s">1</li>
+        <li class="s">2</li>
+        <li class="s">3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <li>6</li>
+    <script>
+        // 元素节点
+        // 获取元素的方法
+
+        // document.getElementById('id名'):通过id名去获取元素，获取的是一个元素对象，如果获取不到，那就是null
+
+        // context.getElementsByTagName('标签名'):在指定的上下文中通过标签名获取一组元素(类数组),如果获取不到就是空元素集合
+
+        // context.getElementsByClassName('类名'):在指定的上下文中通过类名获取一组元素(类数组),如果获取不到就是空元素集合
+
+        // context.querySelector('选择器'):在指定的上下文中通过选择器获取一个元素对象，如果获取不到就是null
+
+        // context.querySelectorAll('选择器'):在指定的上下文中通过选择器获取一组元素(类数组),如果获取不到就是空元素集合
+
+        // document.body:获取body
+
+        // document.documentElement：获取html
+
+        // document.head：获取头部
+
+
+
+
+        // var a = document.getElementById('a');
+       
+
+        // console.log(a);
+        // console.log(box); // 浏览器是支持通过id名直接使用当前对应的元素
+        // var list =  document.getElementsByClassName('r');
+        // console.log(list);
+
+        // var box = document.getElementsByTagName('ul')[0]; // [ul]
+        // console.log(box);
+
+        // console.log(document.querySelector('#box>li.s')); // li
+        console.log(document.querySelectorAll('#box>li.s')); // [li,li,li]
+    </script>
+</body>
+
+</html>

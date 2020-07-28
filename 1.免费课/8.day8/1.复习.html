@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul><li id="one">1</li>
+        <li>2</li>
+        123456
+        <!--  -->
+        <li id="three">3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        // push pop unshift shift splice  reverse sort 全部改变 
+        // slice concat join indexOf lastIndexOf includes forEach map
+
+        // nodeType   1  
+        // childNodes children  firstChild lastChild firstElementChild lastElementChild  previousSibling nextSibling   previousElementSibling nextElementSibling 
+        // parentNode
+
+        //-----------------------------------------------------
+        var three = document.getElementById('three');
+        function prev(ele){
+            // 获取上一个哥哥节点
+            var pre = ele.previousSibling;
+            if(!pre){
+                return null;
+            }
+            // 如果获取的哥哥节点的nodeType是1的话，说明此节点是元素节点
+            // 如果获取的哥哥节点的nodeType不是1，说明当前的节点不是元素节点，要继续循环获取上一个哥哥节点的哥哥节点，直到获取的节点的nodeType是1为止
+            while(pre.nodeType !==1){
+                // 继续获取当前节点的上一个哥哥节点
+                pre = pre.previousSibling;
+
+            }
+            return pre;
+
+
+        }
+
+        console.log(prev(one)); //  <li>2</li>
+
+    </script>
+</body>
+
+</html>

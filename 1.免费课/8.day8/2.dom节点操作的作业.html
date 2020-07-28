@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        div {
+            width: 50%;
+            margin: 20px auto;
+            text-align: center;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            position: relative;
+            height: 20px;
+            line-height: 20px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            position: absolute;
+            right: 0;
+            height: 20px;
+            width: 30px;
+            font-size: 12px;
+            background: rgb(118, 194, 3);
+        }
+
+        input {
+            display: block;
+            width: 50%;
+            margin: 0 auto 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="input">
+        <ul id="box"></ul>
+    </div>
+
+    <script>
+        let box = document.getElementById('box');
+        let input = document.getElementById('input');
+
+        input.onblur = function () {
+            // input框失去焦点的时候就会触发
+            //1.拿到input的内容
+            // 2.动态生成li标签和button标签，并且把button和input的内容插入到li里边
+            // 最后再把li插入到ul里边
+
+            var value = input.value;
+            if(!value){
+                alert('请输入内容!');
+                return;
+            }
+            var li = document.createElement('li');
+            var btn = document.createElement('button');
+            btn.innerText = '删除';
+            var text = document.createTextNode(value);
+
+            li.appendChild(text);
+            li.appendChild(btn);
+            box.appendChild(li);
+            input.value = '';
+            // console.log(li);
+            // 获取页面的li
+            changeColor();
+
+            btn.onclick = function () {
+                console.log(1);
+                this.parentNode.parentNode.removeChild(this.parentNode);
+                // this就是当前点击的button元素，他的父元素是li，li的父元素的ul
+                // this就是当前操作的元素
+                changeColor();
+            }
+
+
+        }
+
+        function changeColor() {
+            var list = document.getElementsByTagName('li');
+            for (var i = 0; i < list.length; i++) {
+                if (i % 2 === 0) {
+                    list[i].style.background = 'red'
+                }
+                else {
+                    list[i].style.background = 'black'
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

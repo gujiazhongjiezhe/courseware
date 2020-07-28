@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Date本身是一个函数，当前Date但会的实例才是引用值，而且是对象数据类型的，他可以调用好多方法
+    // Date获取的是当前电脑上的时间，不能够作为重要的参考依据
+    let time = new Date();
+    // console.log(time);
+    let year = time.getFullYear(); // 获取当前的年份
+    let month = time.getMonth() + 1; // 0-11,代表1到12月份 
+    let date = time.getDate(); // 获取日
+    let day = time.getDay(); // 获取星期 (0-6,0代表星期日)
+
+    let hour = time.getHours(); // 获取小时
+    let min = time.getMinutes(); // 获取分钟
+    let sec = time.getSeconds(); // 获取秒
+    let mill = time.getMilliseconds(); // 获取毫秒
+    console.log(year,month,date,day);
+    console.log(hour,min,sec,mill);
+    console.log(time.toLocaleTimeString());
+    console.log(time.toLocaleDateString());
+
+    let ss = time.getTime(); // 获取当前时间距离1970年1月1号上午八点的时间差(毫秒级) 时间戳
+    console.log(ss);
+
+
+
+  </script>
+</body>
+</html>

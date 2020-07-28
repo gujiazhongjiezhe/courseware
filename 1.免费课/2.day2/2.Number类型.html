@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js数据类型之Number类
+        // Number
+        // 有效数字 0 12 -12 3.5
+        // NaN:(not a number),而且他和谁都不相等
+        //---------------------------------------------------------------------------------------------
+        //一、Number(value) 把其他数据类型转化为Number类型 Number(value),这个方法的返回值是一个Number类型的值
+        // 1、把字符串转化为Number类型
+        // 需要转化的字符串中如果出现了非有效数字，那最后转化的结果就是NaN
+        // 空字符串转数字是0
+        // 2、把布尔转数字 true  false  true转是1  false转是0
+        // 3、把null和undefined转数字，null是0，undefined是NaN
+
+
+        // console.log(Number('23')); // 23
+        // console.log(Number('2a3')); // NaN
+        // console.log(Number('3px')); // NaN 
+        // console.log(Number('21.59')); // 21.59 
+        // console.log(Number('21.59.6')); // NaN
+        // console.log(Number('-234')); // -234
+        // console.log(Number('')); // 0
+
+        //--------------------------------------------
+        // console.log(Number(true)); // 1
+        // console.log(Number(false)); // 0
+        // console.log(Number(null)); // 0
+        // console.log(Number(undefined)); // NaN
+        //----------------------------------------------------
+
+        // 引用数据类型转数字
+        // 普通对象
+        // 数组
+
+        // 把普通对象转数字
+        // 把对象转数字，首先浏览器要默认调用toString方法，把对象转成字符串，然后在把字符串转成数字
+        // 所有的对象转字符串都是 '[object Object]'--》所有的对象转数字都是NaN
+        // var obj = {
+        //     name: 'xiaoMing',
+        //     age: 18
+        // };
+        // console.log(obj.toString());
+        // console.log(Number(obj));
+
+
+
+        // console.log(obj == 1);
+        // console.log('23' == 23);
+        // console.log(true + null); // 1 + 0
+
+        //--------------------------------------------
+        // 数组转数字
+        // 浏览器会默认调用toString方法，先把数组转字符串，然后在转数字
+        // 把数组里的每一项都去转字符串，然后在把每一个字符串和数组之间的逗号，组合成大的字符号串，最后再把这个大字符串转数字
+        // 空数组转字符串是 ''
+        // let ary = [1, true, false];
+        // '1' 'true' 'false'-->'1,true,false'-->NaN
+        // var ary = [100]; // '100'-->100
+
+        // console.log(Number(ary));
+
+        // var ary = [1, 2, 3];
+        // console.log(Number(ary)); // '1' '2' '3' --> '1,2,3' -->NaN
+
+        // var ary = [{},
+        //     [], false
+        // ];
+        // console.log(ary.toString()); // '[object Object],,false'-->NaN
+        // var ary = []; // ''-->0
+
+
+        // 基本值转数字直接转，
+        // 引用值转数字要先转字(浏览器默认的机制)符串然后在转数字
+
+        // 基本值转字符串直接加引号
+        // 对象转字符串都是 '[object Object]'
+        // 数组转字符串是吧数组的每一项转字符串，然后在和所有的逗号拼接成一个大字符串
+        //------------------------------------------------------------------------------------------
+        // 二、parseFloat(value):是从字符串里的字符从右依次提取有效数字，直到遇到非有效数字为止，然后把找到的有效数字返回出去(返回值是number类型的)
+        // 如果当前的值不是字符串，那要先转成字符串在计算
+
+        // console.log(parseFloat('123px')); // 123
+        // console.log(parseFloat('r123px')); // NaN
+        // console.log(parseFloat('3.12.32'));// 3.12
+        // console.log(parseFloat(true)); // 'true'-->NaN
+
+        // parseInt():他和parseFloat用法一样，只不过不能够识别小数点
+        // console.log(parseInt('3.12.32')); // 3
+
+        // parseInt  Number
+
+        // console.log(parseInt([])); // ''-->NaN
+        // console.log(Number([])); // ''-->0
+
+        // parseInt(34.98); // '34.98'-->34
+
+        // var num = '100';
+        // console.log(parseFloat(num));
+
+        // console.log(Number(parseFloat('23'))); // 23 如果遇见嵌套的，那就从里往外一层一层算就好
+        //-------------------------------------------------------------------
+
+        // isNaN(value):结果是一个布尔值，如果你检测的值是NaN，那就返回true，否则返回false
+        // 如果检测的值不是number类型的值，那要先转number在检测
+        // console.log(isNaN(NaN)); // true
+        // console.log(isNaN(35)); // false
+        // console.log(isNaN(true)); // false
+        // console.log(NaN == NaN); // false
+
+        // var flag = NaN;
+
+        // // console.log(flag == NaN); // false
+        // isNaN(flag) // true
+
+        // console.log( isNaN(Number( parseInt('13px') ) ) ); // false
+
+        //----------------------------------------------------------------
+        // value.toFixed(num):返回值是一个字符串，保留指定的小数位(结果会四舍五入)
+        // var num = 100.15;
+        // console.log(num.toFixed(1)); // '100.2'
+
+        // var num = 100
+        console.log(num.toFixed(2)); // '100.00'
+
+        console.log(100.00);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">
+    <p>1111</p>
+  </div>
+  <input type="text" id="inp">
+  <button id="btn">确定</button>
+  <script>
+    var box = document.getElementById('box'),
+      inp = document.getElementById('inp'),
+      btn = document.getElementById('btn');
+
+    btn.onclick = function () {
+      // 当点击的时候生成一个p标签，然后把input框的内容放到p标签中，然后把p标签插入到box中
+      // 表单元素的获取和设置内容必须用value
+
+      var value = inp.value;
+      // console.log(value);
+
+      var p = '<p>' + value + '</p>';
+      console.log(box.innerHTML+ p);
+      // box.innerHTML += p; // box.innerHTML =  box.innerHTML + p
+    }
+
+
+  </script>
+</body>
+
+</html>

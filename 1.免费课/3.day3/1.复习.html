@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //--------------------------------------------
+        // js的数据类型
+        // Number
+
+        // Number(value) :把其他数据类型转数字  number值
+        // isNaN(value) 布尔
+
+        // parseFloat(value):可以识别小数点
+        // parseInt(value):不可以识别小数点
+
+        // value.toFixed(num):四舍五入  字符串  '100.00'
+
+        // String
+        // String toString
+
+        // 四则运算
+
+        // 加法中有可能出现字符串拼接 加号和引号相遇
+
+        // Boolean(value)  null undefined NaN '' 0 false  其他的全部是true
+        // !  !!  !!!
+        // [1, 2]
+        // console.log(alert({}));
+        // console.log('Number(NaN)');
+        // console.log(Number(NaN));
+        let friend = 'xiaoHua';
+        let name = 'friend';
+        let person = {
+            name: 'erYa',
+            age: 18,
+            sex: 'girl',
+            friend: friend, // 'xiaoHua'
+            name: 'xxx',
+            3: 666
+        }
+
+        person.name = '111'; // 把对象中的name对应的属性值修改为 '111'
+        person.ss = 'sss'; // 往person对象中新增键值对，属性名是ss，属性值是'sss''
+        person['sex'] = null; // 假删除 (把sex对应的属性值改为null)
+        console.log(person.name); // '111'
+        console.log(person['name']); // '111'
+        console.log(person[name]); // 如果使用的中括号的形式获取，而且还没有加引号，这是就当做变量名处理  person['friend']  'xiaoHua'
+        console.log(person[3]); // 666
+        console.log(person.sex); // null
+        console.log(person);
+
+        // 如果获取对象中某一个属性名对应的属性值获取不到，那就是undefined
+
+        console.log(person.www); // undefined
+
+        var _this;
+        console.log(_this); // un
+
+        // let str = '中国你好'
+        // console.log(str.length);
+        //------------------------------------------
+    </script>
+</body>
+
+</html>

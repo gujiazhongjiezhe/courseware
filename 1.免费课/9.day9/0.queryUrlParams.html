@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // https://www.baidu.com:8080/s?word=苹果&age=18&sex=boy
+
+        // let obj = {
+        //   word: '苹果',
+        //   age:'18',
+        //   sex:'boy'
+        // }
+
+        // 封装queryUrlParams
+        // let url = 'https://www.baidu.com:8080/s?word=苹果&age=18&sex=boy';
+        // function queryUrlParams(url) {
+
+        //     // 不断的拆分
+        //     // 1.想要参数部分的字符串
+        //     let paramsStr = url.split('?')[1]; // 'word=苹果&age=18&sex=boy'
+        //     let paramsAry = paramsStr.split('&'); // ["word=苹果", "age=18", "sex=boy"]
+
+        //     //  console.log( paramsAry[0].split('='));
+        //     let obj = {}; // 创建一个对象，用来存储参数的键值对
+
+
+        //     /*
+        //         // let ss = paramsAry[0].split('='); // ['word','苹果']
+        //         // obj[ss[0]] = ss[1]
+        //         // console.log(obj);
+        //     */
+
+        //     // 循环把每一个参数增加到对象中
+        //     for (var i = 0; i < paramsAry.length; i++) {
+        //         // 第一次循环 i是0 1 2
+        //         var cur = paramsAry[i].split('='); // ['word','苹果']  ['age','18'] ['sex','boy']
+        //         // 把每一个参数字符串以等号作为分隔符变成数组，然后把数组的第一项作为属性名，数组的第二项作为属性值给obj增加键值对
+        //         obj[cur[0]] = cur[1];
+        //         // obj['word'] = '苹果'
+        //     }
+        //     return obj;
+        // }
+
+        // console.log(queryUrlParams(url)); 
+
+
+        //-----------------------------------------------------
+        let url = 'https://www.baidu.com/s?wd=%E8%87%AA%E8%A1%8C%E8%BD%A6&rsv_spt=1&rsv_iqid=0xf415f708000bd07a&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_dl=tb&oq=%25E8%2587%25AA%25E8%25A1%258C%25E8%25BD%25A6&rsv_btype=t&rsv_t=abccwfGug5u5pg2kZZVQRbF%2FXF3Vd0mbvy9R3HAnG175z3R2J3lbzRXtL1wB5pA5RtKU&rsv_pq=daa9921a001985ec#index';
+
+        // let obj = {
+        //     word:'苹果',
+        //     age:'18',
+        //     sex:'boy',
+        //     HASH:'index'
+        // }
+
+        function queryUrlParams(url){
+            // 不断的分隔，直到分的每一个参数的属性名和属性值分来为止 split
+            let queryStr = url.split('?')[1]; // 'word=苹果&age=18&sex=boy#index'
+
+            // let paramsStr = queryStr.split('#')[0];
+            // let hash =  queryStr.split('#')[1];
+
+            let index = queryStr.indexOf('#'); // 获取#号的索引
+            let paramsStr = queryStr.slice(0,index); // 'word=苹果&age=18&sex=boy'
+            let hash = queryStr.slice(index+1); // 'index'
+            // console.log(paramsStr,hash);
+
+            let paramsAry = paramsStr.split('&'); // ['word=苹果','age=18','sex=boy']
+            let obj = {};
+            for(var i = 0;i<paramsAry.length;i++){
+                var cur = paramsAry[i].split('=');
+                obj[cur[0]] = cur[1];
+            };
+            obj['HASH'] = hash;
+
+            return obj
+
+        }
+        console.log(queryUrlParams(url));
+
+    </script>
+</body>
+
+</html>

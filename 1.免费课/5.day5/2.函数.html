@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 函数
+        /* 
+        创建(定义)函数
+        function fn(){}
+        var fn = function(){}
+    
+        执行函数
+        fn()
+        */
+
+        // function fn(n,m){
+        //   // 实参和形参是一一对应的
+        //   // 如果实参不给形参赋值，那行的值就是undefined
+        // //  var ss = 100
+        //   return ss; // 只要return后面是js的值就可以
+        //   console.log(200);
+        // }
+
+        // console.log(fn(10,12)); 
+
+        //------------------------------------------------
+        // var num = 100;
+        // function fn(){
+        //   console.log(num);
+        //   var ss = 200;
+        // }
+
+        // fn();
+        // console.log(ss);
+
+        // var num = 100;
+        // function fn(n) {
+        //   console.log(n);
+        //   console.log(num);
+        //   var ss = 200;
+        // }
+        // fn(10);
+
+        // console.log(ss);
+
+        // 如果函数只创建不执行，那此时的函数没有意义
+
+
+        // function sum(){
+        //   // console.log(arguments); // 是实参集合
+        //   var total = 0; // 初始化一个变量，用来接收累加的实参的值
+
+        //   // 利用for循环实现求和
+        //   for(var i=0;i<arguments.length;i++){
+        //     // console.log(arguments[i]); // 代表每一个实参
+        //     total+=arguments[i]; // 把每一个实参累加给total
+        //   }
+
+        //   return total;
+        // };
+
+        // console.log(sum(10,20));
+        // sum(10,12,30);
+
+
+        // 此函数仅仅针对于两个数的求和
+        // 把函数变成可以求任意个数的数的和
+
+        //---------------------------------------------------------------
+
+
+        // function sum() {
+        //     var total = null;
+        //     for (var i = 0; i < arguments.length; i++) {
+        //         // 第一步我先把实参转成Number类型的值再求和
+        //         var item = Number(arguments[i]); // 代表实参的每一项(转换成number之后的)
+        //         // 判断当前的item是不是NaN，如果不是，那就进行累加求和，
+        //         if (!isNaN(item)) {
+        //             total += item;
+        //         }
+        //     };
+        //     return total;
+        // };
+
+        // console.log(sum(10,20));
+        // 实现任意个数的求和，但是如果我求和的数有其他类型的值，
+        // 要求：返回值必须是一个数字，不能是NaN
+
+        // console.log(sum(10, 20, true, false, undefined, '33'));; //  64
+
+        // 任意类型和任意个数的值的求和
+
+        // 封装 把实现某个功能的代码封装到一起，以后想实现这个功能就直接执行这个函数就好，
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

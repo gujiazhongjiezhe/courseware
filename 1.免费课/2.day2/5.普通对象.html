@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js数据类型之引用数据类型：普通对象
+        // 任何一个对象都是拿大括号进行包裹，里边存放的是0到多组键值对，
+        // 而且每一组键值对之间拿逗号隔开, 
+        // 键值对是由属性名(键)和属性值(值)组成，属性名的类型是字符串或者数字,属性值必须是js数据类型值
+        // 对象的属性名可以省略引号
+
+        // var person = {
+        //     name: 'erYa',
+        //     age: 18,
+        //     sex: true,
+        //     3:'qwe',
+        //     ss:null
+        // }
+        // var pingZi = {
+        //     width:'200cm',
+        //     hight:'10cm',
+        //     content:'water'
+        // }
+
+        // var ss = {
+        //     name: 1
+        // };
+
+        // var obj = {
+        //     name: '11',
+        //     age: ss
+        // };
+        // console.log(obj);
+
+
+
+        // 对象的增删改查
+        var obj = {
+            name: 'erYa',
+            age: 18,
+            sex: 'boy',
+            3: 100
+        }
+
+
+        // 1.查(获取对象中属性名对应的属性值)
+        // 对象名.属性名     (这种方式可以省略属性名的引号)
+        // 对象名['属性名']   (这种必须加引号,如果是数字，加不加引号都可以)
+
+        // console.log(obj.name); // 'erYa'
+        // console.log(obj['name']); // 'erYa'
+
+
+        // 但是如果属性名是数字，那句必须使用  对象名['属性名'] 方式去获取
+        // console.log(obj[3]); // 100
+        // console.log(obj.3); // 这种方式是不允许的
+
+
+        // 2.新增和修改
+        // 对象名.属性名 = xxx
+        // 如果属性名存在那就是修改，如果属性名不存在就是新增
+        // obj.w = 200; // 新增
+        // obj['w'] = 200;
+
+        // obj.name = 'ssss'; // 修改name的值
+        // console.log(obj);
+
+        // 3.删除
+        // 假删除：手动改当前需要删除的键值对赋值为null
+        // 真删除
+
+        // obj.name = null; // 假删除
+        // console.log(obj);
+
+        // delete obj.name; // 真删除
+        // console.log(obj);
+
+        //--------------------------------------------
+        var age = 'sex'
+        console.log(obj[age]); // obj['sex'] // 中括号里的age是变量，把age代表的值拿过来进行使用
+    </script>
+</body>
+
+</html>

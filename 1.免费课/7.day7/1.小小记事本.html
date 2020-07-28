@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+            border: 1px solid black;
+            height: 400px;
+            font-size: 20px;
+            overflow: hidden;
+        }
+
+        li {
+            line-height: 30px;
+            background: red;
+            margin-top: 3px;
+        }
+
+        #box {
+            width: 500px;
+            /* height: 50px; */
+            margin: 0 auto;
+        }
+
+        #text {
+            margin-left: 100px;
+            height: 30px;
+            width: 300px;
+        }
+
+        #btn {
+            height: 30px;
+            width: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="note">
+            <!-- <li>ssss</li> -->
+        </ul>
+        <input type="text" id="text"><button id="btn">增加</button>
+    </div>
+    <script>
+        // 需求：当用户点击确定按钮的时候，在ul里新增li标签，而且标签里的内容就是用户在input里输入的内容
+
+        // 1.获取元素
+        // 2.给响应的元素绑定响应的事件
+        // 3.当事件触发的时候所做的事
+
+        var note = document.getElementById('note');
+        var inp = document.getElementsByTagName('input')[0]; // [input]
+        var btn = document.getElementById('btn');
+        // console.log(note,inp,btn);
+        btn.onclick = function () {
+            // 1.获取input框的内容
+            // 2.生成字符串的li标签，并且把input的内容放到里面
+            // 3.把当前li标签插入到ul里边
+
+            var value = inp.value; // 获取当前input的值
+            console.log(value);
+
+            // var li = '<li>'+ value +'</li>';
+            var li = `<li>${value}</li>`; // es6的语法模板字符串
+            note.innerHTML += li;
+            inp.value = '';
+
+            // 隔行变色
+            var list = document.getElementsByTagName('li');
+            for(var i = 0;i<list.length;i++){
+                if(i % 2 === 0){
+                    list[i].style.background = 'orangered';
+                }else {
+                    list[i].style.background = 'pink';
+                }
+            }
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

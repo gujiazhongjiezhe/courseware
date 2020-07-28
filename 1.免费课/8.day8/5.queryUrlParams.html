@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // https://www.baidu.com:8080/s?word=苹果&age=18&sex=boy
+
+        // let obj = {
+        //   word: '苹果',
+        //   age:'18',
+        //   sex:'boy'
+        // }
+
+        // 封装queryUrlParams
+        let url = 'https://www.baidu.com:8080/s?word=苹果&age=18&sex=boy';
+        function queryUrlParams(url) {
+
+            // 不断的拆分
+            // 1.想要参数部分的字符串
+            let paramsStr = url.split('?')[1]; // 'word=苹果&age=18&sex=boy'
+            let paramsAry = paramsStr.split('&'); // ["word=苹果", "age=18", "sex=boy"]
+
+            //  console.log( paramsAry[0].split('='));
+            let obj = {}; // 创建一个对象，用来存储参数的键值对
+
+
+            /*
+                // let ss = paramsAry[0].split('='); // ['word','苹果']
+                // obj[ss[0]] = ss[1]
+                // console.log(obj);
+            */
+
+            // 循环把每一个参数增加到对象中
+            for (var i = 0; i < paramsAry.length; i++) {
+                // 第一次循环 i是0 1 2
+                var cur = paramsAry[i].split('='); // ['word','苹果']  ['age','18'] ['sex','boy']
+                // 把每一个参数字符串以等号作为分隔符变成数组，然后把数组的第一项作为属性名，数组的第二项作为属性值给obj增加键值对
+                obj[cur[0]] = cur[1];
+                // obj['word'] = '苹果'
+            }
+            return obj;
+        }
+
+        console.log(queryUrlParams(url)); 
+
+
+        //-----------------------------------------------------
+        // let url = 'https://www.baidu.com:8080/s?word=苹果&age=18&sex=boy#index';
+        // let obj = {
+        //     word:'苹果',
+        //     age:'18',
+        //     sex:'boy',
+        //     HASH:'index'
+        // }
+
+    </script>
+</body>
+
+</html>

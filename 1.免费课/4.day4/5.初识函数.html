@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 需求：把两个数进行求和然后在除以2，把最后的结果在控制台进行输出
+
+        // 10 12   20 30  34 45   56  67
+
+        // var num = 10 + 12;
+        // num = num / 2;
+        // console.log(num);
+
+        // var num1 = 20 + 30;
+        // num1 = num / 2;
+        // console.log(num1);
+
+        // 函数的定义：函数就是方法，可以把实现某个功能的代码封装到一起，以后你想实现这个功能，就直接让函数执行就可以了，
+        // 减少代码的冗余，提高代码的复用率(高内聚 低耦合)
+
+        /* 
+        榨汁机
+          生产榨汁机(把榨汁这个功能集成到这个机器里边)，榨汁机有一个入口(可以往里放水果)，而且还有一个出口(把榨好的果汁倒出来)
+    
+        
+          使用榨汁机：启动榨汁机(把水果放进去)，然后榨汁机开始工作，最后再把果汁倒出来
+        */
+
+        // 创建函数
+        function fn(n,m) {
+            // n和m就相当于两个容器(或者两个变量)
+            var num = n + m;
+            num = num / 2;
+            console.log(num);
+        }
+
+
+        // 函数执行：函数名()
+        // fn(10,12);
+        // fn(20,30);
+        // fn(50,60);
+
+        // parseFloat('12.2px');
+        // parseInt()
+        // isNaN()
+        // Number()
+        // // console.log(parseFloat);
+
+        // var s = 1;
+        // s() // TypeError: s is not a function
+
+
+
+
+
+    </script>
+</body>
+
+</html>

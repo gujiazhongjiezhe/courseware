@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 变量提升
+        // 变量提升就是浏览器解析代码的一个机制，这个机制发生在代码执行之前
+        // 在当前作用域，在代码执行之前，浏览器会对当前作用域下带var和带function的进行提前的声明(创建)和定义(赋值)，
+        // 带var只声明不定义，带function既声明又定义
+
+        // let和const没有这个机制
+
+
+        /* 
+        a = 12
+         */
+        // console.log(a); // un  
+        // var a = 12; 
+        // console.log(a); // 12
+
+
+
+        // console.log(a); // un  Cannot access 'a' before initialization
+        // let a = 12; 
+        // console.log(a); // 12
+
+
+
+        // var a = 12; // 用var创建全局变量还会给window增加键值对
+
+
+        // console.log('a' in window); // true 说明window上已经存在这个属性名了
+        // console.log('b' in window); // false
+        // var a = 12;
+        //     b = 12; // window.b = 12
+        // 给window增加键值对是在变量提升阶段执行的
+
+
+        // 检测当前的对象中是否包含某一个属性名，如果包含就返回true，否则返回false
+        // let obj = {
+        //   ss:100
+        // }
+        // console.log('ss' in obj); // true
+        // console.log('aa' in obj); // false
+
+        //   let obj = {
+        //     ss: 100,
+        //     3: 200
+        //   }
+
+        //  console.log( obj['ss']); // 100
+        //  console.log(obj[3]); // 200
+        //  console.log(obj['3']); // 200
+        //  console.log( 3 in obj);
+
+        //----------------------------------------------------------------
+
+
+        // 变量提升就是浏览器解析代码的一个机制，这个机制发生在代码执行之前
+        // 在当前作用域，在代码执行之前，浏览器会对当前作用域下带var和带function的进行提前的声明(创建)和定义(赋值)，
+        // 带var只声明不定义，带function既声明又定义
+
+        /* 
+        name = 'erYa'
+        fn = af0
+         */
+        // var name = 'erYa';
+        // console.log(fn); // af0 函数
+        // function fn(ss) { // af0
+        //     /* 
+        //     ss = 'erYa'  af1
+
+        //      */
+        //     console.log(ss); // af1 函数
+        //     function ss() { }; // af1
+        //     console.log(ss); //af1 函数
+        // }
+        // fn(name);
+
+
+
+        /* 
+        ss = af0 0
+         */
+        // console.log(ss); // af0
+        // function ss(){ // af0
+
+        // }
+        // var ss = 0; //
+        // console.log(ss); // 0
+
+
+//------------------------------------------------
+
+            // var a = b = c = 12; 
+            // var a = 12; 
+            // b = 12; 
+            // c = 12;
+
+
+            // var a,b,c = 12;
+            // var a;
+            // var b;
+            // var c = 12;
+
+
+            // var a = 12,b = 13,c = 14;
+            // var a = 12;
+            // var b = 13;
+            // var c = 14;
+
+
+// 变量提升的特殊情况 堆栈内存的销毁   this  变量提升的练习
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

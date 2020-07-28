@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">999</div>
+
+  <div id="father">
+    <p id="p">66666666</p>
+    <button id="btn">点击</button>
+  </div>
+  <script>
+      // document.createElement('标签名'):在js中动态创建标签
+      // document.createTextNode('内容'):在js中动态创建文本节点
+      // 父节点.appendChild(节点)：把指定的节点插入到父节点的末尾
+      // 父节点.removeChild(你要移除的节点)：移除节点
+
+    var box = document.getElementById('box');
+      var div = document.createElement('div'); // 创建div元素节点
+      // div.innerHTML = '123'
+      // console.log(box);
+     
+
+      var text = document.createTextNode('999'); // 创建文本节点
+      // console.dir(text);
+
+      div.appendChild(text) // 把text放到div的末尾
+      console.log(div);
+
+      box.appendChild(div) // 把div放到box的末尾
+
+      //--------------------------------------------
+      btn.onclick = function(){
+        father.removeChild(p)
+      }
+
+
+      // slice  push  indexOf  map  forEach  
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box" class="a b c d">1234567</div>
+    <script>
+        var  box = document.getElementById('box'); // 对象
+        // box.ss = 100; // 当前增加的属性是直接放到堆内存中了
+      
+
+        // setAttribute('属性名',属性值):给当前元素增加自定义属性(放到元素的行间)
+        // getAttribute('属性名'):获取属性名对应的属性值
+        // removeAttribute('属性名'):移除属性
+
+
+
+        // box.setAttribute('aaa',100);
+        // console.log(box.getAttribute('aaa'));
+        // box.removeAttribute('aaa')
+        // console.dir(box)
+
+        // 那点的方式去设置那就拿点的方式去获取，如果那set的方式去设置那就拿get的方式去获取
+        box.setAttribute('data-aaa','ssss')
+
+        //---------------------------------------------------------------------------------
+
+        // classList:类名的集合
+        // box.className = 'r'; // 会覆盖之前的
+        // console.log(box.className);
+
+        console.log(box.classList);
+        // classList.add() // 在原来的基础之上增加类名
+        // classList.remove() // 在原来的基础之上移除类名
+        // classList.toggle()  //如果之前有此类名，那就是移除，如果之前没有那就是新增
+        // classList.replace(n,m) //:n被m进行替换
+
+        // box.classList.add('ss')
+        // box.classList.remove('a')
+    //    console.log(box.classList.toggle('a'));
+       // 如果是增加，那返回值就是true，如果是移除，那返回值就是false
+
+    //    box.classList.replace('a','f') // 类名a被f进行替换
+    // console.log(box.className);
+    // console.log(document.getElementsByClassName('ssss'));
+    // console.dir(box)
+        
+
+    </script>
+</body>
+
+</html>

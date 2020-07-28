@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 全局作用域：
+    // 当我们打开一个页面的时候就会自动生成一个全局作用域
+    // 1、为代码执行提供必要的环境
+    // 2、存储基本值个变量
+    // 在作用域生成之后还会形成一个全局的window大对象
+    // console.log(window);
+    // alert(1)
+    // window.alert(12) // 
+    // 如果要使用window上的方法或者属性，可以省略window.
+    // window.parseFloat()
+    // parseFloat
+
+    // 全局变量：在全局作用域下创建的变量就是全局变量
+    // var const let function  
+
+    // var a = 12; // 全局变量
+    //--------------------------------------------------
+    // 全局作用域下的变量的特点：
+    // 1、var(function)在全局作用域下创建的变量会给window增加键值对(let和const不会)
+
+    // var a = 12; // window上也会增加一个键值对，属性名是a，属性值是12(在全局作用域才全局变量和window是相通的)
+    // console.log(a);
+    // console.log(window.a);
+
+    // b = 12; // 只会给window增加键值对(但是不带var的没有变量提升)
+    // console.log(b); // 12
+
+    // var a = 12; // (不仅会给window增加键值对，还会有变量提升)
+    //     b = 13; // (只会给window增加键值对)
+
+    //   console.log(a,b);
+
+    // function fn(){
+    //   console.log(1);
+    // }
+    // window.fn(); 
+
+    //----------------------------
+    // let s = 100; // let和const不会给window增加键值对
+    // console.log(s);
+    // console.log(window.s); // un
+
+
+    //--------------------------------------------------------------
+    // 2.在同一个作用域下var和function创建的变量可以重复，但是let和const不行
+    // var a = 12;
+    // var a = 13;
+    // console.log(a); // 13
+    // 在执行的过程中，如果发现当前的变量在前面已经创建过了，那就不会再重复创建，只会给他重新赋值
+
+
+
+
+
+    // console.log(12);
+    // console.log(a); // ReferenceError: a is not defined 引用错误 ，出现错误之后下面的代码就不在执行
+    // console.log(13);
+
+
+
+    // console.log(12);
+    // let a = 12;
+    // let b = 13; // SyntaxError: Identifier 'a' has already been declared
+    // console.log(13); 
+    // 在代码执行之前浏览器有一个机制，词法解析(语法解析)，他会在代码执行之前把当前页面的代码检查一遍，如果发现有不符合规范的就直接给报错
+
+    // 赛车
+
+
+
+  // 3、var和function创建的变量有变量提升，但是let和const就没有
+
+
+
+  // console.log(12);
+  // const s = 12; // const创建的常量不允许被修改
+  //       s = 15;
+
+  // const s; // const创建的常量一开始就得赋值
+
+
+
+  
+  // es6使代码变得更加严谨
+
+
+  // var a = 12;
+  // let a = 13;
+
+  // let a = 12;
+  // var a = 13;
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

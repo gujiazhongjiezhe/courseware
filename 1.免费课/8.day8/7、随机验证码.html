@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            width: 200px;
+            margin: 20px auto;
+            display: flex;
+            /* border: 1px solid black; */
+        }
+
+        span {
+            display: block;
+            width: 60%;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid black;
+            margin-right: 10px;
+            font-weight: 600;
+            color: orangered;
+        }
+
+        button {
+            display: block;
+            height: 20px;
+            width: 40%;
+            background: orangered;
+        }
+
+        input {
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span id="show">放置验证码</span><button id="btn">看不清</button>
+    </div>
+
+    <input type="text" id="input">
+    <script>
+        /* 
+        1、操作谁就获取谁
+        2、封装了一个随机产生验证码的方法
+        3、给btn绑定点击事件，当点击的时候去产生一个随机验证码
+        4、给input绑定失去焦点事件，当失去焦点时，判断两个值是否相等
+        */
+    </script>
+</body>
+
+</html>

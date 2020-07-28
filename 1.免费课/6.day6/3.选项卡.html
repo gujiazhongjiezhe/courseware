@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 500px;
+      margin: 200px auto;
+      /* border:1px solid black; */
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      top: 1px;
+    }
+
+    ul li {
+      width: 150px;
+      line-height: 30px;
+      border: 1px solid black;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    #box div {
+      width: 500px;
+      border: 1px solid black;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      display: none;
+      position: relative;
+      z-index: 0;
+    }
+
+    ul li.active {
+      color: orangered;
+      border-bottom-color: white;
+    }
+
+    #box div.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <ul>
+      <li>郭芙蓉</li>
+      <li>吕轻侯</li>
+      <li class="active">邢育森</li>
+    </ul>
+    <div>他的爸爸是郭巨侠</div>
+    <div>他是一个算账的秀才</div>
+    <div class="active">他是一个当差的捕头</div>
+  </div>
+  <script>
+    // 选项卡的逻辑：当用户点击li的时候，让当前li加上active类名(其余的li移除类名)，还得让当前li对应的div加上active类名(其余的div移除类名)
+
+    let navList = document.getElementsByTagName('li');
+    let box = document.getElementById('box');
+    let tabList = box.getElementsByTagName('div');
+
+    for (var i = 0; i < navList.length; i++) {
+      navList[i].index = i;
+      navList[i].onclick = function () {
+        select(this.index);
+      }
+    }
+    // 当用户点击li的时候，让函数执行
+    function select(index) {
+      for (var i = 0; i < navList.length; i++) {
+        navList[i].className = '';
+        tabList[i].className = '';
+      }
+      // 清空类名可以优化，利用变量的方式，不适用for循环
+      
+      // [li,li,li][0]
+      navList[index].className = 'active';
+      // [div,div,div][0]
+      tabList[index].className = 'active';
+
+    }
+
+
+  </script>
+</body>
+
+</html>

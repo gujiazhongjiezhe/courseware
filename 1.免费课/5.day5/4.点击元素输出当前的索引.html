@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>我是第一个0</button>
+  <button>我是第二个1</button>
+  <button>我是第三个2</button>
+  <script>
+    // 给每一个元素绑定点击事件，当点击元素的时候控制台输出当前元素的索引
+    var list = document.getElementsByTagName('button');
+    console.log(list);
+    for (var i = 0; i < list.length; i++) {
+      list[i].index = i; // 给每一个元素增加自定义属性，其属性名是index，属性值是当前i的值
+      list[i].onclick = function () {
+        // console.log(index);
+        console.log(this.index);
+        // this就是当前点击的元素，
+      }
+    }
+
+    /* 
+    页面初始化阶段
+    var i = 0 1 2 3
+
+    list[0].index = 0;
+    list[0].onclick = function () {
+        console.log(i);
+    }
+
+    list[1].index = 1;
+    list[1].onclick = function () {
+        console.log(i);
+    }
+
+    list[2].index = 2;
+    list[2].onclick = function () {
+        console.log(i);
+    }
+
+    当for循环结束之后，每一个按钮的点击事件才能绑定完成
+    此时用户开始点击第一个button，然后对应的函数才会执行(当for循环的时候是给元素绑定函数，函数并不会执行)
+     */
+  </script>
+</body>
+
+</html>

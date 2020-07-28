@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // =：赋值：把等号右边的值赋值给等号左边的变量
+        // ==：比较，返回值是一个布尔值
+        // !=:不等于：进行数据类型的转换
+
+        // ===:绝对比较：比较的时候不会进行数据类型的转换
+        // !==:绝对不相等 ： 比较的时候不会进行数据类型的转换
+
+
+        // 不同的数据类型比较，会默认进行隐式的类型转换
+
+
+        // console.log(3 == 3); // true
+        // console.log(3 == 5 - 2);
+        // console.log(true == 1);
+
+        // 数字 字符串 布尔 null undefined     对象
+
+        // 数字 == 字符串 把等号左右两边全部转数字然后在进行比较
+        // 数字 == 布尔   把等号左右两边全部转数字然后在进行比较
+        // 布尔 == 字符串 把等号左右两边全部转数字然后在进行比较
+
+        // 对象 == 对象   比较的是空间地址--------------------
+        // 对象 == 数字   把等号左右两边全部转数字然后在进行比较
+        // 对象 == 布尔   把等号左右两边全部转数字然后在进行比较
+        // 对象 == 字符串 把等号左右两边全部转字符串然后在进行比较---------
+
+
+        // null == null // true-------
+        // undefined == undefined // true-------
+        // null == undefined // true-----------
+        // 除此之外null和undefined和谁都不相等
+        // NaN和谁都不相等(包括自己)------
+
+        // console.log(null === undefined); // false
+
+
+        // console.log('1' == 1); // true
+        // console.log('1px' == 1); // false
+
+        // console.log(true == 1); // true
+        // console.log(false == 0); // true
+
+        // console.log(true == '1'); // true
+        // console.log(false == ''); // true
+
+        // console.log(null == 0); // false
+        // console.log(undefined == NaN); // false
+        // console.log(null == null); // true
+        // console.log(null == undefined); // true
+        // console.log(undefined == undefined); // true
+
+
+
+        // console.log({} == {}); // false
+        // var obj = {};
+        // var a = obj;
+        // console.log(obj == a); // true
+
+
+
+        // console.log(1 == {}); // false
+        // console.log([1] == 1); // true
+        // 普通对象和数字 两个等号比较都是false
+
+        // console.log([1] == true); // true
+
+        // console.log({} == '[object Object]'); // true
+
+        // console.log(true>=1); // true
+        // console.log(false<=1); // true
+        // console.log(3 != 5); // true
+
+        // console.log(false === 0); // false
+        // console.log(false !== 0); // true
+
+        // console.log(NaN === NaN); // false
+        // console.log(NaN == NaN); // false
+
+        // console.log(false != 0); // false
+        // console.log(false !== 0); // true
+
+        // console.log(!isNaN(undefined) == !!isNaN(NaN));
+        //           false == true  // false
+    </script>
+</body>
+
+</html>

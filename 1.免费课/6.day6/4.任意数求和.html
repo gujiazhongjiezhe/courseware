@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+      // 任意数求和
+        // 任意个数的值
+        // 任意类型
+
+        function sum(){
+          // arguments // 实参集合类数组
+          let total = null;
+          for(var i = 0;i<arguments.length;i++){
+              var item = Number(arguments[i]);
+              if(!isNaN(item)){
+                total+=item;
+              }
+          }
+          return total;
+
+        }
+       console.log(sum(true,NaN,null,'23',undefined)); 
+  </script>
+</body>
+</html>

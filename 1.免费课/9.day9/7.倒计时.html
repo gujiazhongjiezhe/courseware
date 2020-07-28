@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin: 50px auto;
+            color: orangered;
+            font-size: 20px;
+            font-weight: 400;
+            background: -webkit-linear-gradient(top right, rgba(255, 0, 0, 0.281), rgba(0, 128, 0, 0.274), rgba(255, 255, 0, 0.178));
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box"></div>
+    <script>
+        /* 
+        1.你得有一个结束的时间
+        2.得到当前时间和结束时间的时间差
+        3.把时间差转化成用户可以直接观看的格式展示在页面上
+        4.用定时器不短的更新页面上的时间差
+         */
+         let box = document.getElementsByClassName('box')[0];
+         let endTime = new Date('2020-7-24 16:10:00'); // 结束的时间
+         let timer = null;
+
+        function addZero(value){
+            return  value<10 ? '0' + value:value;
+        }
+         function setTime(){
+             // 获取当前的时间
+             let time = new Date();
+             let diffTime = endTime - time; // 毫秒级的时间差
+             if(diffTime<=0){
+                 clearInterval(timer);
+                 box.innerHTML ='时间到';
+                 return;
+             }
+            let hour = Math.floor(diffTime/1000/60/60); // 获取小时  3
+            let min = Math.floor((diffTime - hour*60*60*1000)/1000/60); // 把能够转化成整点小时的毫秒去掉
+            let sec = Math.floor((diffTime - hour*60*60*1000 - min*60*1000)/1000); // 获取秒
+            // console.log(hour,min,sec)
+            let res = addZero(hour) + ':' + addZero(min) +':' + addZero(sec);
+            box.innerHTML = res;  
+         }
+         setTime();
+         timer = setInterval(setTime,1000);
+    </script>
+</body>
+
+</html>

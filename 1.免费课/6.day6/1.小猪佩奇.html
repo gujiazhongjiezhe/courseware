@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #box p {
+            font-size: 40px;
+            color: orangered;
+            cursor: pointer;
+        }
+
+        #box img {
+            display: block;
+            width: 500px;
+        }
+
+        #box .hide {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <p id="btn">隐藏</p>
+        <img id="pig"
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573150275632&di=8a7f6c6ddf4656c1a67b519bb7244be9&imgtype=jpg&src=http%3A%2F%2Fimgsa.baidu.com%2Fexp%2Fw%3D500%2Fsign%3Df0c47dd191504fc2a25fb005d5dfe7f0%2F6d81800a19d8bc3e6edff713888ba61ea9d34510.jpg"
+            alt="">
+    </div>
+
+    <script>
+        // 1.想操作谁就获取谁
+        // var btn = document.getElementById('btn1');
+        // var pig = document.getElementById('pig');
+        // console.log(btn);
+        // 通过id名获取元素获取不到，那就是null
+
+        // 通过标签名获取元素 
+        // var btn = document.getElementsByTagName('span'); // 
+        // 通过标签名的方式去获取元素，如果获取不到那就是空元素集合
+        // 如果想用此方式获取指定的某一个元素，那就加上[0]
+        // console.log(btn); []
+
+        //------------------------------------------------------------
+        // 1.想操作谁就获取谁
+        var btn = document.getElementById('btn');
+        var pig = document.getElementById('pig');
+
+        // 2.给响应的元素绑定响应的事件
+        btn.onclick = function () {
+            var value = this.innerText;
+            //   console.log(value);
+            if (value === '隐藏') {
+                this.innerText = '显示';
+                // pig.className = 'hide';
+                pig.style.display = 'none';
+            }
+            else {
+                this.innerText = '隐藏';
+                // pig.className = '';
+                pig.style.display = 'block'
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

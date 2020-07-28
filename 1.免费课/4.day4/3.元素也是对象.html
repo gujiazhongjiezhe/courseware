@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    div {
+      height: 200px;
+      background: green;
+      text-align: center;
+      line-height: 200px;
+      color:white;
+    }
+  </style>
+</head>
+<body>
+  <div id="box" class="ss" style=" color:red; width: 200px;">1234</div>
+  <script>
+    // 元素也是对象
+    var box = document.getElementById('box');
+                      // 通过id名去获取页面中的元素
+    // 在js中获取页面中的标签，在js里标签也叫作元素对象(dom元素)
+
+   /* 
+     style:元素的行间样式(样式名要使用驼峰命名法)
+     className:元素的类名
+     innerHTML:元素的内容(可以识别字符串的标签)
+     innerText：元素的内容(不可以识别字符串的标签)
+    */
+
+    // console.dir(box); // 打印出的东西就是对象
+
+
+    // var div = {
+    //   id:'box',
+    //   className:'ss',
+    //   style:{
+        //      color:'red'
+    //        }
+    // }
+
+    // console.log(box.style.color); // 获取元素的行间属性
+    // box.style.color = 'orange'; // 通过js设置元素的行间样式
+    // box.style.backgroundColor = 'pink';
+    // box.style.width = '500px';
+
+    // box.className = 'one' // 修改元素的类名
+
+    
+    // console.log(box.innerHTML);  // '1234' 获取元素的内容
+    // console.log(box.innerText);// '1234' 获取元素的内容
+    // box.innerHTML = '5678';
+    // box.innerHTML = '<span>9999</span>'; // 在设置的时候可以把字符串的标签渲染成真正的标签
+    // box.innerText = '<span>9999</span>' // 这个不能识别字符串的标签
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 基本类型
+        //     Number
+        //     String
+        //     Boolean
+        //     Null
+        //     Undefined
+        //     Symbol
+        // 和引用类型
+        //     Object
+        //     Function
+
+        // typeof instanceof  constructor Object.prototype.toString.call
+
+        // 基本值直接操作或者存储的是值
+        // 引用值操作的是空间地址或者存储的是空间地址
+
+        // 形参和arguments
+
+        // function fn(n,m){
+        //     arguments
+        // }
+        // fn(10,20)
+
+        // var box = document.getElementById('div1');
+        // var box = document.getElementsByClassName('box')[0];// [div][0]
+        // var box = document.getElementsTagName('div')[0];
+
+        // let p = document.createElement('p');
+        // document.body.appendChild('p');
+
+        // previousSibling
+
+        // substr substring slice
+
+        // replace
+
+        // push
+        // // ary[ary.length] = xxx
+        // ary.splice(ary.length,0,xxx)
+
+        // pop()
+        // ary.length--;
+        // ary.splice(ary.length-1)
+
+        // for  方法  forEach map
+
+        // sort(function(a,b){return a-b}); // 冒泡排序
+
+        // 实现找到第n项到第m项(包括第n项和第m项)的内容，返回一个新的数组(原有数组不变)：
+
+        // slice(n,m):从索引n截取带索引m，而且不包含m对应的那一项
+
+        // let ary = [100,200,300,400];
+        // //    获取第3项到第4项
+        // // ary.slice(2,3+1)
+        // slice(n-1,m-1+1)  // n-1,m
+
+        // Math.round(Math.random()*(m-n)+n);
+
+        // Math.max  Math.min
+
+        // []==false:___true__            ![]==false：__true__ 
+
+        // var val = '3px'+3 ? 'ok': 'no';  val存储的值是多少：__'ok'_ ok
+
+
+        // function sum() {
+        //     let total = null;
+        //     for (var i = 0; i < arguments.length; i++)  {
+        //         let cur = Number(arguments[i]);
+        //         if(!isNaN(cur)){
+        //             total+=cur
+        //         }
+
+        //         // if (!isNaN(arguments[i])) {
+        //         //     total += arguments[i];
+        //         // }
+        //     }
+        //     return total;
+        // }
+
+        // sum(true, false, null, undefined,'100');
+
+
+        // 求1到100之间既能被5整数又能被3整除的数的和
+        // function fn(num) {
+        //     if (num > 100) return 0;
+        //     // 如果if条件后边只有一行代码，可以省略大括号
+
+        //     if(num%3 === 0 && num%5 === 0){  // num%15 == 0
+        //         return num + fn(num+1)
+        //     }
+
+        //     return fn(num+1);
+        // }
+
+        // fn(1);
+
+        // for(var i = 1;i<=100;i++){
+
+        // }
+
+        function createCode(){
+            let str = '12345678asdfghjkASDFGHJ';
+            let value = '';
+            for(var i = 0;i<4;i++){
+                let index = Math.round(Math.random()*(str.length-1-0)+0);
+                if(value.indexOf(str[index]) === -1){
+                    // 如果此条件是成立的，说明当前的产生的字符在value中是不存在的
+                    value+=str[index];
+                }
+                else {
+                    i--;
+                } 
+            }
+            return value;
+            
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+    typeof:数据类型检测的属性
+
+    instanceof: 检测当前实例是否属于某个类
+    constructor:基于构造函数检测当前的数据类型
+    Object.prototype.toString.call()
+    */
+
+    // typeof value;
+    // 返回值是一个字符串
+    // 字符串里存放的是当前的数据类型
+    // typeof检测数据类型是存在缺陷的，不能够区分 null、普通对象、数组，因为他们的返回值都是 'object'
+
+    // console.log(typeof 1); // 'number'
+    // console.log(typeof '1'); // 'string'
+    // console.log(typeof undefined); // 'undefined'
+
+    // console.log(typeof null); // 'object'
+    // console.log(typeof {}); // 'object'
+    // console.log(typeof []); // 'object'
+
+    // var flag = 1; 
+    // if(typeof flag  === 'number'){
+    //   console.log('这是Number类型');
+    // }
+    // else if(typeof flag === 'boolean'){
+    //   console.log('这是Boolean类型');
+    // }
+
+    // console.log(typeof typeof 1); //  typeof 'number'-->'string'
+    // console.log(typeof typeof typeof 1);
+    // 所以只要出现两个及以上的typeof，那最后的结果就是 'string'
+
+    // console.log( Object.prototype.toString.call(null) );
+
+    //   if(Object.prototype.toString.call(flag) === '[object Array]'){}
+  </script>
+</body>
+</html>

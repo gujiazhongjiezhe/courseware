@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    Math数学对象
+    Math的方法处理值的时候，如果当前的值不是一个数字，要先转成数字在处理
+     */
+
+    //  console.log(Math);
+    // 1.Math.PI:圆周率
+    // 2.Math.abs:取绝对值
+    // 3.Math.ceil:向上取整
+    // 4.Math.floor:向下取整
+    // 5.Math.max():获取一组数的最大值
+    // 6.Math.min():获取一组数的最小值
+    // 7.Math.round():四舍五入
+    // 8.Math.sqrt():开平方
+    // 9.Math.pow(n,m):n的m次方 取幂
+    // 10.Math.random():获取0到1之间的随机小数
+
+    // console.log(Math.PI);
+    // console.log(Math.abs(-3)); // 3
+    // console.log(Math.ceil(3.14)); // 4
+    // console.log(Math.ceil(3.9)); // 4
+    // console.log(Math.ceil(true)); // 1
+    // console.log(Math.ceil(undefined)); // NaN
+
+    // console.log(Math.floor(3.9)); // 3
+    // console.log(Math.floor(3.1)); // 3
+    // console.log(Math.floor(-3.1)); // -4
+
+    // console.log(Math.max(1,2,3,4,5)); // 如果放的是多个js类型值
+    // console.log(Math.max(...[1, 2, 3, 4, 5]));
+
+    // console.log(Math.round(3.9)); // 4
+    // console.log(Math.round(3.5)); // 4
+    // console.log(Math.round(3.1)); // 3
+
+    // console.log(Math.sqrt(9)); // 3
+    // console.log(Math.pow(2,3));
+    // console.log(Math.pow(2,10)); // 1024
+    // 1024kb = 1mb
+    // 1024mb = 1gb
+    // 1024gb = 1tb
+
+
+    // console.log(Math.random());
+
+    // 需求：获取3到6之间的随机整数n,m
+    // 获取n到m之间的随机整数    Math.round(Math.random()*(m-n)+n)
+    // console.log(Math.round( Math.random()*(6-3) +3));
+
+    //  0-1 之间的随机整数
+    //  0-3之间的随机整数
+    // 3-6之间的随机整数
+
+
+
+
+    // 拓展收缩运算符...
+    // console.log(...[1,2,3]);
+
+    // function fn(...arg){ // 收缩运算符
+    //   console.log(arg); // [1,2,3,4,5]
+    // }
+    // fn(1,2,3,4,5)
+
+    // let ary = [1, 2, 3, 4, 5];
+
+    // let s = [10,20]
+
+    // let ary1 = [...ary,...s];
+    // console.log(ary1);
+
+    //-----------------------------------------------------
+    function createCode(num = 4) { // 形参赋默认值(es6)
+    //  num = num || 4; // 处理实参不赋值的办法
+
+      let str = '1234567890asdfghjklASDFGHJ'; // 验证码的取值范围
+      // 利用random产生随机的索引，通过索引去str中取值
+      let value = '';
+      // 范围 0 - str.length-1   n,m
+
+      for (var i = 0; i < num; i++) {
+        let index = Math.round(Math.random() * (str.length - 1 - 0) - 0); // 产生随机索引
+        value += str[index];
+      }
+      console.log(value)
+      return value
+    }
+
+    createCode()  // '3Fgh'
+
+
+    // 抽奖
+
+    // 周五晚上  选项卡  数组去重  排序sort
+    // 周六下午  笔试 Math.random
+
+    
+  //  任意数求和  递归  验证码 隔行变色 选项卡
+
+
+
+
+  </script>
+</body>
+
+</html>

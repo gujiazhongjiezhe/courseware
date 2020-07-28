@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id='ul1'>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script>
+
+        // <ul id=’ul1’>
+        // <li></li>   <li></li>   <li></li>   <li></li>
+        //       </ul>
+        // </body>
+        // 按照上述HTML结构编写对应的JS代码，实现如下的需求：(能写出的都写出来，这样根据编写情况会酌情给分)
+        // ->获取#ul1下的所有li,实现奇数行和偶数行的隔行变色 (奇数行红色|偶数行绿色)  
+        // ->鼠标滑过每一个li让当前行的背景颜色变为粉色(pink)，鼠标离开恢复开始的颜色
+        // ->鼠标点击每一个li弹出“我是第N个li” (n是每一个li的索引+1)
+
+        let navList = document.getElementsByTagName('li');
+
+        for (var i = 0; i < navList.length; i++) {
+            if (i % 2 === 0) {
+                navList[i].style.background = 'red'
+            }
+            else {
+                navList[i].style.background = 'green'
+            }
+            navList[i].color = navList[i].style.background;
+            navList[i].onmouseover = function () {
+                this.style.background = 'pink'
+            }
+            navList[i].onmouseout = function () {
+                this.style.background = this.color;
+            }
+            navList[i].index = i+1;
+            navList[i].onclick = function(){
+                alert(`我是第${this.index}个li`)
+            }
+        }
+    </script>
+
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      width: 500px;
+      list-style: none;
+      text-align: center;
+      margin: 20px auto;
+      border: 1px solid pink;
+    }
+
+    ul li {
+      line-height: 30px;
+      font-size: 20px;
+      color: green;
+    }
+
+    /* ul li:nth-child(odd) {
+       
+       background-color: orangered;
+    }
+    ul li:nth-child(even) {
+      background-color: black;
+    } */
+    /* odd是奇数行，even是偶数行 */
+  </style>
+</head>
+
+<body>
+  <div>
+    <ul id="box">
+      <li>佟湘玉</li>
+      <li>白展堂</li>
+      <li>吕轻侯</li>
+      <li>李秀莲</li>
+      <li>郭芙蓉</li>
+    </ul>
+    <li>666</li>
+  </div>
+  <script>
+    // 1.想操作谁就获取谁
+    var box = document.getElementById('box'); // 获取的是ul元素
+    var list = box.getElementsByTagName('li');
+    // 通过标签名获取一组元素(获取的是一个元素集合)
+
+    console.log(list); // [li,li,li,li,li] 这是一个类数组，是元素集合
+
+    // list[0].style.background = 'orangered'
+    // list[1].style.background = 'black'
+    // 
+    for (var i = 0; i < list.length; i++) {
+      // console.log(list[i]); // 代表每一个li
+      // list[i].style.background = 'orangered';
+      if (i % 2 === 0) {
+        // 偶数%2才是 0
+        // 如果i%2等于0 说明i是偶数，那对应的就是奇数行的li
+        list[i].style.background = 'orangered';
+      }
+      else {
+        // 如果i%2不等于0 说明i是奇数，那对应的就是偶数行的li
+        list[i].style.background = 'black';
+      }
+      // 元素是对象数据类型的，只要是对象就可以给他增加键值对(自定义属性)
+      // 把当前元素的背景颜色存储到他自己身上(以增加键值对的方式)
+      list[i].color = list[i].style.background;
+      console.dir(list[i]);
+
+
+      // 给一组元素循环绑定事件
+      // 鼠标划入事件
+      list[i].onmouseover = function () {
+        // console.log(this);
+        // this: 代表你当前正在操作的元素，也就是说你操作的是谁，那此时的this就是谁
+        this.style.background = 'pink';
+      }
+      // 鼠标划出事件
+      list[i].onmouseout = function () {
+        this.style.background = this.color;
+        // 当鼠标划出的时候，从当前元素身上获取到color属性名对应的属性值在赋值给
+        // console.log(this.color);
+      }
+
+    }
+
+
+    // 鼠标划去改变当前元素的背景颜色
+    // 当鼠标划出之后在恢复元素之前的背景颜色
+  </script>
+</body>
+
+</html>

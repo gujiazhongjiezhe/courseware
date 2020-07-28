@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">123456</div>
+    <script>
+        // 箭头函数(es6)
+        // function fn(){
+        //   console.log(100);
+        // }
+
+        // var fn = function(){
+        //   console.log(100);
+        // }
+
+
+        // var fn = (num)=> {
+        //   console.log(num);
+        //   return 200
+        // }
+        // console.log(fn(300)); 
+
+        //------------------------------------------------------------------------
+
+        // 如果箭头函数只有一个形参，那就可以省略形参小括号
+        // var fn =   num => {
+        //   console.log(num);
+        // };
+        // fn(300);
+        //------------------------------------------------------------------------
+        // 如果箭头函数里只有return一行代码，那可以省略return和函数大括号
+        // 如果return的是一个对象，如果用省略的写法可以给对象加上小括号
+
+        // var fn = ()=>{
+        //   return 300;
+        // }
+
+        // var fn = () => 300;
+
+        // console.log(fn(300));
+
+        // let s = ()=>{}
+
+        // 如果return的是一个对象，如果用省略的写法可以给对象加上小括号
+        // let fn = ()=>{
+        //   return {}
+        // }
+        // let fn = () => ({});
+
+        // console.log(fn());
+        //------------------------------------------------------------------------
+
+        // function fn() {
+        //     return function () { // af0
+        //         console.log(100);
+        //     }
+        // }
+
+        // let f = fn();
+        // f()
+
+
+        // function fn(){
+        //   return ()=>{ console.log(100);}
+        // }
+
+        // var fn = () => {
+
+        //   return () => { console.log(100); }
+        // }
+
+        // var fn = () => () => { console.log(100); };
+
+        // let f = fn();
+        // f()
+
+        //----------------------------------------------
+        // function addZero(value) {
+        //     return value < 10 ? '0' + value : value;
+        // };
+
+        // var addZero = value => value < 10 ? '0' + value : value;
+        //---------------------------------------------------
+        // 箭头函数没有this
+        // box.onclick = ()=>{
+        //     // 箭头函数没有this，如果在箭头函数里边使用this，那就会往外层作用域查找
+        //     console.log(this);
+        // }
+
+        // 箭头函数没有arguments
+
+        // function fn(){
+        //     console.log(arguments);
+        // }
+        // fn(2,3,4,5,6)
+
+        // var fn = (...arg)=>{
+        //     // console.log(arguments);
+        //     console.log(arg);
+        // }
+        // fn(2,3,4,5,6);
+
+
+        // var sum = (...arg) => {
+        //     var total = null;
+        //     arg.forEach( (item, index)=> {
+        //         var cur = Number(item);
+        //         if (!isNaN(cur)) {
+        //             total += cur;
+        //         }
+
+        //     });
+        //     return total;
+        // }
+        // console.log(sum(true, null, undefined, '11'));
+
+    //     var fn = ()=>{
+    //         console.log(this);
+    //     }
+    //    console.log(fn); 
+
+    //     let obj = {
+    //         fn:fn
+    //     }
+    //     console.log(obj.fn); // 获取
+    //     obj.fn(); // 先获取方法，然后执行
+
+    // 倒计时   选项卡  去重  排序 
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数组的增删改5个
+    // push unshift  pop shift  splice  
+
+    // splice:返回值是一个数组，数组里存放的是删除的内容
+    0
+    // 1 n：从索引n删除到末尾
+    // 2 n,m:从索引n开始，删除m个
+    // 3 n,m,x : 从索引n开始，删除m个,用x进行替换 (修改)
+    //  n,0,x: 从索引n开始，删除0个,把x放到索引n对应值的前面
+
+    // slice concat join(原数组不会改变)
+    // slice
+      // 0 ：克隆数组
+      // 1 n： 从索引n开始，截取到末尾
+      // 2 n,m :从索引n开始,截取到索引m，而且不包含m对应的那一项
+
+      // cancat([]):拼接数组 返回值是一个拼接之后的新数组
+
+    // var ary = [100,200,300,400]
+    //   // join('')  // '100200300400'
+    //   join()// '100,200,300,400'
+    //   join('+')
+    // eval('100+200') // 300
+
+
+    // reverse sort 会改变原数组
+
+    // var ary = [334,2,435,46,3,23,4];
+    // ary.sort(function(a,b){
+    //   return a-b; // 升序
+    //   return b-a;// 降序
+    // });
+
+    //-------------------------------------------------
+    // indexOf:检测某一个值在数组中第一次出现的位置(索引)
+    // 如果检测的值在当前数组中没有，那就返回-1
+    // var ary = [1,2,3,4,1,2,3,4,1,2,3,4];
+    // console.log(ary.indexOf(2)); // 1
+    // console.log(ary.indexOf(4)); // 3
+    // console.log(ary.indexOf(10)); // -1
+
+    // 传两个参数 n,m: n表示被检测的值 m表示检测开始的位置
+    // console.log(ary.indexOf(3,3)); // 6
+
+
+    //---------------------------------------------------------
+    // lastIndexOf:检测某一个值在数组中最后一次出现的位置(索引)
+     // 如果检测的值在当前数组中没有，那就返回-1
+    // var ary = [1,2,3,4,1,2,3,4];
+    // console.log(ary.lastIndexOf(4)); // 7
+
+    //  // 传两个参数 n,m: n表示被检测的值 m表示检测结束的位置
+    //  console.log(ary.lastIndexOf(4,5)); // 3
+//--------------------------------------------------------------------------
+    // includes: 检测某一个值在数组中有没有，如果有返回true，如果没有就返回false
+  //     var ary = [1,2,3,4,1,2,3,4];
+  //  console.log(ary.includes(3));  // true
+
+
+  </script>
+</body>
+</html>

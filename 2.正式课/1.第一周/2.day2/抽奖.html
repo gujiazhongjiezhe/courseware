@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖系统</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            margin: 200px auto;
+            text-align: center;
+        }
+
+        #show {
+            color: rgba(255, 0, 0, 0.918);
+            font-size: 60px;
+            font-weight: 700;
+            display: block;
+            /* width: 200px; */
+            height: 100px;
+            line-height: 100px;
+
+        }
+
+        button {
+            display: block;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            background: orangered;
+            color: white;
+            font-size: 20px;
+            margin: 10px auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <span id="show">请点击开始</span>
+        <button id="btn">开始</button>
+    </div>
+    <script>
+
+        // 1.
+        let show = document.getElementById('show');
+        let btn = document.getElementById('btn');
+        let flag = true;
+        let ary = ['小明', '小王', '老王', '朱时茂', '孙悟空', '猪八戒'];
+        let timer = null;
+
+        function cerateName() {
+            let index = Math.round(Math.random() * (ary.length - 1 - 0) + 0); // 获取的随机的索引
+            let value = ary[index]; // 获取的名字
+            show.innerHTML = value; // 把名字插入到页面
+        }
+
+        btn.onclick = function () {
+            if (flag) {
+                btn.innerText = '停止'; // '<span>1234</span>'
+                flag = false; // !flag
+                clearInterval(timer);
+                timer = setInterval(cerateName, 50);
+            }
+            else {
+                btn.innerText = '开始';
+                flag = true;// !flag
+                clearInterval(timer);
+                // this是btn
+                
+                show.innerHTML = '我';
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

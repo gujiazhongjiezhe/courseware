@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  #box {
+    width: 200px;
+    height: 200px;
+    margin: 200px auto;
+    /* background: red; */
+    cursor: pointer;
+  }
+</style>
+
+<body>
+  <div id="box" style="background-color:red"></div>
+  <script>
+    // 当用户点击元素的时候，让元素的背景颜色进行切换
+    // red--->pink-->green-->orange-->red
+
+    // 1.想操作谁就获取谁
+    var box = document.getElementById('box');
+    // console.log(box);
+
+    // 给当前要操作的元素增加点击事件
+    console.dir(box); // onclick
+    box.onclick = function () {
+      // 当用户每点击一次当前box元素时候，onclick对应的函数就会执行一次
+      // 点击多次执行多次
+      // 函数是可以重复执行的
+      // console.log(1);
+      // box.style.backgroundColor = 'pink';
+
+      var color = box.style.backgroundColor; // 获取当前元素的背景颜色
+      console.log(color); // 当前的元素的背景颜色
+      if (color === 'red') {
+        box.style.backgroundColor = 'pink';
+      }
+      else if (color === 'pink') {
+        box.style.backgroundColor = 'green';
+      }
+      else if (color === 'green') {
+        box.style.backgroundColor = 'orange';
+      }
+      else {
+        box.style.backgroundColor = 'red';
+      }
+      // 当用户第二次点击元素的时候，当前函数的代码会从头带尾再次运行一遍
+      // 当用户第二次点击的时候color的值是啥
+
+    }
+
+
+  </script>
+</body>
+
+</html>

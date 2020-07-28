@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 函数的递归
+    // 含义：就是函数自己去调用自己
+    // 当使用函数的递归的时候，都会有终止的条件
+
+    // function fn(){
+    //   console.log(1);
+    //   fn();
+    // };
+
+    // fn();
+    // 依目前情况来看，当前fn函数会执行那个无数次，那就会形成无数个私有栈内存，就会导致堆栈溢出，
+
+
+    // for(vari = 0;i<4;i++){
+    //   i--;
+    //   console.log(1);
+    //   // 阻塞线程
+    // }
+
+    // console.log(2);
+
+    //-------------------------------------------
+    // let num = 1; // 2 3 4
+    // function fn(){
+    //   if(num>3){ // 函数终止的条件
+    //     return ;
+    //   }
+    //   console.log(1); // 1 1 1
+    //   num++;
+    //   fn();
+    // }
+
+    // fn();
+
+    // 利用函数的递归实现1到3之间的和
+
+    // function fn(num) {
+    //   if (num > 3) {
+    //     return 0;
+    //   }
+    //   return num + fn(num + 1);
+    // };
+
+    // console.log(fn(1)); // 6
+
+    // fn(1)执行形成的私有栈内存
+    // function fn(1) {
+    //   return 1 + fn(2); // 5
+    // };
+
+
+    // fn(2)执行形成的私有栈内存
+    // function fn(2) {
+    //   return 2 + fn(3); // 3
+    // };
+
+
+    // fn(3)执行形成的私有栈内存
+    // function fn(3) {
+    //   return 3 + fn(4); // 0
+    // };
+
+
+    // fn(4)执行形成的私有栈内存
+    // function fn(4) {
+    //   if (4 > 3) {
+    //     return 0;
+    //   }
+    // };
+
+    //----------------------------------------------
+
+    // 实现1到10之间能被3整除的数的和
+    // function fn(num) {
+    //   // 递归终止的条件
+    //   if (num > 10) {
+    //     return 0;
+    //   }
+
+    //   // 找到符合条件的值
+    //   if(num % 3 === 0){
+    //     return num + fn(++num);
+    //   }
+    //   // 让递归进行下去，并且把每一次函数执行return的值返回
+    //   return fn(num+1);
+    // };
+
+    // console.log(fn(1)); // 18
+
+    // function fn(1) {
+    //  reture fn(2)
+    // };
+
+    // function fn(2) {
+    //   return fn(3)
+    // };
+
+    // function fn(3) {
+    //   if(3 % 3 === 0){
+    //     return 3 + fn(4);
+    //   }
+
+    // };
+
+    // .......
+
+    //  function fn(11) {
+    //   if (11 > 10) {
+    //     return 0;
+    //   }
+    
+    // };
+
+
+
+
+  </script>
+</body>
+
+</html>

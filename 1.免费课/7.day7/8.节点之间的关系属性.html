@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">
+    <p></p>
+    123
+    <span id="span">12323</span>
+    <!-- 123456 -->
+  </div>
+  <script>
+    // 页面中节点和加点之间的关系属性
+
+    // 页面的所有东西都是由节点组成的
+    // 元素只是节点的一种叫做元素节点
+    // 所有的节点都是对象数据类型的
+
+    /* 
+    节点名称                    nodeType     nodeName       nodeValue
+                       
+    元素节点  标签                  1       大写的标签名         null
+    文本节点  内容 空格 回车(换行)   3         #text          文本内容
+    注释节点  注释                  8         #comment       注释内容
+    文档节点  document              9        #document        null
+     */
+    //  console.log(box.childNodes);
+    // 节点之间的关系属性
+    // 1.childNodes：获取所有的子节点
+    // 2.children: 获取所有的元素子节点(IE8及以下是不兼容的)
+
+    // 3.firstChild: 获取第一个子节点
+    // 4.lastChild: 获取最后一个子节点
+
+    // 5.firstElementChild: 获取第一个元素子节点(IE8及以下是不兼容的)
+    // 6.lastElementhild: 获取最后一个元素子节点(IE8及以下是不兼容的)
+
+    // 7.previousSibling:获取上一个哥哥节点
+    // 8.nextSibling:获取下一个兄弟节点
+    
+    // 9.previousElementSibling:获取上一个哥哥元素节点(IE8及以下是不兼容的)
+    // 10.nextElementSibling:获取下一个兄弟元素节点(IE8及以下是不兼容的)
+
+    // parentNode:获取父节点
+
+
+
+    // 获取单个节点如果获取不到全是null，如果一组获取不到那就是空节点集合
+    var box = document.getElementById('box');
+    var span = document.getElementById('span');
+    // console.log(box.childNodes); // 获取的是节点集合(类数组)，如果获取不到就是空节点集合 []
+    // console.log(box.children);
+    // console.log(box.firstChild); // 获取的是单个的节点 ，获取不到是null
+    // console.log(box.firstElementChild);
+    // console.log(span.previousSibling);
+    console.log(span.parentNode.parentNode.parentNode.parentNode.parentNode); // div-->body-->html-->document-->null
+
+
+  </script>
+</body>
+</html>

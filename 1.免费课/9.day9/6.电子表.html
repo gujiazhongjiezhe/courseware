@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin: 50px auto;
+            color: orangered;
+            font-size: 20px;
+            font-weight: 400;
+            background: -webkit-linear-gradient(top right, rgba(255, 0, 0, 0.281), rgba(0, 128, 0, 0.274), rgba(255, 255, 0, 0.178));
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+        <script>
+            let box = document.getElementById('box');
+            // 每隔一段时间就会给页面的box渲染一次最新的时间
+
+            // 需求：输入一个数，如果当前输入的数字小于10(或者是个位数)，那就返回一个前边补0的数
+
+            function addZero(value) {
+                // if(value<10){
+                //     return '0' + value;
+                // }
+                // else {
+                //     return value;
+                // }
+                return value < 10 ? '0' + value : value;
+            };
+
+            // 需求：用户输入一个数字的星期值，返回一个汉字的星期值
+            // 0 1 2 3 4 5 6 
+            function transDay(key) {
+                // 星期映射表
+                let obj = {
+                    0: '星期日',
+                    1: '星期一',
+                    2: '星期二',
+                    3: '星期三',
+                    4: '星期四',
+                    5: '星期五',
+                    6: '星期六',
+                };
+                return obj[key];
+            }
+
+            // console.log(addZero(7)); // '07'
+            function getTime() {
+                let time = new Date(),
+                    year = time.getFullYear(),
+                    month = time.getMonth() + 1,
+                    date = time.getDate(),
+                    day = time.getDay(),
+                    hour = time.getHours(),
+                    min = time.getMinutes(),
+                    sec = time.getSeconds();
+
+                let res = addZero(year) + '年' + addZero(month) + '月' + addZero(date) + '日 ' + addZero(hour) + ':' + addZero(min) + ':' + addZero(sec) + ' ' + transDay(day);
+                box.innerText = res;
+                // '2020年03月12日 星期五 12:12:12'
+            };
+
+
+            getTime(); // 为了防止页面初始化的时候没有内容，所以让函数上来就执行一次给页面赋值
+
+            setInterval(getTime, 1000);
+
+
+
+
+
+        </script>
+</body>
+
+</html>

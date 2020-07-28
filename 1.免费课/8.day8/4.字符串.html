@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    1.字符串是由单引号。双引号。 反引号包裹起来的就是字符串
+    2.字符串也有length
+    3.字符串也有索引，也可以代表每一项的位置，跟数组的索引是一样的
+    4.不能够通过length改变字符串的内容
+     */
+    //  let str = '12 3';
+    //  console.log(str.length); // 3
+    //  console.log(str[1]); // '2' 
+    //  str.length--;
+    //  console.log(str);
+
+    // 字符串的方法都不会改变原字符串
+
+    // 1.charAt() 通过制定的索引来获取对应的字符
+      // let str = 'asdfg';
+      // console.log(str.charAt(1)); // 's'
+      // console.log(str[1]); // 's'
+
+      // console.log(str.charAt(20)); // ''
+      // console.log(str[20]); // un
+
+    // 2.charCodeAt(): 通过索引获取指定的字符的对应的acsii码
+      // console.log(str.charCodeAt(1));
+      // '11' < '8' // true
+      // 's'>'f'
+    //-----------------------------------------------------
+    // 字符串的截取
+    // 3.substr(n,m)：从索引n开始，截取m个，如果传一个参数，那就是从索引n截取到末尾
+      // let str = 'asdfgh';
+      // console.log(str.substr()) // 'asdfgh' 克隆字符串
+      // console.log(str.substr(0)) // 'asdfgh' 克隆字符串
+      // console.log(str.substr(2)) // 'dfgh'
+      // console.log(str.substr(1,2)) // 'sd'
+
+    // 4.substring(n,m): 从索引n开始，截取到索引m(不包含m对应的那一项)，不支持负数
+    //  let str = 'asdfgh';
+    //   console.log(str.substring(1,2)) // 's'
+    //   console.log(str.substring()) // 克隆
+    //   console.log(str.substring(0)) // 克隆
+
+    // 5.slice(n,m) : 从索引n开始，截取到索引m(不包含m对应的那一项),支持负数(把负数加上length在进行计算或者从右往左截取)
+
+    // let str = 'asdfgqwerq';
+    // console.log(str.slice(-5,-2)); // 4 7  'gqw'
+    // console.log(str.substring(-5,-2)); // ''
+
+    //------------------------------------------------------
+    // 6.split:把字符串以特定的字符转化成数组
+      // let str = 'qw$er$ty$ty';
+      // console.log(str.split('$')); // ['qw','er','ty','ty']
+      // console.log(str.split()); // ["qw$er$ty$ty"]
+      // console.log(str.split('')); // ["q", "w", "$", "e", "r", "$", "t", "y", "$", "t", "y"]
+
+        // 删除字符串中指定的字符(删除s)
+      //   let str = 'asdasdasd';
+      //  console.log(str.split('s').join('')); // 链式调用
+      //  // ['ad,'ad','ad','ad']-->'adadadad'
+      //  str = str.split('s').join('');
+    //-------------------------------------------------------
+    // 7.replace(n,m):把字符串中的n用m进行替换
+    // let str = 'qwerte e e';
+    // replace默认情况下只能替换第一个
+    // 如果你想全部替换，可以配合正则使用
+    // console.log(str.replace('e','x'));
+    // console.log(str.replace(/e/g,'x'));  // global
+
+    //--------------------------------------------------------
+
+    // 8和9.字符串转大小写
+      // let str = '中国dfghjSDFGHJ';
+      // console.log(str.toLowerCase()); // 转小写
+      // console.log(str.toUpperCase()); // 转大写
+
+      // let code = 'gHfw';
+      // let res = 'ghfw';
+
+    // 10 11 12 去空格系列
+      // trim trimLef(去除做空格)    trimRight(去除右空格)
+      // let str = '  a  sd  ';
+      // console.log(1,str.trim(),3); // 去除左右空格
+
+      // indexOf  lastIndexOf  includes   concat
+
+
+      // 需求：给字符串排序
+      // let str = '2345543212345654323456765434';
+      // console.log(str.split('').sort().join(''));
+
+      // 单词的首字母开头大写
+      let word = 'happy';
+
+      // console.log(word.replace('h','H'));
+      // console.log(word.charAt(0).toUpperCase() + word.slice(1));
+      // console.log(word.slsubstrice(0,1).toUpperCase() + word.slice(1));
+      // console.log(word.charAt(0).toUpperCase().concat('appy'));
+      // Happy
+
+
+
+    
+  </script>
+</body>
+
+</html>
