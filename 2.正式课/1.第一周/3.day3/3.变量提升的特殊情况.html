@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 带var只声明不定义，带function既声明又定义
+
+        // 变量提升的特殊情况
+        // 1、变量提升只发生在等号的左边
+
+        // console.log(fn); // un
+        // var fn = function(){
+
+        // }
+
+
+        // 2、不管if条件是否成立，都要进行变量提升
+        /* 
+        num
+         */
+        // console.log(num); // un
+        // if (false) {
+        //   var num = 12;
+        // };
+        // console.log(num); // un
+
+        //-------------------------------------------------
+
+        /* 
+        fn = af0
+         */
+        // console.log(fn); // un
+        // if(true){
+
+        //   // 老版本浏览器function及声明又定义
+        //   // 在新版本浏览器里边，if条件里的function只声明不定义
+        //   // 如果if条件一旦成立，那所做的第一件事就是给fn赋值，然后在执行代码
+        //   console.log(fn); //af0
+        //   function fn(){ // af0
+        //     console.log(100);
+        //   }
+        // }
+        // console.log(fn); // af0
+        //---------------------------------------------------------------------------
+        // 3.函数里的return下面的代码虽然不执行，但是要进行变量提升
+        // var f = 10
+        // function fn() {
+        //     /* 
+        //     f
+        //     s = af0
+        //      */
+        //     console.log(f, s); // un  af0
+        //     return 1;
+        //     var f = 2;
+        //     function s() { //af0
+        //         console.log(100);
+        //     }
+        // }
+        // fn();
+
+        //---------------------------------------------------------------------
+        // 4、自执行函数不会进行变量提升
+
+        // var a = 10;
+        // (function(){
+        //     /* 
+        //     a
+        //      */
+        //     console.log(a); // un
+        //     var a = 12;
+        // })();
+
+        // 当浏览器的主线程执行到自执行函数这一行代码的时候会把函数先进行创建，然后马上执行，而且自执行函数只会执行一次
+
+        // function fn() {
+        //     return 
+        // }
+        // let res = fn();
+        // console.log(res); // 1
+
+        // let res = (function(){
+        //     return 1
+        // })();
+        // console.log(res);
+
+
+        // 对象里的自执行函数是在对象存储键值对的时候执行的，而且只会执行一次，
+        /* 
+        obj
+         */
+        // let obj = {
+        //     fn: (function () {
+        //         return function(){console.log(1);}
+        //     })()
+        // }
+        // 属性名fn接受的属性值是自执行函数的执行结果
+        // console.log(obj.fn); // 获取fn对应的属性值
+        // obj.fn() // 让fn的属性值执行
+
+
+    //   console.log((function(){return 100})());  // 100
+
+
+
+    </script>
+</body>
+
+</html>

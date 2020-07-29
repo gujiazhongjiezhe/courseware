@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+     /* 
+     全局的栈内存  私有栈内存
+
+     全局栈内存一般情况下是不销毁的，如果想要销毁他，关闭当前页面，
+
+     私有栈内存的销毁
+      销毁
+      不销毁
+      不立即销毁
+
+
+     
+
+      
+
+     
+      */
+       // 1.销毁：一般函数执行完成之后，栈内存都会销毁
+      //  function fn(){
+      //    console.log(100);
+      //  }
+      //  fn();
+
+       // 2.不销毁：在当前私有扎内存中产生一个引用值，而且被外界所占用，
+        // function fn(){
+        //   /* 
+          
+        //    */
+        //   let obj = {name:11}; // af0
+        //   return obj; // af0
+        // }
+
+        // let f = fn(); // af0
+
+
+        // var num = 100; // 全局 af0
+        // function fn(){
+        //   /* 
+          
+        //    */
+        //   num = [100,200]; // af0
+        // }
+        // fn();
+
+        // console.log(num);
+
+
+        // function s(){
+        //   /* 
+          
+        //    */
+        //   return {name:11} ;// af0
+        // }
+        // s(); // af0
+        // 销毁
+
+        // 作用域如果不销毁，那就肯定有用(如果在当前作用域里产生了堆内存，而且还别外界占用了，就不能销毁，因为如果作用域销毁了，那他里面的堆内存也就没有了，)
+
+        // function fn(){
+        //   let num = 100;
+        //   return num; // 100
+        // }
+        // let f= fn(); // 100
+        // console.log(f);
+        // 销毁
+
+        // 3.不立即销毁
+          // function fn(){
+          //   /* 
+          //   f = af0
+          //   在当前fn私有作用域里开辟开辟了一个堆内存
+          //    */
+          //   function f(){ // af0
+          //     console.log(100);
+          //   }
+          //   return f; // af0
+          // }
+
+          // fn() // af0 立即销毁
+          // fn()(); // af0()  不立即销毁
+
+
+          // 当fn执行完成之后不能立即销毁，他的等到af0调用完成之后在销毁
+
+
+          // 先得到fn函数的执行结果，然后让他的执行结果在执行
+
+           // 2.不销毁：在当前私有栈内存中产生一个引用值，而且被外界所占用，
+  </script>
+</body>
+</html>

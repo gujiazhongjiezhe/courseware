@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">123</div>
+  <script>
+    /* 
+    this是js中的关键字，有特殊的意义，
+    this：他就是函数的执行主体，谁执行的函数，那函数里的this就是谁
+     */
+
+    // 仅仅针对于非严格模式
+
+    //  1、在全局作用域下，this是window
+    // console.log(this === window);
+    // window.a = 12;
+    // console.log(this.a); // 12
+
+
+    // 2.在函数里，要看函数执行前有没有点，如果有点，那点前面是谁，函数里的this就是谁，如果没有点，那函数里的this就是window
+
+    // function fn(){
+    //   console.log(this); // window
+    // }
+    // fn(); // fn()
+
+    // let obj = {
+    //   fn:function(){ // af0
+    //     console.log(this); // obj  window
+    //   }
+    // }
+    // obj.fn(); // this-->obj
+    // let f = obj.fn; // af0
+    // f(); // this-->window
+
+    // 3.自执行函数里的this是window
+    // (function(){
+    //   console.log(this); // window
+    // })();
+
+
+
+    // 4. 给元素绑的事件行为绑定方法，那方法里的this就是当前元素本身
+    // box.onclick = function(){
+    //   console.log(this);
+    //   // 给元素绑的事件行为绑定方法，那方法里的this就是当前元素本身
+    // }
+      
+
+      // 单例模式  工厂模式  面向对象  构造函数 原型
+
+
+
+  </script>
+</body>
+
+</html>

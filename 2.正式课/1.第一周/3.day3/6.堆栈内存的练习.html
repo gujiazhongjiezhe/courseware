@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        i = 5
+        fn  = af0
+        f = af1
+         */
+        // var i = 5;
+        // function fn(i){ // af0
+        //     /* 
+        //     i = 1 2 3
+
+        //      */
+        //     return function (n){ // af1
+        //         /* 
+        //         n = 7
+        //          */
+        //         i+=1;
+        //         console.log(n+i); // 7 + 3=>10 
+        //     }
+        // }
+
+        // var f = fn(1); // af1
+        // f(2); // 4
+        // fn(3)(4); // af4(4)    8
+        // f(7); // 10
+        // console.log(i); // 5
+
+
+
+        // function fn(i){
+        //     /* 
+        //     i = 3 4
+        //      */
+        //     return function (n){ // af4
+        //         /* 
+        //         n = 4
+        //          */
+        //         i+=1;
+        //         console.log(n+i);  // 4+4=>8
+        //     }
+        // }
+
+        // 闭包：函数执行产生不销毁的作用域，他可以保护里边的变量不收外界干扰，而且还可以保存里边的值一直存在，这种保存和保护的机制就是闭包机制
+
+        // 如果是销毁的作用域，那作用域执行的一瞬间也是闭包，但是当作用域销毁之后，闭包就不存在了(作用域在闭包就在)
+
+        /* 
+        num = 1
+        obj = af0
+        f = af1
+         */
+        var num = 1;
+        var obj = { // af0
+            fn:(function(){ // 最后fn属性名所代表的属性值是af1
+                /* 
+                num = 2 3 4 5
+                此作用域不销毁
+                 */
+                var num = 2;
+                return function(n){ // af1
+                        /* 
+                        n = 40
+                         */
+                    console.log( n+(num++) ); //40 + 4
+                }
+            })()
+        }
+        // obj = {fn:af1}
+        var f = obj.fn; // af1
+        f(10); // 12
+        f(20); // 23
+        obj.fn(40); // 44
+        console.log(f === obj.fn); // true
+
+        // obj.fn = null;
+        // f = null;
+
+        // af1执行了三次   自执行函数执行了一次
+
+      
+
+    </script>
+</body>
+
+</html>

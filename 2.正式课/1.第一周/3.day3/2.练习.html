@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    ary = af0
+    s = 100
+    fn = af1
+     */
+    // var ary = [12, 23]; // af0  [100,23]
+    // var s = 100;
+    // function fn(ary, s) { // af1
+    //   /* 
+    //   ary = af0
+    //   s = 100 200
+    //    */
+    //   s = 200;
+    //   ary[0] = 100;
+    //   console.log(ary); // [100,23]
+    //   console.log(s); // 200
+    //   ary = [100]; // af2
+    //   console.log(ary); // [100]
+    // }
+    // fn(ary, s);
+    // console.log(ary); // [100,23]
+    // console.log(s); // 100
+
+    //---------------------------------
+
+    // var a,b,c = 10;
+    // var a;
+    // var b;
+    // var c = 10;
+
+    /* 
+    a
+    b
+    c = 10
+     */
+    // console.log(a); //  un
+    // console.log(b); // un
+    // console.log(c); // un
+    // var a, b, c = 10;
+    // console.log(a); // un
+    // console.log(b); // un
+    // console.log(c); // 10
+
+    //--------------------------------------
+
+    // var a = 12,
+    // b = 12;
+
+    // var a = 12;
+    // var b = 12;
+
+    /* 
+    a = 12
+    b = 12  13
+    fn = af0
+     */
+    // console.log(a, b); // un un
+    // var a = 12,
+    //   b = 12;
+    // function fn() { // af0
+    //   /* 
+    //   a = 13
+    //    */
+    //   console.log(a, b); // un 12
+    //   var a = b = 13;
+    //     // var a = 13;
+    //     // b = 13;
+    //   console.log(a, b); // 13 13
+    // }
+    // fn();
+    // console.log(a, b); // 12 13
+
+
+    // var a = b = 13;
+    // var a = 13;
+    // b = 13;
+
+    //-----------------------------------------------------
+
+    /* 
+    a = 4
+    f = 3
+    b = af0
+     */
+    // var a = 4;
+    // var f = 3;
+    // function b(x, y, a) { // af0
+    //   /* 
+    //   x = 1
+    //   y = 2
+    //   a = 3 10
+    //    */
+    //   alert(a); // '3'
+    //   // 形参和arguments存在映射关系；
+    //   arguments[2] = 10;
+    //   alert(a); // '10'
+    // }
+    // a = b(1, 2, f); // un
+    // console.log(a); // un
+    // console.log(f); // 3
+
+    //-----------------------------------------
+
+    /* 
+    fn = af0 af1 af3 af4  af2
+     */
+    // fn(); // 5
+    // function fn() { // af0
+    //   console.log(1);
+    // };
+    // fn(); // 5
+    // function fn() { // af1
+    //   console.log(2);
+    // };
+    // fn(); // 5
+    // var fn = function () { // af2
+    //   console.log(3);
+    // };
+    // fn(); // 3
+    // function fn() { // af3
+    //   console.log(4);
+    // };
+    // fn(); // 3
+    // function fn() { // af4
+    //   console.log(5);
+    // };
+
+    //-----------------------------------------------
+    /* 
+    foo = 'hello'
+     */
+    // var foo = 'hello';
+    // // 当代码执行到自执行函数的时候，先创建这个函数，然后马上让函数执行
+    // // 自执行函数只会执行一次
+    // (function (foo) {
+    //   /* 
+    //     foo = 'hello'  'hello'
+    //    */
+    //   console.log(foo); // 'hello'
+    //   var foo = foo || 'world';
+    //   console.log(foo); // 'hello'
+    // })(foo); // 'hello'
+    // // 自执行函数没有变量提升
+    // console.log(foo); // 'hello'
+
+
+  
+  </script>
+</body>
+
+</html>

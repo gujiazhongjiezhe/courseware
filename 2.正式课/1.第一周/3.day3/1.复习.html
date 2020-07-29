@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 全局作用域(最大的作用域)
+    // 全局变量
+    // 在全局作用域下创建的变量，如果是用var和function创建的，会给window增加键值对
+
+    // let a = 12;
+    // let var const function
+
+    // var a = 12; // window.a = 12;
+    // b = 12; // window.b = 12;没有变量提升
+
+    // parseFloat
+
+    // console.log(b);
+    // let 和 const不会给window增加键值对
+
+    // 1、在全局作用域下创建的变量，如果是用var和function创建的，会给window增加键值对
+    // 2、在同一个作用域下，var和function可以重复创建相同的变量，但是let和const不可以
+    // 3、用var和function创建的变量有变量提升，但是let和const没有
+
+    // var a = 12;
+    //     a = 15;
+
+    // let a = 12;
+    // function fn(){
+    //   let a = 15;
+    // }
+
+    // var a = 12;
+    // let a = 13;
+
+    // let b = 12;
+    // var b = 13;
+
+
+    // console.log(12);
+    // console.log(a);
+    // var a = 12;
+
+    // 在代码执行之前浏览器有一个变量提升的机制，他会把当前作用域中带var和带function进行提前的声明和定义，
+    // 带var的变量只声明不定义，带function的变量既声明又定义
+
+    // 私有作用域 函数执行会产生私有的作用域为当前的函数里的代码执行提供环境
+    // 形成私有作用域  形参赋值  变量提升 代码执行 作用域是否销毁
+    // 私有变量  在私有作用域里用var function let const创建的变量就是私有变量  形参也是私有变量
+
+    // var num = 12; // 13
+    // function fn(){
+
+    //   num++; // 给num累加1
+    //   console.log(num); // un  12
+    // }
+    // fn();
+    // console.log(num); // 13
+
+    // var num = 12; // 全局
+    // function fn(num) {
+    //   /* 
+    //   num = 12 13 // 私有
+    //    */
+    //   // 形参是私有变量
+    //   console.log(num++); // 12
+    // };
+    // fn(num); // 12
+
+
+      // 在函数里使用一个变量，先看自己有没有，如果自己有，那就使用自己的，如果自己没有，那上往上一级作用域查找，如果上一级还没有，那就往上一级的上一级继续查找，直到找到全局作用域为止，如果全局作用域们也没有，那就直接报错了，这种一级一级向上查找的机制就是作用域链机制
+
+      // 上一级作用域：函数的上一级作用域在函数创建的时候就已经确定了，函数在哪创建的，那他的上一级作用域就是谁
+
+      // var a = 12;
+      // function fn(){
+      //   /* 
+        
+      //    */
+
+      //   function f(){
+      //     /* 
+          
+      //      */
+      //     console.log(a); // 12
+      //   }
+      //   f();
+      // }
+      // fn();
+
+        
+
+
+
+
+
+  </script>
+</body>
+
+</html>
