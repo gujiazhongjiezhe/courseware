@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 500px;
+      margin: 200px auto;
+      /* border:1px solid black; */
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      top: 1px;
+    }
+
+    ul li {
+      width: 150px;
+      line-height: 30px;
+      border: 1px solid black;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    #box div {
+      width: 500px;
+      border: 1px solid black;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      display: none;
+      position: relative;
+      z-index: 0;
+    }
+
+    ul li.active {
+      color: orangered;
+      border-bottom-color: white;
+    }
+
+    #box div.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <ul>
+      <li>郭芙蓉</li>
+      <li>吕轻侯</li>
+      <li class="active">邢育森</li>
+    </ul>
+    <div>他的爸爸是郭巨侠</div>
+    <div>他是一个算账的秀才</div>
+    <div class="active">他是一个当差的捕头</div>
+  </div>
+  <script>
+    var navList = document.getElementsByTagName('li');
+    var box = document.getElementById('box');
+    var tabList = box.getElementsByTagName('div');
+
+
+
+
+
+//-----------------------------------------------------
+    // for (let i = 0; i < navList.length; i++) {
+    //   // navList[i].index = i;
+    //   navList[i].onclick = function () {
+    //     select(i);
+    //   }
+    // }
+
+    // {
+    //   {
+    //     let i = 0;
+    //     navList[0].onclick = function () {
+    //       select(i); // 0
+    //     }
+    //   }
+    //   {
+    //     let i = 1;
+    //     navList[1].onclick = function () {
+    //       select(i);
+    //     }
+    //   }
+    //   {
+    //     let i = 2;
+    //     navList[2].onclick = function () {
+    //       select(i);
+    //     }
+    //   }
+    // }
+
+//-----------------------------------------------------------------
+
+    // for (var i = 0; i < navList.length; i++) {
+    //   // 当for循环执行的时候，这个自执行聚会马上执行，让后把当前的i值以实参的形式传递给和这个自执行函数内部，而且还return一个小函数(这个小函数才是给当前元素绑定的事件方法)，当前的作用域不销毁，就会把i的值保存下来
+    //   navList[i].onclick = (function(index){
+    //       return function(){
+    //         // console.log(index);
+    //         select(index)
+    //       }
+    //   })(i)
+    // }
+    // 利用自执行函数马上执行的机制产生闭包
+    // 从而保存了i的值在当前闭包里一直存在
+
+    // i = 0
+    // navList[0].onclick = (function(index){
+    //     /* 
+    //     index = 0
+    //     不销毁
+    //      */
+    //       return function(){
+    //         console.log(index); // 0
+    //       }
+    //   })(i) // 0
+
+
+    // // i = 1
+    // navList[1].onclick = (function(index){
+    //     /* 
+    //     index = 1
+    //     不销毁
+    //      */
+    //       return function(){
+    //         console.log(index); // 1
+    //       }
+    //   })(i) // 1
+
+    // i = 2
+    // navList[2].onclick = (function(index){
+    //     /* 
+    //     index = 2
+    //     不销毁
+    //      */
+    //       return function(){
+    //         console.log(index); // 2
+    //       }
+    //   })(i) // 2
+
+
+//-------------------------------------------------------------
+
+  // for (let i = 0; i < navList.length; i++) {
+  //     navList[i].setAttribute('index',i);
+  //     navList[i].onclick = function () {
+  //       select(this.getAttribute('index'));
+  //     }
+  //   }
+
+//--------------------------------------------------------------
+
+    function select(index) {
+      for (var i = 0; i < navList.length; i++) {
+        navList[i].className = '';
+        tabList[i].className = '';
+      };
+      navList[index].className = 'active';
+      tabList[index].className = 'active';
+    }
+
+
+// let person1= 'xiaoming';
+
+// let person2 = 'laowang';
+
+// let person1 = 'sssssss';
+  </script>
+</body>
+
+</html>

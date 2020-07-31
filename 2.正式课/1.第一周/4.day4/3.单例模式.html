@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    单例设计模式
+      // 假设js一开始只有基本类型，用js去统计每一个人的个人信息
+     */
+    //  let name = 'sunZHongQiang';
+    //  let age = 18;
+    //  let sex = 'boy';
+
+
+    //  let name2 = 'liXinBo';
+    //  let age2 = 19;
+    //  let sex2 = 'boy';
+
+    // let person1 = {
+    //   name: 'sunZHongQiang',
+    //   age: 18,
+    //   sex: 'boy'
+    // };
+
+    // let person2 = {
+    //   name: 'liXinBo',
+    //   age: 19,
+    //   sex: 'boy'
+    // }
+
+    // 把描述相同事物特征的信息进行分组和归类(减少全局变量的污染)
+    // 把当前对象的名字叫做命名空间
+
+    // 单例模式：把描述相同事物特征的信息放到某一个命名空间下进行分组和归类减少全局变量的污染
+
+
+    // 高级单利模式
+    // 为了让单利模式看起来逼格高一些，就有了高级单利模式
+
+
+    //  let person1 = (function(){
+    //     function fn(){
+    //       //.......
+    //     };
+    //     function bubble (){
+
+    //     };
+
+    //    return {
+    //     name:'sdfgh',
+    //     fn:fn,
+    //     sort:bubble
+    //    }
+    //  })();
+    //  console.log(person1);
+    //  person1.sort();
+    //  person1.fn();
+    //  function bubble (){
+    //    // 和闭包里的名字不会有冲突
+    //  };
+
+
+    // let utils = (function () {
+    //   function addZero(value){
+    //     return value < 10 ? '0' + value : value;
+    //   };
+    //   function queryUrlParams(){
+    //     //.........
+    //   }
+    //   function fn(){
+
+    //   }
+    //   return {
+    //     addZero: addZero,
+    //     queryUrlParams,
+    //     fn
+    //   }
+    // })()
+
+    // utils.addZero()
+    // utils.queryUrlParams()
+    // console.log(utils.fn);
+
+    // 小组团队协作开发
+    // 头部  
+    // 中间部分
+    // 底部
+
+
+    // let person1 = (function () {
+    //     var age = 180;
+    //     function addZero(){}
+    //     //..............
+    //   return {
+    //     addZero
+    //   }
+    // })()
+
+    // person1.addZero()
+
+    // let person2 = (function(){
+    //   var age = 200;
+    //   return {
+
+    //   }
+    // })()
+
+    (function(){
+        
+    })()
+
+
+
+  </script>
+</body>
+
+</html>

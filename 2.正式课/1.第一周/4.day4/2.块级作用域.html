@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <script>
+      /* 
+        全局作用域
+        私有作用域
+        块级作用域
+          let和大括号组合就可以形成块级作用域(拥有私有作用域的特点)
+       */
+      //  {}
+      //  if(){
+
+      //  }
+      //  for(){
+
+      //  }
+      
+
+      // let和大括号组合就可以形成块级作用域(拥有私有作用域的特点)
+      /* 
+      
+       */
+      // if(true){
+      //   let a = 13; // 私有变量
+      //   console.log(a); // 13
+      // }
+      // console.log(a); // a is not defined
+
+      // {
+      //   let a = 13;
+      //   var b = 15;
+      //   // console.log(a);
+      // }
+      // console.log(a);
+      // console.log(b);
+
+
+
+      // let obj = {
+      //   name:1
+      // }
+
+      for(let i = 0;i<3;i++){
+        console.log(i); // 0 1 2
+      };
+
+      // {
+      //   {
+      //     let  i = 0;
+      //     console.log(i); // 0
+      //   }
+
+      //   {
+      //     let  i = 1;
+      //     console.log(i); // 1
+      //   }
+
+      //   {
+      //     let  i = 2;
+      //     console.log(i); // 2
+      //   }
+
+      // }
+
+      // console.log(i); // i is not defined
+
+
+     
+
+    
+    </script>
+</body>
+</html>
