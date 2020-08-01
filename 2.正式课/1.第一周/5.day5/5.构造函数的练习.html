@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Fn(n){ // 20
+
+      let m = 10;
+      this.total = m+n;
+      this.say = function(){
+
+        console.log(this.total); // this-->f2
+        // f2.total--> 30
+      }
+      // this.xxx = xxx
+    }
+    let f1 = new Fn(10); // {total:20,say:f}
+    let f2 = new Fn(20); // {total:30,say:f}
+    let f3 = Fn(30); // un
+
+    console.log(f3); // un
+    console.log(f1.n); // un
+    console.log(f2.m); // un
+    console.log(f1.total); // 20
+    f2.say();
+
+    // 构造函数模式解决的是实例的私有属性问题
+    // 如果想给当前实例增加共有属性，必须用到原型模式
+    // 数组的方法
+    let ary = [1002,00,300,400];
+    console.log(ary);
+
+
+
+
+  </script>
+</body>
+</html>

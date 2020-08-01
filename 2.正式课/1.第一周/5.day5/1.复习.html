@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 回调函数
+
+    // function fn(f){ // af0
+    //   // console.log(f);
+    //  f()
+    // }
+    // fn(function(){
+    //   console.log(this);
+    // })
+    // 回调函数一般情况下的this是window
+
+   // 函数执 行形成不销毁的作用域，当前这个作用域就可以保护里边的变量不收外界干扰，还可以保存变量一值存在，这种保存和保护的机制就是闭包机制
+
+
+  //  块级作用域
+  //------------------------------------------------
+  // js的设计模式
+
+  // 暂时性死区
+
+  // var let = 100;
+  // console.log(let);
+  
+  // console.log(a); // a is not defined
+
+  // console.log(typeof a); // 'undefined'
+
+  // console.log(a);
+  // let a = 100;
+
+
+  // 高级单例模式
+  // let nameSpace = (function(){
+  //   function fn(){
+
+  //   }
+  //   return {
+      
+  //   }
+  // })();
+  // // 在全局作用域下开辟的变越少越好
+  // nameSpace.fn()
+
+  // (function(){
+  //   let a =100;
+  //   box.style.backfround = 'red'
+  // })()
+
+  // (function(){
+  //   let a = 300;
+  // })()
+
+  // 工厂模式：函数
+
+  // let num = 100;
+  // console.log(num.toFixed(2));
+
+  let num1 = new Number(100);
+  // console.log(num1.toFixed(2));
+
+  // 类  实例  Number  1
+  console.log(num1);
+      
+  </script>
+</body>
+</html>

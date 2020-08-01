@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        刚才你所看见的都是js中的内置类，
+        如果想让一个类按照你自己的想法去拥有特点，那这时候咱们只能自己去创建自定义类
+    
+        以创建个人信息为例子
+         */
+        // 自定义类也叫作构造函数名字的开头大写
+        function CreatePerson(name, age) {
+            // this-->window
+            /* 
+            形成私有作用域
+            形参赋值
+            变量提升
+                默认生成一个空对象 {} (初始化一个而空的实例)
+                让当前作用域的this指向这个空对象 this = {}
+            代码执行
+                默认把当前作用域的this return出去
+            作用域是否销毁
+             */
+            this.name = name; // this.name  = 'xiaoming'
+            this.age = age; //  this.age = 18
+            // this.xxx就是给当前实例增加私有属性
+            this.say = function(){} // af0  af1
+            // let ss = 100;
+            return [100,200,300,400];
+        }
+
+        // let f = CreatePerson('xiaoming', 18); // 普通函数运行模式
+        // console.log(f); //  undefined 
+        // // {name:'xiaoming',age:18}
+
+        // let person1 = new CreatePerson('xiaoming', 18); // 此时就是构造函数运行模式
+        // let person2 = new CreatePerson('laowang',18);
+        // console.log(person1.say === person2.say); // false
+        // console.log(person1.age === person2.age); // true
+        // console.log(person1,person2); // {name:'xiaoming',age:18,say:f} {name:'laowang',age:54,say:f}
+
+        /* 
+        new 函数名() 这种方式叫做构造函数运行模式，此时的CreatePerson函数已经成了自定义类了，他的返回结果是一个对象,而且这个返回值及时当前这个类的实例【person1是CreatePerson类的实例】
+
+        在这里我们可以发现 类是函数类型的，实例都是对象数据类型的 构造函数里的this就是当前实例
+         */
+
+
+        //  console.log(Number('1')); // 1
+        //  console.log(new Number(1)); // 以构造函数方式运行 
+
+        /* 
+        构造函数和普通函数的区别
+            1、运行上的区别：
+                普通函数：形成私有作用域-->形参赋值-->变量提升-->代码执行-->作用域是否销毁
+                构造函数：形成私有作用域-->形参赋值-->变量提升-->默认生成一个空对象-->让this指向这个对象-->代码执行-->默认把当前的this return出去-->作用域是否销毁
+            2、执行函数上的区别：
+                 普通函数：函数名()
+                 构造函数：new 函数名();如果构造函数执行的或时候不需要传递实参，可以不写执行小括号
+            3、如果在构造函数中手动写课一个return，如果return的是基本值，不会对构造函数的返回值造成影响;如果你返回的是引用值，那就会对构造函数的返回值进行覆盖(在构造函数里手动写return引用值要慎用，也就是说当前return的东西已经不是当前类的实例了)
+         */
+
+        //  let person3 = new CreatePerson;
+        //  console.log(person3);
+
+        //  let ss = CreatePerson();
+        //  console.log(ss); // 100
+
+
+        //  在真正工作的时候
+        //  let num = 1;
+        //  let b = 2;
+
+        // let time = new Date();
+        // console.dir(time)
+
+        // let arr = new Array(1,2,3,4);
+        // console.log(arr);
+         
+
+    </script>
+</body>
+
+</html>

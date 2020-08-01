@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+    instanceof: 检测当前实例是否属于某个类
+
+    实例 instanceof 类  如果当前实例是属于这个类那就返回true，否则返回false
+     */
+
+     function CreatePerson(name,age){
+       this.name = name;
+       this.age = age;
+      //  return {};
+     }
+     let f1 = new CreatePerson('xiaoming',18);
+
+    //  console.log( f1 instanceof CreatePerson); // true
+
+    // let ary = [100,200,300,400];
+    // console.log(ary instanceof Array); // true
+    // console.log(ary instanceof RegExp); // false
+
+
+
+    // console.log(ary instanceof Object); // true
+
+
+
+    // instanceof只能检测标准的实例
+    // instanceof不能够检测基本值
+    // let num = 1;
+    // console.log(num instanceof Number);
+
+    // 实例的创建方式
+    //  1.字面量创建(不是一个标准的实例)
+    //     let num = 1;
+    //  // 2.构造函数创建方式(标准的实例)
+    //   let num1 = new Number(1);
+
+    //   console.log(num1 instanceof Number); // true
+      // 使用instanceof的时候必须保证当前实例是对象数据类型的
+  </script>
+</body>
+</html>

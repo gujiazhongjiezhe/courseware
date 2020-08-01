@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Fn(n) {
+            this.total = n;
+            // this.say = function () {
+            //     console.log(this.total);
+            // }
+
+        }
+        Fn.prototype.say = function () { // 给Fn的原型增加键值对
+            console.log(this.total);
+        }
+        Fn.prototype.sss =100;
+        let f1 = new Fn(10);
+        let f2 = new Fn(20);
+
+        // console.dir(f1.say)
+
+        /*
+        1、每一个函数天生自带一个prototype属性，其属性值是一个对象，对象里面存储的就是当前类的实例的共有属性和方法(这个对象也叫作原型)
+        2、每一个原型天生自带constructor属性，其属性值指向当前的类
+        3、每一个对象天生自带__proto__属性，其属性值指向当前所属类的原型
+
+         */
+    </script>
+</body>
+
+</html>
