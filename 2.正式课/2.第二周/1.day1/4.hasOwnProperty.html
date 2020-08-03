@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // hasOwnProperty：他是Object的类的原型上的一个方法，检测一个属性是否是对象的私有属性，如果是就返回true，否则返回false，
+        // 如果不是当前实例的属性也是返回false
+
+        // 实例.hasOwnProperty('属性名')
+        // let ary = [100,200,300,400];
+        // console.log(ary);
+
+        // console.log(ary.hasOwnProperty(0)); // true
+        // console.log(ary.hasOwnProperty('push')); // false
+
+        function Fn() {
+            this.x = 100;
+            this.y = 100;
+        }
+        Fn.prototype.r = 100;
+        let f1 = new Fn; // {x:100,y:100}
+        let f2 = new Fn; // {x:100,y:100}
+
+        // console.log(f1.hasOwnProperty('x')); // true
+        // console.log(Fn.prototype.hasOwnProperty('r')); // true
+        // // 因为公私有是相对来说的，只要是在自己身上，那就是私有的
+        // console.log(f1.hasOwnProperty('r')); // false
+        // console.log(f1.hasOwnProperty('o')); // false
+
+        // Object.prototype.hasOwnProperty('hasOwnProperty'); // true
+
+        // in ：检测当前实例是否包含某一个属性，不管是私有还是公有，只要能找到就是true
+
+        // console.log('x' in f1); // true
+        // console.log('r' in f1); // true
+
+        // 没有检测当前属性是否是一个公有属性的方法
+        // 咱们自己去封装一个方法，用来检测当前的属性是否是一个公有属性,如果是返回true，否则返回false
+
+        /* 
+        先用in检测一下当前属性是否是当前对象的属性，如果是当前对象的属性，在用hasOwnProperty检测一下是否是私有属性，如果不是私有属性，那就必然是共有属性
+         */
+
+        function hasPubProperty(value) {
+            // this--> 当前调用方法的实例
+            // 1、先检测一下当前传递进来的属性名是否符合规则(字符串 数字),如果属性名是正确的再往下进行检测，如果连名字都不正确，那就直接return false
+            // 2、用in检测一下当前的value是否是实例的属性，如果是在继续往下检测，如果不是就直接返回false
+
+            let n = value in this; // 如果这句话返回true，说明value是当前实例的属性
+
+            let m = this.hasOwnProperty(value); // 如果返回true说明是私有属性
+            // 当n和m同事满足什么样的条件，才能说明value是共有属性
+
+            // if(n ===true && m === false){
+            //   return true;
+            // };
+            // return false;
+
+            if (n === true) {
+                if (m === true) {
+                    return false;
+                }
+                return true;
+            }
+
+        }
+        Object.prototype.hasPubProperty = hasPubProperty;
+
+        let ary = [100, 200, 300, 400];
+        Array.prototype[0] = 600;
+        console.log(ary.hasPubProperty('push')); // true
+        console.log(ary.hasPubProperty('o')); // false
+        console.log(ary.hasPubProperty(0)); // false
+        // push是ary的公有属性
+        console.log(Object.prototype.hasPubProperty('hasPubProperty')); // false
+
+        console.log(ary.hasOwnProperty()); // false
+
+
+        // let obj = {
+        //     null:1
+        // };
+        // console.log(obj.hasOwnProperty());
+
+
+    </script>
+</body>
+
+</html>

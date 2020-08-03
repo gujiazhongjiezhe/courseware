@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+      // 原型的拓展和链式调用
+      // 数组的方法放到Array的原型上
+
+      // function Fn(){
+      //   // this.say = function(){
+      //   //   console.log(100);
+      //   // }
+      // }
+      // Fn.prototype.say = function(){ // 往原型上拓展方法
+      //     console.log(100);
+      //     console.log(this);
+      //   }
+      // let f1 = new Fn; // {}
+      // let f2 = new Fn; // {}
+      // f1.say() // f1
+
+      let ary = [100,200,300,400]; // af0
+      // ary.push(900); // push方法执行的时候，方法里的this是谁 this-->ary
+      // console.log(ary);
+
+      // 自己往Array的原型上拓展一个myPush方法
+
+      // 给类的原型拓展方法的时候不要和人家内置的方法重名
+    //   function myPush(value){
+    //       // this-->ary  af0
+    //       // 原型上的方法里的this一般情况下是当前实例
+    //       this[this.length] = value;
+    //       return this.length;
+    //   }
+    //   Array.prototype.myPush = myPush;
+    //  console.log(ary.myPush(900)); ;
+    //   console.log(ary);
+
+      // 方法的链式调用
+      // 现在我想实现一个数组的排序、然后在倒叙，在然后数组末尾新增一项，然后在删除数组开头一项
+
+      let ary = [200,300,100,400];
+      ary.sort(function(a,b){return a-b}).reverse().push(900);
+      ary.shift();
+      // sort函数的返回值数排序之后的数组,所以可以继续调用数组原型上的方法
+
+      // 如果想实现链式调用，你的保证当前方法的返回值是当前类的实例
+
+    //   let str = 'asdfg';
+    //  str =  str.replace('a','p').split('').join('').toUpperCase();
+   
+
+  </script>
+</body>
+
+</html>

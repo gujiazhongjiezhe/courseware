@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Fn() {
+      this.x = 100;
+      this.y = 100;
+    };
+    Fn.prototype.getX = function () {
+      console.log(this.x);
+    };
+    let f1 = new Fn;
+
+    Fn.prototype = {
+      getY: function () {
+        console.log(this.y);
+      },
+      constructor:Fn // 手动给新原型增加constructor
+    };
+    let f2 = new Fn;
+    console.log(f1.getX);
+    console.log(f2.getX);
+    console.log(f1.constructor);
+    console.log(f2.constructor);
+    console.log(Fn.prototype);
+
+    // 手动重定向的原型是没有constructor的，但是你可以给他后期添加
+    // 内置类的原型不允许重定向,但是可以往原型里边新增方法
+
+    Array.prototype = {}; // 这是不可以的
+
+
+  </script>
+</body>
+
+</html>

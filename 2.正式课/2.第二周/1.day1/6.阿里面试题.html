@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Foo() {
+            getName = function () {
+                console.log(1);
+            };
+            return this;
+        };
+        Foo.getName = function () {
+            console.log(2);
+        };
+        Foo.prototype.getName = function () {
+            console.log(3);
+        };
+        var getName = function () {
+            console.log(4);
+        };
+
+        function getName() {
+            console.log(5);
+        }
+
+        Foo.getName(); // 2
+        getName();  // 4
+        Foo().getName(); // Foo先执行，然后在用返回值找到getName在次执行 // 1
+        getName(); // 1
+        new Foo.getName(); // 先执行 Foo.getName,假设找到的结果是af0 然后执行 new af0()
+
+        new Foo().getName();
+        new new Foo().getName();
+        // new af0.getName()
+        // new af1 ()
+
+        /*
+        1、成员访问：寻找对象里的属性名所对应的属性值就是成员访问(19)
+  
+        2、new(带参数列表):就是构造函数执行有括号(19)
+        3、new(无参数列表):就是构造函数执行没有括号(18)
+        优先级一样，从左到右运算
+
+         */
+
+        //  function Fn(){
+
+        //  }
+        //  new Fn() // 带参列表执行
+        //  new Fn；// 无参列表执行
+
+    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        函数的三种角色
+            1、函数数据类型：普通函数、 构造函数(类)
+            2、对象数据类型：普通对象、数组、Math、实例对象、arguments、
+            正则对象、原型、元素集合、元素、函数
+         */
+         function fn(n,m){
+
+         }
+         console.dir(fn)
+         // 当把函数当做对象的时候，有几个属性需要咱们学一下
+        //  length：代表当前函数的形参的个数
+        // name：当前函数的名字。是字符串类型的
+        console.log(fn.name); 'fn'
+
+        console.log(fn.length); // 2
+        console.log(fn.prototype);
+        // 但是正式场合使用函数的时候，人家的第一角色是函数
+        console.log(fn);
+
+    </script>
+</body>
+
+</html>
