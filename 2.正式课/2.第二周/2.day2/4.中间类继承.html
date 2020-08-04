@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 中间类继承
+
+    function fn(){
+      
+      // arguments[arguments.length] = 600;
+      arguments.__proto__ = Array.prototype;
+      /* 
+      arguments虽然不是Array的实例，但是我们可以手动把arguments的__proto__指向Array的原型，这样arguments就可以使用Array原型上的方法了，那这种继承就是中间类继承
+       */
+
+      arguments.push(600);
+       console.log(arguments);
+      // arguments不是Array的实例，所部能够继承Array原型上的方法
+      // console.log(arguments.__proto__);
+      
+    }
+    fn(100,200,300,400);
+
+
+    // let num = {name:1};
+    // num.__proto__ = Array.prototype;
+    // console.log(num.__proto__);
+    // num.push(900);
+    // console.log(num); // 对象的内部构造发生了改变，就合适了
+
+
+    
+  </script>
+</body>
+</html>

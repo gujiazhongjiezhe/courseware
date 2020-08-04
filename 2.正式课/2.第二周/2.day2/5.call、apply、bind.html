@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">1234567</div>
+    <script>
+        // 'use strict'
+        /* 
+        改变函数this指向的方法
+         */
+        //  let obj = {};
+        //  function fn(){
+        //      this = obj; // 错误的
+        //      console.log(this); // window  obj
+        //  }
+        // //  fn();
+
+        //  obj.fn = fn;
+        //  obj.fn();
+        //  delete obj.fn;
+
+
+        // 我想让fn函数执行时，this指向当前obj对象
+        //  call apply bind这三个方法存在于Function类的原型上，所有的函数都可以进行调用
+        // let obj = {name:1};
+        // function fn(n,m){
+        //     console.log(this,n,m);
+        // }
+
+        // // fn.call(obj);
+        // fn.call(obj,1,2);
+
+
+
+        // 把fn当做对象找到当前所属类的原型上的call方法，这句话是让call执行
+
+        // 1、fn通过__proto__找到当前所属类的原型(Function类的原型)上的call方法
+        // 2、让call方法执行，并且给call传递实参
+        // 3、但是在call的内部，让fn(this)执行了，并且把fn的this指向改成了你传递的第一个实参
+
+        //---------------------------------------------------------------
+        // 1、在严格模式下，如果call不传参，或者传undefined，fn的this指向的都是undefined,如果传null，那this就指向null
+
+        // 2、在非严格模式下如果不传或者传undefined或者传null，那this指向的都是window
+
+        // 3、call的第一个实参第fn的this指向，从第二个实参开始都是fn的正常参数
+
+
+        // 函数里的this不允许直接修改
+        // function fn(){
+        //     this = 100; // 报错 函数里的this不允许直接修改
+        // }
+        // fn();
+
+        //---------------------------------------------------------------------------
+        // 二.apply:他和call方法是一样的，都是改变this指向的，但是不同点事传参不一样，apply从第二个参数是一个数组或者类数组
+        // let obj = {name:1};
+        // function fn(n,m){
+        //     console.log(this,n,m);
+        // }
+
+        // fn.apply(obj,[1,2]);
+
+        //-----------------------------------------------------------------------
+        // bind:这个方法也是改变this指向的，但是他是预处理this，他会提前改变函数的this指向，并不会让fn函数执行，bind方法的返回值才是改变this之后的函数
+        //     let obj = {name:1};
+        //     function fn(){
+        //         console.log(this);
+        //     }
+
+        //    fn = fn.bind(obj);
+        // //    console.log(res === fn);
+        //    fn()
+        //    fn()
+        
+        // let obj = {name:1};
+        // function fn() {
+        //     console.log(this);
+        // }
+        // box.onclick = fn.bind(obj);
+
+        // let obj = {};
+        // function fn(){
+        //     console.log(this);
+        //     return 100;
+        // }
+        // // console.log(fn()); // 100
+
+        // console.log(fn.call(obj));
+
+
+        //-------------------------------------------------
+            // 传参情况
+        // let obj = {name:1};
+        //     function fn(n,m){
+        //         console.log(this,n,m);
+        //     }
+
+        //    fn = fn.bind(obj);
+        //    fn(1,2);
+        //    // 给fn传参时在bind执行时或者fn执行时都可以
+
+        function fn(){
+            // arguments.slice
+        //   console.log( [].slice.call(arguments,0,1) );  
+          // 通过[]找到slice方法，然后在用call方法让slice执行，并且把slice的this指向了arguments，那这样slice内部操作this时就是操作的arguments了
+
+           
+            Array.prototype.push.call(arguments,100);
+            console.log(arguments);
+        }
+        fn(100,200,300,400);
+
+
+        // let ary = [100,200];
+        // console.log(ary.slice(0)); // 克隆数组
+        // slice方法里的this是谁
+        // 谁调用的slice，那slice内部的this就是谁
+    </script>
+</body>
+
+</html>

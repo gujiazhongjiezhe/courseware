@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 原型继承
+    function A() {
+      this.getX = function () {
+        console.log('我是类A实例的私有方法');
+      }
+    };
+
+    A.prototype.getY = function () {
+      console.log('我是类A原型上的方法');
+    };
+
+    function B() {}
+    B.prototype=new A;
+    // 让类B的原型指向类A的实例，那么以后类B的实例不仅可以继承类A的私有方法，还可以继承类A的共有方法，
+
+    let f = new B;
+    f.getX();
+    f.getY();
+    // 现在我想让类B的实例f去使用类A实例的私有方法和类A实例的共有方法
+
+    // 
+  </script>
+</body>
+
+</html>

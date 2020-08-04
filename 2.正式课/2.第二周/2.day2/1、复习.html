@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+    函数的三种角色
+    函数
+    类(构造函数)
+    对象
+     */
+
+    //  function Fn(){
+
+    //  }
+
+    //  Fn.ss = 100; // 把函数当做对象，增加键值对
+    //  Fn.name;// 输出的是当前函数的名字，而且是字符串格式的
+
+    //  let f1 = new Fn;
+
+    //  console.log(f1.ss);
+    //  console.log(f1.constructor.ss); // 100
+    //  console.dir(Fn)
+
+
+    function Fn(){
+
+    }
+    Fn.prototype.ss = 100;
+    let f1 = new Fn;
+
+    console.log(f1 instanceof Fn); // true
+    console.log(f1 instanceof Object); // true
+
+    // 类的原型出现在了当前实例的原型链上，那返回值就是true
+    // instanceof不能够检测基本值
+
+
+    // Fn.prototype.a = 100;
+    // Fn.prototype.b = 100;
+    // Fn.prototype.c = 100;
+    // Fn.prototype.b = 100;
+    // Fn.prototype.e = 100;
+    // let obj = {
+    //   a:100,
+    //   b:100,
+    //   c:100,
+    //   d:100,
+    //   constrcutor:Fn
+    // }
+    // Fn.prototype = obj;
+
+    // let f = new Fn;
+
+    // fn.prototype=new Fn
+
+
+  </script>
+</body>
+</html>

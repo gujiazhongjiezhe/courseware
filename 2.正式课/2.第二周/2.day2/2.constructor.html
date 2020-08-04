@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function Fn() {
+
+    // }
+    // let f = new Fn;
+    // f.constructor = 1;
+    // let num = 1;
+    // console.log(f.constructor === Fn); // true
+
+
+
+    // console.log(f.constructor === Object); // false
+    // console.log(num.constructor === Number); // true
+    // console.log(Fn.constructor === Function); // true
+
+    // 如果给当前实例增加一个私有属性也叫constructor或者给类的原型重定向都有可能造成检测的结果不准确
+    // Fn.prototype.constr === Fn
+
+    // console.log(Object.prototype.toString.call(1)); 
+    // console.log({}.toString.call(1));
+
+    console.log(Object.prototype.toString.call(1)); // '[object Number]'
+    console.log(Object.prototype.toString.call('1'));// '[object String]'
+    console.log(Object.prototype.toString.call(true));// '[object Boolean]'
+    console.log(Object.prototype.toString.call(null)); // '[object Null]'
+    console.log(Object.prototype.toString.call(undefined));// '[object Undefined]'
+    console.log(Object.prototype.toString.call({}));// '[object Object]'
+    console.log(Object.prototype.toString.call([]));// '[object Array]'
+
+    // toString.call不能够检测自定义类，如果检测自定义类那返回的都是 '[object Object]'
+    // function Fn(){
+
+    // }
+
+    // let f1 = new Fn;
+    // console.log(Object.prototype.toString.call(f1));
+    // console.log({}.toString.call());
+    // console.log(toString.call()); // 把window.省略了
+    // console.log({}.toString === toString); // true
+    // let res = toString.call(1);
+    // if(res === '[object Number]'){
+
+    // }
+    // toString.call()
+
+
+
+    // function toString() {
+    //   console.log(100);
+    // }
+
+    // toString.call = function () {
+    //   //  this-->toString
+    //   this()
+    // }; // 把函数当做对象增加键值对
+
+
+    // toString.call()
+
+
+  </script>
+</body>
+
+</html>
