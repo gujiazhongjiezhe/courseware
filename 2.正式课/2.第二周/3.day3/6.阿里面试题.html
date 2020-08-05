@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        Foo = af0
+        getName = af1  af4 af5 af6 af7
+         */
+        function Foo() { // af0
+            
+            getName = function () {// af5 af6 af7
+                console.log(1);
+            };
+            // 构造函数里的this就是当前实例
+            return this;
+        };
+        Foo.getName = function () { // af2 把Foo函数当做对象增加键值对，属性名是getName，属性值是af2
+            console.log(2);
+        };
+        Foo.prototype.getName = function () { // af3 把Foo当做类，给他的原型上新增方法，方法名是getName，对应的方法是af3
+            console.log(3);
+        };
+        var getName = function () { // af4
+            console.log(4);
+        };
+
+        function getName() { // af1
+            console.log(5);
+        }
+
+
+
+        Foo.getName(); //  af2()   2
+        getName();  //    af4()    4
+        Foo().getName(); // Foo先执行，然后在用返回值找到getName在次执行   window.getName() -->af5()// 1
+        getName(); // 1
+
+
+        new Foo.getName(); // 先执行 Foo.getName,假设找到的结果是af2 然后执行 new af2() // 2
+
+        new Foo().getName(); //3 先算new Foo执行，返回值是当前Foo的实例f，然后在通过Foo的实例f找到所属类原型上的getName方法执行(f.getName()-->af3())
+
+
+        new new Foo().getName();
+        // 先算new Foo()--->返回值是Foo的实例f
+
+        // new f.getName()
+        // 先算 f.getName-->通过实例f找到所属类原型上的getName方法af3
+        // new af3()  // -->3
+
+
+    
+
+        /*
+        1、成员访问：寻找对象里的属性名所对应的属性值就是成员访问(19)
+  
+        2、new(带参数列表):就是构造函数执行有括号(19)
+        3、new(无参数列表):就是构造函数执行没有括号(18)
+        优先级一样，从左到右运算
+
+         */
+
+        //  function Fn(){
+
+        //  }
+        //  new Fn() // 带参列表执行
+        //  new Fn；// 无参列表执行
+
+    
+    </script>
+</body>
+
+</html>

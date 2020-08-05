@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // call是Function类的原型上的一个方法，所有的函数都可以去调用这个方法
+        // call是改变函数里的this指向的
+
+        // function fn(n,m){
+        //   console.log(this,n,m);
+        // }
+        // let obj = {};
+        // // fn.call(obj,1,2);
+        // // 让call执行，当call执行的时候，在call内部让fn执行了
+
+        // // apply:和call一样，只不过第二个参数传递的是一个数组
+        // // bind:预处理this,bind方法执行的时候,不会让fn立即执行,但是他会返回一个改变this指向的新函数
+        // fn = fn.bind(obj);
+
+        // fn(1,2) // this-->obj
+        // fn(3,4)
+
+
+        // function fn(){
+        //   console.log(this);
+        // }
+
+        // let obj = {};
+
+        // obj.fn = fn;
+        // obj.fn();
+        // delete obj.fn;
+        //-------------------------------------------------------------
+        // 把当前fn函数添加到obj中，然后执行 obj.fn，当执行形完成之后从obj中把fn删除
+
+        function myCall(context, ...arg) { // arg接收的是从第二个实参开始的所有实参
+            let res = null; // 创建一个变量，准备用来接收fn函数执行的返回结果
+            context = context || window;
+            // 如果当前myCall执行的时候实参不传，或者传null，或者传undefined，那得把当前的context的值改为window
+            // console.log(arg);
+            // this-->fn函数  context-->obj
+            context.$fn = this;  // obj.$fn = fn     把当前的fn放到obj中
+            res = context.$fn(...arg);       // obj.$fn()  让fn执行，并且把执行的结果给到res
+            delete context.$fn;  // delete obj.$fn        把fn在obj中删除
+
+            return res; // 把fn方法的返回值return出去
+        }
+
+        Function.prototype.myCall = myCall;
+        // 把myCall方法挂载到Function原型上
+
+
+        function fn(n, m) {
+            console.log(this, n, m);
+            return 100;
+        }
+        let obj = { name: 1 };
+
+        //  console.log(fn.call(obj,1,2));    // this-->obj
+
+        console.log(fn.myCall(obj, 1, 2));
+
+        //------------------------------------------------
+        // 第一步：完成this指向改变
+        //   function myCall(context){
+        //       // this-->fn函数  context-->obj
+        //       context.$fn = this;  // obj.$fn = fn
+        //       context.$fn();       // obj.$fn()
+        //       delete context.$fn;  // delete obj.$fn
+        //     }
+        //-------------------------------------------------------------
+        // 第二部：完成传参情况
+        // function myCall(context,...arg){
+        //       context = context || window;
+        //     // 如果当前myCall执行的时候实参不传，或者传null，或者传undefined，那得把当前的context的值改为window
+        //         // console.log(arg);
+        //       // this-->fn函数  context-->obj
+        //       context.$fn = this;  // obj.$fn = fn
+        //       context.$fn(...arg);       // obj.$fn()
+        //       delete context.$fn;  // delete obj.$fn
+        //     }
+
+        // ------------------------------------------
+        // 第三部：完成返回值的情况
+
+        function myCall(context, ...arg) {
+            let res = null;
+            context = context || window;
+            // console.log(arg);
+            // this-->fn函数  context-->obj
+            context.$fn = this;  // obj.$fn = fn
+            res = context.$fn(...arg);       // obj.$fn()
+            delete context.$fn;  // delete obj.$fn
+
+            return res; // 把fn函数执行的返回值return 出去了
+            // 这块的return是myCall函数的执行结果
+        }
+
+        //--------------------------------------------------------------
+
+        function fn1() { console.log(1) };
+        function fn2() { console.log(2) };
+        fn1.call(fn2); // 1
+        fn1.call.call(fn2); //2 不管前边有多少call，他执行的是最后一个call方法
+        Function.prototype.call(fn1); // 不输出
+        Function.prototype.call.call(fn1); // 1
+        // 如果出现两个及以上call，那最后运行的就是传进去的函数
+    </script>
+</body>
+
+</html>

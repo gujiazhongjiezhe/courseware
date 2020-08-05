@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+      /* 
+      3、...运算符
+      4、解构赋值
+       */
+
+       //-------------------------------------------------
+       // 传递实参的时候
+      //  let ary = [12,34,231,2,3,4,4];
+      //  console.log(Math.max(...ary)); // 231
+      // 接受实参的时候
+      // function fn(n,m,...arg){
+      //   console.log(arg); // [3,4]
+      // }
+      // fn(1,2)
+
+      // 克隆数组(浅克隆)
+      // let ary = [100,200,300,{}];
+      // let cloneAry = [...ary]; // [100,200,300,af0]
+
+      // // 克隆对象
+      // let obj = {
+      //   name:1,
+      //   age:2
+      // }
+      // let cloneObj = {...obj};
+      // console.log(cloneObj);
+      // 合并数组
+      // let ary = [1,2];
+      // let ary1 = [3,4];
+      // let ary3 = [...ary,...ary1,5,6];
+      // console.log(ary3);
+
+      // 合并对象
+      // let obj = {
+      //   name:1
+      // }
+      // let obj1 = {
+      //   age:2
+      // };
+      // let obj3 = {
+      //   ...obj,
+      //   ...obj1,
+      //   ss:100
+      // }
+      // console.log(obj3);
+    //------------------------------------------
+    // 解构赋值
+    let ary = [100,200,300,400];
+    // let n = ary[0];
+    // let m = ary[3];
+      // 使用解构赋值时，必须保证等号左右两边结构一样
+    // let [n,,,m] = ary;
+    // 如果中间不想结构，就拿逗号站位(只想结构开头和结尾)
+    // console.log(n,m); // 100 400
+
+
+    // let [n,...arg] = ary;
+    // ...arg那剩余的值全部结构到一个数组里边
+    // console.log(n,arg); // 100 [200,300,400]
+
+
+    // let [n=0,,,m,o = 0] = ary;
+    // 如果解构的时候右边没有这一项，咱们可给当前的变量赋一个默认值
+    // console.log(n,o);
+      
+    // 多维数组的解构(只要等号所有两边的结构和位置保持一致就行了)
+    // let ary1 = [10,[20,30,[40]]];
+    // // 我想解构10和30
+    // let [n,[,m,[x]]] = ary1;
+    // console.log(n,m); // 10 30 40
+
+    //----------------------------------
+    // 对象的解构赋值
+    // let obj = {
+    //   sss:1,
+    //   age:2
+    // }
+    // let xxx = obj.name;
+    // let {age,sss} = obj;
+    // 左边的变量名要和等候右边的属性名一致，而且不用考虑位置
+    // console.log(sss,age); // 1 2
+
+    // let obj = {
+    //   sss:1,
+    //   age:2,
+    //   ary:[100,200,300]
+    // }
+
+    // let {sss,ary:[,,m]} = obj;
+    // console.log(sss,m); // 1 300
+
+
+    // let a =[100,{ss:200}];
+    // let [,{ss}] = a;
+    // console.log(ss); // 200
+
+    // let obj = {age:100};
+    // let {age:w} = obj;
+
+    // 你起的名字不想是对象里的属性名，就用冒号的形式，冒号后边是你新起的名字
+    // console.log(w);
+
+    // let product = [
+    //   {
+    //     name:'华为',
+    //     time:'2020-01-12',
+    //     ss:{a:100}
+    //   },
+    //   {
+    //     name:'小米',
+    //     time:'2019-01-12',
+    //     ss:{a:100,w:900}
+    //   },
+    //   {
+    //     name:'魅族',
+    //     time:'2018-01-12',
+    //     ss:{a:100}
+    //   }
+    // ];
+
+    // product.forEach(function(item,index){
+    //       // console.log(item.name,item.time);
+    //       // console.log(item.ss.a);
+    //       let {name,time,ss:{a:{w}}} = item;
+    //       console.log(name,time,a,w);
+    // })
+
+    // let obj = {age:100}
+
+    // let {s=[]} = obj;
+    // // console.log(s);
+
+    // s.forEach(function(item,index){})
+
+    let obj = {age:300};
+    let {age:w} = obj;
+    console.log(w);
+
+
+
+
+  </script>
+</body>
+</html>

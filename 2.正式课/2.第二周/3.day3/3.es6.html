@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // es6：
+        // 1、let和const
+              // 1、let和const没有变量提升
+              // 2、let和const不能够重复声明
+              // 3、let和大括号可以形成块级作用域
+              // 4、let可以解决暂时性死区
+              // 5、在全局作用域下，let声明的变量不会给window增加键值对
+              // 6、const的在创建的时候必须给他赋值
+
+        // 2、箭头函数
+            // 1、箭头函数没有arguments
+            // 2、箭头函数如果只有一个形参，可以省略形参小括号
+            // 3、如果函数里只有retrurn一行代码，可以省略大括号和return
+            // 4、如果函数里只有return {} 一行代码，省略的时候的加上小括号
+            // 5、箭头函数没有this，如果你非要在箭头函数里使用this，那就往上一级作用域查找this
+            // 6、箭头函数不能够作为构造函数使用
+            // 7、函数可以给形参赋默认值(普通函数和箭头函数都可以)
+
+
+        //----------------------------------------------------------------
+
+        // function fn(){
+        //   console.log(100);
+        // }
+        // let fn = function(){
+        //   console.log(100);
+        // }
+        // let fn = (...arg)=>{
+        //   console.log(100);
+        //   // console.log(arguments);箭头函数没有arguments、
+        //   console.log(arg);
+        // }
+        // fn(1,2,3,4,5)
+        //-----------------------------------
+         // 2、箭头函数如果只有一个形参，可以省略形参小括号
+        
+
+        //  let fn = (m)=>{
+        //     return 200
+        //  }
+
+        //  let fn = m =>{
+        //   return 200
+        //  }
+        //  fn(1)
+
+        // 3、如果函数里只有retrurn一行代码，可以省略大括号和return
+        // let fn = m => 200;
+         
+        //  console.log(fn(1)); 
+
+        
+        //4、如果函数里只有return {} 一行代码，省略的时候的加上小括号
+        // let fn = (m)=>{
+        //   return {};
+        // }
+        // let fn = m=> ({})
+        
+        // console.log(fn()); // {}
+
+//------------------------------------
+          // 把下列函数改写成箭头函数
+        // function fn(n){
+        //   return function(m){
+        //     console.log(100);
+        //   }
+        // }
+
+      // let fn = (n)=>{
+      //     return (m)=>{
+      //       console.log(100);
+      //     }
+      // }
+
+
+      // let fn = (n)=>{
+      //     return m=>{console.log(100);}
+      // }
+
+      // let fn = n=> m=>{console.log(100);}
+      // fn()()
+
+      //-------------------------------
+       // 5、箭头函数没有this，如果你非要在箭头函数里使用this，那就往上一级作用域查找this
+
+      //  let obj = {
+      //    fn:()=>{
+
+      //      console.log(this);
+      //    }
+      //  }
+
+      //  obj.fn();
+      //  let f = obj.fn;
+      //  f()
+
+        // let fn = ()=>{
+        //   /* 
+         
+        //    */
+        //   return ()=>{
+        //     /* 
+            
+        //      */
+        //     console.log(this); // obj
+        //   }
+        // }
+
+        // let obj = {
+        //   fn:fn // 给obj新增键值对
+        // };
+
+        // obj.fn()();
+        // 如果fn函数是普通函数，那小函数的this就是obj，
+        // 如果fn函数是箭头函数，那小函数的this就是window，
+
+//----------------------------------------------------
+// 箭头函数不能够作为构造函数使用
+        // var Fn = ()=>{
+        //   this.x = 100;
+        //   this.y = 100;
+
+        // }
+
+        // let f = new Fn; //  TypeError: Fn is not a constructor
+
+        //------------------------------------------------------------------------
+          // 函数的形参可以赋默认值
+          // function fn(n = 100){
+          //   console.log(n); //10 un
+          // }
+          // // fn(10)
+          // fn()
+
+
+        //   function Create() {
+        //     /* 
+        //     this-->实例
+        //      */
+        //     this.name = 10;
+        //     this.fn = () => {
+        //         console.log(this);
+        //     }
+        // }
+
+        // let f = new Create;
+        // console.log(f);
+        // f.fn() // -->this是当前实例
+
+      
+
+  </script>
+</body>
+</html>

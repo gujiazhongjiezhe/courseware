@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // /* 
+    // * getParams:获取url里指定的参数
+    // * @param
+    // *    key:是一个字符串
+    //  */
+    // function getParams(key){
+    //     // 1.不断的细分咱们的字符串
+    //     let paramsStr = this.split('?')[1]; // 获取url里的参数部分
+    //     // ['locallhost','key1=val1&key2=val2&key3=val3']
+    //     let paramsAry = paramsStr.split('&'); // 把字符串的每一对参数分开 // ['key1=val1','key2=val2','key3=val3']
+
+    //     let obj = {};
+    //     for(let i = 0;i<paramsAry.length;i++){
+    //         let cur = paramsAry[i]; // 代表数组的每一项  'key1=val1'
+    //         let item = cur.split('='); // ['key1','val1']  ['key2','val2']  ['key3','val3']
+    //         obj[item[0]] = item[1];
+    //         // obj['key1'] = 'val1'
+    //     }
+
+    //     return obj[key]; // obj['key3']
+    // }
+
+    // String.prototype.getParams = getParams;
+
+    // var url="locallhost?key1=val1&key2=val2&key3=val3";
+    // console.log(url.getParam("key3")); //=>'val3'
+
+    // let obj ={
+    //     key1:'val1',
+    //     key2:'val2',
+    //     key3:'val3',
+    // }
+    // return obj[key]
+
+
+    //-------------------------------------------------------------------------------------
+        /* 
+    * getParams:获取url里指定的参数
+    * @param
+    *    key:是一个字符串
+     */
+    //  function getParams(key){
+    //     let paramsAry = this.split('?')[1].split('&');
+    //     // ['locallhost','key1=val1&key2=val2&key3=val3'][1]
+    //     // 'key1=val1&key2=val2&key3=val3'
+    //     // ['key1=val1','key2=val2','key3=val3']
+    //     let obj = {};
+    //     for(let i = 0;i<paramsAry.length;i++){
+    //         let cur = paramsAry[i].split('=');
+    //         obj[cur[0]] = cur[1];
+    //     };
+    //     return obj[key]; // obj['key3']
+    // }
+
+    // String.prototype.getParams = getParams;
+
+    // var url="locallhost?key1=val1&key2=val2&key3=val3";
+    // console.log(url.getParam("key3")); //=>'val3'
+
+    //--------------------------------------------------------------------------------
+    //     function getParams(num){
+    //     let paramsAry = this.split('?')[1].split('&');
+
+    //     for(let i = 0;i<paramsAry.length;i++){
+    //         var cell = paramsAry[i].split('=');
+    //         var key = cell[0];// 'key1'
+    //         var val = cell[1]; // 'val1'
+    //         if(num==key){
+    //             return val;
+    //         } 
+    //     };
+    //     return obj[key]; // obj['key3']
+    // }
+
+    // String.prototype.getParams = getParams;
+
+    // var url="locallhost?key1=val1&key2=val2&key3=val3";
+    // console.log(url.getParam("key3")); //=>'val3'
+
+//--------------------------------------------------------------------------------------
+// - 2、编写两个方法 plus / minus 实现如下的执行效果
+// ```
+//     let n = 10;
+//     let m = n.plus(10).minus(5);
+//     console.log(m);//=>15（10+10-5）
+// ```
+
+/* 
+* plus:让两个数求和
+*  @params
+*       value：是一个Number类型的值
+ */
+// function plus(value){
+//     // this-->n-->10
+//    return this + value;
+// };
+// function minus(value){
+//     return this-value;
+// };
+
+
+// Number.prototype.plus = plus;
+// Number.prototype.minus = minus;
+
+
+
+// let n = 10;
+// let m = n.plus(10).minus(5);
+// console.log(m);//=>15（10+10-5）
+
+//-----------------------------------
+
+// function setMethods(prototype,obj){
+
+// }
+
+
+// function plus(value){
+//    return this + value;
+// };
+// function minus(value){
+//     return this-value;
+// };
+
+// let obj = {
+//     plus,
+//     minus:minus
+// }
+
+// setMethods(Number,obj)
+
+//-------------------------------------------
+
+// - 3、编写一个方法，方法可以实现找到字符中首个只出现一次的字符(推荐使用for循环 indexof lastIndexOf 函数)
+// 例如：let str = 'asdrawsd' // 找到的字符是 'r'
+// 如果当前的字符拿indexof和lastIndexOf检测结果相等，说明当前字符只出现了一次
+
+/* 
+* getOnly: 找到字符中首个只出现一次的字符
+* @params:
+    str：字符串
+ */
+function getOnly(str){
+    for(let i = 0;i<str.length;i++){
+        let item = str[i]; // 字符串的每一项
+        // if(str.indexOf(item) === str.lastIndexOf(item)){
+        //     // indexOf检测当前字符第一次出现位置的索引
+        //     // lastIndexOf检测当前字符最后一次出现位置的索引
+        //     return item;
+        // }
+        if(i === str.lastIndexOf(item)){
+            return item
+        }
+    }
+}
+let str = 'asdrawsd';
+console.log(getOnly(str)); // 当前找到的字符
+
+
+
+
+  </script>
+</body>
+</html>
