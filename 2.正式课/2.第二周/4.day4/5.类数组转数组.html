@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 类数组转数组
+    // function fn(){
+    //   // 利用循环，把arguments的每一个实参添加到一个新数组中
+    //   let ary = [];
+    //   for(var i=0;i<arguments.length;i++){
+    //       ary.push(arguments[i])
+    //   }
+    //   console.log(ary);
+    // }
+    // fn(1,2,3,4,5);
+    //---------------------------------------------
+
+    function fn(){
+      // let ary = [1,3,4];
+      // ary.slice(); // [1,3,4] this-->ary
+    //  let ary =Array.prototype.slice.call(arguments); // this-->原型
+     // slice执行的时候，this是谁，那就克隆谁，slice的返回的是一个真正的数组
+    //  console.log(ary);
+
+    let ary = toArray(arguments);
+    }
+    fn(1,2,3,4,5);
+
+
+    function toArray(likeAry){
+      return Array.prototype.slice.call(likeAry);
+    }
+
+  </script>
+</body>
+</html>

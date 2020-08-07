@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <script>
+    var inpList = document.getElementsByTagName('button'); // 是类数组
+    var ary = ['red','green','orange'];
+    // for(let i = 0;i<inpList.length;i++){
+    //   var cur = inpList[i];
+    //   cur.onclick = function(){
+    //     document.body.style.backgroundColor = ary[i];
+    //   }
+    // }
+
+    //-----------------------
+    for(var i = 0;i<inpList.length;i++){
+      var cur = inpList[i];
+      cur.setAttribute('index',i);
+      cur.index = i; // 增加自定义属性
+      // 如果是用set设置的，就用get获取，如果是用点设置的，就用点获取，两种方式不能混淆
+      cur.onclick = function(){
+        // document.body.style.backgroundColor = ary[this.index];
+        document.body.style.backgroundColor = ary[this.getAttribute('index')];
+        console.log(this.getAttribute('index'));
+      }
+    }
+ 
+  </script>
+</body>
+</html>

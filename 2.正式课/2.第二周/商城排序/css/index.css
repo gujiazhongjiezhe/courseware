@@ -1,0 +1,89 @@
+html,body {
+  width: 100%;
+  height: 100%;
+  background-color: #d0fadd2c;
+}
+#header {
+ width: 1000px;
+ height: 40px;
+ line-height: 40px;
+ margin: 30px auto;
+ background: orange;
+ box-sizing: border-box;
+ font-size: 16px;
+ padding: 0 10px;
+ color: white;
+ letter-spacing: 1px;
+}
+#header span {
+  margin-right: 10px;
+}
+#header a {
+  color: white;
+  margin-right: 15px;
+  position: relative;
+}
+#header a:hover {
+  color: orangered;
+}
+#header a i {
+  width: 0;
+  height: 0;
+  border:4px solid transparent;
+  position: absolute;
+}
+#header a i.up {
+  border-bottom-color: white;
+  top:3px;
+}
+#header a i.down {
+  border-top-color: white;
+  top:15px;
+}
+
+#header a i.up.bg {
+  border-bottom-color: red;
+}
+#header a i.down.bg {
+  border-top-color: red;
+}
+/* 
+=====================================
+*/
+#cardBox {
+  width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+#cardBox li {
+  width: 24%;
+  box-sizing: border-box;
+  padding: 10px;
+  background: rgba(172, 255, 47, 0.336);
+  margin: 0 .5% 10px .5%;
+}
+
+#cardBox li img {
+  width: 100%;
+  transition: all .2s;
+
+}
+#cardBox li img:hover {
+  transform: scale(1.05);
+}
+#cardBox li span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 18px;
+  margin-left: 10px;
+  color: orangered;
+  transition: all .2s;
+  cursor: pointer;
+}
+#cardBox li span:hover {
+  text-shadow: 2px 2px 5px #000;
+
+}
+

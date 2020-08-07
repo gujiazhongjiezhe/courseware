@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    1、class自定义类
+     */
+
+    //  function Fn(num){
+    //     this.x = num;
+    //  }
+    //  Fn.prototype.say = function(){
+
+    //  };
+    //  Fn.s= 200;
+
+    //  let f = new Fn(10);
+
+    class Fn {
+      // 相当于构造函数，
+      constructor(num) {
+        this.x = num;
+      }
+
+      // 给当前Fn类的原型上增加方法
+      say() { console.log(1); }
+
+
+      x = 800; // 给当前类的实例增加私有属性
+
+      static s = 200; // 把Fn当做对象增加私有属性
+    }
+
+    Fn.prototype.say = function () { console.log(2); }
+    Fn.s = 100;
+    // 给Fn原型增加一个键值对，属性名是w，属性值是90
+
+    let f = new Fn(10);
+    console.log(f);
+    // f.say()
+    // console.log(f);
+    // 如果当前的类是那class创建的，那只能当做构造函数执行，不能当做普通函数执行
+    // let f1 = Fn(); //  Class constructor Fn cannot be invoked without 'new' 会报错的
+
+    // let s = 100;
+
+    // let str = '<span>' + s + '</span>'
+    // let str = `<span>${s}</span>` // 模板字符串
+  </script>
+</body>
+
+</html>

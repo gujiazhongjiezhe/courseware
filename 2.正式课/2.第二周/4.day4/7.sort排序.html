@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style></style>
+
+</head>
+
+<body>
+  <div></div>
+  <script>
+    // sort排序
+    // let ary = [23,45,221,556,3,22];
+    let ary = [{name:3}, {name:1}, {name:5}];
+
+    ary.sort(function (a, b) {
+      console.log(a, b);
+      //         45 23
+      // b是当前项 a是后一项
+      // 如果a-b<0就交换位置，说明当前项大于后一项
+      // 当前这个回调函数每一次执行return的结果就是大于0或者小于0的数字
+      // return a-b;
+      // return -1;
+      return a.name - b.name
+    });
+    console.log(ary);
+
+
+  </script>
+</body>
+
+</html>

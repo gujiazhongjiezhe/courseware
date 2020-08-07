@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <ul id="box">
+    <li>39</li>
+    <li>67</li>
+    <li>22</li>
+    <li>18</li>
+    <li>34</li>
+  </ul>
+    
+   <button id="btn">按钮</button>
+   <script src="./utils.js"></script>
+    <script>
+        let button = document.getElementById('btn');
+
+        let list = document.getElementsByTagName('li');
+        // let list = document.querySelectorAll('li'); // 他没有映射机制
+        //[{innerText:3},{innerText:1},{innerText:0}]
+        list = utils.toArray(list);
+        console.log(list);
+        let flag = -1; // 创建一个标识，用来记录排序的顺序
+        button.onclick = function(){
+          flag*=-1; // 每点击一次，就给flag乘等于-1
+          list.sort(function(a,b){
+            return (a.innerText-b.innerText)*flag
+            // 如果flag是一个负数，那就把之前的顺序倒过来，
+            // sort排序之后，只是把当前list里的数据排序了，但是页面的dom并没有排序，所以还得把排好序的list插入到页面
+          });
+          console.log(list);
+          for(var i = 0;i<list.length;i++){
+            box.appendChild(list[i]);
+            // 把排好序的list插入到页面
+          };
+
+        }
+
+        
+
+    </script>
+</body>
+</html>

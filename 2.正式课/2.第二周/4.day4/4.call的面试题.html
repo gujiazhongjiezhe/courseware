@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function fn1() { console.log(1) };
+    function fn2() { console.log(2) };
+    fn1.call(fn2); // 1
+    fn1.call.call(fn2); // 2
+    Function.prototype.call(fn1); // 原型.call(fn1)-->原型()  不输出
+    Function.prototype.call.call(fn1); // 1
+
+
+
+    // function myCall(context){
+    //   // this-->当前函数fn   context-->obj
+    //   // obj.fn = fn;
+    //   // obj.fn();
+    //   // delete obj.fn;
+    //   context.$fn = this;
+    //   context.$fn();
+    //   delete context.$fn;
+
+    // }
+    // Function.prototype.myCall = myCall;
+
+    // function fn(){
+    //   console.log(this);
+    // }
+    // let obj = {};
+    // fn.myCall(obj);
+    //------------------------------------
+    // fn1.call(fn2);
+
+    // function myCall(context){
+    //   // this-->fn1   context-->fn2
+
+    //   context.$fn = this; // fn2.$fn = fn1
+    //   context.$fn(); // fn2.$fn()-->fn1()
+
+
+    // }
+
+    //------------------------------------
+    // fn1.call.call(fn2);
+    // 
+
+    // function myCall(context){
+    //   // this-->fn1.call-->call     context-->fn2
+
+    //   context.$fn = this; // fn2.$fn = call
+    //   context.$fn(); // fn2.$fn() -->call()
+    // ----------------------------------------
+    // call第二次执行
+    // this-->fn2  context-->window
+    //   context.$fn = this; // window.$fn = fn2
+    //   context.$fn(); // window.$fn()-->fn2()
+  
+
+  //--------------------------------------------------------------------------
+  // Function.prototype.call.call(fn1); // 1
+
+      function call(context){
+        // this-->Function.prototype.call-->call   context-->fn1
+        context.$fn = this; // fn1.$fn = call;
+        context.$fn(); //  fn1.$fn()-->call()
+        //------------------------------
+        // call第二次执行
+        // this-->fn1     context-->window
+        context.$fn = this; // window.$fn = fn1
+        context.$fn(); //  window.$fn()-->fn1()
+      }
+
+      // 如果出现两个及以上的call，最后就会让传进去的实参执行
+
+
+  </script>
+</body>
+
+</html>

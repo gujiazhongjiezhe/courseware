@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    1、sort(function(a,b){return b-a})
+    sort((a,b)=> b-a)
+    2、ary.length--; ary.pop(); ary.splice(ary.length-1)
+    3、ary.slice(n-1,m)
+    4、从索引n开始，删除m个，用x进行替换
+    5、appendChild innerHTMl insertBefore
+    6、previousElementSibling
+    7、Math.round(Math.random()*(m-n)+n)
+    8、replace(n,m)
+    9、document.getElementById('tab')/document.getElementsByClassName('tabCon')[0]/document.querySelector('#tab')
+    10、true  true
+     */
+
+    //  let ary = [100,200,300,400];
+
+    //  let obj = {
+    //    fn:function(){
+    //     //  this---> obj
+
+    //      let ary = [100,200,300,400];
+
+    //      ary.sort((a,b)=>{
+    //       console.log(this);
+    //        return a-b;
+    //      })
+    //    }
+    //  }
+    //  obj.fn();
+    // 回调函数里的this一般情况下是window
+
+    /* 
+    num
+    // 给window增加键值对的过程是在变量提升阶段产生的
+     */
+    // console.log(num); // un
+    // if (!('num' in window)) {
+    //   var num = 100
+    // }
+    // console.log(num); // un
+
+    //------------------------------
+    /* 
+    name = '中国' un
+    age  = 5000
+     */
+    // var name = '中国';
+    // var age = 5000;
+    // name = (function(name,age){
+    //     /* 
+    //     name = '中国' '珠峰'
+    //     age = un 5000
+    //      */
+    //   arguments[0] = '珠峰';
+    //   age = age || this.age; // window.age
+    //   console.log(name,age); // '珠峰' 5000
+    // })(name);
+    // console.log(name,age); // un 5000
+
+    //-----------------------------------------
+
+    /* 
+    ary = af0
+     */
+    // var ary = [100, 200]; // [100]
+    // ~ function (ary) {
+    //   /* 
+    //   ary = af0 af1
+    //    */
+    //   ary.length--;
+    //   ary = []; //af1 [300] 给当前作用域的ary重新赋值
+    //   ary[ary.length] = 300;
+    //   alert(ary); // '300'  [300]
+    // }(ary);
+    // alert(ary); // '100' [100]
+
+
+    //------------------------------------------
+
+    // function fn(i) {
+    //   /* 
+    //   i = 2 3 4
+    //   作用域不销毁
+    //    */
+    //   return function (n) { // af0
+    //     /* 
+    //     n = 4
+    //      */
+    //     console.log(n * (++i)); // 4*4-->16
+    //   }
+    // }
+    // var f = fn(2); // af0
+    // f(3); // 9
+    // f(4); // 16
+    // fn(5)(6); // af1(6)  36
+    // fn(7)(8); // 64
+
+    // function fn(i) {
+    //     /* 
+    //     i = 5 6
+    //      */
+    //   return function (n) { // af1
+    //     /* 
+    //     n = 6
+    //      */
+    //     console.log(n * (++i)); // 6*6-->36
+    //   }
+    // }
+    //-----------------------------------------------------
+    /* 
+    num = 1 4 14
+    obj = af0
+    fn = af1
+     */
+    // var num = 1;
+    // var obj = { // af0
+    //   num: 2 // 22
+    // }
+    // obj.fn = (function (num) {
+    //   /* 
+    //   自执行函数只会执行一次
+    //   num = 2 3 4 5
+    //    */
+    //   this.num = num * 2; // window.num = num*2  // 4
+    //   num++;
+    //   return function (n) { // af1
+    //     /* 
+    //     n = 20
+    //      */
+    //     this.num += n; // obj.num+=n // obj.num+=20
+
+    //     num++;
+    //     console.log(num); // 5
+    //   }
+    // })(obj.num);
+    // var fn = obj.fn; // af1
+    // fn(10); // 4
+    // obj.fn(20); // 5
+    // console.log(num, obj.num); // 14 22
+
+    //-----------------------------------------------
+    function Fn(num) {
+      this.x = this.y = num;
+    }
+    Fn.prototype = { // 这是Fn类的新原型但是没有constructor
+      x: 20,
+      sum: function () { // af1
+        /* 
+        
+         */
+        console.log(this.x + this.y); //  f.x+f.y-->10+10-->20 
+      }
+    }
+    var f = new Fn(10); // f是Fn类的实例  {x:10,y:10}
+    console.log(f.sum === Fn.prototype.sum); //  af1 === af1 true
+    console.log(f.sum()); //  20  un
+    Fn.prototype.sum(); // this-->原型 20 + un -->NaN
+    console.log(f.constructor); // Object
+
+  </script>
+</body>
+
+</html>

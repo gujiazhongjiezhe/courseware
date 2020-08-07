@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <script src="./utils.js"></script>
+  <script>
+    let {toArray} = utils; // 从utils中把toArray方法解构出来
+    let list = document.getElementsByTagName('div');
+    console.log(utils);
+
+    list = toArray(list);
+    console.log(list);
+  
+  </script>
+</body>
+</html>
