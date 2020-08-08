@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box"></div>
+  <script>
+    // let ary = [{name:'八十'},{name:'陈三'},{name:'阿宝'}];
+    // ary.sort((a,b)=>{
+    //   console.log(b.name.localeCompare(a.name));
+    //   return b.name.localeCompare(a.name);
+    // });
+    // console.log(ary);
+    let frg = document.createDocumentFragment();
+    for (var i = 0; i < 4; i++) {
+      let li = document.createElement('li');
+      li.innerHTML = '11';
+      frg.appendChild(li);
+      // box.appendChild(li);
+    }
+    console.log(frg);
+    box.appendChild(frg)
+  </script>
+</body>
+
+</html>

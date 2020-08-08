@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        body,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="box">
+            <ul class="list">
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+            </ul>
+            <div class="info">
+                <span>商品共合计：<em>0</em>件</span>
+                <span>共花费了：<em>0</em>元</span>
+                <br />
+                <br />
+                <span>其中最贵的商品单价是：<em>0</em>元</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        let lis = document.getElementsByTagName('li');
+        let ems = document.querySelectorAll('.info em');
+
+        for (var i = 0; i < lis.length; i++) {
+            console.log(lis[i]) // 代表每一个li 
+            // 当循环的时候给每一个li里的i绑定点击事件
+            addClick(lis[i])
+        }
+
+        function addClick(li){ // 第一个li
+            let tags = li.getElementsByTagName('i'); // [i,i]
+            let em = li.getElementsByTagName('em')[0];
+            let strongs =li.getElementsByTagName('strong'); 
+            tags[0].onclick = function(){
+                // console.log('-')
+                if(Number(em.innerHTML)<=0){
+                    em.innerHTML = 0;
+                }
+                else {
+                    em.innerHTML = Number(em.innerHTML)-1;
+                }
+                strongs[1].innerHTML = Number(em.innerHTML)*parseFloat(strongs[0].innerHTML)+ '元';
+                computed()
+                
+            }
+            tags[1].onclick = function(){
+                console.log('+');
+                em.innerHTML = Number(em.innerHTML)+1;
+                strongs[1].innerHTML = Number(em.innerHTML)*parseFloat(strongs[0].innerHTML)+ '元';
+                computed();
+            }
+        }
+        function computed(){
+    
+            /* 
+            1、商品总数量：
+                1、创建一个变量，用来累加每一个商品的数量
+                2、把每一个商品的数量累加起来
+                3、把商品数量额显示到页面
+            2、总合计：
+                1、创建一个变量，用来累加每一个商品的小计
+                2、把每一个商品的小计累加起来
+                3、把商品总计显示到页面
+            3、最贵的商品单价：
+                1、创建一个数组，用来存放购买商品的单价
+                2、把你购买的商品的单价放到数组里，并且给他排序
+                3、把数组的最大值显示到页面上
+             */
+             let total = 0;
+             let allPrice = 0;
+             let ary  =[0];
+             for (var i = 0; i < lis.length; i++) {
+                let em = lis[i].getElementsByTagName('em')[0];
+                let strongs = lis[i].getElementsByTagName('strong');
+
+                total+=Number(em.innerHTML);
+                allPrice+=parseFloat(strongs[1].innerHTML);
+                if(Number(em.innerHTML)>=1){
+                    ary.push(parseFloat(strongs[0].innerHTML))
+                }
+             }
+
+             ary.sort((a,b)=>b-a);
+             ems[0].innerHTML = total;
+             ems[1].innerHTML = allPrice;
+             ems[2].innerHTML = ary[0];
+            // //  ems[2].innerHTML = ary[0] === undefined? 0: ary[0]
+            // ems[2].innerHTML = ary[0] || 0
+             console.log(ary)
+
+        }
+
+
+    </script>
+</body>
+
+</html>

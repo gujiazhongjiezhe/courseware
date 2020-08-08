@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        obj = af2
+        Fn = af0
+        f1 = af1
+        f2
+        f3
+        n = 10 20 21 22 23
+        window.m = 10
+        window.n = NaN
+         */
+        let n = m = 10; // let n = 10;  m = 10 -->window.m = 10  let不会给window增加键值对
+        var obj = { // af2
+            n: 10, // 11
+            f1: (function (m) {
+                /* 
+                m = 10 11
+                作用域不销毁
+                // 自执行函数的this是window
+                 */
+                n += n; // n+=10 
+                return () => { // af3
+                    /* 
+                    箭头函数没有this，
+                     */
+                    console.log(++this.n, this.m == undefined ? m : ++m);
+                    // ++window.n --> window.n = windiw.n+1-->NaN
+                    // windiw.m==>10  false  ==> 11
+                }
+            })(n)
+        }
+
+        function Fn() { // AF0
+            /* 
+            
+             */
+            this.n = n;
+             // 给当前实例f2增加私有属性 this.n = 20 21
+             // 给当前实例f3增加私有属性 this.n = 22 23 24
+            n++ < 21 ? n++ : this.n++;
+            //  20<21? n++(true)
+            //  22<21? this.n++
+
+            f1.call(this, this.n);
+            this.getN = function () {
+                
+                console.log(this.n++); // obj.n++  10
+            }
+        }
+
+        function f1(n) { // af1  20 23
+        /* 
+         this-->当前的Fn实例f2
+         this-->当前的Fn实例f3
+         this-->Object的原型
+         this-->f2
+         this-->f2
+         */
+            console.log(this.n++); // 20 23  NaN 
+            //  Object的原型.n = Object的原型.n+1  给Object的原型增加键值对，属性名是n，属性值是NaN
+
+            //-----------------------------------
+            // f2.n++     21
+            // f2.n++     22
+        }
+        var f2 = new Fn(); // {n:21 22 23,getN:fun // af4}     20
+        var f3 = new Fn(); // {n:24,getN:fun}     23
+        console.log(f2, f3);// {n:21,getN:fun}  {n:24,getN:fun}
+        Fn.prototype.f1 = f1; // 给Fn的原型增键值对，属性名是f1，属性值是af1
+        f2.__proto__.f1 = f1;  // 给Fn的原型增键值对，属性名是f1，属性值是af1
+        Fn.prototype.__proto__.f1 = f1;  // 给Object的原型增加键值对，属性名是f1，属性值是 af1
+        Fn.prototype.__proto__.getN = f2.getN;  // 给Object的原型增加键值对，属性名是getN，属性值是 af4(f2的getN)
+
+        console.log(f2.getN == f3.getN); // false 
+        console.log(f2.getN === Fn.prototype.getN);  // true 
+        console.log(f2.f1 === Object.f1); // af1 === af1  // true
+        // Object.f1 // 把函数当做对象，找属性，但是自己身上没有，通过__proto__找到当前所属类Function的原型，但是这个原型上也没有，所以又找向Object的原型
+
+        obj.f1(); // NaN 11           
+        obj.__proto__.f1(); // Obkject的原型.f1()  NaN
+        obj.getN();  // 10     
+        f2.f1();    // 21         
+        f3.f1.call(f2);  // 22
+        // call执行的时候会让   f1(af1)函数执行 ,并且把af1的this指向了f2  
+
+        //---------------------------------------------------
+        let i = undefined;
+        console.log(i++); // NaN
+    </script>
+</body>
+
+</html>
