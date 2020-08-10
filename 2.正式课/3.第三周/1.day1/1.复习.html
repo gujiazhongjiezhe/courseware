@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    原型
+    商城排序
+    call apply bind
+    es6
+    utils
+    sort的原理
+    继承
+    阿里的面试题
+
+     */
+
+    //  call
+
+    // function fn(n,m){
+    //   // console.log(this,n,m);
+    //   if(false){
+    //     throw new Error('1111');
+    //   }
+
+    // };
+    // let obj = {};
+    // fn();
+
+    // obj.fn = fn;
+    // obj.fn();
+    // delete obj.fn;
+
+    // fn.call(obj, 1, 2);
+    // 如果call执行时不穿参，或者传null和undefined，那函数的this就默认指向window
+
+    // function myCall(context,...arg) {
+    //   // this-->fn   context-->obj
+    //   context = context || window;
+    //   let ary = ['number','string','boolean'];
+
+    //   if(ary.includes(typeof context)){
+    //     throw new Error('不可以传基本值');
+    //   };
+    //   console.log(100);
+
+    //   let res = null;
+    //   context.fn = this;
+    //   res =  context.fn(...arg);
+    //   delete context.fn;
+
+    //   return res;
+
+    // }
+    // Function.prototype.myCall = myCall;
+
+    // function fn(n, m) {
+    //   console.log(this);
+    //   return 200;
+    // }
+    // // let obj = {};
+    // fn.myCall(100,1,2);
+
+
+    // es6
+    // 箭头函数 let var
+    // ...
+    // 解构赋值
+
+    // let ary = [100,200];
+    // let ary1 = [...ary]
+
+    // function fn(){
+    //   let ary = [...arguments]; // 类数组转数组
+    //   console.log(ary);
+    // }
+    // fn(1,2,3,4);
+
+    // let obj = {
+    //   name:1,
+    //   age:[100,200]
+    // }
+
+    // let {name,age:[,n]} = obj;
+
+    // console.log(name,n);
+
+
+    // function fn({name = 100,age = 200}={}){
+    //   // console.log(obj);
+    //   // let {name,age} = obj;
+    //   console.log(name,age);
+    // }
+    // fn({name:1,age:2});
+    // fn()
+
+    //-----------------------------------------------------
+    // Array.isArray() // 这不是es6的 他是专门用来检测当前实例是否是Array类的，如果是就返回true，如果不是就返回false
+    // console.log(Array.isArray({anme:1})); // false
+    // console.log(Array.isArray([100,200])); // true
+    //----------------------------------------------------------
+
+    // Array.from(类数组) // 类数组转数组
+    // Array.of(1,2,3) // 将一组数转化成一个数组
+
+    // function fn(){
+    //   console.log(Array.from(arguments));
+    // }
+    // fn(1,2,3,4)
+
+    // let obj = { name: 1, age: 2 }
+    let ary = [100, 200, 300, 400]
+    // for (var key in ary) {
+    //   console.log(key); // 
+    // }
+
+    // for(var value of ary){
+    //   console.log(value);
+    // }
+
+    // console.log(ary.keys()); // 返回值是一个遍历器
+    // for (let index of ary.keys()) {
+    //   console.log(index); // 每一个属性名
+    // }
+
+    // console.log(ary.values()); // 返回值是一个遍历器
+    // for (let index of ary.values()) {
+    //   console.log(index); // 每一个属性值
+    // }
+
+    // for (let ss of ary.entries()) {  // 等价于forEach
+    //   // console.log(ss); // [0,100]
+    //   console.log(index,item);
+    // }
+
+
+    // function fn(){ // 是可以的
+    //   for(let ss of [].entries.call(arguments)){
+    //     console.log(ss); // [0,100]
+    //   }
+    // }
+    // fn(100,200,300,400);
+
+    //-------------------------------------------------
+
+    // let obj = {name:1,age:2};
+    // Object.prototype.ss = 100;
+    // // 只要是你手动增加的就是可枚举的属性
+    // for(var key in obj){
+    //   // for in 遍历的是可枚举的属性
+    //   console.log(key);
+    // }
+
+
+
+    // Object.assign()方法用于对象的合并
+    // const target = { a: 1 };
+
+    // const source1 = { b: 2 };
+
+    // Object.assign(target, source1);
+    // console.log(target);
+    // target // {a:1, b:2, c:3}
+
+    // const v1 = 'abc';
+    // const v2 = 'de';
+
+    // const obj = Object.assign({}, v1, v2);
+    // // 先把v1和v2转成对象，然后在合并，当合并的时候，如果属性名一样，那下面会覆盖上面的
+    // console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+    //                //    {'0':'d','1':'e'}
+    //                // {'0':'d','1':'e','2':'c'}
+
+
+    // Obejct.keys() // 把可枚举的私有的的属性名放到一个数组里
+    // Object.values() // 把可枚举的私有的的属性名对应的属性值放到一个数组里
+    // Object.entries() // 把上面的结果组成一起进行输出
+
+
+    // let obj = {name:1,age:2};
+    // console.log(Object.keys(obj)); //  ["name", "age"]
+    // console.log(Object.values(obj)); // [1,2]
+    // console.log(Object.entries(obj)); // [['name',1],[age,2]]
+
+    // for(var ss of Object.keys(obj)){
+    //     console.log(ss); // 每一个属性名
+    // }
+
+    // for(var ss of Object.values(obj)){
+    //     console.log(ss); // 每一个属性值
+    // }
+
+    // for(var ss of Object.entries(obj)){
+    //     console.log(ss); // 每一个键值对用数组进行输出
+    // }
+
+
+    // let obj = {name:undefined,age:2};
+    // // console.log(obj.name); // undefined
+    // let ary = Object.keys(obj); // ['name','age'];
+    // ary.includes('name'); // true
+
+    //------------------------------------------------
+    // 由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
+    // let obj = {
+    //   age:1,
+
+    //   age:100
+    // }
+
+    // const symbol1 = Symbol();
+    // const symbol2 = Symbol();
+
+    // console.log(symbol1 === symbol2); // false
+
+    // // let obj = {};
+    // // obj[symbol1] = 1;
+    // // obj[symbol2] = 100;
+    //   let obj = {
+    //     [symbol1]:1
+    //   }
+
+    // console.log(obj);
+    // console.log(obj[symbol1]);
+    //---------------------------------------------------------
+    // Set
+    // const s = new Set([1,2,3,4,4]);
+    // console.log(s);
+    //   console.log([...s]);
+
+      // let res = [...new Set(ary)] // 数组去重
+
+      // const set1 = new Set([1,2,3]);
+      // set1.add(9);
+      // console.log(set1);
+      // console.log(set1.size); // 代表值的个 数等价于数组的length
+
+      // [...new Set('ababbc')].join('') // 字符串的去重
+
+      // let res = new Set('asdasd');
+      // console.log(res);
+      // console.log([...res].join('')); // 'asd'
+
+      // const a = 1;
+      // a = 2;
+      // const a = {name:1}; // af0
+      // a.ss =100; // 这句话是给af0新增键值对，所以a代表的空间地址不变
+      // console.log(a);
+
+
+      // add():新增值
+      // has():检测某个值在当前set数据结构中有没有，如果有返回true
+      // delete()：删除某一个值
+
+      let set1 = new Set([100,200,300,400,400]);
+      console.log(set1);
+      // console.log(set1[100]); // un
+      console.log(set1.keys());
+      // for(var ss of set1.values() ){
+      //   console.log(ss);
+      // }
+
+      set1.forEach((item,index)=>{
+        console.log(item,index);
+      })
+
+      
+  
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

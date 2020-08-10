@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 正则的使用
+    // \d{11}  
+    // test:检测当前字符串是否可以用当前正则进行匹配，如果匹配成功就返回true，否则返回false
+
+    // 1、^ $
+    // let reg = /18$/; // 以18结尾
+    // console.log(reg.test('189')); // false
+    // console.log(reg.test('198')); // false
+    // console.log(reg.test('234567818')); // true
+
+    // let reg = /^18/; // 以18开头
+    // console.log(reg.test('189')); // true
+    // console.log(reg.test('198')); // false
+    // console.log(reg.test('18234567818')); // true
+
+
+    // let reg = /^18$/; // 以18开头并且以18结尾
+    // console.log(reg.test('189')); // false
+    // console.log(reg.test('198')); // false
+    // console.log(reg.test('1845618')); // false
+    // console.log(reg.test('1818')); // false
+    // console.log(reg.test('18')); // true
+
+    // let reg = /^\d{2}$/; // 0-9之间的数字出现两次
+    // console.log(reg.test('e2')); // false
+    // console.log(reg.test('2e')); // false
+    // console.log(reg.test('2e2')); // false
+    // console.log(reg.test('22')); // true
+    // console.log(reg.test('57')); // true
+
+    // 如果 ^ $ 都不加，那只要字符串中出现符合规则的字符就可以
+    // 如果加上 ^ $那匹配的字符必须跟正则里规则一样才可以
+
+
+    // 2.转义字符  \
+    // let reg = /^2.3$/; // 以2开头，中间任意字符，以3结尾
+    // // . 除了换行符之外的任意字符
+    // console.log(reg.test('2.3')); // true
+    // console.log(reg.test('2e3')); // true
+    // console.log(reg.test('2@3')); // true
+
+    // let reg = /^2\.3$/; // '2.3'
+    // 把特殊元字符转化为普通元字符
+    // console.log(reg.test('2.3')); // true
+    // console.log(reg.test('2e3')); // false
+    // console.log(reg.test('2@3')); // false
+
+    // 把普通元字符转化为特殊元字符
+    // let reg = /^\d$/ // 0-9之间的数字
+
+    // let str = '中\\国'; // 转义字符在字符串里也适用(第一个\把第二个\转化为普通的字符串了)
+    // console.log(str);
+
+    // let reg = /^\\d$/; // 我只想匹配 '\d'
+    // console.log(reg.test('\\d')); // true
+
+
+    // 3、x|y：x或者y之间取一个
+    // let reg = /^18|29$/;
+    // console.log(reg.test('18')); // true
+    // console.log(reg.test('29')); // true
+    // console.log(reg.test('189')); // true
+    // console.log(reg.test('129')); // true
+    // console.log(reg.test('118219')); // false
+    // console.log(reg.test('1589')); // false
+    // 直接写 x|y会产生很乱的优先级，一般咱们这样写的时候都会有()进行分组，小括号可以改变处理的优先级
+    // let reg = /^(18|29)$/;
+    // console.log(reg.test('18')); // true
+    // console.log(reg.test('29')); // true
+    // console.log(reg.test('129')); // false
+    // console.log(reg.test('189')); // false
+    // console.log(reg.test('1829')); // false
+
+
+
+    // 4、[]中不允许出现多位数，而且中括号一般都是普通含义
+
+    // let reg = /^[21-68]$/; // [2,1-6,8] // 从2或者1-6或者8中任意取一个
+    // console.log(reg.test('22')); // false
+    // console.log(reg.test('68')); // false
+    // console.log(reg.test('2')); // true
+    // console.log(reg.test('5')); // true
+    // console.log(reg.test('228')); // false
+
+    // 而且中括号一般都是普通含义
+    // let reg = /^[.]$/; // .就是普通元字符
+    // console.log(reg.test('.')); // true
+    // console.log(reg.test('1')); // false
+
+
+    // let reg = /^[\d]$/; // \d还是特殊意义的元字符
+    // console.log(reg.test('6')); // true
+    // console.log(reg.test('1')); // true
+
+    // 年月日
+
+    // 匹配身份证中的年份
+      // - 四位数
+      // - 前一位应该是1或者2
+      // - 后边随便了
+
+
+      // 2001   1995 1993 1990 
+
+      // let reg = /^[1-2](\d{3})$/;
+
+      // let reg = /^[1-2]\d{3}$/
+
+
+      // 月： 01-12   01-09   10-12
+      // 01-09   0[1-9]
+      // 10-12   1[0-2]
+
+      // let reg = /^(0[1-9]|1[0-2])$/ // 匹配月份
+      // let reg1 = /^(0[1-9]|10|11|12)$/ // 匹配月份
+
+      // 日：01-31    01-09  10-29  30-31
+                    // 01-09  10-19  20-29 30-31
+      // let reg = /^(0[1-9]|[1-2][0-9]|3[0-1])$/;
+      // let reg1 = /^(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
+
+
+      // 5、():分组
+      //   1、提高匹配的优先级
+      //   2、分组引用
+
+
+      // let str = 'moon' // 'seew';  'meeeo'
+      // ([a-z])\1:把刚才小括号里出现的字符再重新出现一次
+      // let reg = /^[a-z]([a-z])\1[a-z]$/;
+      // console.log(reg.test('moon')); // true
+
+    // 让第一次分组的内容再次出现两次
+      // let reg = /^[a-z]([a-z])\1\1[a-z]$/;
+      // console.log(reg.test('mooon')); // true
+
+
+
+      // let str1 = 'abab';
+    //  let reg =  /^([a-z][a-z])\1$/;
+    //             // /^([a-z]{2})\1$/
+              //  /^([a-z])([a-z])\1\2$/;
+
+
+    //  console.log(reg.test('abab')); // true
+
+    
+
+
+
+
+
+
+     
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
