@@ -1,13 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+
 <body>
-  <script>
-    
-  </script>
+    <script>
+        // Array.isArray(实例):检测当前实例是否属于Array类，如果是返回true。否则返回false(这是es5的语法)
+
+        //---------------------------------------------------------------------------
+        // Array.from():将类数组转数组，
+        // Array.of():将一组数转成数组
+        // function fn(){
+        //     let res = Array.from(arguments);
+        //     console.log(res); // [1,2,3,4,5]
+        // }
+        // fn(1,2,3,4,5);
+
+        // console.log(Array.of(1,2,3,4)); // [1,2,3,4]
+        //---------------------------------------------------------------------------
+        // 数组实例的 entries()，keys() 和 values()  这三个方法是存在于Array的原型上的
+        // 他可以让咱们遍历数组变得更加方便
+            // for (let index of ['a', 'b'].keys()) {
+            //     console.log(index); // 0 1 输出属性名
+            // };
+
+
+            // for (let elem of ['a', 'b'].values()) {
+            //     console.log(elem); // 'a' 'b' 输出属性值
+            // };
+
+
+            // for (let ss of ['a', 'b'].entries()) {
+            //     console.log(ss); // [0,'a'] [1,'b'] 把每一个键值对放到数组里进行输出
+            // };
+        //---------------------------------------------------------------------------
+        // Object.assign()方法用于对象的合并，把从第二个参数开始的键值对给到第一个对象(第一个参数只能传引用值或者字符串)
+            // const target = { a: 1 };
+            // const source1 = { b: 2 };
+            // const source2 = { c: 3 };
+
+            // let res = Object.assign(target, source1, source2);
+            // console.log(target); // {a:1,b:2,c:3}
+            // console.log(res === target); // true  说明方法的返回值是target的空间地址
+        //---------------------------------------------------------------------------
+        // Object.keys()，Object.values()，Object.entries() 这三个方法是存在于Object类的自己身上的
+
+            // var obj = { foo: 'bar', baz: 42 };
+            // Object.keys(obj); // ["foo", "baz"] // 把对象的键值对的属性名放到一个数组里
+
+            // const obj = { foo: 'bar', baz: 42 };
+            // Object.values(obj); // ["bar", 42] // 把对象的属性值放到一个数组里
+
+            // const obj = { foo: 'bar', baz: 42 };
+            // Object.entries(obj); // [['foo','bar'],['baz',42]] // 把每一个对象的属性名和属性值分别放到一个小数组里
+
+
+
+            // let {keys, values, entries} = Object; // 从Object身上解构出三个方法去配合of使用
+            // let obj = { a: 1, b: 2, c: 3 };
+
+            // for (let key of keys(obj)) {
+            // console.log(key); // 'a', 'b', 'c'  输出属性名
+            // };
+
+            // for (let value of values(obj)) {
+            // console.log(value); // 1, 2, 3       输出属性值
+            // };
+
+            // for (let [key, value] of entries(obj)) {
+            // console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]   输出属性名和值
+            // };
+         //---------------------------------------------------------------------------
+        //  Symbol
+        //  ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值。它是 JavaScript 语言的第七种数据类型，前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+
+
+            // 由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。
+            // let symbol1 = Symbol();
+            // let symbol2 = Symbol();
+
+            // 第一种写法
+            // let obj = {};
+            // obj[mySymbol1] = 'Hello!';
+            // obj[mySymbol2] = 'world';
+
+            // 第二种写法
+            // let a = {
+            //     [mySymbol1]: 'Hello!',
+            //     [mySymbol2]: 'world'
+            // };
+        //---------------------------------------------------------------------------
+        // Set
+        // ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+        // 他的实参接收一个数组或者类数组
+        // 由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。(012不是他的属性名，)
+
+            // const set = new Set([1, 2, 3, 4, 4]); // 返回值类似于对象和数组的结合体，但是没有重复的值{0:1,1:2,2:3,3:4}
+            // console.log([...new Set([1, 2, 3, 4, 4])]); // [1,2,3,4]  数组去重
+
+            // set.size // 4 类似于数组的length，代表值的个数
+            // set.add(1) // 向实例增加值
+            // s.has(1) // 检测某个值在实例中有么有，有就返回true，没有返回false
+            // s.delete(2); // 删除实例中的某个值
+    </script>
 </body>
+
 </html>
