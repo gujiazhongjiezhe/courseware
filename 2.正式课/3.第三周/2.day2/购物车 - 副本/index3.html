@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        body,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="box">
+            <ul class="list">
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+                <li>
+                    <i></i>
+                    <em>0</em>
+                    <i></i>
+                    <span>
+                        单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+                    </span>
+                </li>
+            </ul>
+            <div class="info">
+                <span>商品共合计：<em>0</em>件</span>
+                <span>共花费了：<em>0</em>元</span>
+                <br />
+                <br />
+                <span>其中最贵的商品单价是：<em>0</em>元</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 1.获取相应的元素，给每一个i标签绑定点击事件
+        let list = document.getElementsByTagName('li');
+        let ems = document.querySelectorAll('.info em');
+        
+        console.log(ems);
+        console.log(list);
+        // 2.循环给每一个li里的i标签绑定点击事件
+        for (var i = 0; i < list.length; i++) {
+            // 假设现在的for循环凝固到第一次循环了，此时的i是0
+            // list[i] // 代表每一次循环时的li标签
+            addClick(list[i])
+        }
+
+        function addClick(li) { // 代表第一个li
+            let tags = li.getElementsByTagName('i'); // 类数组集合  [i,i] 获取每一个li中的减号和加号
+            let strongs = li.getElementsByTagName('strong'); // 元素集合 [strong,strong]
+            let em = li.getElementsByTagName('em')[0]; // 获取当前显示数量的元素em
+            tags[0].onclick = function () {
+                console.log('-');
+                
+                if(Number(em.innerHTML)<=0){
+                    em.innerHTML = 0;
+                }
+                else {
+                    em.innerHTML = Number(em.innerHTML) - 1; // 当点击事件的时候，给当前em元素累加1
+                }
+                 // 做一下限制，如果当前数量小于等于0了，就不要再累减了
+              
+                strongs[1].innerHTML = Number(em.innerHTML)* parseFloat(strongs[0].innerText) +'元'
+                // 小计 = 当前商品的数量乘以当前商品的单价
+                computed();
+                
+            }
+            tags[1].onclick = function () {
+                console.log('+');
+                em.innerHTML = Number(em.innerHTML) + 1; // 当点击事件的时候，给当前em元素累加1
+                strongs[1].innerHTML = Number(em.innerHTML)* parseFloat(strongs[0].innerText) +'元'
+                // 小计 = 当前商品的数量乘以当前商品的单价
+                computed();
+            }
+        }
+        function computed(){
+            // 计算下面三个数据的
+            /* 
+            1、商品数量总和
+                1、先创建一个变量，用来存储累加每一个商品数量的值
+                2、循环，把每一个商品数量的值累加起来
+                3、把当前累加的值显示到页面上
+            2、商品小计总和
+                1、先创建一个变量，用来存储累加每一个小计的值
+                2、循环，把每一个小计的值累加起来
+                3、把当前累加的值显示到页面上
+            3、最贵的商品单价
+                1、创建一个数组，用存储用户买的每一个商品的单价
+                2、循环，把用户买的商品的单价push到数组里
+                3、从数组中获取到最大的值，显示到页面
+             */
+             let total = null;
+             let allPrice = null;
+             let ary = [0];
+
+             for(var i = 0;i<list.length;i++){
+                // 循环得到每一个li中的em元素
+                let em = list[i].getElementsByTagName('em')[0];
+                let strongs = list[i].getElementsByTagName('strong');
+                total+= Number(em.innerText); // 把每一个商品数量的值累加起来
+
+                allPrice+=parseFloat(strongs[1].innerText); // 把每一个小计的值累加起来
+
+                if(Number(em.innerText)>0){
+                    // 如果当前li的em大于0,说明用户已经购买了当前商品，那咱们就把当前商品的单价push到数组中
+                    ary.push(parseFloat(strongs[0].innerText))
+                }
+             }
+             console.log(total,allPrice,ary);
+             ems[0].innerText = total; // 把当前的商品数量总和显示到页面
+             ems[1].innerText = allPrice;// 把当前的总计价格的和显示到页面
+
+             ary.sort((a,b)=> b-a);
+             ems[2].innerText = ary[0];
+
+            // ems[2].innerText = Math.max(...ary);
+
+
+        }
+    </script>
+</body>
+
+</html>
