@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    亲爱的上帝，还记的你们以前封装的处理url的方法吗？，现在用正则的方式再去重温一下
+    */
+    //    let url = 'http://www.baidu.com?name=erYa&age=18#index'
+    //    function queryUrlParams(){
+    //         let reg = /([^?=&#]+)=([^?=&#]+)/g;
+    //         let obj = {}; // 创建一个空对象，用来存储一会处理的键值对
+    //         this.replace(reg, (content,key,value)=>{obj[key] = value})
+    //         // 把url里的参数捕获出来，以键值对的形式赋值给obj对象
+    //         this.replace(/#([^?=&#]+)/,(content, value)=>{ obj['hash'] =value})
+    //         // 把url里的hash值捕获出来，以键值对的格式赋值给obj对象
+    //         return obj
+    //         // 最后把obj对象return 出去
+    //    }
+    //    String.prototype.queryUrlParams = queryUrlParams;
+    //    console.log(url.queryUrlParams())
+
+    //  let str1 =   'https://www.baidu.com/s?wd=%E6%97%A2%E7%94%9F%E7%91%9C%E4%BD%95%E7%94%9F%E4%BA%AE%E4%B8%8B%E4%B8%80%E5%8F%A5&rsv_spt=1&rsv_iqid=0xe2e4184300069d92&issp=1&f=3&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_dl=ih_2&rsv_enter=1&rsv_sug3=1&rsv_sug1=1&rsv_sug7=001&rsv_sug2=1&rsp=2&rsv_sug9=es_2_1&rsv_sug4=4188&rsv_sug=6'
+    //  console.log(str1.queryUrlParams())
+
+
+
+    let url = 'http://www.baidu.com?name=erYa&age=18#index';
+    function queryUrlParams() {
+      let reg = /([^?=&#]+)=([^?=&#]+)/g;
+      let obj = {}; // 创建一个空对象，用来存储一会处理的键值对
+      this.replace(reg, (content, key, value) => {
+        // content是每一次全局捕获的内容，
+        // key是每一次第一个分组捕获的内容(作为属性名)
+        // value是每一次第二个分组捕获的内容(作为属性值)
+        obj[key] = value;
+      });
+      // 把url里的参数捕获出来，以键值对的形式赋值给obj对象
+      this.replace(/#([^?=&#]+)/, (content, value) => {
+        // value是每一次分组捕获的内容(作为属性值)
+        obj['hash'] = value;
+      })
+      // 把url里的hash值捕获出来，以键值对的格式赋值给obj对象
+      return obj;
+      // 最后把obj对象return 出去
+    }
+    String.prototype.queryUrlParams = queryUrlParams;
+    console.log(url.queryUrlParams());
+  </script>
+</body>
+
+</html>

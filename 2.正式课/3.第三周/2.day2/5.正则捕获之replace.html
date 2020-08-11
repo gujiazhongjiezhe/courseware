@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // replace 字符串中实现替换的方法（一般都是伴随正则一起使用的）
+    // let str = "zhufeng@2019|zhufeng@2020";
+    //=>把"zhufeng"替换成"珠峰"
+    //1.不用正则，执行一次只能替换一个
+    /*
+    str = str.replace("zhufeng","珠峰").replace("zhufeng","珠峰");
+    console.log(str);
+    */
+    //2.使用正则会简单一点
+    // str = str.replace(/zhufeng/g, "珠峰");
+    // console.log(str);
+    //---------------------------------------------------------------------------
+    // let str = "zhufeng@2019|zhufeng@2020";
+    //=>把"zhufeng"替换为"zhufengpeixun"
+    //str=str.replace("zhufeng","zhufengpeixun").replace("zhufeng","zhufengpeixun");
+    //"zhufengpeixunpeixun@2019|zhufeng@2020" 每一次替换都是从字符串第一个位置开始找的
+
+    //=>基于正则g可以实现
+    // str = str.replace(/zhufeng/g, "zhufengpeixun");
+    // console.log(str);
+
+    //-------------------------------------------------------------------------------
+    // 案例：把时间字符串进行处理
+
+
+    // let time = "2019-08-13";
+    //=>变为"2019年08月13日"
+    // let reg = /^(\d{4})-(\d{1,2})-(\d{1,2})$/g;
+    
+
+  //=>这样可以实现
+  // time = time.replace(reg,"$1年$2月$3日");
+  // console.log(time); //=>2019年08月13日
+  // 这一块可以下边讲-------------------------------------------------
+
+  //-------------------------------------------------------------------------------------
+  // 其实正则最牛的不是这些，而是正则的第二个参数可以传函数
+  // str.replace(reg,function)
+  // time = time.replace(reg,function(...ary){
+  //   //1.首先拿reg和time进行匹配捕获，能匹配到几次就会把传递的函数执行几次（而且是匹配一次就执行一次）
+  //   //2.不仅把方法执行，而且replace还给当前函数传递了实参信息（和exec捕获的内容一致的信息：大正则匹配的内容，小分组匹配的信息....）
+  //   //3.在函数中我们返回的是啥，就把当前大正则匹配的内容替换成啥
+  //   // console.log(ary);
+  //   let  [,$1,$2,$3] = ary; // 数组的解构
+  //   $2.length<2?$2="0"+$2:null; // 补零
+  //   $3.length<2?$3="0"+$3:null; // 补零
+  //   return $1+'年' + $2+'月'+ $3 + '日';
+  // });
+  // console.log(time);
+
+  //----------------------------------------------------------------------------------------
+  // 单词首字母大写
+  // let str = "good good study，day day up！";
+  //  let reg = /\b([a-zA-Z])[a-zA-Z]*\b/g;
+  //  //=>函数被执行了六次，每一次函数执行时接收到的实参是当前正则捕获到的信息
+  //  //=>每一次捕获到的信息:["good","g"] ["good","g"] ["study","s"]...
+  //  str = str.replace(reg,(...arg)=>{
+  //      let [content,$1]=arg;
+  //      $1=$1.toUpperCase(); // 把首字母转大写
+  //      content=content.substring(1); // 截取出来首字母之后的字符
+  //      return $1+content; // 把转化之后的大写字符和后边的字符拼接起来进行返回
+  //     // return 11
+  //  });
+  //  console.log(str); //=>"Good Good Study，Day Day Up！"
+
+  //---------------------------------------------------------------------------------------
+  
+  // let str = 's3a3df4b4gh5c5jkl';
+  // // 给正则加上g，其实利用匹配也可以实现捕获，每匹配一次，正则就会把当前捕获到的内容挂载到正则类上
+  // // 这玩意用处不是很大
+  // let reg = /(\d)([a-z])(\d)/g;
+  // console.log(reg.test(str));
+  // console.dir(RegExp);
+  // console.log(reg.test(str));
+  // console.dir(RegExp);
+  //-------------------------------------------------
+  </script>
+</body>
+
+</html>

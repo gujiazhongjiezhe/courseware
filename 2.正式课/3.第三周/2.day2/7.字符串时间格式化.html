@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    字符串时间格式化
+    在工作中后台会给我们返回字符串格式的时间
+     */
+    let time = '2019-12-3 12:12:3';
+    '2019年12月03日 12时10分03秒'
+
+    function formatTime(template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
+      let timeAry = this.match(/\d+/g);// 把字符串里的年月日时分秒都拿到,以数组的格式进行展示 ["2019", "12", "3", "12", "10", "3"]
+      // let template = '{0}年{1}月{2}日 {3}时{4}分{5}秒';// 编写一个模板，一会用来进行替换
+      template = template.replace(/\{(\d)\}/g, function (content, index) {
+        // index是每一次分组捕获的内容
+        // console.log(content, index)
+        // console.log(timeAry[index])
+
+        let time = timeAry[index] || "00"; // 如果index获取不到对应的值，那就默认赋值为 "00"
+
+        time.length < 2 ? time = "0" + time : null;
+        // 如果获取的时间不足十位就补零
+        return time
+      })
+      return template
+      console.log(timeAry)
+    }
+    String.prototype.formatTime = formatTime;
+    console.log(time.formatTime())
+    console.log(time.formatTime('{1}~{2} {3}:{4}'))
+  </script>
+</body>
+
+</html>]
