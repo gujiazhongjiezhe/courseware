@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+   
+    #box {
+      width: 200px;
+      height: 200px;
+      padding: 20px;
+      border:10px solid lightgreen;
+      background: lightpink;
+    }
+    /* 知道当前盒子宽高的情况下 */
+    /* #box {
+      position: absolute;
+      left:50%;
+      top:50%;
+      margin-top: -130px;
+      margin-left: -130px;
+    } */
+
+    /* 在不知道当前盒子宽高的情况下，利用css的变形属性完成居中 */
+    /* #box {
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+    } */
+
+
+   /* #box {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    } */
+
+
+  /* 利用flex布局实现居中*/
+    /* body {
+      display: flex;
+      justify-content:center;
+      align-items:center
+    } */
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+    // 利用js实现盒子居中
+    let box = document.getElementById('box');
+
+    // left ==>当前屏幕宽度的一半 - 当前盒子宽度的一半 ==> (当前屏幕宽度 - 当前盒子宽度)/2
+    // top ==>当前屏幕高度的一半 - 当前盒子高度的一半 ==> (当前屏幕高度 - 当前盒子高度)/2
+    
+    let screenW = document.documentElement.clientWidth;
+    let screenH = document.documentElement.clientHeight;
+
+    box.style.position = 'absolute';
+    box.style.left = (screenW - box.offsetWidth)/2 + 'px';
+    box.style.top = (screenH - box.offsetHeight)/2 + 'px';
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  's123df456gh789jk'
+  <script>
+    // 正则的捕获
+    // exec -  在RegEXp的原型上
+
+    // match - String的原型上
+    // matchAll - String的原型上
+
+    // let str = 's123df456gh789jk';
+    // let reg = /\d{3}/g;
+    // console.log(reg.exec(str));
+    // console.log(reg.test(str)); // true
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+    // 默认只能捕获到第一次匹配的内容(正则的懒惰型，给当前正则加上修饰符g可以取消他的懒惰型)
+
+    // match可以拿到每一次捕获的内容，如果正则不加g，那捕获的内容和exec一样
+    // console.log(str.match(reg));
+    //-----------------------------------------------------------
+    // let str = 's1a2df3e4gh5w6jkl';
+    // let reg = /\d([a-z])\d/g;
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+
+    // console.log(str.match(reg));
+    // console.log(str.matchAll(reg));
+    // for(var ss of str.matchAll(reg)){
+    //   // console.log(ss);
+    //   let [$1,$2,$3 = 1] = ss;
+    //   console.log($1,$2,$3);
+    // }
+
+    // function myMatch(reg) {
+    //   if (!reg.global) {
+    //     return reg.exec(this);
+    //   }
+    //   let bigAry = [];
+    //   let smallAry = [];
+
+    //   let res = this.matchAll(reg);
+    //   for (var ss of res) {
+    //     let [$1, $2] = ss;
+    //     bigAry.push($1);
+    //     smallAry.push($2);
+    //   }
+
+    //   let obj = {
+    //     bigAry,
+    //     smallAry
+    //   }
+    //   return bigAry.length === 0 ? null : obj;
+
+    // }
+    // String.prototype.myMatch = myMatch;
+    // console.log(str.myMatch(reg));
+
+
+    //--------------------------------------------------------------
+    // 正则的贪婪性(在量词元字符后面加一个?号，就可以取消正则的贪婪性)
+    // let str = 'sd123fgh456jk';
+    // let reg = /\d+?/g;
+    // console.log(str.match(reg));
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

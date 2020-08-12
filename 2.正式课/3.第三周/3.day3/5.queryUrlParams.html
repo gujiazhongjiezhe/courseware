@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 利用replace封装queryUrlparams
+
+    // let url = 'https:www.baidu.com:5500?name=erYa&age=18#index';
+
+    // function queryUrlParams(){
+    //   // this-->当前url
+    //   let paramsStr = this.split('?')[1];
+    //   // 'name=erYa&age=18#index'
+    //   let params = paramsStr.split('#');
+    //   // ['name=erYa&age=18','index']
+    //   let paramsAry = params[0].split('&');
+    //   // ['name=erYa','age=18']
+    //   let obj = {};
+    //   for(var i =0;i<paramsAry.length;i++){
+    //     let item = paramsAry[i]; // 代表数组的每一项 'name=erYa'
+    //     let itemAry = item.split('='); // ['name','erYa']
+    //     obj[itemAry[0]] = itemAry[1];
+    //   }
+    //   obj['hash'] = params[1];
+    //   return obj;
+    // }
+    // String.prototype.queryUrlParams = queryUrlParams;
+    // console.log(url.queryUrlParams()); 
+    //-------------------------------------------------------------------------------
+    let url = 'https:www.baidu.com:5500?name=erYa&age=18#index';
+    // function queryUrlParams() {
+    //   // this--》url
+    //   let reg = /([^?=&#]+)=([^?=&#]+)/g;
+    //   let obj = {};
+    //   // 单纯利用replace进行捕获,不利用return的特点
+    //   this.replace(reg,(...ary)=>{
+    //     // 从这里给当前obj新增键值对
+    //     let [,key,value] = ary; // 从传递过来的参数中结构出我们想要的值
+    //     obj[key] = value; // 给obj新增键值对
+    //   });
+    //   this.replace(/#([^?=&#]+)/,(...ary)=>{
+    //     obj['hash'] = ary[1];
+    //   })
+    //   return obj;
+     
+
+    // }
+    // String.prototype.queryUrlParams = queryUrlParams;
+    // console.log(url.queryUrlParams()); 
+
+    //------------------------------------------------------------------------------------------
+
+    // function queryUrlParams() {
+    //   let reg = /([^?=&#]+)=([^?=&#]+)/g;
+    //   let obj = {};
+    //   this.replace(reg,($1,key,value)=>{obj[key] = value});
+    //   this.replace(/#([^?=&#]+)/,($1,$2)=>{obj['hash'] = $2});
+    //   return obj;
+    // }
+    // console.log(url.queryUrlParams());
+
+    // for(var ss of ){}
+
+
+  </script>
+</body>
+
+</html>

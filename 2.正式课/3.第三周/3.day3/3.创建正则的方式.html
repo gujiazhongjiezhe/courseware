@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <script>
+      // 创建正则的方式
+      // let name = 'wer'
+      // let reg = /fgh/;
+
+      // 利用构造函数的方式去创建正则的时候传递的实参是字符串,如果字符串中有\，要写两个\才可以
+      // /\d+/
+      // let reg = new RegExp('\\d+');
+      // console.log(reg);
+
+      // 利用构造函数创建的正则可以传递变量
+      let type = 'erYa';
+      // let reg = /^"+type+"$/;
+      // 拿字面量方式创建的正则 两个斜杠中间的都是元字符，所以不能够识别变量
+
+
+      // console.log(reg);
+      // 以上想往正则里边写变量，只能拿构造函数去创建当前的正则
+      // 给构造函数传递的参数是字符串，字符串可以拼接，所以可以传递变量
+      // let reg = new RegExp('^'+type+'$'); // /^erYa$/
+      let reg = new RegExp(`^${type}$`); // /^erYa$/
+      console.log(reg);
+    </script>
+</body>
+</html>

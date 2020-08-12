@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 后台返回的时间是 '2018-8-01 '
+        // '2018年08月01日 12时12分3秒'
+        let time = '2018-8-01 12:12:3'
+        function formatTime(template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
+            let timeAry = this.match(/\d{1,4}/g); // 获取所有的时间
+            // console.log(timeAry); // ["2018", "8", "01"]
+            // let template = '{0}年{1}月{2}日 {3}时{4}分{5}秒';
+            // '2018~08~01'
+            template = template.replace(/\{(\d)\}/g, (...ary) => {
+                // console.log(ary);
+                let [, index] = ary;// 从参数中解构出分组捕获的数字
+                let time = timeAry[index] || '00';
+                // 如果index获取不到对应的时间，那咱们就给他一个默认值 '00'
+                // 把当前捕获的数字当做索引去时间数组里去对应的值
+                // console.log(time);
+                time.length < 2 ? time = '0' + time : null; // 补零
+                return time;
+            });
+            // '{0}年8月01日 {3}时{4}分{5}秒'
+            // console.log(template);
+            return template;
+        }
+        String.prototype.formatTime = formatTime;
+        // console.log(time.formatTime('{1}~{2}'));
+        // 时间的模板用户可以自定义，但是要注意模板里的数字，得和年月日时分秒的索引对上
+
+//--------------------------------------------------------------------
+        // 匹配空格
+        // let reg = /[a-z]( )[a-z]/;
+        // let str = 'a c'
+        // console.log(reg);
+        // console.log(reg.exec(str));
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 正负向预查
+    //  (?=)：正向预查
+    //  (?!)：负向预查
+    //  (?:):只匹配不捕获
+
+    // let reg = /zhufeng(?=peixun)/; // zhufeng后面必须紧跟着peixun才可以匹配成功
+    // console.log(reg.test('543zhufengpeixun 45678')); // true
+    // console.log(reg.test('543zhufeng2345peixun 45678')); // false
+
+
+
+    let reg = /zhufeng(?!peixun)/; // zhufeng后面不能紧跟着peixun才可以匹配成功
+    console.log(reg.test('543zhufeng2345peixun 45678')); // true
+    console.log(reg.test('543zhufengpeixun 45678')); // false
+
+
+
+  </script>
+</body>
+</html>

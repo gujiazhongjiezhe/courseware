@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        html,body {
+            width: 100%;
+            height: 100%;
+        }
+        #box {
+            width: 200px;
+            height: 200px;
+            background: lavenderblush;
+            font-size: 20px;
+            border: 10px solid greenyellow;
+            padding: 20px;
+            line-height: 50px;
+            margin: 0 auto;
+            word-wrap: break-word;
+            /* overflow: auto; */
+        }
+        p {
+            width: 10px;
+            height: 300px;
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- eyufgjhkltyuihjvhjkeyufgjhkltyuihjvhjkeyufgjhkltyuihjvhjk
+        eyufgjhkltyuihjvhjkeyufgjhkltyuihjvhjkeyufgjhkltyuihjvhjk -->
+        <p></p>
+    </div>
+    <script>
+        let box = document.getElementById('box');
+        /*
+
+
+         */
+        //  let box  =document.getElementById('box');
+        //  box.ss = 100
+        //  box.style.background = xxx
+        /*
+        client
+            clientWidth、clientHeight、clientLeft、clientTop
+        offset
+            offsetWidth、offsetHeight、offsetLeft、offsetTop、offsetParent
+        scroll
+            scrollWidth、scrollHeight、scrollLeft、scrollTop
+
+        window.getComputedStyle()   element.currentStyle
+         */
+
+//------------------------------------------------------------------------------
+        // clientWidth、clientHeight、clientLeft、clientTop
+
+        // 获取当前盒子可视区域的宽度和高度
+        // clientWidth ==> 宽度(width) + 左右的padding
+        // clientHeight ==> 高度(height) + 上下的padding
+
+        // 1.内容溢出对其没有影响
+        // 2.获取的结果是没有单位的
+        // 3.获取的结果是一个整数，他会自动进行四舍五入(其他盒子模型的属性值也一样)
+
+        // console.log(box.clientHeight);
+
+        // 获取当前屏幕的可视区域的宽度和高度
+        // let screenW = document.documentElement.clientWidth || document.body.clientWidth;
+        // let screenH = document.documentElement.clientHeight || document.body.clientHeight;
+
+        // 获取当前盒子左、上边框的宽度
+
+        // clientLeft ==> 当前盒子左边框的宽度
+        // clientTop ==> 当前盒子上边框的高度
+
+    //------------------------------------------------------------
+        // offsetWidth、offsetHeight、scrollWidth、scrollHeight
+
+        // 获取当前盒子的总宽高(在client的基础之上加上border)
+        // offsetWidth ==> 宽度(width) + 左右的padding + 左右的border
+        // offsetHeight ==> 高度(width) + 上下的padding + 上下的border
+
+
+        // 获取当前盒子真实的宽度和高度
+        // scrollHeight ==>在没有溢出的情况下，和clientHeight是一样的，但是在溢出的情况下约定于上padding+盒子的真实高度
+        // scrollWidth ==>在没有溢出的情况下，和clientHeight是一样的，但是在溢出的情况下约等于做padding+真实盒子的宽度
+
+        
+
+    </script>
+</body>
+
+</html>

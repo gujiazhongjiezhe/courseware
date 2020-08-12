@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 正则捕获之replace 他是字符串中实现替换的方法
+    // let str = 'zhufeng2019zhufeng2018';
+    // // 我想把以上字符串中的zhufeng替换成珠峰
+    // // console.log(str.replace('zhufeng','珠峰').replace('zhufeng','珠峰')); // 珠峰2019珠峰2018
+
+    // console.log(str.replace(/zhufeng/g,'珠峰')); //  珠峰2019珠峰2018
+
+    //-------------------------------------------------------------------------
+    // let str = 'zhufeng2019zhufeng2018'
+    // 把zhufeng替换成zhufengpeixun
+    // console.log(str.replace('zhufeng','zhufengpeixun').replace('zhufeng','zhufengpeixun'));
+
+    // console.log(str.replace(/zhufeng/g,'zhufengpeixun'));
+    // replace(str，str)
+    // replace(reg，str)
+    // replace(reg,fun)
+
+    // let res =   str.replace(/zhufeng/g,function(){
+    //       // 1、正则在当前字符串中匹配几次，那当前的回调函数就会执行几次(每匹配一次，函数就会执行一次)
+    //       // 2、当匹配之后会进行捕获，会把当前捕获的内容议实参的形式传递给当前正在执行的函数(传递的内容和exec捕获的内容基本一致)
+    //       // 3、当前函数返回啥，就会把当前大正则匹配的地方替换成啥
+    //      console.log(arguments);
+    //     //  return 'zhufengpeixun'
+    //   })
+    //   console.log(res);
+
+    // 'ss2019ss2018'
+
+    //--------------------------------------------------------------------------------
+    // let time = '2018-8-12';
+    //==> '2018年08月12日'
+    // let reg = /^(\d{4})-(\d{1,2})-(\d{1,2})$/g;
+    // time = time.replace(reg, (...ary)=> {
+    //   // console.log(ary);
+    //   let [,$1,$2,$3] = ary;
+    //   $2.length<2? $2 = '0'+$2:null; // 补零
+    //   $3.length<2? $3 = '0'+$3:null; // 补零
+
+    //   return `${$1}年${$2}月${$3}日`
+    // })
+    // console.log(time);
+
+    // console.log(time.replace(reg,'$1年$2月$3日'));
+
+    //--------------------------------------------------------------------------------
+    // 单词首字母大写
+    // let str = 'good good study, day day up!'
+    // // 把每一个单词的首字母进行大写
+    // let reg = /\b([a-zA-Z])([a-zA-Z]*)\b/g;
+    // // reg = /\b[a-zA-Z]+\b/g;
+
+
+    // str = str.replace(reg,(...ary)=>{
+    //   console.log(ary);
+    //   // 得到每一个单词的首字母，然后把它转大写，在把当前的大写字母和剩下的单词拼接起来返回出去
+    //   let [$1,$2,$3] = ary; // $1是当前的单词 $2是当前的首字母 $3就是除了首字母剩下的单词
+    //   $2 = $2.toUpperCase(); // 把首字母转大写
+    //   // 'good'==>'ood'
+
+    //   // return $2 + $1.slice(1) // ==> 'Good'
+    //   return $2 + $3;
+    // });
+    // console.log(str);
+    // 'good good study, day day up!'
+
+    //--------------------------------------------------------------------------------
+    // let s = 100
+    // let str = 'a1sd1fgh1jk1l';
+    // // ==> '2018年08月12日'
+    // let reg = /[a-z](\d)[a-z]/g;
+    // console.log(str.replace(reg,`{$3}${s}`));
+    // '{}{}g{}{}'
+
+    // for(var ss of str.matchAll(reg)){
+    //   console.log(ss);
+    // }
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
