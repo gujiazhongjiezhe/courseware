@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 300px;
+      height: 200px;
+      margin: 800px auto;
+    }
+
+    img {
+      display: block;
+      width: 300px;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <img src="./img/default.jpg" true-img="./img/1.jpg" alt="">
+  </div>
+  <script src="./utils.js"></script>
+  <script>
+    let img = document.getElementsByTagName('img')[0];
+
+    /* 
+    图片的下边框 === 浏览器的下边框
+    当前图片的自身的高度+图片的上偏移量(距离body) === 当前浏览器的可视区域的高度+ 当前浏览器滚动条卷曲的高度
+    如果上述条件相等，说明已经到达临界条件
+    */
+
+    function dealy() {
+      // 防止图片重新加载。
+      if (img.flag) {
+        return;
+      }
+      // 在这里去做图片是否显示
+      let screenH = utils.screen('clientHeight'); // 前浏览器的高度
+      let imgH = img.offsetHeight; // 图片的总高度
+      let imgT = utils.offset(img).top; // 图片的上偏移量(body)
+      let screenT = utils.screen('scrollTop'); // 浏览器滚动条的卷曲的高度
+
+
+      console.log(screenH, screenT, imgH, imgT);
+      if (screenT + screenH >= imgH + imgT) {
+        console.log('show');
+        // 把当前img元素行内的true-img的值拿过来，赋值给src就可以了
+        let address = img.getAttribute('true-img');
+        console.log(address);
+        img.src = address;
+        img.flag = true; // 只要图片已经加载过，就会拥有这个属性
+      }
+    }
+    window.onscroll = dealy;
+
+  </script>
+</body>
+
+</html>

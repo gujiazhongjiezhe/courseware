@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    #goBack {
+      position: fixed;
+      width: 200px;
+      height: 200px;
+      background: orangered;
+      line-height: 200px;
+      text-align: center;
+      bottom:20px;
+      right:20px;
+      color: white;
+      font-weight: 400;
+      font-size: 28px;
+      border-radius: 50%;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <div id="box">
+      <img src="./1.png" alt="">
+      <img src="./1.png" alt="">
+      <img src="./1.png" alt="">
+      <img src="./1.png" alt="">
+      <div id="goBack">
+          回到顶部
+      </div>
+    </div>
+    <script src="./utils.js"></script>
+    <script>
+        let goBack = document.getElementById('goBack');
+
+        goBack.onclick = function(){
+          // 点击元素，让浏览器的滚动条回到顶部
+          // utils.screen('scrollTop',0);
+          // 我想让他在规定的事件内回到顶部
+          let screenT = utils.screen('scrollTop'); // 100
+          let mean = screenT/50;
+          // 每隔20毫秒，往上移动50份之一，
+
+          // 把总共要移动的距离分成50份，每一次移动50份之一，需要50次移动完，每每隔20毫秒移动一次，那移动完需要1000毫秒
+          var timer = setInterval(function(){
+            screenT -=mean; // 让当前的总距离累减一份
+            if(screenT<=0){
+                clearInterval(timer);
+            }
+            utils.screen('scrollTop',screenT); // 把最新的距离设置回去
+          },20);
+          // 最后移动的总时间就是间隔的实践乘以总的份数
+        };
+
+
+        let screenH = utils.screen('clientHeight');// 前屏幕可视区域的高度
+        window.onscroll = check;
+
+        function check(){
+          // 当前滚动条卷曲的高度  当前屏幕可视区域的高度
+          // 当浏览器的滚动条卷曲的距离 >= 当前屏幕可视区域的高度时，就让回到顶部元素显示
+          
+          let scrollT = utils.screen('scrollTop'); // 浏览器的滚动条卷曲的距离
+          console.log(screenH,scrollT);
+          if(scrollT>=screenH){
+            goBack.style.display = 'block';
+          }
+          else {
+            goBack.style.display = 'none';
+          }
+          // console.log(100);
+
+        }
+
+        // $('#box') // jq的实例
+    </script>
+</body>
+</html>

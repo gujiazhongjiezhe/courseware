@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 1000%;
+    }
+
+    #outer {
+      width: 300px;
+      height: 300px;
+      padding: 10px;
+      border: 10px solid black;
+      margin: 0 auto;
+      position: relative;
+      background: blueviolet;
+    }
+
+    #box {
+      width: 200px;
+      height: 200px;
+      padding: 10px;
+      background: yellowgreen;
+      border: 10px solid red;
+      margin: 0 auto;
+      position: relative;
+    }
+    #center {
+      width: 100px;
+      height: 100px;
+      background: yellow;
+      border: 10px solid black;
+      padding: 10px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="outer">
+    <div id="box">
+      <!-- 都看见爱上接电话赛道好客山东红豆沙的就撒好几款的撒娇的哈 -->
+      <div id = 'center'></div>
+    </div>
+  </div>
+
+  <script>
+    /* 
+    client
+      clientWidth clientHeight clientLeft clientTop
+    
+    offset
+      offsetWidth offsetHeight offsetLeft offsetTop offsetParent
+    
+  scroll
+   scrollWidth scrollHeight scrollLeft scrollTop
+
+
+   
+     */
+    // 获取当前屏幕可视区域的宽高
+    //  let screenH = document.documentElement.clientHeight || document.body.clientHeight;
+    //  let screenH = document.documentElement.clienWidth || document.body.clientWidth;
+
+
+    // 获取滚动条卷去的高度
+    // scrollLeft scrollTop
+    // scrollLeft ==>当前盒子滚动发条横向卷曲的距离
+    // scrollTop ==>当前盒子滚动发条纵向卷曲的距离
+    // 在13个js盒子模型里边，只有当前的scrollTop，scrollLeft是可读可写属性(既可以设置也可以读写)，其余的都是只读属性(只能读取不能设置)
+
+    // 边界值：
+    //   min = 0;
+    //   max = 整个的高度(scrollHeight) - 屏幕的高度(clientHeight)
+
+    // 获取当前屏幕的滚动条
+    // document.documentElement.scrollTop || document.body.scrollTop;
+    // document.documentElement.scrollLeft || document.body.scrollLeft;
+    /* 
+    @params:
+      attr:当前要操作的属性名
+      value：给属性所设置的值
+     */
+    // function screen(attr,value){
+    //     // 判断用户到底想干什么，如果用户只是传递了一个参数，那就是想获取，如果传递；两个参数，那就是想设置
+    //     if(value === undefined){
+    //       // 这是获取值
+    //         return document.documentElement[attr] || document.body[attr];
+    //     }
+    //     else {
+    //       // 设置
+    //       document.documentElement[attr] = value;
+    //       document.body[attr] = value;
+    //     }
+
+    // }
+
+    // console.log(screen('clientHeight')); // 获取当前屏幕的可视区域的高度
+    // console.log(screen('scrollTop')); // 获取当前屏幕的滚动条卷曲的距离
+    // screen('scrollTop',0);// 设置当前屏幕的滚动条卷曲的距离
+
+    // window.onscroll = function(){
+    //   console.log(100);
+    // }
+
+    //---------------------------------------------------------------
+    // offsetLeft offsetTop offsetParent
+    // 获取当前盒子距离父级参照物的左上偏移量
+
+    // console.log(box.offsetParent);
+    // offsetParent ==>获取当前盒子的父级参照物(当前盒子的所有父元素中，谁于position定位，那他的父级参照物就是谁，默认是body)
+
+    // offsetLeft ==>获取当前盒子距离父级参照物的左偏移量(当前盒子的外边框到父级参照物的内边框)
+
+     // offsetLeft ==>获取当前盒子距离父级参照物的上偏移量(当前盒子的外边框到父级参照物的内边框)
+
+
+
+     /* 
+     封装一个方法，去获取当前盒子距离body的偏移量
+      @params:
+        ele:当前盒子
+     */
+    function offset(ele){
+      let left = ele.offsetLeft; // 获取当前盒子的做偏移量
+      let top =  ele.offsetTop;
+      let parent = ele.offsetParent; // 获取当前盒子的父级参照物
+      while(parent !==document.body){
+        // 在原来的基础之上累加父级参照物的左border的宽度和父级参照物的左偏移量
+        left += parent.clientLeft + parent.offsetLeft;
+        top += parent.clientTop + parent.offsetTop;
+        // 继续获父级参照物的父级参照物
+        parent = parent.offsetParent;
+      }
+      return {
+        left,
+        top
+      }
+    }
+    console.log(offset(center)); // {left:200,top:100}
+  </script>
+</body>
+
+</html>

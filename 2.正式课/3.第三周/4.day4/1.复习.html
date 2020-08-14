@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function Fn(n, m) {
+    //   n = n || 0;
+    //   m = m || 0;
+    //   this.x = n;
+    //   this.y = m;
+    //   this.getX = function () {
+    //     console.log(this.x);
+    //   }
+    //   return n + m;
+    // }
+    // Fn.prototype.sum = function () { // 给当前Fn的原型增加方法
+    //   console.log(this.x + this.y);
+    // }
+    // Fn.prototype = { // 给Fn的原型重定向 原来的原型堆内存就销毁了 没有constructor
+    //   getX: function () { // af2
+    //     this.x += 1; // 
+    //     console.log(this.x);
+    //   },
+    //   getY: function () { // af1
+    //     this.y -= 1; // 原型.y = 原型.y - 1;
+    //     console.log(this.y);
+    //   },
+    //   x:NaN,
+    //   y:NaN
+
+    // };
+    // let f1 = new Fn(10, 20); // {x:10,y:20,getX:fun}
+    // let f2 = new Fn; // {x:0,y:0 -1,getX:fun}
+    // console.log(f1.getX === f2.getX); // false
+    // console.log(f1.getY === f2.getY); // true
+    // console.log(f1.__proto__.getY === Fn.prototype.getY); // true
+    // console.log(Fn.prototype.getX === f2.getX); // false
+    // console.log(f1.constructor); // Object
+    // f1.getX(); // this-->f1  console.log(f1.x);  10
+    // Fn.prototype.getX(); // this-->原型  NaN
+    // f2.getY(); // this-->f2   -1
+    // Fn.prototype.getY(); // this-->原型 NaN
+    // f1.sum(); // un()  fn.sum is not a function
+
+    //----------------------------------------------------------------
+    // var name = 'WINDOW'; // 'B' 'B'
+    // function A() {
+    //   console.log(1, this.name);
+    //   name = this.name;
+    // };
+    // function B() {
+    //   name = this.name; // window.name
+    //   console.log(2, this.name);
+    // };
+    // A.call(B, 10); // 1  B.name==>'B'
+    // A.call.call.call(B); // 2 'B'
+    // Function.prototype.call(B); // Function类的原型是一个匿名函数，但是当他执行的时候不会输出任何东西
+    // Function.prototype.call.call.call(B); // 2 'B'
+    // 只要出现两个及以上的call，那最后执行的就是传递进去的实参,
+
+    // function call(context){
+    // A.call.call.call(B);
+    // this-->A.call.call-->call   context-->B
+
+    // context = context || window;
+    // context.$fn = this; // B.$fn = call;
+    // context.$fn(); // B.$fn() --> call();
+    // //--------------------------------------
+    // call第二次执行
+    // // this-->B   context -->window
+    // context = context || window;
+    // context.$fn = this; // window.$fn = B
+    // context.$fn(); //  window.$fn()-->B()
+
+    //------------------------------------------------------------------------
+    // Function.prototype.call.call.call(B);
+    // this-->Function.prototype.call.call-->call   context-->B
+    // context.$fn = this; //B.$fn = call
+    // context.$fn(); //  B.$fn() --> call()
+    //--------------------------------------
+    // call第二次执行
+    // this-->B  context-->window
+    // context.$fn = this; //window.$fn = B;
+    // context.$fn(); //  window.$fn()-->B()
+    // }
+
+
+
+    //  ------------------------------------------------------------------------
+    /* 
+    print = un af1 af2 af3 af4
+    Fn = af0
+     */
+    // var print = function () { // af2
+    //   alert(1);
+    // };
+
+    // function Fn() { // af0
+    //   print = function () { // af3 af4
+    //     alert(2);
+    //   };
+    //   return this; // window
+    // };
+
+    // function print() { //  af1
+    //   alert(3);
+    // };
+    // Fn.prototype.print = function () { //af9 给Fn类的原型上增加print方法
+    //   alert(4);
+    // };
+    // Fn.print = function () { // af6 把Fn当做对象，给他增加私有的方法
+    //   alert(5);
+    // };
+
+    // print(); // 把print当做普通函数执行  1
+    // Fn.print(); // 把Fn当做对象，找到他的私有方法print然后执行 5
+    // Fn().print(); // 先执行Fn-->window   window.print()  2
+    // new Fn.print(); // 这块成员访问的优先级是19，大于new无参执行的18 new af6()  5
+    // new Fn().print(); // new Fn()-->当前Fn的实例  -->实例.print()-->af9()  4
+    //---------------------------------------------------------
+    // var name = "WINDOW";
+    // function fn() {
+    //   console.log(this.name);
+    // }
+    // var obj = {
+    //   name: "OBJ",
+    //   fn: () => { // 箭头函数没有this
+    //     console.log(this.name);
+    //   }
+    // };
+    // // fn(); // window  "WINDOW"
+    // // obj.fn(); // "WINDOW"
+    // // fn.call(obj); // this-->obj  "OBJ"
+    // window.onload = function () { //页面加载完成，事件就会触发
+    // console.log(1);
+    //   // fn(); //  "WINDOW"
+    //   // fn();
+    //   // obj.fn();//  "WINDOW"
+    // };
+    // fn.bind(obj)(); // 这句话没有任何意义,因为你没有接收人家的返回值
+
+    // bind预处理this，他不会让fn立即执行，只不过他的返回值是一个改变this之后的函数
+    //-----------------------------------------------------------------------
+
+    // class A {
+    //   constructor(n,m){
+    //     // this-->当前实例
+    //     this.n = n;
+    //     this.m = m;
+    //   }
+
+    //   ss(){ // 给当前类A增加方法
+
+    //   }
+
+    //   x = 100; // 给当前实例增加私有属性
+    //   static num = 100; // 把当前类当做对象，增加键值对
+
+    // }
+    // // 想给当前类A增加属性
+    // A.prototype.e = 100;
+
+
+
+
+    // let f = new A(1,2);
+
+    //----------------------------------------------------
+    // class A{
+    //   constructor(n){
+    //     console.log(111);
+    //     this.n = n;
+    //   }
+    //   getX(){}
+    // }
+
+    // class B extends A{
+    //   constructor(){
+    //     super(200); // super的目的就是让类B的实例继承类A的私有属性,super不能省略
+    //     // super会让类A的构造函数在此处执行，并且让函数的this指向当前类B的实例
+    //     // super和constructor要同时存在
+    //     this.x = 100;
+    //   }
+
+    // }
+    // let f = new B(); // {x:100,n:un}
+    // console.log(f);
+    // 我想让类B的实例继承类A的私有和共有属性
+    // f--->B.prototype--->A.prototype
+
+    //---------------------------------------------------------------
+    /*编写unique方法，实现如下的效果：先去重后排序*/
+    //   let ary = [12, 23, 12, 13, 13, 12, 23, 14, 8];
+    // // ary.unique().sort((a, b) => a - b); //=> 最后的ary等于[8,12,13,14,23]
+
+    // function unique(){
+
+    //   // return [...new Set(this)]
+    //   return Array.from(new Set(this));
+    // }
+
+    // Array.prototype.unique = unique;
+    // console.log(ary.unique().sort((a,b)=>a-b));
+
+    //--------------------------------------------------------
+    // Function.prototype.changeThis = function changeThis(context,...arg) { 
+    //     //=>实现你的代码 
+    //     context = context || window;
+    //     let res = null;
+    //     context.$fn = this;
+    //     res = context.$fn(...arg);
+    //     delete context.$fn;
+    //     return res;
+    // }; 
+    // let obj = {
+    //     name: 'Alibaba'
+    // };
+
+    // function fn(x, y) {
+    //     this.total = x + y;
+    //     return this;
+    // }
+    // let res = fn.changeThis(obj, 100, 200); //res => {name:'Alibaba',total:300} 
+    // console.log(res);
+
+    // 获取数组中最大值的办法
+    // let ary = [100,300,600,200];
+
+    // 第一种利用sort排序，然后去最大值
+    // ary.sort((a,b)=>b-a)[0]
+
+    // 第二种利用Math.max进行获取最大值
+    // Math.max(...ary);
+    // Math.max.apply(Math,ary);
+
+
+    // 假设法
+
+    // let max = ary[0]; // 假设数组的第一项就是最大的值；然后去循环数组，那数组的每一项会让当前的max值进行比较，如果比当前的max值大了，那就把当前的值赋值给max
+
+    // for(var i = 1;i<ary.length;i++){
+    //   // if(ary[i]>max){
+    //   //     max = ary[i];
+    //   // }
+    //   ary[i]>max ? max = ary[i] : null;
+    // }
+    // console.log(max);
+
+
+
+
+
+    //------------------------------------------------------------------------
+    // let utils = (function () {
+
+    // function toArray() {
+    //   //实现你的代码 
+    //   // 把一组数转化为数组
+    //   return Array.of(...arguments) // of传递的实参是一组数  
+    // };
+
+
+    // function toArray(...ary) {
+    //   //实现你的代码 
+    //   // 把一组数转化为数组
+    //   return ary // of传递的实参是一组数  
+    // };
+
+    // function toArray() {
+    //   //实现你的代码 
+    //   // 把一组数转化为数组
+    //   return Array.from(arguments) // of传递的实参是一组数  
+    // };
+
+    // function toArray() {
+    //     return [].slice.call(arguments)
+    // };
+
+    //   function toArray() {
+    //     var ary = [];
+    //     for(var i = 0;i<arguments.length;i++){
+    //         ary.push(arguments[i])
+    //     }
+    //     return ary;
+    //   };
+
+    //   return {
+    //     toArray:toArray
+    //   };
+    //   // return toArray;
+    // })();
+
+
+    // let ary = utils.toArray(10, 20, 30);
+    // // ary=[10,20,30] 
+    // console.log(ary);
+    // ary = utils.toArray('A', 10, 20, 30);
+    // ary=['A',10,20,30]
+    // console.log(ary);
+
+    try {
+      console.log(a);
+      // 如果try里的代码出错了，那就会走catch里的代码，而且还能输出错误的信息
+    } catch (e) {
+      console.log(e);
+      console.log(900);
+    }
+    finally { // finnally里的代码永远会执行
+      console.log(100);
+      console.log(200);
+    }
+
+    function toArray() {
+      let ary = [];
+      try {
+        ary = [].slice.call(arguments);
+      } catch (e) {
+        for (var i = 0; i < arguments.length; i++) {
+          ary.push(arguments[i])
+        }
+        return ary;
+      }
+    }
+    
+
+
+
+  </script>
+</body>
+
+</html>
