@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding:0;
+      margin:0;
+    }
+    #box {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box" style ="background:red;"></div>
+  <script>
+    var box = document.getElementById('box');
+    // style: 他是元素身上的一个属性，其实属性值是一个对象
+    // 只能够获取或者设置元素的行间样式
+    // console.log(box.style.background);
+    // console.log(box.style.width);
+
+    /* 
+    getComputedStyle
+    在js中获取元素的css样式
+    只要元素在页面中呈现出来的样式，那么当前的样式就是元素计算出来的样式，而getComputedStyle获取的就是计算之后的样式
+    如果有符合样式，名字要遵循驼峰命名法
+     */
+
+    // console.log(window.getComputedStyle); 
+    // // getComputedStyle(ele,伪类) // 返回值是一个对象(在ie浏览器下不能够使用)
+    // console.log(getComputedStyle(box).width);
+
+    // 在ie下要要使用
+    // ele.currentStyle // 是一个属性，他的返回值是一个对象
+
+    //  console.log(box.currentStyle.width); // 这是专门在ie浏览器下使用的
+
+  </script>
+</body>
+</html>

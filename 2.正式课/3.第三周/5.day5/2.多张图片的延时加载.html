@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding:0;
+      margin: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    div {
+      margin:450px;
+      width: 300px;
+    }
+    img {
+      display: block;
+      width: 300px;
+      height: 200px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="./img/default.jpg"  true-img = './img/1.jpg' alt="">
+    <img src="./img/default.jpg"  true-img = './img/2.jpg' alt="">
+    <img src="./img/default.jpg"  true-img = './img/3.jpg' alt="">
+    <img src="./img/default.jpg"  true-img = './img/4.jpg' alt="">
+    <img src="./img/default.jpg"  true-img = './img/5.jpg' alt="">
+  </div>
+  <script src="./utils.js"></script>
+  <script>
+    let {screen,offset} = utils;
+    let imgs = document.getElementsByTagName('img');
+    function dealy(){
+      for(var i = 0;i<imgs.length;i++){
+        
+        dealyImg(imgs[i])
+        // 每循环一次，当前的dealyImg就会执行一次，把当前的图片以实参的形式传递进去
+        // 写判断图片是否需要加载的代码
+      }
+    }
+    function dealyImg(img){
+      if(img.flag){
+        return;
+      }
+      let imgH = img.offsetHeight;
+      let imgT = offset(img).top;
+      let screenH = screen('clientHeight');
+      let screenT = screen('scrollTop');
+      if(screenH+screenT>=imgH+imgT){
+        let address = img.getAttribute('true-img');
+        img.src = address;
+        img.onerror = function(){
+          img.src = './img/default.jpg'
+        }
+        img.flag = true;
+      }
+    }
+    dealy();
+    window.onscroll = function(){
+
+      dealy();
+    }
+  </script>
+</body>
+</html>
