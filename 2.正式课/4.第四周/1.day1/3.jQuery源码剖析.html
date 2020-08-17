@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    (function (global, factory) {
+      // global--> window  factory--> 函数
+      if (typeof module === "object" && typeof module.exports === "object") {
+
+
+      } else {
+        factory(global); // 实参变量global的值为 window
+      }
+    }(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
+      // window --> window    noGlobal -->undefined
+      var deletedIds = [];
+      var slice = deletedIds.slice;
+      var concat = deletedIds.concat;
+      var push = deletedIds.push;
+      var indexOf = deletedIds.indexOf;
+      var class2type = {};
+      var toString = class2type.toString;
+      var hasOwn = class2type.hasOwnProperty;
+      var support = {};
+
+      var version = "1.11.3";
+
+      var jQuery = function (selector, context) { // 一会咱们再看
+        // 这块其实是new 了一个init的实例返回出去，这样写的目的是为了避免死递归
+        return new jQuery.fn.init(selector, context);
+      };
+
+      jQuery.fn = jQuery.prototype = {
+        // 给jQuery的原型进行重定向，而且还给jQuery新增一个私有属性，其属性值也是当前这个新的原型
+        jquery: version,
+
+        constructor: jQuery, // 重定向之后的原型没有constructor，所以人家给手动加一个
+        toArray: function () { // 类数组转数组
+          return slice.call(this);
+        },
+        // 把jq的实例转成原生的数组集合
+        get: function (num) {
+          return num != null ?
+
+            // Return just the one element from the set
+            (num < 0 ? this[num + this.length] : this[num]) :
+
+            // Return all the elements in a clean array
+            slice.call(this);
+        },
+        // jq的循环的方法
+        each: function (callback, args) {
+          return jQuery.each(this, callback, args);
+        },
+
+        push: push,
+        sort: deletedIds.sort,
+        splice: deletedIds.splice
+        // .....
+        // 这三个方法都是js原生的方法
+      }
+      var init = jQuery.fn.init = function (selector, context) {
+        // 次处的类才是$()运行的真正的类
+      }
+      init.prototype = jQuery.fn;
+      // 把init类的原型指向了jQuery的原型
+
+
+      var
+        // Map over jQuery in case of overwrite
+        _jQuery = window.jQuery,
+
+        // Map over the $ in case of overwrite
+        _$ = window.$;
+
+      jQuery.noConflict = function (deep) {
+        if (window.$ === jQuery) {
+          window.$ = _$;
+        }
+
+        if (deep && window.jQuery === jQuery) {
+          window.jQuery = _jQuery;
+        }
+
+        return jQuery;
+      };
+
+      
+      if (typeof noGlobal === "undefined") {
+        window.jQuery = window.$ = jQuery;
+        // 给window增加两个键值对，属性名是jQuery和$,他们的属性值都是当前的jQuery函数
+      }
+    }))
+    // (function(形参){}(实参))
+
+
+    // $('#tabList li'); // 他就是jQ的实例
+    // jQuery(('#tabList li')
+    // $()但返回值其实是init的实例
+
+    $(this)
+    $('<div></div>')
+
+    // $('#tabList li').get()
+
+    // var jQuery = function(){
+    //   return new jQuery();
+    // }
+
+    /*
+      基于$执行所创建出来的东西都是jq的实例，所以可以去调用jq原型上的方法
+      1、不管传参还是不传参，返回值都是一个对象类型的实例
+        $() ==>如果jq不穿参，那返回结果是一个空实例
+      2、$执行时可以传三种不同的格式
+        1、
+          $('.box') jq的选择器
+          $('<div>123</div>')
+        2、$(原生的元素)：把原生的元素变成jq的实例(只有这样草可以去调用jq原型上的方法)
+          原生js中的方法jq中的方法不能混着去使用
+        3、$(函数)
+           $(function(){}); ==>// $(document).ready(function(){})
+
+
+
+
+    */
+  </script>
+</body>
+
+</html>

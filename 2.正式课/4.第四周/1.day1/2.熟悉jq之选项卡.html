@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            /* border: 1px solid red; */
+            margin: 20px auto;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        ul li {
+            border: 1px solid black;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            margin-right: 10px;
+            position: relative;
+            top: 1px
+        }
+
+        #box div {
+            width: 800px;
+            height: 500px;
+            text-align: center;
+            line-height: 500px;
+            font-size: 40px;
+            border: 1px solid black;
+            display: none;
+        }
+
+        ul li.active {
+            border-bottom-color: white;
+        }
+
+        #box div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="navList">
+            <li class="active">一</li>
+            <li>二</li>
+            <li>三</li>
+        </ul>
+        <div class="active">我们是一</div>
+        <div>我们是二</div>
+        <div>我们是三</div>
+    </div>
+    <script src="./jquery-1.11.3.js"></script>
+    <script>
+        // let navList = document.querySelectorAll('#navList li');
+        // let tabList = document.querySelectorAll('#box div');
+
+        // for (let i = 0; i < navList.length; i++) {
+        //     navList[i].onclick = function(){
+        //         selected(i)
+        //     }
+        // }
+
+        // function selected(index){
+        //     for (var i = 0; i < navList.length; i++) {
+        //         navList[i].className = '';
+        //         tabList[i].className = '';
+        //     }
+        //     navList[index].className = 'active';
+        //     tabList[index].className = 'active';
+        // }
+
+        // $('#navList li').click(function(){
+        //         // li li li
+        //         // this // 是原生的元素
+        //       let ss = $(this).addClass('active').siblings().removeClass('active').parent().nextAll().eq($(this).index()).addClass('active').siblings('div').removeClass('active');
+        //       console.log(ss);
+        //     //   console.log($(this).index()); // index：获取当前实例元素的索引
+        // })
+
+    </script>
+</body>
+
+</html>
