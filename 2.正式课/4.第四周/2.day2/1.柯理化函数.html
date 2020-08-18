@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // function fn(n) { // n = 3
+    //   // fn执行形成的作用域不销毁
+    //   return function (m) { // 6
+    //     return n + m;
+    //   }
+    // }
+
+    // console.log(fn(3)(6));  // 9
+    // 现在咱们是利用了闭包的机制，预先保存或者处理一下我们以后会用到的参数，这种编程的思想就是柯理化函数预处理思想(说白了就是闭包)
+
+    function myBind(context,...outerArg) {
+      // context就是当前fn函数的this指向的值   this-->当前fn函数
+      // 当myBind执行时形成的作用域不销毁
+      let _this = this;
+      return function (...innerArg) {
+          // 这个函数就是myind的执行结果(返回值)【所以当前的res就代表此函数】
+          console.log(outerArg,innerArg);
+          let newAry = [...outerArg,...innerArg]; // 把传递给fn的函数收集到一个数组里边
+          // 在这里执行fn函数
+          _this.apply(context,newAry); // _this就是fn函数
+      }
+    }
+    // 当bind执行的时候，形成一个闭包，预先的保存一下我们以后要执行的函数fn和fn要改变的this指向的值，然后返回一个新的函数供外界所调用(但新函数在外界执行的时候就可以去闭包里拿值了)
+    Function.prototype.myBind = myBind;
+
+
+
+    function fn(n,m) {
+      console.log(this,n,m);
+    }
+    let obj = { name: 100 };
+    let res = fn.myBind(obj,1);
+    res(2);
+    // res();
+    // res();
+    // res();
+    // res();
+
+
+
+  </script>
+</body>
+
+</html>

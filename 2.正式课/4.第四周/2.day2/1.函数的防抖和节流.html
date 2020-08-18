@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 500%;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">23456</button>
+  <script src="./underscore.js"></script>
+  <script>
+
+    /* 
+      函数的防抖：(debounce):不是某个事件触发就会去执行函数，而是在指定的时间间隔内，执行一次，减少函数的执行次数
+      一、防抖(debounce) 用在高频率点击事件
+      触发高频函数事件后，n秒内函数只能执行一次，如果在n秒内这个事件再次被触发的话，那么会重新计算时间
+      二、节流(throttle)
+      高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率
+    
+     */
+    //  https://underscorejs.org/  JS类库（提供很多项目中需要经常使用的方法）
+
+
+    //--------------------------------------------------------------------
+    // 防抖: 用在高频率点击事件,n秒内函数只能执行一次，如果在n秒内这个事件再次被触发的话，那么会重新计算时间
+
+
+    /*
+		 * debounce:函数防抖
+		 *   @params
+		 *      func:要执行的函数
+		 *      wait:间隔等待时间
+		 *      immediate:在开始边界还是结束边界触发执行(TRUE=>在开始边界)
+		 *   @return
+		 *      可被调用的函数
+		 * 
+		 */
+    // function debounce(func, wait = 100, immediate = false) {
+
+    //   let timeout = null; // 用来存放定时器的返回值，一会咱们得用定时器记录时间
+    //   return function () {
+    //     // this是当前的btn元素
+    //     let now = immediate && !timeout;
+    //     // 如果timeout不是null，说明当前有定时器正在计时，在此之前函数肯定已经执行过了，就不要在让他执行了
+    //     clearInterval(timeout); // 在我们设置新的定时器之前，把之前的定时器干掉，重新开始计时，之前的就不算了(防抖的核心是在等待时间内如果又一次触发事件了，就把上一次的计时清掉，重新开始计时)
+    //     timeout = setTimeout(() => {
+    //       if (!immediate) func.call(this);
+    //       // 如果immediate是false，说明函数是在末尾边界执行
+    //       timeout = null;
+    //       // 当定时器到达时间之后，而且还没有被清除，那就把定时器的返回值置为null
+    //     }, wait);
+
+    //     // 如果now是true，那就在开始边界就执行这个函数
+    //     if (now) func.call(this);
+
+    //   }
+    // }
+
+    // function fn() {
+    //   console.log(this);
+    // }
+    // let lazyFun = debounce(fn, 1000, false);
+    // btn.onclick = lazyFun;
+
+    //-----------------------------------------------------------------------------------
+    // 节流: 高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率
+		/*
+		 * throttle：函数节流是为了稀释函数的执行频率
+		 *   @params
+		 *      func:需要执行的函数
+		 *      wait:设置的间隔时间
+		 *   @return
+		 *      返回可被调用的函数
+		 * 
+		 */
+    function throttle(fn, wait) {
+      // 记录上一次函数触发的时间
+      var lastTime = 0; // 10001
+      return function () {
+        // 记录当前函数触发的时间
+        var nowTime = Date.now(); //10005 获取当前时间距离1970年1月1号凌晨的时间毫秒差;
+        // 如果当前时间减去上一次执行的时间大于你规定的时间了，那就让函数执行
+        if (nowTime - lastTime >= wait) {
+          fn.call(this);
+          lastTime = nowTime;
+        }
+      }
+    }
+
+
+    var i = 0;
+    function fn() {
+      console.log(i++);
+    }
+    // {leading: false} // 末尾边界执行
+    // {trailing: false} // 开头边界执行
+    let lazyFun = throttle(fn, 1000, {});
+    window.onscroll = lazyFun;
+  </script>
+</body>
+
+</html>

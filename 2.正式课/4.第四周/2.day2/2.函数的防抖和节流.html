@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,body {
+      width: 100%;
+      height: 500%;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">123</button>
+  <script src="./underscore.js"></script>
+  <script>
+
+    // 浏览器的最小反应时间是10ms ， 你滚动一次滚轮需要100ms 
+    // 
+
+    /* 
+    函数的防抖和节流
+    1.函数的防抖：
+      触发高频率事件以后，在n秒内只能执行一次，如果在n秒内当前这个事件被再次触发的话，就要重新计时
+     */
+
+    //  刚才的也是一个类似jq的类库(提供了好多方法共咱们去使用)
+
+
+    // function debounce(func,wait) {
+    //   let timer = null; // 用来存储定时器到的返回值
+    //   return function () {
+    //     // this--> 当前点击的元素
+    //     clearTimeout(timer);
+    //     timer = setTimeout(()=>{
+    //       func.call(this)
+    //       timer = null;
+    //     },wait);
+    //   }
+    // }
+
+
+    // function fn() {
+    //   console.log(this);
+
+    // }
+    // // 第三个参数如果传递true的话就是就是在开始边界执行，如果传fasle或者不穿，那就在末尾边界执行
+    // let lazyFun = debounce(fn, 2000, true);
+    // btn.onclick = lazyFun;
+
+    //----------------------------------
+    // 节流：高频事件触发，在n秒内只能触发一次，会稀释函数执行的频率
+    function fn(){
+      console.log(1);
+    }
+    let lazyFunc = _.throttle(fn, 1000,{leading: false})
+      window.onscroll = lazyFunc;
+  </script>
+</body>
+
+</html>
