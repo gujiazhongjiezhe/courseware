@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background:pink;
+      text-align: center;
+      line-height: 200px;
+      
+      /* transform: skew(30deg); */
+      transition: all 1s ease-in-out 3s;
+    }
+    /* #box:hover {
+      transform: rotate(180deg);
+    } */
+
+    @keyframes aaa {
+      0% {
+        transform: rotate(0deg);
+      }
+       25% {
+        transform: rotate(90deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+      75% {
+        transform: rotate(270deg);
+      }
+  
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    #box {
+      animation: aaa 4s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">12345</div>
+  <script>
+    /* 
+    css3中的变形属性： transform，改变当前元素的样式
+    // css的性能要比js好
+    + scale(n):缩放
+    + translate(x,y)：位移   translate3d(x,y,z) translateX/translateY/translateZ
+    + rotate(n deg): 如果是正数是顺时针， 否则就是逆时针
+    + skew(n deg): 倾斜
+     */
+
+     /* 
+     transition:过度动画
+     给元素的变形设置过度效果，当某个元素的某个样式发生变化，不并不是立即发生，而是慢慢的去改变，从而实现动画效果
+     transition-property: 设置过度的样式属性(哪些样式的改变会有过度效果)，默认是all
+     transition-duration：过度需要的时间 ms s
+     transition-timing-function:过度的方式： linear这也是默认值(匀速) ease 
+     transition-delay：设置延迟的时间，默认是0ms
+
+    // 他只能实现从A到B的动画，延时做一些复杂的动画就要用到帧动画
+
+
+      */
+
+      /* 
+      css3中的帧动画 animation;他是分为两部分
+
+      1.制作动画的轨迹(每一帧元素的样式) @keyframs
+      @keyframs 动画 {
+        0%  {}
+        25% {}
+        50% {}
+        75% {}
+        50% {}
+      }
+      2.播放动画
+        animation: 名字 4s linear 2s infinite
+    
+       */
+  </script>
+</body>
+</html>

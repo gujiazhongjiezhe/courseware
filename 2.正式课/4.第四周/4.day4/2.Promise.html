@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Promise是es6新增的一个类，他就是一个状态机
+    // pending ==> fulfilled   pending==>rejected
+    // 他的状态一旦发生改变，就会凝固，不可能在次变化
+
+    // new Promise是一个同步的过程，当new Promise的时候穿进去的回调函数会立马执行，所以他也是同步的
+    // let p = new Promise(function (resolve, reject) {
+
+    //   // setTimeout(() => {
+    //     resolve(900); // pending ==> fulfilled
+    //   // },10)
+    //   // reject();  // pending==> rejected
+    //   console.log(100);
+    // });
+    // console.log(200);
+    // // then他是同步的函数
+
+    // // then里边的回调函数的执行取决于当前的promise实例的状态，如果是成功态，那then的第一个回调函数就会执行，如果是失败态，那then的第二个回调函数就会执行
+    // p.then((num) => {
+    //   console.log(1, num);
+    //   return new Promise((res,rej)=>{
+    //     // rej();
+    //     console.log(a); // 如果当前代码运行会出错，那他还会默认把promise的状态改为失败态
+
+    //   });
+    // }, () => {
+    //   console.log(2);
+    // }).then(()=>{
+    //   console.log(3);
+    // },()=>{
+    //   console.log(4);
+    // })
+    // console.log(300);
+    // 当前的then的回调函数的执行要受上一个then里的函数执行的返回的promise的状态的控制
+    // 如果上一个then执行时没有返回promise的实例，那当前的then会默认执行成功的回调
+
+    //---------------------------------------------------------------
+
+// 他可以把异步的代码变得看起来同步化
+    let p = new Promise((res,rej)=>{
+        // res()
+        rej();
+    });
+
+    p.then(()=>{
+        // return new Promise((res,rej)=>{
+        //     rej()
+        // })
+    }).then(()=>{
+
+    }).catch((e)=>{
+        console.log(3);
+    }).finally(()=>{
+      console.log(6000);
+    })
+
+
+// 
+
+setTimeout(()=>{
+
+},100);
+setTimeout(()=>{
+
+},100);
+setTimeout(()=>{
+
+},100);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background: pink;
+      position: relative;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" style="left:0;top:0"></div>
+  <script src="./jquery-1.11.3.js"></script>
+  <script>
+    // 多方向运动动画
+    // 一会咱们实现当前元素left、top、width、height同时变化
+    //  500 500 500    500
+
+    // let box = document.getElementById('box');
+    // function linear(t, b, d, c) {
+    //   // t:time 已经运动过的时间
+    //   // b:begin 起始位置
+    //   // d:duration 总时间
+    //   // c：change 总共需要运动的距离
+
+    //   // 距离body左边的位置
+    //   return t / d * c + b; // 代表当前球距离左边的位置
+    // }
+
+    // let  begin = {
+    //   left:parseFloat(getComputedStyle(box).left),
+    //   top:parseFloat(getComputedStyle(box).top),
+    //   width:parseFloat(getComputedStyle(box).width),
+    //   height:parseFloat(getComputedStyle(box).height)
+    // }
+    // let target = {
+    //   left: 200,
+    //   top: 200,
+    //   width: 300,
+    //   height: 300
+    // }
+    // let change = {
+
+    // }
+    // for(var key in begin){
+    //   // 计算每一个样式需要运动的总距离增加到change里
+    //   change[key] = target[key] - begin[key]
+    // }
+    // // console.log(change);
+    // let duration = 3000;
+    // let timer = null;
+    // let flag = 0;
+    // timer = setInterval(()=>{
+    //   flag+=17;
+    //   for(let key in change){
+    //     let cur = linear(flag,begin[key],duration,change[key]);
+    //     box.style[key] = cur + 'px';
+    //     // box.style.left = xxx
+    //   }
+    //   if(flag>=duration){
+    //     clearInterval(timer);
+    //   }
+    // },17);
+
+    //-------------------------------------------------------------------
+    // jq中的多方向动画
+    
+
+      // $('#box').stop().animate({
+      //   left:300,
+      //   top:300,
+      //   width:300,
+      //   height:300
+      // },3000,'linear',function(){
+      //   console.log(200);
+      // })
+
+      /* 
+        curEle:当前需要添加样式的元素
+        target：移动的目标的位置
+        duration：运动的总时间
+        callBack：动画执行完成的回调函数
+      */
+      function move(curEle,target,duration,callBack){
+        
+      }
+  </script>
+</body>
+
+</html>

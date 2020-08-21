@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background: pink;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+    }
+
+    button {
+      width: 80px;
+      height: 30px;
+      background: orangered;
+      line-height: 30px;
+      text-align: center;
+      position: relative;
+      top: 200px;
+    }
+
+    #right {
+      margin-left: 20px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" style="left:0"></div>
+  <button id="left">往左跑</button>
+  <button id="right">往右跑</button>
+  <script>
+    // 固定步长的动画
+    let box = document.getElementById('box');
+    let left = document.getElementById('left');
+    let right = document.getElementById('right');
+
+    let target = document.documentElement.clientWidth - box.offsetWidth; // 当前球需要运动的总距离    100
+    let timer = null;
+    let step = 8; // 当前定时器每运行一次球需要运动的距离
+    right.onclick = function () {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        let curL = parseFloat(box.style.left); // 是一个字符串的值而且有单位 96
+
+        curL += step; // 104
+        if (curL >= target) {
+          // 当前的left值加上一个步长如果大于等于target的值了，说明球运动到位置了
+          clearInterval(timer);
+          box.style.left = target + 'px'; // 为了让当前的球运动到指定的位置
+          return; // 当清除定时器时，当前次的函数的走完，为了不让下边的那一句代码走，所以加了return
+        }
+        box.style.left = curL + 'px';
+      }, 17)
+    };
+
+    left.onclick = function () {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        let curL = parseFloat(box.style.left); // 是一个字符串的值而且有单位 96
+
+        curL -= step; // 104
+        if (curL <= 0) {
+          // 当前的left值加上一个步长如果大于等于target的值了，说明球运动到位置了
+          clearInterval(timer);
+          box.style.left = 0 + 'px'; // 为了让当前的球运动到指定的位置
+          return; // 当清除定时器时，当前次的函数的走完，为了不让下边的那一句代码走，所以加了return
+        }
+        box.style.left = curL + 'px';
+      }, 17)
+    }
+
+    // 当点击左右的时候，小球会出现不知道往那边跑的现象，因为你开辟了多个定时器，每一个定时器里都去操作当前的小球，所以这时候你在点击按钮的时候，把之前的定时器清空就好了
+  </script>
+</body>
+
+</html>

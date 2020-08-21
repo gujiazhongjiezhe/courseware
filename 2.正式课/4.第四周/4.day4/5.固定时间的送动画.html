@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background: pink;
+      border-radius: 50%;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="box" style="left:100px"></div>
+
+  <script>
+    // 固定时长的动画
+    let box = document.getElementById('box');
+
+    // let target = document.documentElement.clientWidth - box.offsetWidth; // 需要运动的总长度
+    // let duration = 2000;
+    // let timer = null;
+
+    /* 
+    t:timey 已经运动过的时间
+    b:begin 起始位置
+    d:duration 总时间
+    c：change 总共需要运动的距离
+
+    求当前的位置：
+
+    时间比 === 位置比
+
+    当前运动的时间/总时间 === 当前的距离/总距离
+    t/d === 当前的距离/c
+
+    c/d =  当前的位置/t
+
+    当前的位置 = t/d*c+b
+
+
+    小明  target   duration
+         100m       10s
+
+    小王  target
+         100m
+
+    
+     */
+
+    function linear(t, b, d, c) {
+      // t:time 已经运动过的时间
+      // b:begin 起始位置
+      // d:duration 总时间
+      // c：change 总共需要运动的距离
+      return t/d*c+b; // 代表当前球距离左边的位置
+    }
+    let target = document.documentElement.clientWidth - box.offsetWidth; // 目标位置
+    let begin = parseFloat(box.style.left); // 当前起始位置
+    let change = target - begin; // 需要移动的总距离
+    let duration = 1000;
+    let timer=  null;
+    function move() {
+      let flag = 0;
+      timer = setInterval(() => {
+        flag += 20;
+        if (flag >= duration) {
+          clearInterval(timer);
+          timer = null;
+          box.style.left = target + 'px';
+          return;
+          // 到此为止定时器的回调函数执行的次数已经确定好了
+        }
+        box.style.left = linear(flag,begin,duration,change) + 'px'; // 设置的是当前left的最新值
+        console.log(1);
+      }, 20);
+    }
+    move()
+  </script>
+</body>
+
+</html>

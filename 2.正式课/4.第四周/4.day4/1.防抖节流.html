@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">23456</button>
+  <div id="box"></div>
+  <script>
+    // 函数的防抖和节流
+    // 防抖的概念：用在高频触发的事件，n秒呢就执行一次，如果在n秒内再次被触发，那么会重新计算时间
+
+    // 函数每执行一次就会启动一个定时器，来延迟执行fn的执行时间，如果在规定的时间内你有一次执行了函数，那就把上一次的定时器清除，在重新启动一个新的定时器
+    // function debounce(func, wait = 1000){
+    //   // 当前的作用域是不销毁的
+    //   // 
+    //   let timer = null;
+    //   return function(){
+    //     // 当前作用域的this是btn元素
+    //       clearTimeout(timer);
+    //       timer = setTimeout(()=>{
+    //         func.call(this);
+    //         timer = null;
+    //       },wait);
+    //   }
+    // }
+
+    // function fn(){
+    //   console.log(2,this);
+    // }
+
+    // let lazyFunc = debounce(fn,2000);
+    // btn.onclick = lazyFunc;
+
+    //--------------------------------------------------------------
+    // 函数的节流
+    // 也是使用在高频触发事件，但在n秒内执行一次，会稀释函数的执行次数
+
+    // throttle
+    // lastTime记录的是上一次执行的时间，然后每一次都要把当前执行的时间-上一次执行的时间和wait进行比较
+    function throttle(func,wait) {
+      let lastTime = 0; // 20000000 用来记录上一次的时间
+      return function () {
+        var nowTime = Date.now(); // 20000000 20000005 200002000获取当前距离1970年1月1号凌晨的毫秒级的时间差
+        // 如果当前时间减去上一次的时间(上一次执行func的时间)大于你设置的wait的时间了，说明这一系执行和上一次执行的时间间隔已经满足规定的时间，那就让func执行，并且重新记录上一次时间
+        if(nowTime - lastTime >=wait){
+          func();
+          lastTime = nowTime;
+        }
+      }
+    }
+
+    function fn() {
+      console.log(1);
+
+    }
+    let lazyFunc = throttle(fn, 80);
+
+    box.onmousemove = lazyFunc;
+
+
+  </script>
+</body>
+
+</html>
