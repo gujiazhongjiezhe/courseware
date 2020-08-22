@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    #box {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background:pink;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" style="left:0"></div>
+  <script>
+    // let target = 100;
+    // let step = 1;
+
+    // let timer = setInterval(()=>{
+    //     let curL = parseFloat(box.style.left);
+    //     curL+=step;
+    //     if(curL>=target){
+    //       clearInterval(timer);
+    //       curL = target;
+    //       timer = null;
+
+    //     }
+    //     box.style.left = curL + 'px';
+    // },17);
+    let target = document.documentElement.clientWidth - box.offsetWidth;
+    let step = 1;
+    function move(){
+        let curL = parseFloat(box.style.left);
+        curL+=step;
+        if(curL>=target){
+          curL = target;
+          box.style.left = curL + 'px';
+          return;
+        }
+        box.style.left = curL + 'px';
+        requestAnimationFrame(move);
+    };
+
+    window.requestAnimationFrame(move);
+    //------------------------------------------------
+    // 固定时长的
+
+    // function linear(t, c, d, b) {
+    //   // t:已经运动过的时间
+    //   // c:需要运动的总距离
+    //   // d:总时间
+
+    //   // x:已经走过的距离
+
+    //   // 位置比 === 时间比
+    //   // 总距离/已经走过的距离 === 总时间/ 已经运动过的时间
+    //   return t / d * c + b;
+    // }
+
+
+    // let duration = 1000;
+    // let time = 0;
+    // let begin = parseFloat(box.style.left);
+    // let target = 500;
+    // let change = target - begin;
+
+    
+    // let timer = setInterval(() => {
+    //   time += 17;
+    //   if (time >= duration) {
+    //     clearInterval(timer);
+    //     box.style.left = target + 'px';
+    //     return;
+    //   }
+    //   // xxx应该是当前最新的left值(距离body左侧的偏移量)
+    //   let curL = linear(time,change,duration,begin);
+    //   box.style.left = curL + 'px'
+    // }, 17);
+
+  </script>
+</body>
+
+</html>

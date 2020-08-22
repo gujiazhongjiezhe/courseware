@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: pink;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" style="left:0;top:0"></div>
+  <script>
+    // 多方向运动动画
+
+    /* 
+    curEle:当前需要添加动画的元素
+    target:当前需要移动到的目标位置
+    duration:需要运动的总时间
+    callBack:当前动画运行完成之后需要执行的回调函数
+     */
+    function linear(t, c, d, b) {
+      // t:已经运动过的时间
+      // c:需要运动的总距离
+      // d:总时间
+
+      // x:已经走过的距离
+
+      // 位置比 === 时间比
+      // 总距离/已经走过的距离 === 总时间/ 已经运动过的时间
+      return t / d * c + b;
+    }
+
+
+    function move(curEle, target, duration, callBack) {
+      let begin = {}; // 变化的起始位置
+      let change = {}; // 需要移动的总距离
+      for (var key in target) {
+        begin[key] = parseFloat(getComputedStyle(curEle)[key]);// 变化的起始位置
+        change[key] = target[key] - begin[key]; // 需要移动的总距离
+      }
+
+      let time = 0; // 用来记录已经走过的时间
+      let timer = setInterval(() => {
+        time += 17;
+        if (time >= duration) {
+          clearInterval(timer);
+          for (var key in change) {
+            curEle.style[key] = target[key] + 'px';
+            timer = null;
+          }
+          // callBack && callBack();
+          typeof callBack === 'function' ? callBack():null;
+          return;
+        }
+        for (var key in change) {
+          let cur = linear(time, change[key], duration, begin[key]);
+          curEle.style[key] = cur + 'px'
+        }
+
+      }, 17)
+    }
+    let box = document.getElementById('box');
+    move(box, { left: 300, top: 300 }, 3000, () => { console.log(100) })
+  </script>
+</body>
+
+</html>
