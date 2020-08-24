@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./swiper.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .swiper-container {
+            width: 800px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid red;
+        }
+
+        .swiper-container .swiper-wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-container .swiper-wrapper .swiper-slide {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 300px;
+            font-size: 40px;
+        }
+
+        .swiper-container {
+            --swiper-theme-color: #ff6600;
+            --swiper-pagination-color: #00ff33;
+            /* 两种都可以都是改变当前选中焦点的颜色 */
+            --swiper-navigation-color: #00ff33;
+            /* 单独设置按钮颜色 */
+            --swiper-navigation-size: 60px;
+            /* 设置按钮大小 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background:red">Slide 1</div>
+            <div class="swiper-slide" style="background:green">Slide 2</div>
+            <div class="swiper-slide" style="background:yellow">Slide 3</div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+
+    <script src="./swiper.min.js"></script>
+    <script>
+        let ary = ['http://www.baidu.com','xxxx','xxxx']
+        var mySwiper = new Swiper('.swiper-container', {
+
+            initialSlide: 0, // 默认显示的图片
+            speed: 2000, // 图片切换的速度
+            autoplay: { // 自动轮播
+                delay: 3000, // 图片切换的间隔时间
+                disableOnInteraction: false, // 当你手动滑动图片的时候，是否停止自动轮播
+            },
+            loop: true, // 环路(实现图片煦暖)
+            // init: false,
+            on: { // 这里存放的都是事件
+                // slideChange: function () {
+                //     console.log(this.activeIndex);
+                // },
+                click:function(){
+                    let index = mySwiper.realIndex; // 这是当前图片的索引
+                    console.log(ary[index]);
+                    window.location = ary[index];
+                    
+                }
+            },
+
+            // slide的切换效果，默认为"slide"（位移切换），可设置为'slide'（普通切换、默认）,"fade"（淡入）"cube"（方块）"coverflow"（3d流）"flip"（3d翻转）。
+            // effect: 'flip',
+
+            keyboard : true, // 允许键盘控制图片切换
+            pagination: { // 进度条的配置
+                el: '.swiper-pagination',
+                // type: 'bullets', // 进度条的样式
+                // type: 'fraction',
+                // type : 'progressbar',
+                // type: 'custom',
+            },
+
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // 如果需要滚动条
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        })
+
+
+        // mySwiper.init();//现在才初始化
+    </script>
+</body>
+
+</html>

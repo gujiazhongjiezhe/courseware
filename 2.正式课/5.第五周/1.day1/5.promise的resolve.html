@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    Promise.resolve快速创建一个成功态的promise实例
+     */
+    // let p = new Promise((resolve,reject)=>{
+    //   resolve(100)
+    // })
+
+    // let p1 = Promise.resolve(100);
+
+    // p1.then((data)=>{
+    //   console.log(data);
+    // })
+
+    //--------------------------------------------
+    // （1）参数是一个 Promise 实例
+
+    // 如果参数是 Promise 实例，那么Promise.resolve将不做任何修改、原封不动地返回这个实例。
+
+    // let p = Promise.resolve(new Promise(resolve => resolve('foo')))
+
+
+    //-----------------------------------
+    // 2、参数是一个thenable对象
+    // 如果传递的是一个thenable对象，那现在返回的promise的实例的状态要收thenable对象里的参数控制
+
+    // let thenable = {
+    //   then: function (resolve, reject) {
+    //     resolve(42);
+    //     // reject(100)
+    //   }
+    // };
+
+    // let p1 = Promise.resolve(thenable);
+    // p1.then(function (value) {
+    //   console.log(value);  // 42
+    // },(data)=>{
+    //   console.log(data);
+    // });
+
+    //----------------------------
+    // 3、如果传递的参数不是一个thenable对象，也不是promsie实例，那就是生成一个成功态的promise实例，而且参数会传递到回调函数里
+    // let p1 = Promise.resolve(100);
+
+    // p1.then((data)=>{
+    //   console.log(data); // 100
+    // })
+
+    //-------------------------
+    // 4、不传参  想让一个代码变成异步
+
+
+    // Promise.resolve().then(()=>{ console.log(100);})
+    // console.log(200);
+
+
+
+
+    //-----------------------------------------------
+    // const preloadImage = function (path) {
+    //   return new Promise(function (resolve, reject) {
+    //     const image = new Image(); // document.createElement('img')
+    //     image.onload = resolve;
+    //     image.onerror = reject;
+    //     image.src = path;
+    //   });
+    // };
+
+    // preloadImage('xxxxx').then(()=>{
+
+    // }).catch(()=>{
+
+    // })
+
+  </script>
+</body>
+
+</html>

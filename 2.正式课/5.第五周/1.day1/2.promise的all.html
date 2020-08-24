@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // $.ajax({
+    //   url: 'xxxxx111',
+    //   async: true,
+    //   success: (data) => {
+    //     $.ajax({
+    //       params: data,
+    //       url: 'xxx212222',
+    //       async: true,
+    //       success: (data) => {
+
+    //       }
+    //     });
+    //   }
+    // });
+
+
+
+    // 把第一次请求回来的数据当做第二次请求的参数
+    // 所以第二次请求你得等到第一次请求成功以后再发送
+
+    // let p = new Promise((resolve, reject) => {
+    //   $.ajax({
+    //     url: 'xxx',
+    //     success: (data) => {
+    //       resolve(data);
+    //     },
+    //     error: () => {
+    //       reject()
+    //     }
+    //   })
+    // })
+
+    // p.then((data) => {
+    //   // 在这里发送第二个请求了
+    //   $.ajax({
+    //     url: 'xxx',
+    //     success: (data) => {
+    //       resolve(data);
+    //     }
+    //   })
+    // }).catch(() => {
+    //   // 如果请求失败了，在这里做错误的处理
+    // })
+
+    // let p = new Promise((resolve,reject)=>{
+    //     setTimeout(()=>{
+    //       //拿定时器去模拟一个异步的请求，
+    //       resolve()
+    //     },3000);
+    // })
+
+
+    // p.then(()=>{
+    //   console.log(1);
+    // }).catch(()=>{
+    //   console.log(2);
+    // }).finally(()=>{
+    //   console.log(3);
+    //   // alert('请求完成了')
+    //   // 当你请求完成之后，finally函数就会执行，你可以在这里做请求完成的事情
+    //   // 他是异步的，当状态发生变化才会执行，(但是不会依赖状态的结果)
+    // });
+
+
+    //---------------------------------------------------------
+
+    /* 
+    Promise.all;他是Promise自己身上的一个方法，
+    传参是一个数组，数组里边放的是promise的实例
+    all方法的返回值是一个新的promise的实例，p
+    只有p1，p2，p3的状态全部为成功态，那p的状态才会变成成功态
+    如果p1，p2，p3有一个是失败态，那当前的p就会马上变成失败态
+    catch里的回调函数的形参代表的值是第一个状态被改为失败时所传的实参
+     */
+
+    // 一般用于一个请求需要等待其他多个全部请求完成之后在发送
+
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let data = 100;
+        // resolve(data)
+        reject(100);
+      }, 1000)
+    });
+
+    let p2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let data = 200;
+        // resolve(data)
+        reject(800);
+      }, 5000)
+    });
+
+    let p3 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let data = 300;
+        resolve(data)
+      }, 5000)
+    });
+
+    // 当上面的三个请求全部请求完成之后在发送最后一个请求
+    let p = Promise.all([1,p2,p3]) // 他的返回值也是一个Promise的实例
+    Promise.resolve(1)
+    p.then((data)=>{
+      console.log(data,'成功');
+      // 发送第四次请求
+    }).catch((data)=>{
+      console.log(data,'失败');
+    })
+
+
+    // 封装一个promise版的请求
+    // 改方法的返回值一个promise的实例
+    // function getJSON(url){
+    //   return new Promise((resolve,reject)=>{
+    //       $.ajax({
+    //         url:url,
+    //         success:(data)=>{
+    //           resolve(data)
+    //         },
+    //         error:(data)=>{
+    //           reject(data)
+    //         }
+    //       })
+    //   })
+    // }
+
+    // getJSON('xxxx').then(()=>{}).catch(()=>{})
+
+  </script>
+</body>
+
+</html>

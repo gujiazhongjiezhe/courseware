@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    p的回调函数要等到每一个实例的状态都发生变化(不管是成功还是失败)之后才会执行，回调函数里的参数是每一实例的状态和值
+    // 他只会执行成功的回调
+     */
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let data = 100;
+        // resolve(data)
+        reject(100);
+      }, 1000);
+    });
+
+    let p2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let data = 200;
+        resolve(data)
+        // reject(800);
+      }, 1000);
+    });
+
+    let p3 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let data = 300;
+        resolve(data);
+      }, 5000)
+    });
+
+
+    let p = Promise.allSettled([p1, p2, p3]) // 他的返回值也是一个Promise的实例
+
+    p.then((data) => {
+      console.log(data, '成功');
+
+      // 发送第四次请求
+    }).catch((data) => {
+      console.log(data, '失败');
+    });
+
+    // ------------------------------
+    // Promise.any
+    // 假设现在有三个promise的实例，这个三个有一个先是成功态，那any的回调函数就执行，
+  </script>
+</body>
+
+</html>

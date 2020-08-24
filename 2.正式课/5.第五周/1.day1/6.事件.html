@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box"></div>
+  <input type="text" id="inp">
+  <script>
+    /* 
+      事件就是元素天生自带的默认操作行为
+      无论我们给其是否绑定方法，当我们操作那个元素的时候对应的事件行为照样会有
+
+      事件绑定：给当前元素的某一个事件行为绑定一个方法
+        原因：当你触发某一个事件行为的时候，想做一些事件
+
+      常用的事件行为
+      鼠标事件：
+      click 点击
+      contextmenu 右击
+      dblclick 双击
+      mousedown	在元素上按下任意鼠标按钮。
+      mouseenter	指针移到有事件监听的元素内。
+      mouseleave	指针移出元素范围外（不冒泡）。
+      mousemove	指针在元素内移动时持续触发。
+      mouseover	指针移到有事件监听的元素或者它的子元素内。
+      mouseout	指针移出元素，或者移到它的子元素上。
+      mouseup	在元素上释放任意鼠标按键。
+      select	有文本被选中。
+      wheel	滚轮向任意方向滚动。
+
+      键盘事件
+      keydown	按下任意按键。
+      keypress	除 Shift、Fn、CapsLock 外的任意键被按住。（连续触发。）
+      keyup	释放任意按键。
+
+      表单元素的事件
+      focus:获取焦点
+      blur：失去焦点
+      change：内容发生变化而且在失去焦点的时候会触发
+      input：内容发生变化就会触发
+    */
+    // console.dir(box)
+    // document.onkeydown = function (e) {
+    //   console.log(e);
+    // }
+    inp.onfocus = function(e){
+      console.log(this.value,'focus');
+    }
+    inp.onblur = function(e){
+      console.log(this.value,'blur');
+    }
+    inp.onchange = function(){
+      console.log(this.value,'change');
+    }
+    inp.oninput = function(){
+      console.log(this.value,'input');
+    }
+  </script>
+</body>
+
+</html>
