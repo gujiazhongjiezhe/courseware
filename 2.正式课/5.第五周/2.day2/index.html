@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="w  r">1</div>
+  <li class="word w">2</li>
+  <div class="outer"></div>
+  <script>
+    // 1. JS中的数据类型都有哪些？它们之间有什么区别？该如何检测？
+    // 1. 基本数据类型
+    //     Number
+    //     String
+    //     Boolean
+    //     null
+    //     undefined
+    //     Symbol 唯一值
+    //     BigInt 最大整数
+    // 2. 引用数据类型
+    //     对象
+    //         - 普通对象Object
+    //         - 数组Array
+    //         - 正则RegExp
+    //         - 日期Date 实例
+    //         - 数学Math
+    //         - 实例
+    //         - prototype原型
+    //     -函数
+    //         - function
+    //         - Class
+    // 区别：基本值存储的是值，引用值存储的址
+
+    // typeof instanceof  constructor toString.call(value)
+
+    // 对象和null他们拿typeof检测返回的都是 'object'
+
+    // instanceof 检测当前实例是否属于某个类，
+    // let ary = [] // 只要当前类的原型在实例的原型链上就返回true
+    // 基本值不能拿它检测
+
+    // constructor 
+    // ary.constructor === Array;
+    // 这块如果当前类的原型重定向了，那就不准了
+
+    // toString.call(value) // '[object 当前的类]'
+    // 只能检测js的内置类
+
+    //-----------------------------------------------------------
+    // 3. 数组中常用的迭代方法有哪些？都是什么意思？（至少四种）
+    // forEach 
+    // map   返回值是一个新数组，数组里的每一项就是回调函数每一次的return值
+
+    //---------------------------
+    // every() :　对数组中的每一项执行函数，如果每一项都返回 true ,则该方法返回 true。如果有一项没有返回true，那就立即停止遍历，然后返回false
+
+    // let ary = [1,2,0,4,5];
+    // // 判断数组里的每一项是否都满足某一个条件
+    // // 如果回调函数里的条件一旦不成立，那就终止循环
+    // let res = ary.every((item,index)=>{
+    //   console.log(item);
+    //   return true;
+    //     // if(item>0){
+    //     //   return true
+    //     // }
+    // })
+    // console.log(res);
+    //------------------------------
+    // some(): 对数组中的每一项执行函数，只要有一项返回了 true ,则该方法返回 true。如果都不满足，那就返回false
+    // let ary = [1,0,3,4,5];
+    // // 在遍历的时候只要回调函数返回了true，那就停止遍历，some最后的返回值就是true(找true的)
+    // let res = ary.some((item,index)=>{
+    //   console.log(1);
+    //     if(item>9){
+    //         return true
+    //     }
+    // });
+    // console.log(res);
+
+    //-----------------------------
+    // filter(): 对数组中的每一项执行函数，把里面返回 true 的项，组成一个数组返回。
+    // let ary = [1,0,3,4,5];
+    // let ary1 = [1,2,45,32,45,2,123]
+    // // 把数组索引大于2的那几项挑出来组成一个新的数组进行返回
+    // // 我想把数组中大于10 的数调出来
+    // let res = ary1.filter((item,index)=>{
+    //     // if(index>2){
+    //     //   return true;
+    //     // }
+    //     if(item>10){
+    //       return true
+    //     }
+    // })
+    // console.log(res);
+
+    //-----------------------------------------------
+    // 说一下你对闭包的理解，以及工作中什么地方你用到了闭包？
+    //------------------------------------------------
+
+    // let obj = {
+
+    // };
+    // obj.push(10);
+    // obj.push(20);
+    // [].push.call(obj,10);
+    // [].push.call(obj,20);
+    // console.log(obj);
+    // 如果普通对象去调用push方法，那改变之后的对象就拥有数组的特点了
+
+
+    // let obj = {
+    //   0: 3,
+    //   1: 4,
+    //   length: 0,
+    //   push: Array.prototype.push
+    // }
+    // obj.push(10);
+    // obj.push(20);
+    // console.log(obj);
+    //-----------------------------------------------
+
+    /* 
+    x = 3 4 12 13 14 234
+    obj = af0
+    fn = af1
+     */
+    // var x = 3,
+    //   obj = { x: 5 }; // af0  95
+    // obj.fn = (function () { // 给obj新增键值对
+    //   /* 
+    //   this-->window
+    //   */
+    //   this.x *= ++x; // window.x = window.x * ++x --> 3 * 4
+    //   return function (y) { // af1
+    //     /* 
+    //     y = 6
+    //     this--> obj
+    //      */
+    //      /* 
+    //      y = 4
+    //      this -->window
+    //       */
+    //     this.x *= (++x) + y; // obj.x = obj.x * ((++x) + y) --> 5 * (13+6)--> 95
+    //                         // window.x = window.x * ((++x) + y)--> 13 * (14 + 4)-->234
+    //     console.log(x); // 13  234
+    //   }
+    // })();
+
+    // var fn = obj.fn;
+
+    // obj.fn(6); // 12
+    // fn(4); // 234
+    // console.log(obj.x, x); // 95 234
+    //--------------------------------------------------------
+
+    // var name = '珠峰培训';
+    // function A(x, y) { // 10 un   70 un
+    //   /* 
+    //   this-->20实例
+    //   this -->80
+    //    */
+    //   var res = x + y; // NaN NaN
+    //   console.log(res, this.name); // NaN  un   NaN un
+    // }
+    // function B(x, y) {
+
+    //   var res = x - y;
+    //   console.log(res, this.name);
+    // }
+    // B.call(A, 40, 30); // 10 'A'
+    // call会让B执行，并且把B的this指向了A，还给B穿了两个实参
+    // 函数可以当做对象使用，还会默认自带一个属性name，其属性值是字符串的函数名
+    // B.call.call.call(A, 20, 10);// NaN  un
+    // Function.prototype.call(A, 60, 50); // 和第一个是一样的  不输出
+    // Function.prototype.call.call.call(A, 80, 70); // 和第二个是一样的
+
+    // 入股有两个及以上的call那最后执行的就是传递的第一个实参
+
+
+    // B.call.call.call(A, 20, 10);
+    // function call(context, ...arg) {
+    //   // this -->call      context-->A     arg -->[20,10]
+    //   context = context || window;
+
+    //   context.$fn = this; // A.$fn =call 
+    //   context.$fn(...arg); // A.$fn(20,10) -->call(20,10)
+    //   // call第二次执行
+    //   // this -->A      context-->{20}     arg -->[10]
+    //   // 如果context是基本值，他会拿构造函数在给你创建一个标准的实例
+
+    //   context.$fn = this; // {20}.$fn = A
+    //   context.$fn(...arg); // {20}.$fn(10) --> A(10)
+    // }
+
+    //------------------------------------------------
+    // function fn(){
+    //   console.log(this); // 显示的是那构造函数创建出来的20实例
+    //   如果给当前函数改的this是一个基本值，那call内部会把这个基本值拿对应的构造函数进行重新new
+    // }
+    // fn.call(20)
+
+
+    // new Number(20)
+    // fn.call
+    //----------------------------------------------------------
+    // Function.prototype.call.call.call(A, 80, 70);
+    // function call(context, ...arg) {
+    //   // this -->call     context-->A     arg -->[80,70]
+    //   context = context || window;
+
+    //   context.$fn = this; // A.$fn = call;
+    //   context.$fn(...arg); // A.$fn(...arg) -->call(80,70)
+
+    //   // call第二次执行
+    //   // this -->A      context-->80     arg -->[70]
+    //   context.$fn = this; // {80}.$fn = A
+    //   context.$fn(...arg); // {80}.$fn(...arg) -->A(70)
+    //    // 现在的A函数执行时，this指向{80}
+    // }
+
+
+    //--------------------------------------------------------------------
+    /*
+ * 1.编写一个方法“flatten”，将数组扁平化 （至少两种办法）
+ * 2.然后实现“unique”数组去重方法，把数组进行去重 （至少两种办法）
+ */
+    // let arr = [[1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10];
+    // ary.flatten().unique().sort((a, b) => a - b); //=>[1, 2, 3, 4, 5, 6, 7, 8, 9....]
+
+    // 1、Array.prototype.flat;
+    // flat可以指定展开的层级，而且还可以穿第一个Infinity，这样可以把所有的数组都展开
+    // arr = arr.flat(Infinity)
+    // console.log(arr);
+
+    // 2.利用toString展开
+    // console.log(arr.toString()); // '1,2,3,.......'
+    // arr = arr.toString().split(',').map(item=>Number(item));
+    // console.log(arr);
+
+    // 3.利用JSON.stringfly
+
+    // console.log(JSON.stringify(arr)); // '[[1,2,2],[3,4,5,5],[6,7,8,9,[11,12,[12,13,[14]]]],10]'
+
+    //  JSON.stringify(arr).replace(/(\[|\])/g,'') // '1,2,3,.......'
+
+    //  arr =  JSON.stringify(arr).replace(/(\[|\])/g,'').split(',').map(item=>Number(item));
+    //  console.log(arr);
+
+
+
+
+
+    // let arr = [100, [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10];
+    // function myFlat() {
+    //   // this -->arr
+    //   let _this = this;
+    //   let ss = []; // 用来接收扁平化之后的每一项的值的
+    //   function fn(ary) {
+    //     // 循环当前的数组，看看数组里边还有没有数组
+    //     for (var i = 0; i < ary.length; i++) {
+    //       if (Array.isArray(ary[i])) { // isArray检测当前值是否是一个数组，如果是数组就返回true
+    //         // 如果当前条件成立，说明数组的当前项是数组,那得继续循环这个数组，
+    //         fn(ary[i]);
+    //       }
+    //       else {
+    //         // 如果走else，说明当前项不是数组，那就直接push到ss数组里
+    //         ss.push(ary[i]);
+    //       }
+    //     }
+    //   }
+    //   fn(_this);
+    //   return ss;
+    // }
+
+    // Array.prototype.myFlat = myFlat;
+
+    // console.log(arr.myFlat()); 
+
+    //---------------------------------------------------------------
+    /* 实现一个$attr(name,value)遍历
+    *    属性为name
+    *    值为value的元素集合
+    * 例如下面示例:
+    */
+    // let ary = $attr('class', 'box'); //=>获取页面中所有class为box的元素
+    // let ary = $attr('ss', 'box'); //=>获取页面中所有class为box的元素
+      // [div.box ,li,img]
+    function $attr(key, value) { // 'clss', 'box'
+      // 1.获取到素有的元素
+      let ary = [];
+      let elements = document.getElementsByTagName('*'); // 获取所有元素
+      console.log(elements); // 这是一个元素集合是类数组
+      elements = Array.from(elements); // 类数组转数组
+
+      elements.forEach(item => {
+          // console.log(item); // 是元素的每一项
+
+          let itemValue = item.getAttribute(key) // 就当当前属性名对应的属性值
+          console.log(itemValue);
+          // 如果用户是按照class名获取元素，那得做特殊处理
+          if(key === 'class'){
+            // 在这块用正则进行匹配
+            
+          }
+          if(itemValue === value){
+            // 那当前获取的指定的属性值和用户指定的value进行比对，如果一致，就把当前的元素push到ary数组里
+            ary.push(item)
+          }
+
+      });
+      return ary;
+
+    }
+    let ary = $attr('class', 'w');
+    console.log(ary);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
