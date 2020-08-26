@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='box' style='background:red'></div>
+  <button>红</button>
+  <button>绿</button>
+  <button>蓝</button>
+  <script src="./jquery-1.11.3.js"></script>
+  <script>
+    // var box = document.querySelector('#box'),
+    //   btnList = document.querySelectorAll('button'),
+     var  colorAry = ['red', 'green', 'blue'];
+
+      // 利用块级作用域
+    // for (let i = 0; i < btnList.length; i++) {
+    //   btnList[i].onclick = function () {
+    //     box.style.background = colorAry[i];
+    //   }
+    // }
+
+    // for (var i = 0; i < btnList.length; i++) {
+    //   btnList[i].onclick = (function(index){
+    //       /* 
+    //       此作用域不销毁
+    //        */
+    //         return function(){
+    //           box.style.background = colorAry[index];
+    //         }
+    //   })(i)
+    // }
+
+  //  $('button').each(function(index,item){
+
+  //  })
+
+    // $('button').click(function(){
+    //   let index = $(this).index()-1;
+    //   console.log(index);
+    //   box.style.background = colorAry[index];
+    // })
+  </script>
+</body>
+
+</html>

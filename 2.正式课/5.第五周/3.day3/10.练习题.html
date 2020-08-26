@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    x = 5 11 10
+    y = 6
+    func = af0 af1
+     */
+    // var x = 5,
+    //   y = 6; // var x = 5; var y = 6
+    // function func() { // af0
+    //   /* 
+    //   af0执行形成的私有作用域不销毁
+    //    */
+    //   x += y; // 
+
+    //   func = function (y) { // af1
+    //       /* 
+    //       y = 3
+    //        */
+    //     console.log(y + (--x)); // 3 + 10
+    //   };
+
+    //   console.log(x, y); // 
+    // }
+    // func(4); // 这句话执行完成只有func已经被改变了af1  11 6
+    // func(3); // 13
+    // console.log(x, y); // 10 6
+    //-------------------------------------------
+    //example 1
+    // let a = {}, b = '0', c = 0;
+    // a[b] = '珠峰'; // 给对象新增键值对 a['0'] = '珠峰'
+    // a[c] = '培训';// 给对象新增键值对  a[0] = '培训'
+    // console.log(a[b]); // a['0']  // '培训'
+
+    // ---------------------
+
+    //   ---------------------
+    //example 3
+    // let a = {}, b = { n: '1' }, c = { m: '2' };
+    // // 如果把一个对象当做属性名的话，当前这个对象会默认转字符串
+    // a[b] = '珠峰'; // a['[object Object]'] = '珠峰'
+    // a[c] = '培训'; // a['[object Object]'] = '培训'
+    // console.log(a[b]); // a['[object Object]']  // '培训'
+
+    //-----------------------------------------------------------------
+
+    // function Fn() {
+    //   this.x = 10;
+    //   this.y = 20;
+    //   this.getX = function () {
+    //     console.log(this.x);
+    //   }
+    // }
+    // Fn.prototype.y = 40; // 给当前Fn的原型增加属性
+    // Fn.prototype = { // 给Fn类的原型重定向，没有constructor
+    //   x: 30,
+    //   getY: function () {
+    //     this.y += 1;
+    //     console.log(this.y);
+    //   },
+    //   sum: function () {
+    //     console.log(this.x + this.y);
+    //   }
+    // };
+    // let f1 = new Fn; // {x:10,y:20,getX:af0}
+    // let f2 = new Fn; // {x:10,y:20 21,getX:af1}
+    // console.log(f1.getX === f2.getX); // false 找的都是私有的方法
+    // console.log(f1.getY === f2.getY); // true 找的是原型上的getY
+    // console.log(f1.constructor); // Object
+    // f1.getX(); // this-->f1  f1.x -->10
+    // f2.getY(); // this-->f2   21
+    // f1.sum(); // this-->f1  f1.x+f1.y -->30
+
+    // // Object :js的内置类
+    // // object
+
+    //---------------------------------------------------
+    /* 
+    A = af0 af3 af4 af5
+    Func = af1
+     */
+    // function A() { // af0
+    //   alert(1);
+    // }
+    // function Func() { // af1
+    //   /* 
+
+    //    */
+    //   A = function () { // af3 af4 af6
+    //     alert(2);
+    //   };
+    //   return this; // return window 
+    // }
+    // Func.A = A; // 把函数Func当做对象新增键值对，属性名是A，属性值af0 alert(1)
+    // Func.prototype = { // 把Func函数当做类，给他的原型重定向，没有constructor
+    //   A: () => { // af5
+    //     alert(3);
+    //   }
+    // };
+    // A(); // 1
+    // Func.A(); // 1
+    // Func().A(); // 先把Func执行完之后，利用他的返回值找到A，让其执行 window.A() -->2
+    // new Func.A(); // new af0() --->1
+    // new Func().A();  // 先执行 new Func()-->f,   f.A()-->af5()-->3
+    // new new Func().A(); // new Func()执行的返回结果是f实例 -->new f.A() --> new af5() // 报错(箭头函数不能被new)
+
+    //--------------------------------------------------------------
+
+    //     var name = "WINDOW",
+    //     obj = {
+    //         name:"OBJ",
+    //         fn:(()=>{
+    //             /* 
+
+    //             */
+    //             console.log(this.name); // window.name // "WINDOW"
+    //             return function(){
+    //               /* 
+    //               this-->obj
+    //                */
+    //                 console.log(this.name);
+    //             }
+    //         })()
+    //     },
+    //     fn=()=>{
+    //         console.log(this.name); // window.name // // "WINDOW"
+    //     };
+    // fn(); // // "WINDOW"
+    // obj.fn(); // this-->obj  // "OBJ"
+    // fn.call(obj); // 箭头函数没有this，改不了 'WINDOW'
+    //--------------------------------------------------------------------------------
+
+    // function A1(name) { // un
+    //   this.name = name;
+    // };
+    // function A2(name) { // un
+    //   this.name = name || 'Jerry';
+    // };
+    // function A3(name) { // un
+    //   name && (this.name = name);
+    //   // 如果 && 前边转布尔是false，那就不会再往后走
+    // };
+    // A1.prototype.name = 'Tom';
+    // A2.prototype.name = 'Tom';
+    // A3.prototype.name = 'Tom';
+    // alert((new A1().name) + (new A2().name) +    (new A3().name));
+    //   // {name:un}.name    {name:'Jerry'}.name    {}.name
+    //       //   undefined    +   'Jerry'      +       'Tom'
+
+    //------------------------------------------------------------
+    // function myCall(context,...arg){
+    //   // this -->fn  context -->obj
+    //   context = context || window;
+    //   let res = null;
+    //   context.$fn = this;
+    //   res = context.$fn(...arg);
+    //   delete context.$fn;
+
+    //   return res;
+    // }
+    // Function.prototype.myCall = myCall;
+
+
+    // function fn(n,m){
+    //   console.log(this,n,m);
+    //   return 100;
+    // }
+    // let obj = {};
+    // fn.myCall(obj,1,2);
+
+    //----------------------------------------------------------
+
+    // function Modal(x, y) {
+    //   this.x = x;
+    //   this.y = y;
+    // }
+    // Modal.prototype.z = 10;
+    // Modal.prototype.getX = function () {
+    //   console.log(this.x);
+    // }
+    // Modal.prototype.getY = function () {
+    //   console.log(this.y);
+    // }
+    // Modal.n = 200;
+    // Modal.setNumber = function (n) {
+    //   this.n = n;
+    // };
+    // let m = new Model(10, 20);
+
+
+    class Model {
+      constructor(x, y) { // 相当于构造函数
+        this.x = x;
+        this.y = y;
+      }
+      // z = 10; // 给当前实例增加私有属性
+      getX() { // 给原型增加方法
+        console.log(this.x);
+      }
+      getY() { // 给原型增加方法
+        console.log(this.y);
+      }
+      static n = 200; // 把当前函数当做对象去增加键值对
+      static setNumber = function (n) {
+        this.n = n;
+      };
+    }
+    Model.prototype.z = 10;
+    
+    let m = new Model(10, 20);
+    console.log(m);
+    console.dir(Model);
+
+  </script>
+</body>
+
+</html>
