@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a href="http://www.baidu.com" id="a">跳转</a>
+  <script>
+    a.onclick = function(e){
+
+  
+      // e.preventDefault(); // 禁止事件的默认行为 (在IE8及以下是不兼容的)
+      // e.returnValue = false; //  禁止事件的默认行为 (在IE9及以下是不兼容的)
+      console.log(e);
+      console.log(1);
+    }
+  </script>
+</body>
+</html>

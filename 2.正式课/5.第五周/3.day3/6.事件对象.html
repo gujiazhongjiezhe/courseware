@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 200px;
+      height: 200px;
+      background: yellowgreen;
+      margin: 100px auto;
+      /* border:10px solid red; */
+    }
+
+    #outer {
+      width: 400px;
+      height: 400px;
+      background: red;
+      margin: 100px auto;
+    }
+    #father {
+      width: 500px;
+      height: 500px;
+      background: orange;
+      margin: 200px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="father">
+    <div id="outer">
+      <div id="box"></div>
+    </div>
+  </div>
+
+
+  <script>
+    let box = document.getElementById('box');
+    let outer = document.getElementById('outer');
+    box.onclick = function (e) {
+      // 事件对象：当用户通过键盘、鼠标获取其他一些触发事件行为的时候，浏览器会把一些默认的事件信息以实参的形式传递给当前的函数
+      // console.log(e);
+      // 1、clientX：当前鼠标点击的位置距离浏览器可视窗口左边框的距离
+      // 2、clientY：当前鼠标点击的位置距离浏览器可视窗口上边框的距离
+      // (相对于离浏览器可视窗口来说)
+
+      // 3、offsetX：当前鼠标点击的位置距离当前盒子左内边框的距离
+      // 4、offsetY：当前鼠标点击的位置距离当前盒子上内边框的距离
+      // (相对于当前盒子来说)
+
+      // 5、pageX：当前鼠标点击的位置距离body左内边框的距离
+      // 6、pageY：当前鼠标点击的位置距离body上内边框的距离
+      // (相对于body来说)
+
+      // 7、target：事件源，当前的事件类型是在哪个元素身上触发的，那事件源就是谁
+      // 8、type:事件类型('click')
+
+
+      // 9、e.preventDefault(); // 禁止事件的默认行为 (在IE8及以下是不兼容的)
+      // 10、e.returnValue = false; //  禁止事件的默认行为 (在IE9及以下是不兼容的)
+
+      // 11、e.cancelBubble = true // 阻止事件的冒泡传播机制
+      // 12、e.stopPropagation() // 阻止事件的冒泡传播机制
+
+      console.log('box');
+      // e.cancelBubble = true;
+    }
+    outer.onclick = function (e) {
+      e.cancelBubble = true;
+      console.log('outer');
+    }
+
+    father.onclick = function(){
+      console.log('father');
+    }
+  </script>
+</body>
+
+</html>

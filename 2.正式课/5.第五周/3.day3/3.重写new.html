@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    function Dog(name) {
+      this.name = name;
+    }
+    Dog.prototype = {
+      bark() {
+        console.log('wangwang');
+      },
+      sayName() {
+        console.log('my name is ' + this.name);
+      }
+    };
+    function _new(Fn,...arg) {
+      //=>完成你的代码
+      // 这里所做的事就是js原生new做的事(重写new)
+      // Object.create(obj) // 生成一个新对象，并且把当前对象的__proto__指向你传的参数
+
+      // let obj = {}; // obj是Dog类实例
+      // obj.__proto__ = Fn.prototype;
+      let obj = Object.create(Fn.prototype); // 和上面的两句话是等价的
+
+
+      // 当Dog构造函数执行，并且把Dog里的this指向当前实例
+      Fn.call(obj,...arg);
+      return obj;
+
+      // 创建一个空对象，让构造函数里的this指向当前对象
+      // 默认把对象return 出去
+
+    }
+    let sanmao = _new(Dog, '三毛');
+    console.log(sanmao);
+    sanmao.bark(); //=>"wangwang"
+    sanmao.sayName(); //=>"my name is 三毛"
+    console.log(sanmao instanceof Dog); //=>true
+  </script>
+</body>
+
+</html>

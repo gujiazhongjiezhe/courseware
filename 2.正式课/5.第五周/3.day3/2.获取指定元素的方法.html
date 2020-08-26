@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="w word name">1</div>
+  <div class="l">2</div>
+  <div class="w">3</div>
+  <script>
+    // 封装一个$attr方法，用来获取指定的元素
+    function $attr(key, value) {
+      let ary = [];
+      let elements = document.body.getElementsByTagName('*');
+      for (let i = 0; i < elements.length; i++) {
+        let item = elements[i]; // 代表每一个元素
+        // 获取每一个元素的行间属性名为key的属性值和value进行比对
+        let itemValue = item.getAttribute(key);
+        // console.log(itemValue)
+        if (key === 'class') {
+          // 这块如果使用includes应该怎么去写
+          // 如果当前的key是class的话，为了防止有多个类名，咱们得做特殊处理
+          let reg = new RegExp('\\b' + value + '\\b');
+          // 匹配一下当前获取的整个类名是否包含用户指定的类名
+          reg.test(itemValue) ? ary.push(item) : null;
+     
+        }
+        else {
+          // 如果这个else不写的话，会把符合条件的push两遍
+          if (itemValue === value) {
+            ary.push(item);
+          }
+        }
+
+      }
+      return ary;
+    }
+    let res = $attr('class', 'w'); // 获取页面中class名为w的元素
+    console.log(res); // [ ]
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

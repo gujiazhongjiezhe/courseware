@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // let ary = [100, 200, 300, 400];
+    // function myForEach(callBack) {
+    //   // this -->ary
+    //     // 循环数组，每循环一次就把callBack执行一次
+    //     for(let i = 0;i<this.length;i++){
+    //       // for循环的时候，this[i]就是数组的每一项 i就是每一项的索引
+    //       callBack(this[i],i);
+    //     };
+    // }
+    // Array.prototype.myForEach = myForEach;
+
+    // ary.myForEach((item, index) => {
+    //   console.log(item, index);
+    // });
+
+    //--------------------------------------------
+    // 循环数组，执行回调函数，
+    // let res = ary.some((item, index) => {
+    //   console.log(item);
+    //   return item > 200
+    // });
+    // console.log(res);
+
+    //   function mySome(callBack) {
+    //     for (let i = 0; i < this.length; i++) {
+    //       let res = callBack(this[i], i);
+    //       if (res) {
+    //         return true;
+    //       }
+    //     };
+    //     // 如果for循环执行的时候，里面的if一次也没有走，说明你回调函数每一次的返回值返回的都是false
+    //     return false;
+    //   }
+    //   Array.prototype.mySome = mySome;
+
+    // let res = ary.mySome((item, index) => {
+    //     console.log(item, index);
+    //     return item > 800
+    //   });
+    //   console.log(res);
+
+    //------------------------------------------------------------------
+    // let ary = [100, 200, 300, 400];
+    // let res = ary.every((item, index) => {
+    //   console.log(item, index);
+    //   return item > 90;
+    // });
+    // console.log(res);
+
+
+    // function myEvery(callBack) {
+
+    //   for (let i = 0; i < this.length; i++) {
+    //     let res = callBack(this[i], i);
+    //     if (!res) { // 第一处
+    //       return false; // 第二处
+    //     }
+
+    //   };
+    //   // 如果for循环执行的时候，里面的if一次也没有走，说明你回调函数每一次的返回值返回的都是false
+    //   return true; // 第三处
+    // }
+    // Array.prototype.myEvery = myEvery;
+
+    // let res = ary.myEvery((item, index) => {
+    //   console.log(item, index);
+    //   return item > 90;
+    // });
+    // console.log(res);
+
+    //-----------------------------------------------------------
+    let ary = [100, 200, 300, 400];
+    // let res = ary.filter((item,index)=>{
+    //       // 判断每一次回调函数的返回结果，如果是true就把当前的那一项放到新数组里，如果是false就不放
+    //       // return item>200;
+    // });
+    // console.log(res);
+
+    function myFilter(callBack) {
+      let ary = [];
+      for (let i = 0; i < this.length; i++) {
+        let res = callBack(this[i], i);
+        if (res) {
+          ary.push(this[i]);
+        }
+      };
+      return ary;
+    }
+    Array.prototype.myFilter = myFilter;
+
+    let res = ary.myFilter((item, index) => {
+      // 判断每一次回调函数的返回结果，如果是true就把当前的那一项放到新数组里，如果是false就不放
+      return item>200;
+    });
+    console.log(res);
+
+
+  </script>
+</body>
+
+</html>

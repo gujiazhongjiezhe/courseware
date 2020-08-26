@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">123456</div>
+  <script>
+    var box = document.getElementById('box');
+    // DOM的事件绑定
+    // DOM的0级事件绑定  DOM的2级事件绑定
+
+    // DOM0
+    // 元素.on事件行为 = function(){}
+
+    // 元素.addEventListener('事件类型',方法函数,布尔值)
+    /* 
+    DOM0级事件的绑定原理，给元素的私有属性增加方法(赋值)，当用户触发事件行为的时候，浏览器帮我们把给当前的事件行为赋的方法进行执行
+    DOM0级只能给当前同一个事件行为不能够绑定两个方法
+    DOM0级事件绑定默认会有冒泡机制
+
+     */
+    // box.onclick = function(){
+    //   console.log(1);
+    // }
+    //  box.onclick = function(){
+    //   console.log(2);
+    // }
+    // 如果想给当前元素的某个事件行为移除事件绑定，只需要给当前的事件行为赋值为null即可(DOM0级移除事件)
+    // box.onclick = null;
+
+    //---------------------------------------------------
+    // DOM2级事件绑定通过原型链查找机制，一级一级的找到EventTarget.prototype上的addEventListener并且让次方法执行,他会把给当前元素的某个事件行为绑定的所有方法存放到浏览器默认的事件池中(绑定几个方法，他就会忘事件池中存储几个方法)，当事件行为触发的时候，他会把事件池中绑定的对应的方法依次执行(先绑定的谁就先执行谁)
+
+
+    // box.addEventListener('click',function(){console.log(1);},false);
+    // box.addEventListener('click',function(){console.log(2);},false);
+    // box.onclick = function(){console.log(3);};
+
+    // 利用DOM2级去给元素的某个事件行为绑定方法的时候，方法一般都是以函数名的方法去绑定
+    // 这样写的好就是便于咱们去操作这些方法
+    // function fn1() { console.log(1); }
+    // function fn2() { console.log(2); } // af0
+    // box.addEventListener('click', fn1, false);
+    // box.addEventListener('click', fn2, false);
+    // box.addEventListener('click', fn1, false); // 这是绑定不上的
+    // box.addEventListener('mouseover', fn1, false);
+
+    // 如果给元素的同一个事件行为绑定两次同一个方法(函数)，是绑定不上的，因为往事件池里增加方法的时候他会进行'去重'的机制
+
+    // 给DOM2级事件移除指定的方法
+    // 找到事件池里边的方法，然后把它从事件池里边移除
+    // 当解绑的时候穿的参数要保持一致
+    // 元素.removeEventListener('事件行为',方法,布尔值)
+    // box.removeEventListener('click',fn2,false);
+
+
+
+    // DOM2级绑定的特点
+    // 1、先绑定的谁就先输出谁
+    // 2、绑绑定的函数里的this还是当前元素本身
+    // 3、元素的同一个事件行为不能够绑定同一个方法
+
+
+    //-----------------------------
+    // 在IE8及以下是不能够使用DOM2级事件绑定的
+
+    // 但在IE8级以下是可以利用attachEvent进行绑定的(这是IE8及以下专用的)
+    // function fn1() { console.log(this); }
+    // function fn2() { console.log(2); }
+    // box.attachEvent('onclick', fn1);
+    // box.attachEvent('onclick', fn2);
+    // box.attachEvent('onclick', fn1);
+
+    // attachEvent特点
+      // 1、方法的绑定和输出的顺序是倒着的
+      // 2、被绑定的方法里的this是window
+      // 3、元素的同一个事件行为能够绑定同一个方法
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
