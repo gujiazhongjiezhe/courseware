@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    #box {
+      width: 500px;
+      height: 500px;
+      background:greenyellow;
+      margin: 100px auto;
+      position: relative;
+    }
+    #mark {
+      width: 100px;
+      height: 100px;
+      background:rgba(0,0,0,.5);
+      cursor: move;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+      <!-- <div id="mark"></div> -->
+  </div>
+<script>
+  let box = document.getElementById('box');
+  let mark = null;
+  // 当鼠标划入box时，生成mark小盒子,并且插入到box中
+  box.onmouseenter = function(){
+    mark = document.createElement('div');
+    mark.id = 'mark';
+    box.appendChild(mark);
+  }
+  box.onmousemove = function(e){
+    let curLeft = e.pageX - box.offsetLeft - mark.offsetWidth/2;
+    let curTop =  e.pageY - box.offsetTop - mark.offsetHeight/2;
+
+    let minL = 0;
+    let minT = 0;
+    let maxL = box.offsetWidth - mark.offsetWidth;
+    let maxT = box.offsetHeight - mark.offsetHeight;
+
+    curLeft<minL ? curLeft = minL : (curLeft>maxL ? curLeft = maxL:null);
+    curTop<minT ? curTop = minT : (curTop>maxT ? curTop = maxT:null);
+
+    mark.style.left = curLeft +'px';
+    mark.style.top = curTop +'px';
+  }
+
+  box.onmouseleave = function(){
+    box.removeChild(mark);
+  }
+
+
+</script>
+</body>
+</html>

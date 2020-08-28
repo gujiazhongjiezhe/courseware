@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    ul {
+      width: 100px;
+      border:1px solid gainsboro;
+      box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+      padding: 10px;
+      list-style: none;
+      position: fixed;
+      display: none;
+    }
+    ul li {
+      line-height: 30px;
+      border-bottom:1px solid black;
+      margin-bottom:5px;
+    }
+  </style>
+</head>
+<body>
+  <ul id="box">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <script>
+    let box = document.getElementById('box')
+    window.oncontextmenu = function(e){
+      console.log(2);
+      // return false; // 禁止默认行为
+      e.returnValue = false;// 禁止默认行为
+      box.style.display = 'block';
+      let left = e.clientX;
+      let top = e.clientY;
+
+      box.style.left = left + 'px';
+      box.style.top = top + 'px';
+
+    }
+  </script>
+</body>
+</html>

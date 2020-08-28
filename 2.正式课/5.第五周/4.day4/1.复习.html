@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">123 </div>
+  <script>
+    let box = document.getElementById('box');
+    // DOM0级 ：只能给元素的同一个事件行为绑定一个方法
+      // 移除事件绑定：给元素的事件行为赋值为null
+      // 默认存在冒泡传播机制
+
+    // DOM2级 ：能给元素的同一个事件行为绑定多个不同的方法 addEventlistener('事件类型',函数,布尔值)
+    // 可以控制方法在哪个阶段执行
+    // 移除事件绑定 removeEventListener('事件类型',函数,布尔值)  注意移除的时候，参数和绑定的时候要保持一致
+
+    // addEventlistener 先绑定谁就先输出谁， 函数里的this还是当前元素   不能给元素的同一个事件行为绑定同一个方法
+
+    // 事件对象 
+
+    box.onclick = function(e){
+        // console.log(e);
+        /* 
+        clinetX
+        clinetY
+        offsetX
+        offsetY
+        pageX
+        pageY
+        target
+        type
+
+        cancelBubble = true 
+        stopPropagation()
+
+
+        returnValue = false
+        preventDefault()
+        return
+
+        keyCode 
+        code
+        which
+         */
+    }
+
+  </script>
+</body>
+</html>

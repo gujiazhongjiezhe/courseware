@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box,
+    #bigBox {
+      width: 350px;
+      height: 350px;
+      border: 1px solid red;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bigBox {
+      top: -350px;
+      left: 400px;
+      display: none;
+    }
+
+    #bigBox img {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      left: 0;
+      top: 0;
+    }
+
+    #mark {
+      width: 175px;
+      height: 175px;
+      background: rgba(0, 0, 0, .5);
+      position: absolute;
+      left: 0;
+      top: 0;
+      cursor: move;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <img src="./img/iphone.jpg" alt="">
+  </div>
+
+  <div id="bigBox">
+    <img src="./img/iphone_big.jpg" alt="">
+  </div>
+  <script>
+    let box = document.getElementById('box');
+    let bigBox = document.getElementById('bigBox');
+    let img = bigBox.getElementsByTagName('img')[0];
+    let mark = null;
+
+    box.onmouseenter = function () {
+      // 创建mark元素并且插入到box中
+      mark = document.createElement('div');
+      mark.id = 'mark';
+      box.appendChild(mark);
+      bigBox.style.display = 'block';
+    }
+    box.onmousemove = function (e) {
+      // 不断的改变当前mark的left和top值
+      let curLeft = e.pageX - box.offsetLeft - mark.offsetWidth / 2;
+      let curTop = e.pageY - box.offsetTop - mark.offsetHeight / 2;
+
+      // 判断边界所用的值
+      let minL = 0;
+      let minT = 0;
+      let maxL = box.offsetWidth - mark.offsetWidth;
+      let maxT = box.offsetHeight - mark.offsetHeight;
+
+      curLeft < minL ? curLeft = minL : (curLeft > maxL ? curLeft = maxL : null);
+      curTop < minT ? curTop = minT : (curTop > maxT ? curTop = maxT : null);
+
+      // 给mark设置值
+      mark.style.left = curLeft + 'px';
+      mark.style.top = curTop + 'px';
+
+      // x === curLeft/350 *700
+      img.style.left = -(curLeft /350 * 700) + 'px';
+      img.style.top = -(curTop /350 * 700) + 'px';
+
+    }
+
+    box.onmouseleave = function () {
+      // 删除mark元素
+      box.removeChild(mark);
+      bigBox.style.display = 'none';
+    }
+  </script>
+</body>
+
+</html>

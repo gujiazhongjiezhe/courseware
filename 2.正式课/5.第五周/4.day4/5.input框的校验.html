@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="input">
+  <script>
+    // backSpace 8  左37  右 39
+    let ary = [8, 37, 39];
+    input.onkeydwo = input.onkeydown = function (e) {
+      console.log(e.keyCode);
+      // onkeydown当你按键按下的那一瞬间，值还么有输入进去呢，所以这时候获取的value是上一次的
+      // onkeyup是可以拿到最新的value的
+
+      // 判断用户输入的值是否是数字或者是X
+      let value = this.value;
+      let reg = /[^0-9X]/g;
+      // console.log(this.value);
+      // 利用正则匹配到不符合规则的字符然后用空字符进行替换
+      // 如果正则匹配不到，那返回原字符串
+      this.value = value.replace(reg, '');
+
+      if (this.value.length >= 18) {
+        // 如果内容超了18位，那就不让用户输入了
+        console.log(111111);
+
+        if (!ary.includes(e.keyCode)) {
+          e.returnValue = false;
+        }
+        // if(e.keyCode !== 8 && e.keyCode !== 37 && e.keyCode !== 39){
+        //   e.returnValue = false;
+        // }
+      }
+      if (e.keyCode === 13) {
+        console.log(666);
+        // 如果用户点击的是回车，进行提交或者别的一些逻辑操作
+        alert(this.value);
+      }
+    }
+  </script>
+</body>
+
+</html>

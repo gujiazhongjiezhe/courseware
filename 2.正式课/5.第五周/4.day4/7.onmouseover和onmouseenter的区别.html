@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #outer {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      background: red;
+    }
+
+    #inter {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      background: yellow;
+    }
+
+    #center {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      background: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="outer">
+    <div id="inter">
+      <div id="center"></div>
+    </div>
+  </div>
+  <script>
+    let outer = document.getElementById('outer');
+    let inter = document.getElementById('inter');
+    let center = document.getElementById('center');
+
+    // onmouseover和onmouseenter的区别
+
+    // onmouseenter 和onmouseleave是没有冒泡传播的
+    // outer.onmouseenter = function(){
+    //   console.log('outer');
+    // }
+    // inter.onmouseenter = function(){
+    //   console.log('inter');
+    // }
+    // center.onmouseenter = function(){
+    //   console.log('center');
+    // }
+
+    // onmouseover和onmouseout是有冒泡传播机制的
+    // outer.onmouseover = function () {
+    //   console.log('outer');
+    // }
+    // inter.onmouseover = function () {
+    //   console.log('inter');
+    // }
+    // center.onmouseover = function () {
+    //   console.log('center');
+    // }
+
+
+  </script>
+</body>
+
+</html>

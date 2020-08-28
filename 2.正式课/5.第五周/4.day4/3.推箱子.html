@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background: orangered;
+      position: absolute;
+      left: 200px;
+      top: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+
+  <script>
+    // 当用户按下按键时，咱们去通过keyCode去判断当前按下的按键是啥，从而改变盒子的位置
+    // 上：38  下：40  左：37  右39
+    let box = document.getElementById('box');
+    let step = 10;
+    let minL = 0;
+    let maxL = document.documentElement.clientWidth - box.offsetWidth;
+    let minT = 0;
+    let maxT = document.documentElement.clientHeight - box.clientHeight;
+    window.onkeydown = function (e) {
+      console.log(e);
+      // 获取当前按键的keyCode值，从而判断当前用户按的是哪个键
+      let code = e.keyCode;
+      let style = getComputedStyle(box);
+      let left = parseFloat(style.left); // 获取当前最新的left值
+      let top = parseFloat(style.top);// 获取当前最新的top值
+
+
+      switch (code) {
+        case 38:
+          top -= step;
+          break;
+        case 40:
+          top += step;
+          break;
+        case 37:
+          left -= step;
+          break;
+        case 39:
+          left += step;
+          break;
+
+      }
+      // if(left<minL){
+      //   left = minL;
+      // }
+      // if(left>maxL){
+      //   left = maxL;
+      // }
+      left < minL ? left = minL : (left > maxL ? left = maxL : null);
+      top < minT ? top = minT : (top > maxT ? top = maxT : null);
+
+      box.style.top = top + 'px'; // 把计算之后的top在设置回去
+      box.style.left = left + 'px'; // 把计算之后的left在设置回去
+    }
+
+    // 给鼠标的右击的事件行为绑定方法，然后当用户右击的时候禁止掉默认弹出小框的行为，咱们自己写一个小框让他显示，而且位置是鼠标点击位置的右下角 slectmenu
+  </script>
+
+</body>
+
+</html>

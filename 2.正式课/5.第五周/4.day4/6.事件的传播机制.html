@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #outer {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      background: red;
+    }
+
+    #inter {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      background: yellow;
+    }
+
+    #center {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      background: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="outer">
+    <div id="inter">
+      <div id="center"></div>
+    </div>
+  </div>
+  <script>
+    let outer = document.getElementById('outer');
+    let inter = document.getElementById('inter');
+    let center = document.getElementById('center');
+
+    // let obj= null
+    // outer.onclick = function (e) {
+    //   console.log('outer',e);
+    //   // console.log(obj == e);
+    //   // e.cancelBubble = true;
+    // }
+
+    // inter.onclick = function(e){
+    //   console.log('inter',e);
+    //   // console.log(obj == e);
+    // }
+    // center.onclick = function (e) {
+    //   console.log('center',e);
+    //   // obj =e
+    //   // e.cancelBubble = true;
+    // }
+
+    // document.body.onclick = function (e) {
+    //   console.log('body');
+    // }
+    // document.documentElement.onclick = function (e) {
+    //   console.log('html');
+    // }
+    // document.onclick = function (e) {
+    //   console.log('document');
+    // }
+    // window.onclick = function (e) {
+    //   console.log('window');
+    // }
+
+
+
+    // DOM0级事件绑定的事件只能在冒泡阶段触发
+
+    // DOM2级事件绑定可以指定方法在哪个阶段(捕获或者冒泡)执行
+
+    // target:事件源：谁触发的当前的事件，谁就是事件源
+    // 事件对象跟函数执行没有关系，和当前是哪个元素触发的这个事件行为有关系，当前事件对象存储就是你当前触发的行为的那些事件信息
+
+
+
+
+    // 1.捕获传播阶段:
+    // 从最外层往里层依次触发对应的方法，直到捕获到目标源为止 (为冒泡阶段的计算好执行的路径层级)CAPTURING_PHASE: 1
+
+    // 2.目标传播阶段：
+    // 让目标元素的对应的方法依次执行(目标阶段的函数执行，仅仅跟绑定的顺序有关，先绑定的谁就先执行谁) AT_TARGET: 2
+
+    // 3.冒泡传播阶段：
+    // 触发当前元素的某一个事件行为，不仅要把自己的行为触发，而且他还会把所有的祖先元素的对应的事件行为依次触发(从里到外的顺序)，直到window为止 BUBBLING_PHASE: 3
+
+    // 事件传播机制 ： 捕获传播阶段 -->目标传播阶段 -->冒泡传播阶段
+
+    // DOM2级事件绑定可以指定方法在哪个阶段(捕获或者冒泡)执行
+
+    function fn1() {
+      console.log('outer 冒泡');
+    }
+    function fn2() {
+      console.log('inter 冒泡');
+    }
+    function fn3() {
+      console.log('center 冒泡');
+    }
+
+    function fn4() {
+      console.log('outer 捕获');
+    }
+    function fn5() {
+      console.log('inter 捕获');
+    }
+    function fn6() {
+      console.log('center 捕获');
+    }
+
+    // true是捕获，false是冒泡
+    center.addEventListener('click', fn6, true);
+    center.addEventListener('click', fn3, false);
+
+
+    inter.addEventListener('click', fn2, false);
+    inter.addEventListener('click', fn5, true);
+
+    outer.addEventListener('click', fn1, false);
+    outer.addEventListener('click', fn4, true);
+
+      // 目标阶段的函数执行，仅仅跟绑定的顺序有关，先绑定的谁就先执行谁
+  </script>
+</body>
+
+</html>
