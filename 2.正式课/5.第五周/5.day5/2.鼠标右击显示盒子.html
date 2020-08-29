@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 200px;
+      border: 1px solid black;
+      position: fixed;
+      text-align: center;
+      list-style: none;
+      padding: 10px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+      display: none;
+    }
+
+    #box li {
+      line-height: 30px;
+      border-bottom: 1px solid gainsboro;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="box">
+    <li><span>12</span></li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+  <script>
+    let box = document.getElementById('box');
+    let children = Array.from(box.children);
+    window.oncontextmenu = function (e) {
+      e.returnValue = false;
+      box.style.display = 'block';
+      box.style.left = e.clientX + 'px'
+      box.style.top = e.clientY + 'px'
+    }
+
+    window.onclick = function (e) {
+      console.log(e);
+      let target = e.target;
+
+      let res = children.includes(target);
+      // ruguo
+      // 然后在判断当前的事件源是否在children里，如果在就不能让box消失
+
+      console.log(res);
+      // 如果你点击的是box，或者是box里边的元素就不能让box消失
+
+      if (target !== box && !res) {
+        box.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+
+</html>

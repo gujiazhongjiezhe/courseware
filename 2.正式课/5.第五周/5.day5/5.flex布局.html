@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 500px;
+      height: 600px;
+      border: 1px solid red;
+      margin: 100px auto;
+      list-style: none;
+      background:hotpink;
+      display: flex;
+      /* flex-direction:column;  */
+      /* flex-wrap: wrap; */
+      /* justify-content:space-around; */
+      align-items:flex-start;
+      /* align-content:space-around; */
+    }
+
+    #box li {
+      width: 50px;
+      height: 50px;
+      background: greenyellow;
+      border:1px solid black;
+      /* flex-shrink:1; */
+      flex:1;
+
+    }
+    #box li:nth-child(1) {
+      /* flex-basis: 100px; */
+      /* flex-grow:2; */
+      height: 200px;
+      font-size:20px;
+      /* flex-shrink:2; */
+    }
+    li:nth-child(2) {
+      height: 100px;
+      font-size:50px;
+      /* flex-grow:1; */
+    }
+    li:nth-child(3) {
+      height: 130px;
+      /* order:2; */
+      /* flex-grow:1; */
+    }
+    li:nth-child(4) {
+      height: 150px; 
+      /* order:1; */
+      /* flex-grow:0.5 */
+      /* flex-grow:1; */
+    }
+    li:nth-child(5) {
+      height: 150px; 
+      /* order:1; */
+      /* flex-grow:0.5 */
+      /* flex-grow:1; */
+      align-self:center;
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="box">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+</body>
+
+</html>

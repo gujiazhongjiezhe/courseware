@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box,
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #box1 {
+            top: 300px
+        }
+    </style>
+</head>
+<div id="box">
+
+</div>
+<div id="box1">
+
+</div>
+
+<body>
+    <script>
+        let box = document.getElementById('box');
+
+        // function drag(ele) { // 就是当前要拖拽的元素
+        //   ele.onmousedown = function (e) {
+        //     this.x = e.offsetX; // 记录按下时的offsetX
+        //     this.y = e.offsetY;// 记录按下时的offsetY
+        //     document.onmousemove = function (e) {
+        //       ele.style.left = e.clientX - ele.x + "px";
+        //       ele.style.top = e.clientY - ele.y + "px";
+        //     }
+        //     document.onmouseup = function () {
+        //       document.onmousemove = null;
+        //       document.onmouseup = null;
+        //     }
+        //   }
+        // }
+        // drag(box);
+        // drag(box1);
+
+        // 利用面向对象去封装
+
+        function Drag(ele) {
+            // ele --> 当前的元素 this -->当前实例
+            this.ele = ele; // 把元素挂载到实例身上
+            ele.onmousedown = this.down.bind(this); // 给当前元素绑定鼠标按下事件
+        }
+        Drag.prototype.down = function (e) {
+            // this --> 元素     实例 需要把一些信息放到当前实例身上，(把this改为当前实例)
+            this.x = e.offsetX; // 把鼠标按下时的offsetX存储到当前实例身上
+            this.y = e.offsetY;
+            document.onmousemove = this.move.bind(this); // 把move方法里的this指向实例
+            document.onmouseup = this.up;
+        }
+        Drag.prototype.move = function (e) {
+            // this -->document  实例
+            // 当前最新的left值 === 当前的clientX - 按下时的offsetX(在实例身上呢) 
+            let newLeft = e.clientX - this.x;
+            let newTop = e.clientY - this.y;
+
+            this.ele.style.left = newLeft + 'px';
+            this.ele.style.top = newTop + 'px';
+        }
+        Drag.prototype.up = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+        // 原型上放置一些公共的方法，实例自己身上放置一些当前元素的属性，
+        // 在方法里如果用到某些东西了，那最好把当前this改为实例，
+        // 如果要存储一些东西，最好也是存储到实例身上
+
+
+        new Drag(box);
+        new Drag(box1);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 300px;
+      height: 300px;
+      background: greenyellow;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    h3 {
+      height: 30px;
+      line-height: 30px;
+      background: hotpink;
+      text-align: center;
+      user-select: none;
+      /* 禁止选中文字 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <h3 id="title">头部</h3>
+  </div>
+  <script>
+    // 当鼠标按下h3并且移动的时候，盒子就会跟着走，当鼠标抬起的时候，停止移动
+    let box = document.getElementById('box')
+    let title = document.getElementById('title');
+
+    // 盒子最新的left值 === 鼠标按下时盒子初始的left值 + 鼠标移动的距离(当前的clientX - 按下时的clientX )
+
+
+    /* 
+    产生bug的原因：当是鼠标快速滑动的时候，要不短的执行move方法，浏览要不短的对页面中的dom元素进行回流，浏览器处理的速度就跟不上你鼠标移动的速度了，就会导致鼠标在盒子脱离
+
+
+    鼠标已经离开盒子了，就不会再出发move事件了，盒子就不动了，
+     */
+
+    title.onmousedown = function (e) {
+
+      // this -->title
+      this.curL = e.clientX; // 记录鼠标按下时的clientX的值
+      this.curT = e.clientY; // 记录鼠标按下时的clientY的值
+
+      this.left = parseFloat(getComputedStyle(box).left); // 记录鼠标按下时盒子初始的left值
+      this.top = parseFloat(getComputedStyle(box).top); // 记录鼠标按下时盒子初始的top值
+
+      // 
+      // 可以把当前鼠标和盒子用绳子绑在一起
+      if (this.setCapture) {
+        console.log(1);
+        this.setCapture(); // 在Ie和火狐下可以使用，在谷歌下不能使用
+        title.onmousemove = move;
+        title.onmouseup = up;
+      }
+      else {
+        console.log(2);
+        document.onmousemove = move.bind(this);
+        document.onmouseup = up;
+      }
+    }
+
+    function move(e) {
+      // 不断的设置盒子的left值和top值
+      // this --> title  
+      let newLeft = this.left + (e.clientX - this.curL);
+      let newTop = this.top + (e.clientY - this.curT);
+
+
+      box.style.left = newLeft + 'px';
+      box.style.top = newTop + 'px';
+    }
+
+    function up() {
+      // 当鼠标抬起的时候，去清鼠标的除移动事件
+      // document.onmousemove = null;
+      // document.onmouseup = null;
+      if (this.releaseCapture) {
+        this.releaseCapture()
+        title.onmousemove = null;
+        title.onmouseup = null;
+      }
+      else {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      }
+
+    }
+
+
+// 当前盒子最新的left值 ===  当前鼠标的clientX值 -  按下时的offsetX值 
+
+    // function drag(ele) {
+    //   ele.onmousedown = function (e) {
+    //     ele.x = e.offsetX;
+    //     ele.y = e.offsetY;
+    //     ele.onmousemove = function (e) {
+    //       ele.style.left = e.clientX - ele.x + "px";
+    //       ele.style.top = e.clientY - ele.y + "px";
+    //     }
+    //     ele.onmouseup = function () {
+    //       ele.onmousemove = null;
+    //       ele.onmouseup = null;
+    //     }
+    //   }
+    // }
+    // drag(box)
+  </script>
+</body>
+
+</html>

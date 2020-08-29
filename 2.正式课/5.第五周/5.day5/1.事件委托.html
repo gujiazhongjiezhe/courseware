@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      border:5px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+  </div>
+
+  <script>
+    // 事件委托
+    // 1、事件委托主要是基于冒泡机制完成的
+    // 给外层元素绑定某一个事件行为绑定方法(假设是给点击事件行为绑定的方法)，，只要你点击的是外层盒子里边的元素，那由于冒泡传播机制的存在会触发，外层火盒子上的点击事件总会被触发(说白了就是冒泡的机制，就是把点击触发的函数委托给外层元素了)
+
+    // 获取页面中的button，循环button列表给每一个button绑定一个点击事件，
+    // let list = document.getElementsByTagName('button');
+    // for (let i = 0; i < list.length; i++) {
+    //   list[i].onclick = function () {
+    //     alert(`我是第${this.innerText}个li`)
+    //   }
+    // }
+    // 创建了5个引用值，
+
+    box.onclick = function(e){
+      // console.log(e);
+      let target = e.target;
+      console.log(target);
+      if(target !== box){
+        alert(`我是第${target.innerText}个li`)
+      }
+      
+    }
+  </script>
+</body>
+
+</html>
