@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            position: relative;
+            top: 1px;
+        }
+
+        .box {
+            width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .box li {
+            width: 150px;
+            font-size: 20px;
+            line-height: 30px;
+            margin-right: 10px;
+            border: 1px solid black;
+        }
+
+        .box div {
+            width: 500px;
+            height: 300px;
+            line-height: 300px;
+            font-size: 50px;
+            color: orangered;
+            border: 1px solid black;
+            display: none;
+        }
+
+        .box div.active {
+            display: block;
+        }
+
+        .box li.active {
+            border-bottom-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box">
+        <ul id="navList">
+            <li class="active">孙悟空</li>
+            <li>猪无能</li>
+            <li>沙悟净</li>
+        </ul>
+        <div class="active">俺老孙来也</div>
+        <div>趁早分家得了</div>
+        <div>二师兄说的对啊</div>
+    </div>
+
+    <div id="box1" class="box">
+        <ul id="navList">
+            <li class="active">孙悟空</li>
+            <li>猪无能</li>
+            <li>沙悟净</li>
+        </ul>
+        <div class="active">俺老孙来也</div>
+        <div>趁早分家得了</div>
+        <div>二师兄说的对啊</div>
+    </div>
+
+
+    <script>
+        // let box = document.getElementById('box');
+
+        function Tab(ele, params = {}) {
+            // this -->实例
+            let { callBack } = params;
+            this.callBack = callBack;
+            this.box = document.getElementById(ele);
+            // 获取navList和tabList
+            this.navList = this.box.getElementsByTagName('li');
+            this.tabList = this.box.getElementsByTagName('div');
+            this.flag = 0;
+            // 给当前获取li绑定点击事件
+            this.bound();
+
+        };
+        Tab.prototype.bound = function () {
+            // 专门用来给li绑定点击事件的 this-->实例
+            // let _this = this;
+            for (let i = 0; i < this.navList.length; i++) {
+                this.navList[i].onclick = () => {
+                    this.select(i); // 把当前li的索引传递过去
+                    // 想让当前this是实例
+                }
+            }
+        }
+
+        Tab.prototype.select = function (index) {
+            // 这是专门用来处理增加和清除类名的逻辑的
+            this.navList[this.flag].className = '';
+            this.tabList[this.flag].className = '';
+
+
+            this.navList[index].className = 'active';
+            this.tabList[index].className = 'active';
+            this.callBack && this.callBack(this.flag, index);
+            this.flag = index;
+        }
+
+        new Tab('box', {
+            callBack: function (last, index) {
+                console.log(last, index);
+            }
+        });
+        // 那些构造函数执行时所获取的数据给他放到实例身上
+        // 那些公共的方法放到原型上
+        // new Tab('box1');
+    </script>
+</body>
+
+</html>

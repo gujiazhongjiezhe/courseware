@@ -1,0 +1,143 @@
+
+// less支持嵌套
+// less支持变量
+
+@w:100px;
+@s:50px;
+@mainColor:green;
+@border: 1px solid black;
+
+
+// .box {
+//   width: @w;
+//   height: @w;
+//   background:@mainColor;
+//   border:@border;
+//   .box1 {
+//     width: @s;
+//     height: @s;
+//     background:@mainColor;
+//     border:@border;
+//   }
+// }
+
+// less存在类似于作用域的特点(而且还会有类似于及声明有定义的白能量提升)
+// .box {
+//   width: @w;
+//   height: 100px;
+//   @w:300px;
+  
+//   .box1 {
+//     width: @w;
+//     height: @s;
+//   }
+// }
+
+
+// @name:#box;
+// // 如果变量是选择器名或者样式名，使用的时候加上大括号
+// @{name} {
+//   width: 100px;
+//   height: 100px;
+//   background:red;
+// }
+
+// 路径的变量，创建的时候加字符串，使用的时候也得加大括号
+// @images: "../../img";//需要加引号
+// .box {
+//   background:url('@{images}/1.png');
+//   .box1 {
+//     background:url('@{images}/2.png');
+//   }
+// }
+
+//----------------------------------------
+// &:代表当前的父选择器(连接符)
+
+// .box {
+//   width: 100px;
+//   height: 100px;
+//   color:black;
+//   &:hover { // &代表.box
+//     color:red;
+//   };
+// }
+
+//--------------------------------------
+// @fnord:  "I am fnord.";
+// @var:    "fnord";
+// // 解析的顺序是从后向前逐层解析。
+// #wrap::after{
+//   content: @@var; //将@var替换为其值 content:@fnord;
+//   // @"fnord" //--> "I am fnord."
+// }
+// /* 生成的 CSS */
+// #wrap::after{
+//   content: "I am fnord.";
+// }
+
+// less支持函数
+
+// .pub(@w:500px,@h:600px){
+//   width: @w;
+//   height: @h;
+// }
+
+
+
+// .box {
+//   // .pub(100px,200px)
+//   // .pub()
+//   .pub // 如果不想穿参，可以省略执行小括号
+// }
+
+// @arguments代表所有的参数
+// .border(@a:10px,@b:50px,@c:30px,@color:#000){
+//   border:solid 1px @color;
+//   box-shadow: @arguments;//指代的是 全部参数
+// }
+// .box {
+//   .border()
+// }
+
+
+// .boxShadow(...){
+//   box-shadow: @arguments;
+// }
+// .textShadow(@a,...){
+//   text-shadow: @arguments;
+// }
+// #main{
+//   .boxShadow(1px,4px,30px,red);
+//   .textShadow(1px,4px,30px,red);
+// }
+// /* 生成后的 CSS */
+// #main{
+// box-shadow: 1px 4px 30px red;
+// text-shadow: 1px 4px 30px red;
+// }
+
+//--------------------------
+// less可以实现继承
+// .pub {
+//   color:red;
+// }
+
+// .box {
+//   width: 100px;
+//   height: 100px;
+//   &:extend(.pub); // 把.pub的样式继承给.box
+//   .box1 {
+//     &:extend(.pub);
+//   }
+// }
+
+// .layout(@a) when(@a<100){
+//   color:red;
+// }
+
+// .box {
+//   .layout(99);
+// }
+
+

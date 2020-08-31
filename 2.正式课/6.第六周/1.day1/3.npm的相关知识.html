@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script>
+    // 在下载node的时候，npm也会随之进行下载，咱们可以使用npm进行模块的管理
+    // 基于npmjs.com这个网站上下载的咱们所需要的的模块
+
+    // npm install xxx 把当前模块下载到当前的项目
+
+    // npm install xxx -g 把当前模块下载到当到全局
+
+    // npm install xxx@1.0.0 下载指定版本的模块
+    // npm view xxx versions : 查看当前模块的版本
+
+    // npm root -g: 查看全局模块存储的位置路径
+
+    // npm init -y: 初始化一个项目(生成一个项目的配置依赖清单)
+        // 会默认生成一个package.json的文件
+        // dependencies:生产依赖模块(项目开发和部署的时候都的需要)
+        // devDependencies: 开发依赖模块(只有开发的时候使用)
+    // npm install xxx --save-dev 把模块保存在开发依赖清单中
+    // npm install xxx 或者跟(--save) 把模块保存在生产依赖清单中
+  
+    // npm install :跑环境，他会按照当前package.json中的模块信息进行下载
+
+    // npm uninstall xxx 
+
+    // 简写形式
+      // npm i xxx ==> npm install xxx 
+      // npm uni xxx ==>npm uninstall xxx
+      // npm install ==> npm i 
+
+  </script>
+</body>
+</html>

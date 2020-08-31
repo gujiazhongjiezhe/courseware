@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        /**{
+            margin: 0;
+            padding: 0;
+        }*/
+        .box {
+            width: 500px;
+            /*1.角度  颜色*/
+            background: linear-gradient(-45deg, lightseagreen, lightpink, lightblue, lightyellow, lightcoral);
+            background: -webkit-linear-gradient(-45deg, lightseagreen, lightpink, lightblue, lightyellow, lightcoral);
+        }
+
+        .box span {
+            display: block;
+            height: 35px;
+            line-height: 35px;
+            cursor: pointer;
+        }
+
+        .box span.close:before {
+            content: "+";
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .box span.open:before {
+            content: "-";
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="box" id="box">
+        <li><span>第一级菜单</span>
+            <ul>
+                <li><span>第二级菜单</span>
+                    <ul>
+                        <li><span>第三级菜单</span>
+                            <ul>
+                                <li><span>第四级菜单</span></li>
+                                <li><span>第四级菜单</span></li>
+                            </ul>
+                        </li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                    </ul>
+                </li>
+                <li><span>第二级菜单</span>
+                    <ul>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                    </ul>
+
+                </li>
+                <li><span>第二级菜单</span>
+                </li>
+                <li><span>第二级菜单</span></li>
+            </ul>
+        </li>
+        <li><span>第一级菜单</span></li>
+        <li><span>第一级菜单</span></li>
+        <li><span>第一级菜单</span></li>
+    </ul>
+    <script>
+        // 获取所有的span元素
+        let spans = document.getElementsByTagName('span');
+        let box = document.getElementById('box');
+        for (let i = 0; i < spans.length; i++) {
+            // 判断所有的span有没有兄弟元素
+            let cur = spans[i]; // 代表每一个span
+            if (cur.nextElementSibling) {
+                // 如果当前的span有兄弟元素，那就让span前显示加号
+                cur.classList.add('close');
+                cur.nextElementSibling.style.display = 'none'
+            }
+            else {
+                // 如果当前span没有兄弟元素，那就让他显示减号
+                cur.classList.add('open');
+            }
+        }
+
+        //---------------------------------------------------------
+        box.onclick = function (e) {
+            let target = e.target;
+            // console.log(target);
+            let next = target.nextElementSibling;
+            // 如果当前span有兄弟元素，才能够进行展开关闭的逻辑判断，
+            if (next) {
+                if (target.className === 'close') {
+                    // 如果当前的类名是close，证明页面显示的是加号，而且内容是隐藏的
+                    target.className = 'open';
+                    next.style.display = 'block';
+
+                }
+                else {
+                    // 这里是关闭的逻辑
+                    
+                    target.className = 'close';
+                    next.style.display = 'none';
+
+                    // 我要获取当前span的兄弟元素里的所有ul，把他们都隐藏，而且把ul的哥哥元素span的符号改为加号(close)
+                    let uls = next.getElementsByTagName('ul');
+             
+                    for(var i = 0;i<uls.length;i++){
+                        uls[i].style.display = 'none';
+                        uls[i].previousElementSibling.className = 'close';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "1.day1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sss": "lessc index.less index.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^1.5.2",
+    "less": "^3.12.2"
+  },
+  "devDependencies": {}
+}
