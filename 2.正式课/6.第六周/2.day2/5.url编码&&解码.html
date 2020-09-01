@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">单击跳转</button>
+  <script>
+    /* 
+      请求地址中如果出现非有效的UNICODE编码内容，现代版的浏览器会默认的进行编码
+      1、基于encodeURI进行编码 ，也可以基于decodeURI进行解码，一般用于整个url的转码，他可以对url里的空格，汉字进行特殊的编码
+
+      2、基于encodeURIComponent进行转码(decodeURIComponent解码)，他会对字符转的数字和字母以外的所有东西进行编码。一般用于参数的部分进行编码
+
+      3、以上几种方法在客户端和服务端都可以使用，我们基于这些方法在可以在传递的时候实现数据编码，这样后台拿到之后可以利用对应的方法解码，这样就可以事项数据格式统一了
+
+      4、escape他也是编码的，但是只能编汉字， unescape(解码)，这种方式只能用于客户端，后端没有这个方法
+
+      
+
+      http://127.0.0.1:5501/5.url编码&&解码.html
+    
+    */
+    //  'http://www.baidu.com:5500/index.html?name=http://127.0.0.1:5501'
+
+
+
+    // -----------------------------------------------------------------
+    // window上控制页面历史记录的方法
+    // window.history是一个对象，里边存储着页面的历史记录
+    // length：代表当前打开的页面的个数
+    // 在他的原型上还有几个方法
+    // back():后退一个页面
+    // forword()：前进一个页面
+    // go(number):跳转到指定的页面
+
+    // window.location:他里面存储的是控制url的一个属性或者方法
+
+    // href：代表当前的url
+    // protocol：代表当前的协议
+    // host：（域名 + 端口）
+    // hostname:（域名）
+    // port（端口）
+    // pathname（路径部分）
+    // search（请求的参数部分）
+    // assign('url')：打开页面
+    // reload():刷新当前页面
+    // replace('url'):把当前页面替换成一个新的页面(不会再history中留下历史记录)
+
+    btn.onclick = function(){
+      // window.location.href = 'http://www.baidu.com' 
+      // 如果通过修改href跳转到新的页面，会在history中新增历史记录
+      // window.location.search = 'age=11' // 给当前url设置参数，会把之前的进行覆盖
+    }
+
+  </script>
+</body>
+
+</html>
