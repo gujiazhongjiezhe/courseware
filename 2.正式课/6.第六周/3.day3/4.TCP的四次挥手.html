@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="xxx"/>
+
+</head>
+
+<body>
+  <script>
+    // 四次挥手：
+
+    // 1、当客户端无数据要传输了，会发送FIN码告诉服务器，我发送完毕了；
+
+    // 2、当服务端接收完毕后，告诉客户端ACK码，告诉客户端你可以把数据通道关闭了；
+
+    // 3、当服务器发送完毕之后，也会发送FIN码，告诉浏览器，数据发送完毕；
+
+    // 4、当客户端接收完毕 之后，同样发送ACK码，告诉服务器，数据接收完毕，你可以关闭；
+
+    // 三次握手和四次挥手的好处：确保数据的安全和完整
+
+    // setTimeout(()=>{
+    //   console.log(200);
+    // },2000);
+    // // 当同步代码走到这的时候开始启动这个定时器(浏览器有分配了一个线程来记录时间)
+
+    // console.log(300); // 300
+
+
+    ajax1 // 这是一个ajax请求 500ms  success:(data)=>{console.log(data)}
+    ajax2 // 这是一个ajax请求 200ms
+ // ajax3                    100ms
+
+    console.log(100); // 当这句话输出的时候已经是300ms之后了
+  </script>
+</body>
+
+</html>

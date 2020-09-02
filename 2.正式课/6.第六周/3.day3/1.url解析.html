@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://www.aaa.com/css/index.css">
+</head>
+<body>
+  <!-- www.aaa.com:80/index.html -->
+  <script>
+    /* 
+    用户输入一个url浏览器到底做了什么
+    1、发送一个请求(解析url)
+    2、DNS域名解析
+    3、建立TCP连接(客户端和服务器之间的传输通道就打通了)
+    
+    4、把客户端的信息传递给服务端(发送HTTP请求)
+    5、服务端收到你的请求，并处理你的请求，把你想要的数据返回给你(HTTP响应内容)
+    6、和服务器断开TCP连接(关闭通道)
+    7、客户端拿到数据之后进行数据的渲染
+     */
+    //  ajax请求  
+
+    $.ajax({
+      url:'http://www.bbb.com:80/js/home.js',
+      async:true,
+      success:(data)=>{
+        data
+      }
+    })
+
+    $.ajax({
+      url:'https://www.baidu.com:80/js/home.js',
+      async:true,
+      success:(data)=>{
+        data
+      }
+    })
+  </script>
+</body>
+</html>
