@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    // ajax的基础操作
+
+    // 1、创建一个ajax的实例
+    let xhr = new XMLHttpRequest; // 如果在低版本的IE浏览器中使用的是 new ActiveXObject
+    // console.log(xhr.readyState,'15');
+
+    // 2、打开一个url(配置当前的请求参数)
+    // params1 (method):HTTP请求的方式  get post put delete head 
+    // params2(url):URL请求的地址(API接口地址)
+    // params3(async):设置请求时是同步还是异步，如果不写或者写true都是异步，如果写false那就是同步
+    // params4(userName):传递给服务器的用户名
+    // params4(password):传递给服务器的用户名
+    xhr.open('get','./json/product.json',true);
+    // console.log(xhr.readyState,'24');
+    // 3、监听ajax的执行状态，在ajax执行状态为4并且HTTP的响应码为2或者3开头的数字的时候，才会成功拿到数据
+    xhr.onreadystatechange = function(){
+      // 当你的ajax的执行状态发生变化的时候当前的函数就会执行
+      // xhr.readyState 当前ajax的执行状态 0 1 2 3 4
+      // console.log(xhr.readyState);
+      // xhr.status 当前请求的HTPP状态码
+      if(xhr.readyState === 4 && /^(2|3)\d{2}$/.test(xhr.status)){
+         let result = xhr.responseText;
+      }
+    }
+
+    // 4、发送当前配置好的请求
+    // send中存储的是请求主体
+    xhr.send(null)
+
+    // 一个完整的ajax任务(从发送一个ajax开始，发送一个请求给服务器，从服务器获取到对应的内容)。或者说是从send执行开始到 xhr.readyState === 4的时候算任务结束
+
+  </script>
+</body>
+</html>

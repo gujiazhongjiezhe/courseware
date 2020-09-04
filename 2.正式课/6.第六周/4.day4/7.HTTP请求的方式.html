@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+      // HTTP的请求方式
+      // - GET系列
+      //   + GET 
+      //   + DELETE 一般用于告诉服务器删除某些信息
+      //   + HEAD 只获取响应头的内容。响应的主体内容不想要
+      //   + OPTIONS 试探性的请求，给服务器发送个请求，看看服务器能不能接收到，如果接受到能不能正常的返回
+
+      // - POST系列
+      //   + PUT 和DELTE是相对应的，告诉服务器要存储某些东西
+
+      // 上边的这些请求仅仅是为了语义化而已，但是如果我们请求的时候不遵循这个规律，也没事，浏览器不会为难你的(使用的最多的还是get和post)
+
+
+    // GET系列一般都是用于从服务器获取数据，POST系列一般都是给服务器发送数据，不管你是POST还是GET都可以把信息传递给服务器，还可以获取服务器传来的信息，只不过是多少而已
+
+    // 怎样把客户端的信息传递给服务端
+    // 问号传参 './json/product.json?name=1&age=2'
+    // 设置请求头 xhr.requestHeader('key',value)
+    // 设置请求主体 send(请求主体的内容)
+
+    // 服务器返回给客户端的数据的方式
+    // 响应头
+    // 响应主体
+
+    // GET系列和POST系列的具体差别
+      // 1、GET传递给服务器的参数要比POST少，因为浏览器对URL的长度有限制(IE一般是2kb左右，谷歌浏览器的限制一般是6到7kb左右)
+      // xhr.open('get','./json/product.json?name=1&age=2',true); // GET传参的方式
+      // send({anme:1,age:2,sex:0}); // post传参的形式
+
+      //2、get请求会产生缓存，如果没一次请求的地址一模一样，这样他就会左右缓存
+      // 'http://www.baidu.com:8080/index.html?name=1&age=2'
+      // 'http://www.baidu.com:8080/index.html?name=1&age=2'
+      // 如果你不想走缓存，只要保证每一次请求的地址有不一样的地方就可以
+
+      // let flag = Date.now() // 获取时间戳 // 不让这次请求走缓存的办法
+      // 'http://www.baidu.com:8080/index.html?name=9&age=2&flag=' + flag;
+
+      //3、GET相对于POST来说不安全，因为GET请求是基于问号传参，有一种技术就是URL劫持，这样别人就可以拿到你的参数或者篡改你的参数，POST是基于请求体传参的，他相对来说还安全一些
+      
+
+
+
+
+  </script>
+</body>
+
+</html>
