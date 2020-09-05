@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 使用构造函数的方式去封装
+    (function () {
+      function Ajax(options) {
+        return new init(options);
+      };
+      let defaults = {
+        url: '', // 请求的API地址
+        method: 'GET', // 请求方式 GET DELETE HEAD OPTIONS POST
+        data: null, // 传递给服务器的信息(可以传对象或者字符串)
+        dataType: 'JSON', // 会把服务器返回的结果进行处理成你想要的格式 1(JSON,TEXT,XML)
+        async: true, // 是否同异步，默认是true异步
+        timeOut: null, // 设置请求超时的时间    
+        headers: null, // 设置请求头的信息(默认是null，如果用户传，那就是对象，支持传递汉字)   
+        success: null, // 请求成功以后的回调函数  1
+        error: null, // 请求失败以后的回调函数    1
+        cache: true // 控制是否走缓存，如果是false就是不走，默认是true走缓存(只在GET系列请求在有效)
+      }
+      // 当前的defaults对象里的参数一会和用户传递的参数进行合并，如果用户传递了那就使用用户的，如果用户没有传，那就走defaults里默认的
+      function init(options) {
+        //1. 咱们所做的第一件事就是把用户传递的信息和默认的信息进行合并，如果用户传递了，那就用用户的，如果用户没有传，那就走默认的
+        this.options = { ...defaults, ...options };
+        // options = Object.assign(defaults,options);
+        // Object.assign(a,b); // 他会把b里的键值对合并到a里，最后把a的空间地址返回(合并对象)
+        // console.log(options);
+
+        // 2.发送ajax请求
+        this.send();
+
+      };
+      let regGet = /^(GET|DELETE|HEAD|OPTIONS)$/i;
+      // 校验当前请求方式是否是GET请求系列，而且还不区分大小写
+      Ajax.prototype = {
+        constructor: Ajax,
+        version: 1.0,
+        send() {
+          // 专门用来发送ajax请求的,这里的this是当前实例
+          let { method, url, async, data, cache, timeOut, headers } = this.options;
+          let xhr = null;
+          xhr = this.xhr = new XMLHttpRequest;
+
+          // 如果用户是get请求，，如果data是对象，那这时候咱们得把对象处理成字符串，然后在拼接到url后面
+          data = this.handleData();
+
+          if (data !== null && regGet.test(method)) {
+            // 把data参数拼接到url后面
+            // 'http://www.baidu.com' 这种加?
+            // 'http://www.baidu.com?sex=1' 这种加&
+
+            url += `${this.wenhao(url)}${data}`;
+            data = null; // 主要是为了如果当前是get请求，那send里就传null
+            //  console.log(url,60);
+          }
+
+          // 处理cache，如果是true那就是走缓存，不用做处理，如果是false那就是不走缓存，咱们得进行进一步处理(保证当前请求必须是GET系列请求)
+          if (cache === false && regGet.test(method)) {
+            url += `${this.wenhao(url)}_=${Math.random()}`;
+          }
+          console.log(url);
+          // data = name=1&age=2
+          xhr.open(method, url, async);
+
+          // 处理超时时间
+          timeOut !== null ? xhr.timeout = timeOut : null;
+
+          // 处理请求头
+          if (toString.call(headers) === '[object Object]') {
+            for (let key in headers) {
+              if (!headers.hasOwnProperty(key)) break;
+              xhr.setRequestHeader(key, encodeURIComponent(headers[key]));
+            };
+          }
+
+          xhr.onreadystatechange = function () {
+                
+          };
+          xhr.send(data);
+
+        },
+        handleData() {
+          // 专门用来处理data的参数的
+          let { data } = this.options;
+          // 只有data是对象的时候咱们才给他循环拼接字符串
+          if (data === null || typeof data === 'string') return data;
+
+          // 接下来咱们要把data处理成 name=1&age=2这样的格式
+          // {name:1,age:2} ==>name=1&age=2
+          let str = ``;
+          for (let key in data) {
+            // key代表每一项属性名
+            // data[key]代表每一个属性值
+
+            // 为了把原型上的可枚举属性过滤掉，咱们的单独的处理一下
+            // 遍历的时候如果原型上有可枚举的属性，也会在自己的私有属性遍历完成之后在输出原型上的共有可枚举属性
+            if (!data.hasOwnProperty(key)) break;
+            str += `${key}=${data[key]}&`;
+          }
+          str = str.substring(0, str.length - 1); //把最后一项的&去掉 
+          return str;
+          // console.log(str);
+
+        },
+        wenhao(url) {
+          // let { url } = this.options;
+          // console.log(url,93);
+          return url.indexOf('?') !== -1 ? '&' : '?';
+        }
+      };
+      init.prototype = Ajax.prototype;
+      // 把Ajax的原型赋值给init的原型
+      // 所以以后new 出来的init的实例的__proto__统统指向Ajax的原型
+
+      window.ajax = Ajax;
+    })()
+
+    ajax({
+      url: 'xxx',
+      method: 'GET',
+      data: {
+        name: 1,
+        age: 2
+      },
+      cache: false,
+      headers:{
+        aa:1,
+        bb:2
+      }
+    })
+
+    // 'http://www.baidu.com'
+    // 'http://www.baidu.com?sex=1'
+
+    // $()
+
+
+
+  </script>
+</body>
+
+</html>

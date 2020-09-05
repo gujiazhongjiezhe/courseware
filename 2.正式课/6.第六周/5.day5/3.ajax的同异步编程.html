@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', 'product.json',false);
+    xhr.onreadystatechange = function () {
+      console.log(xhr.readyState);
+      // 只会输出一次 4
+    }
+    xhr.send(); // 主线程去发送这个请求，当请求发送完成之后，主线程就空闲了
+
+    // 此时的ajax请求是主线程在发送，在请求完成之前，异步的任务不会执行，当请求完成之后，主线程空闲了，然后当状态变成4的时候，主线程去执行这个异步的任务
+    // console.log(100);
+ 
+   
+
+
+    // console.log(100);
+
+    // setTimeout(() => {
+    //   console.log(200);
+    // }, 4000);
+
+    // console.log(300);
+
+    // setTimeout(() => {
+    //   console.log(400);
+    // }, 2000);
+
+    // console.log(500);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    /* 
+    $.ajax(url,{}) 基于ajax原生的四部封装的
+    $.ajax({
+      url:'xxx',
+      async:true
+    })
+    */
+
+      /* 
+      配置项信息
+      url：请求的API接口地址
+      type：请求方式(默认是GET请求)
+      data:传递给服务器的信息，默认为null(可以传字符串和对象,如果是GET请求会把参数信息拼接到url后面，基于问号传参传递给服务器；如果是POST请求，jq会基于请求主体把参数传递给服务器)
+      dataType：预设服务器返回结果的数据格式(一般情况下都是使用默认值，JSON格式的对象，支持的内容为text json xml html script jsonp)
+      async:是否同异步默认是true是异步，如果是false就是同步
+      cache：是否走缓存，如果是false就是不走缓存(只在GET请求下起作用)
+      headers:设置请求头信息,他是一个对象
+      timeout：设置请求超时的时间
+      success:请求成功之后的回调函数
+      error:请求失败之后的回调函数
+      complete：不管请求成功还是失败都会执行的回调函数
+
+      contentType：客户端发送给服务器的数据格式类型
+      */
+   $.ajax({
+     url:'produt.json',
+     type:'get',
+     data:{
+      name:1,
+      age:2
+     },
+     timeout:3000,
+     async:true,
+     headers:{
+        aa:1,
+        ss:2
+     },
+     dataType:'json',
+     success:(data,status,xhr)=>{
+        console.log(data);
+        // console.log(xhr);
+        // console.log(xhr.getAllResponseHeaders());
+     },
+     error:(xhr)=>{
+       // 形参是当前ajax实例
+        console.log(data);
+     }
+   })
+  </script>
+</body>
+</html>

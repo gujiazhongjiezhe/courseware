@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    /*
+  DONE: 4 响应主体已经全部返回到客户端
+  HEADERS_RECEIVED: 2 响应头的信息已经返回给客户端了，(发送请求以后，服务器会依次先返回响应头，在返回响应主体)
+  LOADING: 3 等待服务器返回响应主体
+  OPENED: 1 已经打开(执行了xhr.open)
+  UNSENT: 0  未发送，当创建好一个xhr实例的时候，初始状态是0
+
+    */
+    // let xhr = new XMLHttpRequest;
+    // // console.log(xhr.readyState); // 0
+    // xhr.open('GET', 'product.json');
+    // // console.log(xhr.readyState); // 1
+
+    // xhr.onreadystatechange = function () {
+    //   // 此处的函数会在ajax执行的状态发生变化的时候执行
+    //     console.log(xhr.readyState);
+    //     // if(/^(2|3)\d{2}.test(xhr.status)$/ && xhr.readyState === 2){
+    //     //   // console.log(xhr.getAllResponseHeaders()); // 获取响应头的全部信息
+    //     //   // console.log(xhr.getResponseHeader('date')); // 获取响应头指定的信息
+
+    //     //   // 获取服务器的时间 是一个标准的日期格式的对象(格林尼治时间,比北京时间晚了8小时)
+    //     //   let serverTime = xhr.getResponseHeader('date');
+    //     //   console.log(new Date(serverTime)); // GMT+0800 (中国标准时间)  
+    //     // }
+
+
+    //     if(/^(2|3)\d{2}.test(xhr.status)$/ && xhr.readyState === 4){
+    //           // 如果状态是4，说明已经请求完成了
+    //           console.log(xhr.response); // 这是接收到所有类型的数据
+    //           console.log(xhr.responseText); // 这是接收字符串类型的数据
+    //           console.log(xhr.responseXML); // 是接收XML格式的数据
+    //           console.log(xhr.responseURL); // 这是当前请求的路径
+    //     }
+    // }
+
+    // xhr.send();
+    // 如果当前请求不发送，那ajax的状态永远不会变成2
+
+
+    // xhr.readyState:当前的ajax的状态码
+    // xhr.status:当前HTTP的状态码
+    // xhr.statusText: HTTP的状态码的描述
+    // xhr.timeout: 设置请求超时的时间
+    // xhr.ontimeout 设置超时之后会回调函数
+
+    // xhr.abort(); // 手动关闭一个请求(终止请求)
+    // xhr.setRequestHeader()
+    // xhr.withCredentials
+    // xhr.onreadystatechange
+
+    // xhr.open
+
+    // xhr.response
+
+    //---------------------------
+    let xhr = new XMLHttpRequest;
+    // xhr.timeout = 10;
+    // xhr.ontimeout = function(){
+    //   console.log('请求超时');
+    //   // xhr.abort(); // 手动关闭一个请求(终止请求)
+    // }
+
+    xhr.open('GET', 'product.json');
+    xhr.setRequestHeader('ss','qwert'); // 设置请求头(而且必须在open执行之后在设置)
+    xhr.setRequestHeader('aa', encodeURIComponent('中国'));// 请求头不支持传递汉字，但是可以给他进行转码
+    xhr.withCredentials = true; // 默认为false，在跨域请求中是否允许携带证书(cookie)
+    xhr.onreadystatechange = function () {
+  
+      if (xhr.readyState === 4 && /^(2|3)\d{2}$/.test(xhr.status)) {
+
+        console.log( xhr.response );
+      }
+    }
+    xhr.send();
+
+  </script>
+</body>
+
+</html>
