@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    // axios是一款基于promise封装的ajax库(jq封装的仅仅是普通版的ajax，axios是基于promise管理的ajax库)
+
+    // console.dir(axios);
+    // axios({
+    // method:'post'
+    // })
+
+    // axios是一个函数，但是没关系，函数也可以当做对象来使用
+
+
+    // axios.get(url[, config]) // 基于问号传参，那config的配置传递给服务器
+    // axios.delete(url[, config])
+    // axios.head(url[, config])
+    // axios.options(url[, config])
+
+    // axios.post(url[, data[, config]])
+    // axios.put(url[, data[, config]])
+    // axios.patch(url[, data[, config]])
+
+    // axios.xxx() 他们的返回值都是一个promise的实例，当前请求成功以后，实例的状态就是成功态，请求失败实例就是失败态
+
+    /* 
+    options常用的配置信息
+    baseURL：基础的url路径
+    transformRequest 允许在向服务器发送前，修改请求数据(仅仅是在POST系列请求中有效)
+    transformResponse：在服务器返回内容之后，在调用then里的回调函数之前执行(get和post请求都可以使用)
+    headers：设置请求头
+    params：GET系列请求基于问号传参传递给服务器的内容(content-type:application/x-www-form-urlencoded)
+    data:post请求时给服务器传递的参数
+    timeout：设置请求超时时间
+    withCredentials: 表示跨域请求时是否需要使用凭证
+    validateStatus:可以控制axios返回的promise实例的状态(如果返回true那就是成功态，如果返回false那就是失败态)
+    
+     */
+    // 添加请求拦截器
+    // axios.interceptors.request.use(function (config) {
+    //   // 在发送请求之前做些什么
+    //   console.log(config);
+    //   config.params.name = 10;
+    //   return config;
+    // }, function (error) {
+    //   // 对请求错误做些什么
+    //   return Promise.reject(error);
+    // });
+
+    axios.interceptors.response.use(function (response) {
+      // 对响应数据做点什么
+      console.log(response);
+      return response.data;
+    }, function (error) {
+      // 对响应错误做点什么
+      return Promise.reject(error);
+    });
+
+    axios.get('/product1.json', {
+      params: { // 这是get系列请求传递给服务器的参数
+        name: 1, age: 2
+      },
+      baseURL: 'http://127.0.0.1:5500/json',
+      // transformResponse:(config)=>{
+      //   console.log(config);
+      //   return config
+      // }
+      validateStatus: function (status) {
+        // status是当前的HTTP状态码
+        return status >= 200 && status < 400; // default
+        // return true;
+        // 此处的返回的布尔值直控制当前axio返回promise实例的状态
+      },
+    }).then((result) => {
+      console.log(result);
+      // config:用户的配置信息
+      // data：响应主体
+      // headers:响应头
+      // request：ajax实例
+      // status:HTTP状态
+      // statusText：HTTP请求状态的描述
+    }).catch((reason) => {
+      console.log(reason);
+    })
+
+    // 第一个参数是url，第二个参数是发送给服务器的请求主体,第三个参数是config配置
+    // axios.post('json/product.json', { name: 1, age: 2 }, {
+    //   headers: {
+    //     aa: 1
+    //   },
+    //   transformRequest: function (data) {
+    //     // data是给服务器传递的内容 
+    //     // 此函数会在请求发送之前执行(仅仅针对post系列的请求有效)
+    //     // 这个函数可以对参数进行任意的处理
+    //     console.log(data); // {name:1,age:2}
+    //     let str = ``;
+    //     for(let key in data){
+    //       str+=`${key}=${data[key]}&`
+    //     }
+    //     // name=1&age=2
+    //     return str.substring(0,str.length-1);
+
+    //   }
+    // })
+  </script>
+</body>
+
+</html>

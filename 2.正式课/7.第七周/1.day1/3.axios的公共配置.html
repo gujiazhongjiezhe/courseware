@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    // 把请求时公共的配置找一个公共的地方给他配置好，以后咱们发sing每一个请求都走这些配置
+
+    // 在使用axios之前逆序配置一些公共的配置
+    // 1、基础的url，后期咱们发送请求的时候，基础的路径就不需要写了
+    // axios.defaults.baseURL = 'http://127.0.0.1:5500';
+
+    // // 2、withCredentials: 表示跨域请求时是否需要使用凭证
+    // axios.defaults.withCredentials = true;
+
+    // // 3、设置请求头：在post系列中，我们传递给服务器的数据格式一般都是application/x-www-form-urlencoded
+    // axios.defaults.headers ={'Content-type':'application/x-www-form-urlencoded'} 
+
+    // // 4、设置请求拦截器(支队POST请求有效)：基于POST请求把请求主体发送给服务器的内容进行拦截，把请求内容的格式改为application/x-www-form-urlencoded格式的数据
+    // axios.defaults.transformRequest = function (data) {
+    //   let str = ``;
+    //   for (let key in data) {
+    //     str += `${key}=${data[key]}&`
+    //   }
+    //   // name=1&age=2
+    //   return str.substring(0, str.length - 1);
+    // }
+
+    // // 5.设置响应拦截器
+    // axios.interceptors.response.use(function (response) {
+    //   // 对响应数据做点什么
+    //   // console.log(response);
+    //   return response.data;
+    // }, function (error) {
+    //   // 对响应错误做点什么
+    //   return Promise.reject(error);
+    // });
+
+    // // 6. validateStatus:可以控制axios返回的promise实例的状态(如果返回true那就是成功态，如果返回false那就是失败态)
+    // axios.defaults.validateStatus = function (status) {
+    //     // status是当前的HTTP状态码
+    //     return status >= 200 && status < 400; // default
+    //     // return true;
+    //     // 此处的返回的布尔值直控制当前axio返回promise实例的状态
+    // }
+
+    // axios.post('json/product.json',{name:1,age:2},{
+    //   // params:{
+    //   //   name:1,age:2
+    //   // }
+    // }).then((result)=>{
+    //   console.log(result);
+    // }).catch((reason)=>{
+    //   console.log(reason);
+    // })
+
+    // console.dir(axios)
+
+    // axios.all([axios1,axios2,axios3]).then((data)=>{
+    //   // 当数组里的promise实例都返回成功的状态之后，此处的回调函数才执行
+    // });
+    // console.dir(axios)
+    
+  </script>
+</body>
+
+</html>

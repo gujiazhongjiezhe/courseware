@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 封装一个axios方法，
+    // axios.get()
+    // axios.post()
+    // axios.all()
+
+    // axios本身是一个函数，但是没有关系，咱们可以把它当做对象来使用
+    (function () {
+      class myAxios {
+        constructor(url,options) {
+          console.log(url,options);
+          console.log(axios.defaults);
+          return new Promise(() => {
+            // 在这里写ajax请求
+
+
+          }); // 返回的是一个promise实例
+        }
+      }
+
+      function axios() { }; // 当前的axios函数当做对象来使用
+      axios.defaults = {
+        // 默认的全局配置
+        baseURL: '',
+        withCredentials: false,
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded'
+        },
+        transformRequest: function (data) {
+          let str = ``;
+          for (let key in data) {
+            str += `${key}=${data[key]}&`
+          }
+          // name=1&age=2
+          return str.substring(0, str.length - 1);
+        },
+        traneformResponse: function (data) {
+          return data
+        },
+        validateStatus: function (status) {
+          // status是当前的HTTP状态码
+          return status >= 200 && status < 400; // default
+
+        },
+        timeout: null,
+
+
+        params: {}, // 用来存储GET系列请求的参数
+        data: {}, // 用来存储POST系列请求的参数
+        cache: true, // 可以控制是否走缓存
+
+      }
+      function initDefaults(options){
+        // 此方法单独用来处理配置项的
+        // 因为headers是一个对象，里面存在一个默认的配置，这时候如果直接合并的加，那新的headers对象就会覆盖默认的headers对象，那之前的默认的配置就没了
+        // axios.defaults和options合并到一起
+        // let headers = options.headers || {};
+        // Object.assign(axios.defaults.headers,headers); // 把defaults里的headers和用户的headers进行合并
+        // delete options.headers;
+
+        // axios.defaults对应的堆内存里的值不能改，如果改了，下次就不对了，你可以复制一份来用
+        let obj = {...axios.defaults.headers,...options.headers};
+        return {...axios.defaults,...options,headers:obj};
+       
+        // console.log(axios.defaults);
+        return  Object.assign(axios.defaults,options);
+      }
+      axios.get = function (url, options) {
+        // 传递给myAxios的配置应该是defaults和用户的options的一个合并之后的结果
+        let obj = initDefaults(options); // 他的返回值是一个合并之后的对象
+        // console.log(obj);
+        return new myAxios(url,obj); // 返回是一个promise实例
+      }
+      axios.post = function (url,data,options) {
+        options.data = data; // 把用户传递的data数据放到options里
+        let obj = initDefaults(options);
+        return new myAxios(url,obj); // 返回是一个promise实例
+      }
+
+
+
+      axios.all = function (promiseArr = []) {
+        return Promise.all(promiseArr); // 返回一个all方法的实例
+      }
+
+      window.axios = axios;
+    })()
+
+    // axios.all([p1,p2,p3]) // 返回的是一个promise的实例
+    // axios.all([Promise.resolve(100),Promise.resolve(200),Promise.resolve(300)]).then((data)=>{
+    //   console.log(data);
+    // })
+    // console.dir(axios);
+
+    axios.defaults.timeout = 1000;
+    axios.defaults.baseURL = 'xxx';
+
+    console.dir(axios);
+    // axios.get('/json/product.json', {
+    //   params: {
+    //     name: 1,
+    //     age: 2
+    //   },
+    //   headers:{
+    //     ss:1
+    //   },
+  
+    // }); // 返回一个promsie的实例
+
+    axios.post('json/product.json',{name:1,age:2},{
+      headers:{
+        ss:1
+      }
+    });
+
+
+
+
+
+
+//     let defaults = {
+//       headers:{
+//         'Content-type':'xxxxxx'
+//       },
+//       params:null
+//     }
+
+//     let options = {
+//       params:{
+//         name:1,
+//         age:2
+//       },
+//       headers:{
+//         ss:1
+//       }
+//     }
+
+//  let headers = options.headers || {};
+//     // Object.assign(defaults.headers,headers); // 先把headers合并
+//     // delete options.headers;
+//     // Object.assign(defaults,options);
+//     // console.log(defaults);
+
+//     // 不能改defaults堆内存里的东西，可以复制一份来使用
+//     let obj = {...defaults.headers,...headers};
+//     // options.headers = obj; // 把最新的headers赋值给options里的headers
+//     // let newObj = {...defaults,...options}
+
+//     let newObj = {...defaults,...options,headers:obj}; // 也可以实现合并
+
+//     console.log(newObj);
+//     console.log(defaults);
+
+
+
+
+  // let newObj = {
+  //     headers:{
+  //       'Content-type':'xxxxxx',
+  //       ss:1
+  //     },
+  //     params:{
+  //       name:1,
+  //       age:2
+  //     }
+  //   }
+  </script>
+</body>
+
+</html>

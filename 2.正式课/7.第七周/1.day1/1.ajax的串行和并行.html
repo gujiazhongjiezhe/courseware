@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // ajax的并行和串行
+
+    // 我要从服务器获取某一个学生的信息 {name:'zahngsan',id:1,age:18,sex:0}
+
+    // 当把学生的信息获取成功之后，我要再次获取当前这个学生的学习成绩(当发送这个请求的时候必须把拿到当前学生的id)
+    // let id  = null;
+    //  $.ajax({
+    //    url:'studentInfo',
+    //    async:false,
+    //    success:(data)=>{
+    //     id = data.id
+    //    }
+    //  }); 
+
+    //  $.ajax({
+    //    url:'score',
+    //    async:false,
+    //    data:{
+    //     id
+    //    },
+    //    success:(data)=>{
+    //     console.log(data);
+    //    }
+    //  }) 
+
+    //------------------------------------
+    // 用异步来写
+    // 这也是串行
+    // $.ajax({
+    //   url: 'studentInfo',
+    //   success: (data) => {
+    //     let { id } = data;
+    //     $.ajax({
+    //       url: 'score',
+    //       data: {
+    //         id
+    //       },
+    //       success: (data) => {
+    //         console.log(data);
+    //       }
+    //     })
+    //   }
+    // }); 
+
+    //---------------------------------------------
+    // ajax的并行
+    // 假设页面有2个ajax请求，我要等到页面的所有的ajax发送请求成功以后再去做什么事(所有都请求成功以后我就告诉用户，您当前的页面已经加载完成)
+    // $.ajax({
+    //   url: 'xx1',
+    //   success: (data) => {
+    //     // id = data.id
+    //     count++;
+    //     notice();
+
+    //   }
+    // }); 
+
+    // $.ajax({
+    //   url: 'xx2',
+    //   success: (data) => {
+    //     // id = data.id
+    //     count++;
+    //     notice();
+    //   }
+    // }); 
+
+    // let count = 0;
+    // function notice(){
+    //   if(count>=2){
+    //     alert('您当前的页面已经加载完成，请放心使用');
+    //   }
+
+    // }
+
+    // Promise是es6的内置类，他有三个状态 
+    // let res = new Promise((resolve,reject)=>{
+    //   resolve()
+    //   // reject(1)
+    // })
+    // console.log(res);
+
+    // res.then((data)=>{
+    //   console.log('resolve',data);
+    //   // return 900;
+    //   return Promise.reject();// 快捷创建一个失败的promise实例
+    // }).then((data)=>{console.log(3,data);},()=>{console.log(999);})
+
+    // // then函数的返回值也是Promise的实例
+    // // 如果上一个then没有返回promise的实例，如果没有，那他就会默认做成功的回调(默认是成功态)，如果有，那当前回调的执行就受当前promise实例的状态的影响
+    // console.log(100);
+
+    //--------------------------------
+
+    // function request(url) {
+    //   return new Promise((resolve, reject) => {
+    //     $.ajax({
+    //       url: url,
+    //       success: (data) => {
+    //         resolve(data);
+    //       }
+    //     })
+    //   })
+    // }
+
+    // function second(url,id) {
+    //   return new Promise((resolve, reject) => {
+    //     $.ajax({
+    //       url: url,
+    //       data:{
+    //         id
+    //       },
+    //       success: (data) => {
+    //         resolve(data);
+    //       }
+    //     })
+    //   })
+    // }
+
+    // let res = request('studentInfo'); // 是一个promise实例
+    // // 当ajax请求完成之前是等待态
+    // res.then((data) => {
+    //   // 此处的回调函数会等到上边的状态变成成功以后再执行
+    //   // 在这里发送第二个ajax请求
+    //  return  second('score',data.id);
+    // }).then((data)=>{
+    //   // 这里可以发送第三个请求
+
+    // })
+
+    // let res = Promise.all([Promise.resolve(100),Promise.resolve(200)]) // 他的返回值是一个新的promise的实例            
+
+    // res.then((data)=>{
+    //   console.log(data);
+    // },()=>{});
+
+    //------------------------------------------
+    // function request(url) {
+    //   return new Promise((resolve, reject) => {
+    //     $.ajax({
+    //       url: url,
+    //       success: (data) => {
+    //         resolve(data);
+
+    //       }
+    //     })
+    //   })
+    // }
+
+    // let res = request('xxxx');
+    // res.then((data)=>{
+
+    // })
+  </script>
+</body>
+
+</html>
