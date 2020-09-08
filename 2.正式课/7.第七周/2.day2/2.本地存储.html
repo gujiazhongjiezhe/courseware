@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./client/js/md5.min.js"></script>
+  <script src="./client/js/jquery.min.js"></script>
+  <script src="./client/js/jquery.cookie.js"></script>
+  <script>
+    /* 
+    什么时候会用到本地存储？
+      - 记住用户名和密码(自动登录)
+      - 在未登录状态下，如果加入购物车的信息一般也会存储到本地，当登录以后把存储在本地的购物信息发送到服务端(可以实现多端共享)
+
+    本地存储的限制
+      1.本地存储是受浏览器限制的，加入在谷歌浏览器下存储的数据在IE下就拿不到
+      2.受域的限制，不同域之间的存储是不互通的
+    
+    本地存储的信息在控制台中可以直接看到各种本地存储(而且是明文存储)，所以数据不敏感的数据可以存储，但是比较敏感的数据最好不要存储在本地中，如果非要存储不可，那就做安全处理(加密)
+
+    */
+  //  localStorage : 
+
+    /* 
+    setItem(key,value):设置存储
+    getItem(key)：获取存储
+    removeItem(key):移除存储
+    clear() :移除全部存储
+    ==>向本地存储信息都是字符串格式的，如果你想存储对象的话，要记得拿JSON的方法转一下
+
+    localStorage存储的信息是永久存储在客户端的(浏览器)，除非你手动移除，卸载浏览器，没有过期时间
+
+    sessionStorage会话存储(刷新页面不会清除，但是关闭页面就清除了)
+
+
+    cookie
+    
+    
+    */
+  // localStorage.setItem('xxx',123)
+  // console.log(md5('1234567')); // fcea920f7412b5da7be0cf42b8c93759
+  // console.log(md5('1234567')); 
+  // console.log(md5('1234567errtyufghjghgjk')); 
+  // $.cookie('username','234567890-')
+  // console.log($.cookie('username')); 
+  // $.cookie('wwww',11111,{
+  //   expires: new Date(new Date().getTime() + 1*24*60*60*1000) 
+  // })
+
+  /* 
+  1.大小限制：一般浏览器允许在同一个域下最多8kb。而localStorage会存储5mb左右
+  2.兼容性：cookie几乎可以兼容所有浏览器，但是localStorage是H5新增的，低版本的浏览器不支持
+  3.稳定性：cookie可以设置过期时间，但是一般情况下载没有到达时间之前cookie都被清除了(比如你的各种安全卫士在清除缓存垃圾的时候，就有可能把cookie清除，浏览器里的清除浏览记录也可以清除cookie，无痕浏模式不会设置cookie)
+
+  4.cookie会自动通过请求头发送给服务端
+  */
+  </script>
+</body>
+</html>
