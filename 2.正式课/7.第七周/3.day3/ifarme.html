@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 90%;
+    }
+    .navList {
+      height: 10%;
+      padding-top:20px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navList">
+    <a href="https://www.jd.com" target="A">京东</a>
+    <a href="https://www.taobao.com" target="A">淘宝</a>
+    <a href="https://www.baidu.com" target="A">百度</a>
+  </nav>
+
+  <iframe src="https://www.jd.com" frameborder="0" name="A" ></iframe>
+  <!-- <iframe src="https://www.jd.com" frameborder="0"></iframe> -->
+  <script>
+    // SPA(Single Page Application) 单页面应用
+    // - 基于iframe页面嵌套在父页面中模拟出单页面的效果，但是他的本质还是多页面
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 浏览器的本地存储都受域的限制，还有受浏览器的限制
+    // 本地存储一般都是在控制台可以看到，而且大多数都是明文，建议不要存储在重要的东西，如果非要存储不可，只能加密或
+
+    // localStorage / sessionStorage / cookie
+
+    // setItem('key','value')
+    // getItem('key')
+    // removeItem('key')
+    // clear()
+    // 每一个本地存储，存储的内容类型都是字符串
+    // 如果想要存储对象，就拿先拿JSON.stringify转一下，当获取的时候在拿JSON.parse转一下
+
+    // ---->
+    // localStorage:是本地的永久性存储(只要你的浏览器不卸载，内容不手动清空，或者电脑不重新安装系统)
+    // sessionStorage：会话存储，(在刷新当前页面的时候不会清除他，但是在关闭页面的时候就会被清除)
+
+    // cookie
+    // document.cookie = 'ss=1' // 设置
+    // document.cookie // 获取
+    // cookie 可以设置过期的时候，当到达过期时间以后就自动失效了(清除了)
+    // jquery.cookie
+
+    // $.cookie('key',value)
+
+    //--------------
+    // cookie和local之间的区别
+      // 1.大小限制：一般浏览器允许的大小是8kb，但是local是5mb
+      // 2.兼容性：local是H5新增的所以兼容性差，但是cookie早就有，所以兼容好
+      // 3.稳定性：cookie不太稳定，各种清除缓存都会把cookie清除，local比较稳定(清除缓存对他不起作用)
+
+      // 4.cookie可以自动的穿梭于客户端和服务端之间，local不会
+
+        
+      // 1.客户端拿到用户名和密码发动给服务端
+      // 2.服务端拿到之后：
+            // 0.那当前的用户名和密码去数据库中进行比对，如果比对不成功，那就直接给客户端返回一个失败的信息
+
+            // 1.那当前的用户名和密码去数据库中进行比对，如果有比对成功的那就可以登录成功
+                // 在服务端设置一个SESSION信息，里边存储一个connect_sid,他是客户端和服务器之间连接的唯一的标识，
+                // 服务端会把当前的connect_sid通过响应头传递给客户端(Set-cookie)
+
+                // 浏览器会检测当前的响应头有没有Set-cookie这个字段，如果有就会把这个字段中的所有信息设置到浏览器当前域的cookie中
+
+                // 以后你再从当前域在发送任何接口，浏览器会自动把cookie中的信息通过请求头传递给服务端，
+
+                // 以后你在发送请求的时候，服务器拿到当前请求头中cookie中的connect_sid之后和服务器中的SESSION中的connect_sid进行比对，如果比对成功，就把当前的connect_sid对应的用户的数据传递给客户端
+                
+
+
+  </script>
+</body>
+</html>
