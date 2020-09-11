@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title>珠峰培训-CRM登录</title>
+	<link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
+	<!-- IMPORT CSS -->
+	<link rel="stylesheet" href="css/reset.min.css">
+	<style>
+		/* ==DIALOG== */
+		.ZF-DIALOG {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 9998;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, .8);
+			user-select: none;
+			opacity: 0;
+			transition: opacity .3s;
+		}
+
+		.ZF-DIA-MAIN {
+			position: absolute;
+			top: 100px;
+			left: 50%;
+			margin-left: -200px;
+			z-index: 9999;
+			width: 400px;
+			background: #FFF;
+			border-radius: 3px;
+			overflow: hidden;
+			transform: translateY(-1000px);
+			transition: transform .3s;
+		}
+
+		.ZF-DIA-HEADER {
+			position: relative;
+			box-sizing: border-box;
+			padding: 0 10px;
+			height: 40px;
+			line-height: 40px;
+			background: #2299EE;
+		}
+
+		.ZF-DIA-TITLE {
+			font-size: 18px;
+			color: #FFF;
+			font-weight: normal;
+		}
+
+		.ZF-DIA-CLOSE {
+			position: absolute;
+			right: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 24px;
+			font-style: normal;
+			color: #FFF;
+			font-family: 'Courier New';
+			cursor: pointer;
+		}
+
+		.ZF-DIA-BODY {
+			padding: 30px 10px;
+			line-height: 30px;
+			font-size: 16px;
+		}
+
+		.ZF-DIA-FOOTER {
+			text-align: right;
+			padding: 10px 10px;
+			border-top: 1px solid #EEE;
+		}
+
+		.ZF-DIA-CONFIRM,
+		.ZF-DIA-CANCEL {
+			margin: 0 5px;
+			padding: 0 15px;
+			height: 28px;
+			line-height: 28px;
+			border: none;
+			font-size: 14px;
+			cursor: pointer;
+		}
+
+		.ZF-DIA-CONFIRM {
+			color: #FFF;
+			background: #2299EE;
+		}
+
+		.ZF-DIA-CANCEL {
+			color: #000;
+			background: #DDD;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- DIALOG -->
+	<div class="ZF-DIALOG">
+		<div class="ZF-DIA-MAIN">
+			<div class="ZF-DIA-HEADER">
+				<h3 class="ZF-DIA-TITLE">系统温馨提示</h3>
+				<i class="ZF-DIA-CLOSE">X</i>
+			</div>
+			<div class="ZF-DIA-BODY">
+				用户名密码不匹配，请重新输入!
+			</div>
+			<div class="ZF-DIA-FOOTER">
+				<button class="ZF-DIA-CONFIRM">确定</button>
+				<button class="ZF-DIA-CANCEL">取消</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- IMPORT JS -->
+	<!-- <script src="js/md5.min.js"></script>
+	<script>
+		console.log(md5('0000000000'));//=>f1b708bba17f1ce948dc979f4d7092bc
+		console.log(md5('1234567890'));//=>e807f1fcf82d132f9bb018ca6738a19f
+		console.log(md5('zhufeng@zhou1990'));
+	</script> -->
+</body>
+
+</html>
