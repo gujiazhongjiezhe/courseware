@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "set NODE_EVN=12345&&node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "jquery": "^3.5.1",
+    "less": "^3.12.2"
+  }
+}
