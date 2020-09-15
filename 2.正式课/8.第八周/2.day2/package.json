@@ -1,0 +1,21 @@
+{
+  "name": "222",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.path.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mime": "^2.4.6",
+    "qs": "^6.9.4"
+  },
+  "devDependencies": {
+    "jquery": "^3.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
