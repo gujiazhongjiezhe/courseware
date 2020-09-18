@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //  发布  订阅
+
+  //  let obj = {
+  //     'click':[fn1,fn2,fn3],
+  //     'mouseover':[fn1,fn2,fn3]
+  //   }
+
+  // 放学  8点   去做 写作业  吃饭
+  // 睡觉  10点   做梦 流哈喇
+
+  let obj = {};
+
+  // on订阅   off取消订阅   emit发布
+
+// obj是当前的最大存储的地方
+// type是当前订阅的事件类型
+// fn是要订阅的方法
+function on(obj,type,fn){
+    if(!obj[type]){
+      obj[type] = []; // 给当前obj新增对应类型的池子
+    }
+    
+    let ary =  obj[type]; // 获取当前对应的池子
+
+    // 往事件池子里增加方法
+    if(ary.includes(fn) || typeof fn !== 'function') return; // 防止重复添加同一个事件的
+    ary.push(fn);
+    
+};
+
+// obj最大的存储所有池子的对象
+// type你要发布的类型
+function emit(obj,type){
+  // 通过类型拿到当前的事件池子，
+  // 循环池子，把池子里的方法依次执行
+  let ary = obj[type]; // 拿到池子
+  ary.forEach(item=>{
+    if(typeof item === 'function'){
+      item();
+    }
+    
+  })
+}
+
+function off(obj,type,fn){
+  // 移除事件的时候，尽量不要去破坏数组的原有数据结构
+  let ary = obj[type];
+  let index = ary.indexOf(fn);
+  if(index !== -1){ // 校验当前要移除的事件在池子里有没有
+    ary.splice(index,1,null); // 为了防止数组的塌陷
+  }
+
+};
+
+function fn1(){console.log('写作业')};
+function fn2(){console.log('吃饭')};
+function fn3(){console.log('做梦')};
+function fn4(){console.log('流哈喇')};
+on(obj,'fangxue',fn1);
+on(obj,'fangxue',fn1); // 咱们不允许往一个类型的池子中添加相同的方法
+on(obj,'fangxue',fn2);
+on(obj,'fangxue',true);
+
+off(obj,'fangxue',fn1);
+
+on(obj,'sleep',fn3);
+on(obj,'sleep',fn4);
+
+
+setTimeout(()=>{
+  emit(obj,'fangxue')
+},5000)
+
+// box.addEventListener('click',fn)
+
+// 在promise里
+new Promise((resolve,reject)=>{
+    // resolve(); // 发布成功的事件池子的方法
+    // reject // 发布失败事件池子里的方法
+
+}).then(()=>{},()=>{}); // then执行就是往不同的事件池子里增加方法(订阅)
+
+console.log(obj);
+  </script>
+</body>
+</html>

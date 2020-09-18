@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //  JSONP的原理：利用了script的src是非同源策略的机制，请求的时候在地址的后面品拼接一个callback和对应的函数名，当后端将数据传递给客户端时，当前的callback回调函数会默认执行，并且护具会以实参形式传递给当前的回调函数
+    // script请求回来的数据，浏览器会把数据当做js代码执行，给咱们传递回来的是一个字符串的函数执行，浏览器会把他执行
+
+
+    // 特点：
+    // 后台必须对JSONP请求作出特殊的处理
+    // 只能走get请求，不能够发送post请求
+
+    // 自己去封装一个jsonp跨域请求的方法
+    function jsonp(option) {
+      let script;
+      let { callback='fn', url, params={} } = option;
+      return new Promise((resolve, reject) => {
+        window[callback] = function (data) {
+          resolve(data); // 调用promise的成功态
+          // 跨域请求成功之后，拿到数据之后，把script从页面删除
+          document.body.removeChild(script);
+          delete window[callback];
+        }
+
+        // 动态生成script标签
+        script = document.createElement('script');
+        let str = `${url}${url.includes('?') ? '&' : '?'}`;
+        for (var key in params) {
+          str += `${key}=${params[key]}&`
+        }
+        str += `callback=${callback}`;
+        // 把路径、参数、回调函数拼接到一起给到script的src属性上
+        script.src = str;
+        document.body.appendChild(script);
+      });
+    }
+    jsonp({
+      url: 'http://127.0.0.1:8080/list',
+      params: { name: 1, age: 2 },
+      callback: 'fn'
+    }).then(function (data) {
+      console.log(data)
+    })
+  </script>
+</body>
+
+</html>

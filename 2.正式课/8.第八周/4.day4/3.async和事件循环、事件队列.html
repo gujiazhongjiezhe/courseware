@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // async await 是es7中提出的，是generator的语法糖
+    // async返回的是一个promise成功的实例
+
+    //  async function fn1 (){
+    //     return 10
+    //   }
+    // console.log(fn1()); 
+    //  console.log(fn1()); 
+
+    // async function fn1(){
+    //     await console.log(100);
+    //     // await下面的代码是异步的
+    //     console.log(200);
+    //     console.log(300);
+    // }
+    // fn1();
+    // console.log(400);
+
+
+    // async function fn1() {
+    // let res = await new Promise((resolve,reject)=>{resolve(100)});
+    // console.log(res);
+    //   // await下面的代码是异步的(微任务)
+
+    // }
+    // fn1();
+    // console.log(400);
+
+    // async function fn1() {
+    //   // 是同步代码
+
+    //   let res = await axios.get('xxxx');
+    //   // 这里是异步的
+    //   console.log(res); // 就是你从后台请求回来的数据
+    //   // await下面的代码是异步的(微任务)
+    // }
+    // fn1();
+    // console.log(400);
+
+    // await必须在async里边使用，await下边的代码是异步(微任务)
+
+
+    // 微任务： async await  Promise   (微任务的执行是先放入的谁就先执行谁)
+    // 宏任务： 定时器  ajax请求 事件
+
+
+
+
+    function fun1() {
+      console.log('func1 start');
+      return new Promise(resolve => { // 
+        resolve(); // 去发布对应的池子里的事件时异步的
+      });
+    };
+   
+
+    function fun2() {
+      console.log('func2 start');
+      return new Promise(resolve => {
+        setTimeout(() => { //宏任务2
+          resolve(); // 
+        }, 10);
+      })
+    };
+
+    console.log(1);
+    setTimeout(async () => { // 宏任务1
+      console.log(2);
+      await fun1(); 
+      console.log(3);// 微任务2
+    }, 20);
+    for (let i = 0; i < 100000000; i++) {}; // 肯定大于20ms了
+    console.log(4);
+
+    fun1().then(() => { // 微任务1
+      console.log(5);
+    });
+
+    fun2().then(() => { // 微任务3
+      console.log(6);
+    });
+
+    setTimeout(() => { // 宏任务3
+      console.log(7);
+    }, 0);
+    console.log(8);
+
+
+    //  1  4 'func1 start' 'func2 start' 8 5 2 'func1 start' 3 7 6
+
+
+
+
+
+
+    // 1 4  'func1 start' 'func2 start' 8 5 2 'func1 start' 3 7 6
+
+
+
+new Promise((resolve,reject)=>{
+  resolve();
+}).then(()=>{},()=>{});
+// 现在已经把对应的事件放到事件池子里边了，
+// 去执行对应的事件池子里边的事件的过程是异步
+
+
+async function fn(){
+  console.log(1);
+  console.log(2);
+  await console.log(4);
+  console.log(5);
+}
+
+fn();
+console.log(3);
+  </script>
+</body>
+
+</html>
