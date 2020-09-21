@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    ajax : xhrHttpRequest
+    axios:ajax和promise的封装
+
+    fetch： 他是结合promise的一个请求api的新的方法,是原生的,他返回值是一个promise实例
+     */
+    //  console.log(fetch);
+
+    // console.log(fetch('index.json'));
+
+    fetch('index.json', {
+      body: '', // 如果是post请求才能使用，这是通过请求体把内容传递给服务端(如果是get请求不要写这个参数)
+
+
+
+      // same-origin 是只允许同源下才可以携带
+      // *omit： 不允许携带凭证
+      // include ：允许跨域吓呆资源凭证
+      credentials: 'include', // 是否允许携带资源凭证
+      headers: { // 设置请求头
+        'user-agent': 'Mozilla/4.0 MDN Example',
+        'content-type': 'application/json'
+      },
+      method: 'get', // 设置请求方式
+    }).then(res => {
+      // promise成功的回调函数不管当前fetch请求成功还是失败，都会走
+      // 想拿到数据，要写两个then才好使
+
+
+      return res.json();
+      console.log(res);
+    }).then(res => {
+      console.log(res);
+    })
+
+  </script>
+</body>
+
+</html>

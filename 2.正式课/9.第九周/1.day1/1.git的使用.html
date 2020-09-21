@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //  git add . 
+    // git commit -m'xxx'
+    
+    // 在往远程仓库提交代码的时候，先git pull，然后在git push(防止有其他同志在你之前往仓库提交了代码，避免代码冲突)
+    // git pull origin master
+    // git push
+
+    // 如果你跟其他同事修改的是同一个文件，那在git pull的时候就会产生冲突，接下来你就应该在你的本地去解决冲突(这时候最好把你的同事叫过来，你们一起商量着解决，看看到底要谁的代码)
+
+    //-------------------------------------------
+    // git的多分支管理
+
+    // master分支上永远存放的是最新的，最纯净的代码，就是线上跑着的代码，开发人员写代码不会再master上开发
+
+    // 一般都会新创建一个分支dev，在dev分支上去编写代码
+
+    // 检查分支的情况 git branch 查看当前存在的分支   *代表当前打开的分支
+    // 新增分支： git branch 分支名    git branch dev 创建一个叫dev的分支
+    // 切换分支  git checkout 分支名 
+    // git checkout -b 分支名 创建新分支，并且切换到新的分支下
+
+    // git merge 分支名  把某一个分支的代码合并到当前分支下
+
+    
+
+
+    // 过了几天，pm有分配了一个需求，这时候咱们想要在一个新的分支上去开发，
+    // git checkout -b 分支名
+
+    // 不管你使用哪个分支去开发新的需求，都得先merge master上的代码，以保证你当前分支上的代码和master保持同步(以防万一)
+
+     // 当dev上的需求开发完成之后，没有毛病了，而且在线上跑着也没问题，那这时候一定要把dev的代码合并到master上，以保证master是最新最干净的代码
+
+
+  </script>
+</body>
+</html>

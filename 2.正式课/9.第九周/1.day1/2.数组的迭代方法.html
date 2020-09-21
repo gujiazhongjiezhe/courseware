@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数组的迭代方法
+    // filter find some every map forEach reduce
+
+    // let ary = [100,200,300,400];
+    // filter:过滤，当前项目的回调函数执行的时候，如果返回true，那这一项就会被放到返回的新的数组中，如果是false就不会被放
+
+    // find：当前项目的回调函数如果返回true，那就停止循环，并且把当前项返回出去
+
+    // some：如果回调函数返回true那就停止循环，返回true
+    // every：循环的时候只要返回false，那就停止循环，把false返回 出去
+
+    // let res = ary.filter(item=>{
+
+    // });
+
+    // reduce：收敛
+
+    // let res = ary.reduce((prev,next)=>{
+    //   // prev 代表上一次return的值
+    //   // next代表当前值
+    //   console.log(prev,next);
+    //   // 100 200
+    //   // 300 300
+    //   // 600 400
+
+    //   return prev + next
+    // },0); // reduce的第二个参数代表第一次执行回调函数的时候的prev，如果不传，那第一次的prev就是数组的第一项
+
+    // let ary = [
+    //   {
+    //     name:'banana',
+    //     price:10,
+    //     count:2
+    //   },
+    //   {
+    //     name:'apple',
+    //     price:3,
+    //     count:3
+    //   },
+    //   {
+    //     name:'grape',
+    //     price:4,
+    //     count:5
+    //   }
+    // ];
+
+    //   let  res = ary.reduce((prev,next)=>{
+    //       // 第一次 prev 0  next 20
+    //       // 第二次prev 20   next 9
+    //       return next.price * next.count + prev;
+    //   },0);
+    //   console.log(res);
+  </script>
+</body>
+</html>
