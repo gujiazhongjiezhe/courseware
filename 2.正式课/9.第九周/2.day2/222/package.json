@@ -1,0 +1,18 @@
+{
+  "name": "222",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "lessc index.less index.css -x"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "less": "^3.12.2"
+  }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="xxxx2.css">
+</head>
+<body>
+  <script src="xxxx1">
+    // 强缓存，直接走本地的缓存没再不在向服务器发起请求(但是他有过期的时间) 状态码是200(from memry cache)
+
+    // 协商缓存,每一次都要去请求服务器，在服务器端进行比对，当前通过请求头带过去的时间或者标识，如果跟请求的文件的时间或者标识一致，说明，后台的文件没有更新，那就什么也不返回，状态码是304，然后客户端从浏览器拿缓存进行渲染
+
+    // html页面不做缓存或者只做协商缓存,为了用户能够实时拿到最新的内容(每一次和服务的静态资源文件上线之后名字都会变化)
+
+    // 加时间戳
+
+    // 如果想给ajax请求的数据走缓存怎么办
+    
+    // 你只能手动往localstorage里边去存储，设置一个过期的时间
+
+
+
+
+  </script>
+</body>
+</html>

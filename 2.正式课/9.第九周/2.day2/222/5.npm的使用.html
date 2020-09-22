@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // npm默认他的下载源是国外的,所以慢
+    // yarn yran的使用
+    // npm i yarn -g
+    // yarn add xxx
+
+    // 但是咱们可以切换下载源
+    // npm i nrm -g // 他是切换下载源的
+    // nrm ls :查看下在源列表  *就是当前你在使用的下载源地址
+    // nrm use xxx:把当前下载源切换指定的网络上
+
+    // npm安装的模块可以安装到两个地方 全局 一个是当前的项目
+
+
+    // 安装到全局的特点
+      // 1.可以使用命令(针对于那些可以使用命令的模块)
+      // 2.所有的项目都可以使用
+      // 3.可能会产生版本冲突  3.0.1
+      // 4.安装到全局的模块不能使用CommonJs规范进行管理和使用
+    
+    // 安装到本地项目
+      // 1.不能使用命令
+      // 2.只能在当前项目中使用
+      // 3.不会产生版本之间的冲突
+      // 4.安装到当前项目的模块能可以使用CommonJs规范进行管理和使用
+
+
+      // 在真实项目中，less咱们既安装到全局，也安装到当前项目下
+        // 1.npm的5的版本之上，可以使用npx
+        // 使用npx可以让本地项目里的命令行执行
+        // 2.在 package.json中的scripts中间进行执行脚本的配置
+
+
+
+        // 依赖
+        // --save-dev; -D 开发依赖  是你开发的时候用到的模块
+        // --save -S  生产依赖   最终打包上线所需的模块
+        
+  </script>
+</body>
+</html>
