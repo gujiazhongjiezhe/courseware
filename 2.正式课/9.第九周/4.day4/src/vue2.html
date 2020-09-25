@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 
+    胡子语法中可以写js表达式，三元，函数执行
+    但是不能写js 语句
+
+   -->
+   
+  <!-- {{msg}} -->
+  <div id="app">
+    <!-- <div>{{add()}}</div> -->
+    <!-- <div>{{flag === true ?100:200}}</div> -->
+    <!-- <img :src="flag === true? 'ss.png':''" alt=""> -->
+    <!-- <div>{{msg}}</div> -->
+    <!-- <div>{{obj.name}}</div> -->
+    <!-- <div>{{arr}}</div> -->
+  </div>
+  <!-- <div>{name:1}</div> -->
+
+  <!-- <div id="app2">
+    {{msg2}}
+  </div> -->
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 一个页面允许多个监听器存在，
+    // 监听器不能够把body或者html当做监听的范围
+    let vm1 = new Vue({
+      el: '#app',
+      data:{
+        msg:800,
+        obj:{},
+        arr:[1],
+        flag:true,
+        img:'ss.png'
+      },
+      methods:{
+        add(){
+          return '你好'
+        }
+      }
+  })
+
+
+  /**
+  1.在大胡子语法中，绑定的数据值是对象类型的，会基于JSON.stringify把其编译成字符串然后在渲染出来
+  2.并不是所有的数据更改，都会通知视图进行刷新
+    + 在data中初始化一个对象，但是是空的，后期新增键值对的时候不会让视图重新渲染(咱们得想办法解决)
+      1.当给对象增加完内容之后，他其他数据更新一下
+      2.在初始化值的数据的时候，最好就提前好数据声明好,(如果你不知道值的话，可以先赋值空，但是这个属性要有，)只有从data中初始化过的属性才会有get和set
+      3.不要给obj新增一个属性，而是把obj这个对象进行替换，以为obj初始化的时候是存在的，所以他被监听着呢 vm1.obj = {...vm1.obj,name:900}
+      4.基于vm1.$set内置方法实现修改数据，并且实现响应式：vm1.$set(vm1.obj,key,value)   vm1.$set(vm1.obj,'name',900)
+
+  3.数组 如果数据是一个数组，我们修改数组基于控制length，或者直接用最原始的手段给他新增键值对，不会刷新视图，
+      + 但是通过数组的方法去更新数据，视图就会刷新
+      + vm1.$set
+
+      vm1.arr.length-- // 不会刷新视图
+      vm1.arr[1] = 100 // 不会刷新视图
+      vm1.arr.push(100) // 会刷新视图
+    
+
+
+
+  
+  */
+
+  // let vm2 = new Vue({
+  //   el:'#app2',
+  //   data:{
+  //     msg2:200
+  //   }
+  // })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text"  v-model="price">
+    <div>{{price/6.8}}</div>
+
+    <div>{{msg}}</div>
+    <br>
+    <button @click="add">点击</button>
+  </div>
+
+  <div>{{msg}}</div>
+
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    // 视图改变，数据也跟着改变，数据改变，视图也刷新
+    let vm1 = new Vue({ // new Vue就是生成了一个vm的监听器
+      el: '#app', // 这就是监听器监听的视图范围
+      data:{ // data中存放的就是数据，data中的属性名当做变量来说使用，data中的属性会挂在到当前vue的实例上
+        msg:0,
+        price:0
+      },
+      methods:{
+        add(){
+          // 函数里的this就是当前vue实例vm1
+          this.msg++; // vm1.msg++
+        }
+      }
+    });
+
+
+
+    
+
+  </script>
+</body>
+
+</html>

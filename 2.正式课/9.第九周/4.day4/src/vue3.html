@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div v-show="flag">我是v-show</div>
+      <!-- <div v-if="flag">我是一个好人</div>
+      <div v-else-if="!flag">我是elseif</div> -->
+      <!-- <div v-else>我是else</div> -->
+   
+
+    <!-- <div v-once v-html="ss"></div> -->
+    <!-- <input type="text" :value="s" @input="add"> -->
+    <!-- <div v-html="s"></div> -->
+  </div>
+
+  <!-- 
+      vue的是指令
+      1.v-xxx这都是vue中给元素设置的属性
+      2.当vue加载成功并处理逻辑的时候，会按照相关的规则去解析和渲染视图，(根据不同的指令实现不同的功能)
+
+      v-model一般是给表单元素设置的，用于实现表单元素和数据之间的相互绑定
+        1.先把数据绑定给表单元素，一般是把值给到input的value，
+        2、监听表单内容的改变，
+        3.表单内容一旦发生变化就去改变对应的数据，
+        4.数据发生变化之后，就会把视图中用到当前数据的地方全部刷新
+      v-model就是一个双向数据绑定的语法糖
+      3.v-html/v-text
+        给非表单元素增加内容，v-html他支持对于标签的识别，但是v-text不能识别标签
+        防止初次渲染页面小胡子闪烁的，
+      
+      4.v-bind:给元素的内置属性动态的绑定数据 
+          假如给img元素的src动态的绑定数据 <img v-bind:src="s"/>
+          也可以简写为 <img :src="s"/>
+
+      v-once:绑定的数据是一次性的，以后data中的数据给变，视图也不会刷新了
+
+      v-if:控制元素的显示和隐藏
+        v-if控制的是元素在dom的存在与否(直接把元素在dom里删除)
+        v-show也可以控制元素的显示隐藏，但是他是控制的元素的display样式
+
+        如果当前元素要频繁的显示隐藏使用v-show
+        如果当前元素只是页面渲染的时候绝对要么显示，要么隐藏，那就用v-if
+        
+
+      
+      
+
+
+     -->
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        s: '<div>300</div>',
+        ss: '100',
+        flag: true
+      },
+      methods: {
+        add(e) {
+          console.log(e);
+          let value = e.data;
+          this.s += e.data
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
