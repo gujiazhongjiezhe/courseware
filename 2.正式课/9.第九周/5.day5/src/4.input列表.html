@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background: orangered;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        <input @keyup.enter="fn" type="text" v-model="val">
+        <ul>
+            <li style="margin-bottom: 5px;"   v-for="(item,index) in arr">
+              {{index+1}}、{{item}}
+              <button @click="fn1(index)">删除</button>
+            </li>
+        </ul>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+      // 在vue里想改变页面，只需要操作数据，数据==>视图
+      let vm = new Vue({
+        el: "#app",
+        data: {
+            arr:[],
+            val:''
+        },
+        methods: {
+            fn(){
+                // console.log(this.val)
+               this.arr.push(this.val);
+               this.val = '' 
+            },
+            fn1(id){ // 1
+                console.log(id)
+                // splice
+                // filter会便利数组的每一项，如果return true那一项就保留，如果return fasle，那一项就过滤掉
+                this.arr = this.arr.filter((item,index)=>{
+                    return index !==id
+
+                })
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

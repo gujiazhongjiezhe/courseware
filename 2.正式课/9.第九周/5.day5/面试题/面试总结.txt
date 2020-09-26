@@ -1,0 +1,607 @@
+面试总结
+一、JS问题
+1.typeof和instance of 检测数据类型有什么区别？
+相同点：
+        都常用来判断一个变量是否为空，或者是什么类型的。
+不同点：
+        typeof		返回值是一个字符串，用来说明变量的数据类型
+        instanceof        用于判断一个变量是否属于某个对象的实例.
+
+2.谈一谈深克隆和浅克隆？
+浅克隆:
+        只是拷贝了基本类型的数据，而引用类型数据，复制后也是会发生引用，我们把这种拷贝叫做“（浅复制）浅拷贝”，换句话说，浅复制仅仅是指向被复制的内存地址，如果原地址中对象被改变了，那么浅复制出来的对象也会相应改变。
+深克隆：
+        创建一个新对象，属性中引用的其他对象也会被克隆，不再指向原有对象地址。
+JSON.parse、JSON.stringify()
+
+3.es6的新特性都有哪些？
+let定义块级作用域变量
+没有变量的提升，必须先声明后使用
+let声明的变量，不能与前面的let，var，conset声明的变量重名
+const 定义只读变量
+const声明变量的同时必须赋值，const声明的变量必须初始化，一旦初始化完毕就不允许修改
+const声明变量也是一个块级作用域变量
+const声明的变量没有“变量的提升”，必须先声明后使用
+const声明的变量不能与前面的let， var ， const声明的变量重
+const定义的对象\数组中的属性值可以修改,基础数据类型不可以
+ES6可以给形参函数设置默认值
+在数组之前加上三个点（...）展开运算符
+数组的解构赋值、对象的解构赋值
+箭头函数的特点
+箭头函数相当于匿名函数，是不能作为构造函数的，不能被new
+箭头函数没有arguments实参集合,取而代之用...剩余运算符解决
+箭头函数没有自己的this。他的this是继承当前上下文中的this
+箭头函数没有函数原型
+箭头函数不能当做Generator函数，不能使用yield关键字
+不能使用call、apply、bind改变箭头函数中this指向
+Set数据结构，数组去重
+4.==和===区别是什么？
+=
+        赋值
+==
+返回一个布尔值；相等返回true，不相等返回false；
+允许不同数据类型之间的比较；
+如果是不同类型的数据进行，会默认进行数据类型之间的转换；
+如果是对象数据类型的比较，比较的是空间地址
+===
+        只要数据类型不一样，就返回false；
+5.常见的设计模式有哪些？
+    1、js工厂模式
+    2、js构造函数模式
+    3、js原型模式
+    4、构造函数+原型的js混合模式
+    5、构造函数+原型的动态原型模式
+    6、观察者模式
+    7、发布订阅模式
+6.call bind apply 的区别？
+call() 和apply()的第一个参数相同，就是指定的对象。这个对象就是该函数的执行上下文。
+call()和apply()的区别就在于，两者之间的参数。
+call()在第一个参数之后的 后续所有参数就是传入该函数的值。apply() 只有两个参数，第一个是对象，第二个是数组，这个数组就是该函数的参数。
+bind() 方法和前两者不同在于： bind() 方法会返回执行上下文被改变的函数而不会立即执行，而前两者是	直接执行该函数。他的参数和call()相同。
+7.js继承方式有哪些？
+原型链继承
+		核心： 将父类的实例作为子类的原型
+构造继承
+		核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类
+实例继承
+		核心：为父类实例添加新特性，作为子类实例返回
+拷贝继承
+组合继承
+		核心：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现	函数复用
+寄生组合继承
+		核心：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实	例方法/属性，避免的组合继承的缺点
+8.你怎样看待闭包？
+ 	个人感觉，简单来说闭包就是在函数里面声明函数，本质上说就是在函数内部和函数外部搭建起一座桥梁，使得子函数可以访问父函数中所有的局部变量，但是反之不可以，这只是闭包的作用之一，另一个作用，则是保护变量不受外界污染，使其一直存在内存中，在工作中我们还是少使用闭包的好，因为闭包太消耗内存，不到万不得已的时候尽量不使用。
+9.你是如何理解原型和原型链的？
+    把所有的对象共用的属性全部放在堆内存的一个对象（共用属性组成的对象），然后让每一个对象的 __proto__存储这个「共用属性组成的对象」的地址。而这个共用属性就是原型，原型出现的目的就是为了减少不必要的内存消耗。而原型链就是对象通过__proto__向当前实例所属类的原型上查找属性或方法的机制，如果找到Object的原型上还是没有找到想要的属性或者是方法则查找结束，最终会返回undefined
+10.浏览器渲染的主要流程是什么?
+将html代码按照深度优先遍历来生成DOM树。
+css文件下载完后也会进行渲染，生成相应的CSSOM。
+当所有的css文件下载完且所有的CSSOM构建结束后，就会和DOM一起生成Render Tree。
+接下来，浏览器就会进入Layout环节，将所有的节点位置计算出来。
+最后，通过Painting环节将所有的节点内容呈现到屏幕上。
+11.从输入url地址到页面相应都发生了什么？
+    1、浏览器的地址栏输入URL并按下回车。
+　	2、浏览器查找当前URL是否存在缓存，并比较缓存是否过期。
+　　	3、DNS解析URL对应的IP。
+　　	4、根据IP建立TCP连接（三次握手）。
+　　	5、HTTP发起请求。
+　　	6、服务器处理请求，浏览器接收HTTP响应。
+　　	7、渲染页面，构建DOM树。
+　　	8、关闭TCP连接（四次挥手）
+12.session、cookie、localStorage的区别
+相同点
+        都是保存在浏览器端，且同源的。
+不同点
+cookie数据始终在同源的http请求中携带，即cookie在浏览器和服务器间来回传递。而sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
+cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下。
+存储大小限制也不同，cookie数据不能超过4k，同时因为每次http请求都会携带cookie，所以cookie只适合保存很小的数据。sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
+数据有效期不同，sessionStorage：仅在当前浏览器窗口关闭前有效，自然也就不可能持久保持；localStorage：始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据；cookie只在设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭。
+作用域不同，sessionStorage不在不同的浏览器窗口中共享，即使是同一个页面；localStorage 在所有同源窗口中都是共享的；cookie也是在所有同源窗口中都是共享的。
+13.js中跨域方法
+通过jsonp跨域
+通过修改document.domain来跨子域
+使用window.name来进行跨域
+使用HTML5中新引进的window.postMessage方法来跨域传送数据
+14.前端有哪些页面优化方法?
+减少 HTTP请求数
+从设计实现层面简化页面
+合理设置 HTTP缓存
+资源合并与压缩
+合并 CSS图片，减少请求数的又一个好办法。
+将外部脚本置底（将脚本内容在页面信息内容加载后再加载）
+多图片网页使用图片懒加载。
+在js中尽量减少闭包的使用
+尽量合并css和js文件
+尽量使用字体图标或者SVG图标，来代替传统的PNG等格式的图片
+减少对DOM的操作
+在JS中避免“嵌套循环”和 “死循环”
+尽可能使用事件委托（事件代理）来处理事件绑定的操作
+15.Ajax的四个步骤
+创建ajax实例
+执行open 确定要访问的链接 以及同步异步
+监听请求状态
+发送请求
+16.数组去重的方法
+ES6的set对象
+先将原数组排序，在与相邻的进行比较，如果不同则存入新数组
+function unique(arr){
+　　var arr2 = arr.sort();
+　　var res = [arr2[0]];
+　　for(var i=1;i<arr2.length;i++){
+　　　　if(arr2[i] !== res[res.length-1]){
+　　　　　　res.push(arr2[i]);
+　　　　}
+　　}
+　　return res;
+}
+利用下标查询
+ function unique(arr){
+   　　var newArr = [arr[0]];
+  　　 for(var i=1;i<arr.length;i++){
+　　　　if(newArr.indexOf(arr[i]) == -1){
+          　　 newArr.push(arr[i]);
+    　　  }
+        }
+        return newArr;
+   }
+17.ajax中get和post请求的区别
+get 一般用于获取数据
+get请求如果需要传递参数，那么会默认将参数拼接到url的后面；然后发送给服务器；
+get请求传递参数大小是有限制的；是浏览器的地址栏有大小限制；
+get安全性较低
+get 一般会走缓存，为了防止走缓存，给url后面每次拼的参数不同；放在?后面，一般用个时间戳
+post 一般用于发送数据
+post传递参数，需要把参数放进请求体中，发送给服务器；
+post请求参数放进了请求体中，对大小没有要求；
+post安全性比较高；
+post请求不会走缓存；
+18.ajax的状态码
+2开头
+200 : 代表请求成功；
+3开头
+301 : 永久重定向；
+302: 临时转移
+304 : 读取缓存 [表示浏览器端有缓存，并且服务端未更新，不再向服务端请求资源]
+307:临时重定向
+以4开头的都是客户端的问题；
+400 :
+401: 权限不够；（身份不合格，访问网站的时候，登录和不登录是不一样的）
+404 : 路径错误，找不到文件
+以5开头都是服务端的问题
+500 : 服务器的问题
+503: 超负荷；
+19.移动端的兼容问题
+给移动端添加点击事件会有300S的延迟
+如果用点击事件，需要引一个fastclick.js文件，解决300s的延迟
+一般在移动端用ontouchstart、ontouchmove、ontouchend
+移动端点透问题,touchstart 早于 touchend 早于click,click的触发是有延迟的，这个时间大概在300ms左右，也就是说我们tap触发之后蒙层隐藏， 此时 click还没有触发，300ms之后由于蒙层隐藏，我们的click触发到了下面的a链接上
+尽量都使用touch事件来替换click事件。例如用touchend事件(推荐)。
+用fastclick，https://github.com/ftlabs/fastclick
+用preventDefault阻止a标签的click
+消除 IE10 里面的那个叉号
+input:-ms-clear{display:none;}
+设置缓存
+手机页面通常在第一次加载后会进行缓存，然后每次刷新会使用缓存而不是去重新向服务器发送请求。如果不希望使用缓存可以设置no-cache。
+<meta http-equiv="Cache-Control"content="no-cache"/>
+圆角BUG
+某些Android手机圆角失效
+background-clip: padding-box;
+防止手机中网页放大和缩小
+这点是最基本的，做为手机网站开发者来说应该都知道的，就是设置meta中的viewport
+<meta name="viewport"content="user-scalable=0"/>
+    设置用户截止缩放，一般写视口的时候就已经写好了。
+20.JS中同步和异步,以及js的事件流
+同步：在同一时间内做一件事情
+异步：在同一时间内做多个事情
+JS是单线程的，每次只能做一件事情，JS运行在浏览器中，浏览器是多线程的，可以在同一时间执行多个任务。
+21.JS中常见的异步任务
+定时器、ajax、事件绑定、回调函数、async await、promise
+22.TCP的三次握手和四次挥手
+三次握手
+第一次握手：客户端发送一个SYN码给服务器，要求建立数据连接；
+第二次握手： 服务器SYN和自己处理一个SYN（标志）；叫SYN+ACK（确认包）；发送给客户端，可以建立连接
+第三次握手： 客户端再次发送ACK向服务器，服务器验证ACK没有问题，则建立起连接；
+四次挥手
+第一次挥手： 客户端发送FIN(结束)报文，通知服务器数据已经传输完毕；
+第二次挥手: 服务器接收到之后，通知客户端我收到了SYN,发送ACK(确认)给客户端，数据还没有传输完成
+第三次挥手： 服务器已经传输完毕，再次发送FIN通知客户端，数据已经传输完毕
+第四次挥手： 客户端再次发送ACK,进入TIME_WAIT状态；服务器和客户端关闭连接；
+23.为什么建立连接是三次握手，而断开连接是四次挥手呢?
+建立连接的时候， 服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。
+而关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。
+24.DOM diff原理
+如果元素类型发生变化，直接替换
+如果是文本，则比较文本里面的内容，是否有差异，如果是元素就需要比较当前元素的属性是否相等
+会先比较key， 在比较类型 为什么 react中循环 建议不要使用索引 ,如果纯为了展示 那可以使用索引
+25.作用域
+全局作用域
+浏览器打开一个页面时，浏览器会给JS代码提供一个全局的运行环境，那么这个环境就是全局作用域
+一个页面只有一个全局作用域，全局作用域下有一个window对象
+window是全局作用域下的最大的一个内置对象（全局作用域下定义的变量和函数都会存储在window下）
+如果是全局变量，都会给window新增一个键值对；属性名就是变量名，属性值就是变量所存储的值
+如果变量只被var过，那么存储值是undefined
+在私有作用域中是可以获取到全局变量的，但是在全局作用域中不能获取私有变量
+私有作用域
+函数执行会形成一个新的私有的作用域（执行多次，形成多个私有作用域）
+私有作用域在全局作用域中形成，具有包含的关系；
+在一个全局作用域中，可以有很多个私有作用域
+在私有作用域下定义的变量都是私有变量
+形参也是私有变量
+函数体中通过function定义的函数也是私有的，在全局作用域不能使用；
+块级作用域
+es6中新引入的一种作用域
+在js中常见到的if{}、for{}、while{}、try{}、catch{}、switch case{}都是块级作用域
+var obj = {} //对象的大括号不是块级作用域
+块级作用域中的同一变量不能被重复声明（块级下var和function不能重名，否则会报错）
+作用域链
+上级作用域：函数在哪里定义，他的上一级作用域就是哪，和函数在哪个作用域下执行没有关系
+作用域链：当获取变量所对应的值时，首先看变量是否是私有变量，如果不是私有变量，要继续向上一级作用域中查找，如果上一级也没有，那么会继续向上一级查找，直到找到全局作用域为止；如果全局作用域也没有，则会报错；这样一级一级向上查找，就会形成作用域链
+当前作用域没有的，则会继续向上一级作用域查找
+当前函数的上一级作用域跟函数在哪个作用域下执行没有关系，只跟函数在哪定义有关（重点）
+26.Promise处理异步
+他是ES6中新增加的一个类（new Promise）,目的是为了管理JS中的异步编程的，所以把他称为“Promise设计模式”
+new Promise 经历三个状态：padding(准备状态：初始化成功、开始执行异步的任务)、fullfilled(成功状态)、rejected(失败状态)==
+Promise本身是同步编程的，他可以管理异步操作的（重点），new Promise的时候，会把传递的函数立即执行
+Promise函数天生有两个参数，resolve(当异步操作执行成功，执行resolve方法),rejected(当异步操作失败，执行reject方法)
+then()方法中有两个函数，第一个传递的函数是resolve,第二个传递的函数是reject
+ajax中false代表同步，true代表异步，如果使用异步，不等ajax彻底完成
+27.map和forEach的区别
+都是循环遍历数组中的每一项
+forEach和map方法里每次执行匿名函数都支持3个参数，参数分别是item（当前每一项）、index（索引值）、arr（原数组），需要用哪个的时候就写哪个
+匿名函数中的this都是指向window
+只能遍历数组
+不同点
+map方法返回一个新的数组，数组中的元素为原始数组调用函数处理后的值。(原数组进行处理之后对应的一个新的数组。)
+map()方法不会改变原始数组
+map()方法不会对空数组进行检测
+forEach()方法用于调用数组的每个元素，将元素传给回调函数.(没有return，返回值是undefined）
+注意：forEach对于空数组是不会调用回调函数的。
+28.async await函数
+async/await函数是异步代码的新方式
+async/await是基于promise实现的
+async/await使异步代码更像同步代码
+await 只能在async函数中使用，不能再普通函数中使用，要成对出现
+默认返回一个promise实例，不能被改变
+await下面的代码是异步，后面的代码是同步的
+29.this指向
+全局作用域下的this指向window
+如果给元素的事件行为绑定函数，那么函数中的this指向当前被绑定的那个元素
+函数中的this，要看函数执行前有没有 . , 有 . 的话，点前面是谁，this就指向谁，如果没有点，指向window
+自执行函数中的this永远指向window
+定时器中函数的this指向window
+构造函数中的this指向当前的实例
+call、apply、bind可以改变函数的this指向
+箭头函数中没有this，如果输出this，就会输出箭头函数定义时所在的作用域中的this
+30.原型
+所有的函数数据类型都天生自带一个prototype属性，该属性的属性值是一个对象
+prototype的属性值中天生自带一个constructor属性，其constructor属性值指向当前原型所属的类
+所有的对象数据类型，都天生自带一个_proto_属性，该属性的属性值指向当前实例所属类的原型
+
+三、CSS问题
+1.flex布局
+display:flex; 在父元素设置，子元素受弹性盒影响，默认排成一行，如果超出一行，按比例压缩
+flex:1; 子元素设置，设置子元素如何分配父元素的空间，flex:1,子元素宽度占满整个父元素
+align-items:center 定义子元素在父容器中的对齐方式，center 垂直居中
+justify-content:center 设置子元素在父元素中居中，前提是子元素没有把父元素占满，让子元素水平居中。
+2.css3的新特性
+transtion
+transition-property 规定设置过渡效果的 CSS 属性的名称。
+transition-duration 规定完成过渡效果需要多少秒或毫秒。
+transition-timing-function 规定速度效果的速度曲线。
+transition-delay 定义过渡效果何时开始。
+animation属性可以像Flash制作动画一样，通过控制关键帧来控制动画的每一步，实现更为复杂的动画效果。
+ainimation实现动画效果主要由两部分组成：
+通过类似Flash动画中的帧来声明一个动画；
+在animation属性中调用关键帧声明的动画。
+translate
+3D建模效果
+3.img中alt和title的区别
+图片中的 alt属性是在图片不能正常显示时出现的文本提示。
+图片中的 title属性是在鼠标在移动到元素上的文本提示。
+4.用纯CSS创建一个三角形
+ <style>
+          div {
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 40px solid #ff0000;
+    }
+    </style>
+</head>
+<body>
+  <div></div>
+</body>
+5.如何理解CSS的盒子模型？
+标准盒子模型：宽度=内容的宽度（content）+ border + padding
+低版本IE盒子模型：宽度=内容宽度（content+border+padding）
+6.如何让一个div水平居中
+已知宽度，block元素 ，添加添加margin:0 auto属性。
+已知宽度，绝对定位的居中 ，上下左右都为0，margin:auto
+7.如何让一个div水平垂直居中
+div {
+position: relative / fixed; /* 相对定位或绝对定位均可 */
+width:500px;
+height:300px;
+top: 50%;
+left: 50%;
+margin-top:-150px;
+margin-left:-250px;
+ 外边距为自身宽高的一半 */
+background-color: pink; /* 方便看效果 */
+ }
+
+.container {
+display: flex;
+align-items: center; /* 垂直居中 */
+justify-content: center; /* 水平居中 */
+ 
+}
+.container div {
+width: 100px; /* 可省 */
+height: 100px; /* 可省 */
+background-color: pink; /* 方便看效果 */
+}  
+8.如何清除浮动？
+clear清除浮动（添加空div法）在浮动元素下方添加空div,并给该元素写css样式
+   	{clear:both;height:0;overflow:hidden;}
+	给浮动元素父级设置高度
+父级同时浮动（需要给父级同级元素添加浮动）
+父级设置成inline-block，其margin: 0 auto居中方式失效
+给父级添加overflow:hidden 清除浮动方法
+万能清除法 after伪类 清浮动（现在主流方法，推荐使用）
+float_div:after{
+content:".";
+clear:both;
+display:block;
+height:0;
+overflow:hidden;
+visibility:hidden;
+}
+.float_div{
+zoom:1
+}
+9.css3实现三栏布局，左右固定，中间自适应
+圣杯布局/双飞翼布局
+ <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .middle,
+        .left,
+        .right {
+            position: relative;
+            float: left;
+            min-height: 130px;
+        }
+        .container {
+            padding: 0 220px 0 200px;
+            overflow: hidden;
+        }
+        .left {
+            margin-left: -100%;
+            left: -200px;
+            width: 200px;
+            background: red;
+        }
+        .right {
+            margin-left: -220px;
+            right: -220px;
+            width: 220px;
+            background: green;
+        }
+        .middle {
+            width: 100%;
+            background: blue;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='middle'></div>
+        <div class='left'></div>
+        <div class='right'></div>
+    </div>
+</body>
+
+10.display:none 和 visibility: hidden的区别
+display:none 隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢，就当他从来不存在。
+visibility:hidden 隐藏对应的元素，但是在文档布局中仍保留原来的空间。
+11.CSS中 link 和@import 的区别是？
+link属于HTML标签，而@import是CSS提供的
+页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载
+import只在IE5以上才能识别，而link是HTML标签，无兼容问题
+link方式的样式的权重 高于@import的权重.
+12.position的absolute与fixed共同点与不同点
+共同点：
+改变行内元素的呈现方式，display被置为block
+让元素脱离普通流，不占据空间
+默认会覆盖到非定位元素上
+不同点：
+absolute的”根元素“是可以设置的
+fixed的”根元素“固定为浏览器窗口。当你滚动网页，fixed元素与浏览器窗口之间的距离是不变的。
+13.
+二、VUE问题
+1.聊聊对vue的理解
+vue是一个渐进式的JS框架。他易用，灵活，高效；
+可以把一个页面分隔成多个组件；当其他页面有类似功能时，直接让封装的组件进行复用；
+他是构建用户界面的声明式框架，只关心图层；不关心具体是如何实现的
+2.V-model的原理是什么？
+Vue的双向数据绑定是由数据劫持结合发布者订阅者实现的。
+数据劫持是通过Object.defineProperty()来劫持对象数据的setter和getter操作。
+在数据变动时作你想做的事
+原理
+通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化->视图更新
+在初始化vue实例时，遍历data这个对象，给每一个键值对利用Object.definedProperty对data的键值对新增get和set方法，利用了事件监听DOM的机制，让视图去改变数据
+3.Vue的组件之间是如何传递的？
+父传子:
+把父组件的数据作为子组件的动态属性传递给子组件
+在子组件中，用props来接收属性名的属性值
+在子组件中使用动态的属性名，就获取到父组件传递的数据；
+子传父:
+子组件想改变父组件，利用了发布订阅的方式；
+兄弟相邻之间传递：
+事件车可以订阅和发布方法；就是一个Vue的实例；
+把当前要传递的数据通过事件车的订阅方法，那么另一个组件就可以获取对应的数据；
+
+4.谈谈对生命周期的理解
+beforeCreate阶段：vue实例的挂载元素el和数据对象data都是undefined，还没有初始化。
+created阶段：vue实例的数据对象data有了，可以访问里面的数据和方法，未挂载到DOM，el还没有
+beforeMount阶段：vue实例的el和data都初始化了，但是挂载之前为虚拟的dom节点
+mounted阶段：vue实例挂载到真实DOM上，就可以通过DOM获取DOM节点
+beforeUpdate阶段：响应式数据更新时调用，发生在虚拟DOM打补丁之前，适合在更新之前访问现有的DOM，比如手动移除已添加的事件监听器
+updated阶段：虚拟DOM重新渲染和打补丁之后调用，组成新的DOM已经更新，避免在这个钩子函数中操作数据，防止死循环
+beforeDestroy阶段：实例销毁前调用，实例还可以用，this能获取到实例，常用于销毁定时器，解绑事件
+destroyed阶段：实例销毁后调用，调用后所有事件监听器会被移除，所有的子实例都会被销毁
+5.computed 和watch的区别：
+computed
+computed是不支持异步；
+computed会走缓存
+多对一
+watch
+支持异步；
+不走缓存
+一对多
+
+6.vue的状态发生了改变都哪些周期开始执行
+    beforeUpdate   Updated
+
+7.VUE和REACT有什么区别？
+react整体是函数式的思想，把组件设计成纯组件，状态和逻辑通过参数传入，所以在react中，是单向数据流；
+vue的思想是响应式的，也就是基于是数据可变的，通过对每一个属性建立Watcher来监听，当属性变化的时候，响应式的更新对应的虚拟dom。
+
+8.vuex的流程
+	页面通过mapAction异步提交事件到action。action通过commit把对应参数同步提交到mutation。mutation会修改state中对于的值。 最后通过getter把对应值跑出去，在页面的计算属性中，通过mapGetter来动态获取state中的值
+
+9.vuex有哪几种状态和属性
+state中保存着共有数据，数据是响应式的
+getter可以对state进行计算操作，主要用来过滤一些数据，可以在多组件之间复用
+mutations定义的方法动态修改state中的数据，通过commit提交方法，方法必须是同步的
+actions将mutations里面处理数据的方法变成异步的，就是异步操作数据，通store.dispatch来分发actions，把异步的方法写在actions中，通过commit提交mutations，进行修改数据。
+modules：模块化vuex
+
+10.vue路由的两种模式
+hash ——即地址栏URL中的#符号（此hsah 不是密码学里的散列运算）
+hash 虽然出现URL中，但不会被包含在HTTP请求中，对后端完全没有影响，因此改变hash不会重新加载页面。
+history ——利用了HTML5 History Interface 中新增的pushState() 和replaceState() 方法
+这两个方法应用于浏览器的历史记录站，在当前已有的back、forward、go 的基础之上，它们提供了对历史记录进行修改的功能。只是当它们执行修改是，虽然改变了当前的URL，但你浏览器不会立即向后端发送请求。
+11.vue中 key 值的作用
+当 Vue.js 用v-for正在更新已渲染过的元素列表时，它默认用“就地复用”策略。
+如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序，而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
+key的作用主要是为了高效的更新虚拟DOM。
+12.$route和$router的区别
+$route是“路由信息对象”，包括path，params，hash，query，fullPath，matched，name等路由信息参数。
+$router是“路由实例”对象包括了路由的跳转方法，钩子函数等。
+13.vue-router守卫
+导航守卫 router.beforeEach 全局前置守卫
+to: Route: 即将要进入的目标（路由对象）
+from: Route: 当前导航正要离开的路由
+next: Function: 一定要调用该方法来 resolve 这个钩子。（一定要用这个函数才能去到下一个路由，如果不用就拦截）
+执行效果依赖 next 方法的调用参数。
+next(): 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed (确认的)。
+next(false): 取消进入路由，url地址重置为from路由地址(也就是将要离开的路由地址)。
+// main.js 入口文件
+    import router from './router'; // 引入路由
+    router.beforeEach((to, from, next) => { 
+      next();
+    });
+    router.beforeResolve((to, from, next) => {
+      next();
+    });
+    router.afterEach((to, from) => {
+      console.log('afterEach 全局后置钩子');
+    });
+
+
+路由独享的守卫 你可以在路由配置上直接定义 beforeEnter 守卫
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/foo',
+      component: Foo,
+      beforeEnter: (to, from, next) => {
+        // ...
+      }
+    }
+  ]
+})
+组件内的守卫 你可以在路由组件内直接定义以下路由导航守卫
+const Foo = {
+  template: `...`,
+  beforeRouteEnter (to, from, next) {
+    // 在渲染该组件的对应路由被 confirm 前调用
+    // 不！能！获取组件实例 `this`
+    // 因为当守卫执行前，组件实例还没被创建
+  },
+  beforeRouteUpdate (to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+  },
+  beforeRouteLeave (to, from, next) {
+    // 导航离开该组件的对应路由时调用，我们用它来禁止用户离开
+    // 可以访问组件实例 `this`
+    // 比如还未保存草稿，或者在用户离开前，
+    将setInterval销毁，防止离开之后，定时器还在调用。
+  }
+}
+
+14.axios是什么？怎么使用？描述使用它实现登录功能的流程？
+请求后台资源的模块。
+npm install axios -S装好
+然后发送的是跨域，需在配置文件中config/index.js进行设置。后台如果是Tp5则定义一个资源路由。
+js中使用import进来，然后.get或.post。
+返回在.then函数中如果成功，失败则是在.catch函数中
+
+15.vue修饰符
+stop：阻止事件的冒泡
+prevent：阻止事件的默认行为
+once：只触发一次
+self：只触发自己的事件行为时，才会执行
+16.vue项目中的性能优化
+不要在模板里面写过多表达式
+循环调用子组件时添加key
+频繁切换的使用v-show，不频繁切换的使用v-if
+尽量少用float，可以用flex
+按需加载，可以用require或者import()按需加载需要的组件
+路由懒加载
+17.vue.extend和vue.component
+extend
+是构造一个组件的语法器。
+然后这个组件你可以作用到Vue.component这个全局注册方法里
+还可以在任意vue模板里使用组件。
+也可以作用到vue实例或者某个组件中的components属性中并在内部使用apple组件。
+Vue.component
+你可以创建 ，也可以取组件。
+
+三、项目中遇到的问题
+问题1：input输入框使用v-model时， 绑定计算属性时，数据没法双向响应；
+解决：用watch的set和get方法，和v-model
+问题 2：mounted 钩子函数中请求数据会导致页面闪屏问题
+解决：这个是加载时机的问题，放在 create 里会比 mounted 触发早一点，如果在页面挂在完之前请求完成的话就不会看到闪屏了；
+问题 3：定时器中，切换页面，定时器依然在执行，耗性能
+解决：在 data 中定义一个定时器名称，然后使用定时器；最后在 beforeDestroy()声明周期内清除定时器；
+问题 4：样式问题，webpack 会把 css 合并在一起，如果样式命名不规范，会容易造成冲突
+解决：统一使用 less，能更好的解决，冲突的问题；
+问题 5： 在使用 redux 的时候；影响性能
+解决：减少 HTTP 请求次数，尽量少使用高阶组件，高阶组件形成闭包嵌套，导致很多栈内存不销毁；
+问题6：Vuex中的初始化数据为一个数组，后续修改数组中已存在的数据没有导致视图变化
+解决 ：由于Vuex初始化监听数据时，只监听了数组，导致数组中的对象改变并不会去影响数
+组，就不会渲染视图，所以重新拷贝了数组，对原数组进行修改；
+问题7：Vue中给<router-link>绑定点击事件后并没有用
+解决：由于router-link是Vue-router提供的组件，所以绑定事件后并没有绑定到原生dom节点
+上，所以使用.native对事件进行修饰。
+问题8：监听滚动条滚动或者鼠标的移动，但浏览器触发这类事件的频率非常高，可能在10几毫秒就触发一次，如果我们处理事件的函数需要操作大范围的DOM，这对于浏览器的性能是个考验;
+解决： 函数的防抖和分流；
+问题9：常见的兼容问题
+png24位的图片在iE6浏览器上出现背景
+        解决方案是做成PNG8.也可以引用一段脚本处理.
+浏览器默认的margin和padding不同。
+        解决方案是加一个全局的*{margin:0;padding:0;}来统一。
+IE6双边距bug:块属性标签float后，又有横行的margin情况下，在ie6显示margin比设置的大。
+浮动ie产生的双倍距离（IE6双边距问题：在IE6下，如果对元素设置了浮动，同时又设置了margin-left或margin-right，margin值会加倍。） #box{ float:left; width:10px; margin:0 0 0 100px;}

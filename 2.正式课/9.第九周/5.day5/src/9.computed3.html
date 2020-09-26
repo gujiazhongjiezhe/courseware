@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <title>珠峰培训 - 微信：18310612838</title>
+  <meta name="keyword"
+    content="技术体系：HTML5、CSS3、JAVASCRIPT、ES6、AJAX、NODE、VUE、REACT、小程序、FLUTTER等；课程体系：零基础就业课、在线框架课、全栈架构课；学前端就选珠峰，十年专注做前端！">
+</head>
+
+<body>
+  <div id="app">
+    <p>正常结果：{{text}}</p>
+    <p>反转结果：{{reverseComputed}}</p>
+    <input type="text" v-model='reverseComputed'>
+  </div>
+  <!-- IMPORT JS -->
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        text: 'MY NAME IS ZHUFENG PEIXUN'
+      },
+      computed: {
+        //=>GETTER函数
+        /* reverseComputed() {
+          return this.text.split('').reverse().join('');
+        } */
+        reverseComputed: {
+          get() {
+            //=>GETTER：只要获取这个属性值就会触发GET函数执行
+            return this.text.split('').reverse().join('');
+          },
+          set(value) {
+            //=>SETTER：给属性设置值的时候会触发SET函数，VALUE是给这个属性设置的值
+            console.log('OK', value);
+          }
+        }
+      }
+    });
+
+    let n = 0;
+    let timer = setInterval(() => {
+      n++;
+      if (n > 5) {
+        clearInterval(timer);
+        return;
+      }
+      if (n === 3) {
+        vm.text = 'WELCOME TO ZHUFENG';
+        return;
+      }
+      //=>强制更新视图的重新渲染
+      vm.$forceUpdate();
+    }, 1000);
+  </script>
+</body>
+
+</html>

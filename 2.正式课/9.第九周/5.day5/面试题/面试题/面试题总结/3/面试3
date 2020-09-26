@@ -1,0 +1,53 @@
+<!DOCTYPE html><html><head><title>云鸟:</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h2 id="云鸟">云鸟:</h2>
+
+<p>1、html标签语义化的好处</p>
+
+<blockquote>
+  <ol><li rel="1">利于seo优化</li>
+  <li rel="2">在样式丢失的时候，还是可以比较好的呈现结构</li>
+  <li rel="3">更好的支持各种终端，例如无障碍阅读和有声小说等.</li>
+  <li rel="4">利于团队开发和维护，遵循w3c规范，减少代码差异，提高效率.</li>
+  </ol>
+</blockquote>
+
+<p>2、盒子模型 加了box-sizing 之后怎样?</p>
+
+<blockquote>
+  <p>IE5.x以及Quirks(怪异)模式的IE6， IE7中， border和padding都包含在width和height中. <br>
+  标准浏览器中 width和height仅仅包含content， 不包含border和padding。 <br>
+  css3 定义了box-sizing属性: <br>
+  box-sizing:content-box|border-box|inherit; <br>
+  content-box: 该属性维持css2.1盒模型的组成方式 <br>
+  border-box：该属性将重新定义css2.1盒模型组成模式(与IE6解析相同)</p>
+</blockquote>
+
+<p>3、行内元素有哪些 块级有哪些 行内块级有哪些? <br>
+4、左侧固定两百 右侧自适应 这种布局怎么写？多种方式。用flexbox怎么写？ <br>
+5、less如何定义一个函数 如圆角 <br>
+6、一个url 后面好多key-value 如localhost?key=val&amp;key2=val2&amp;key3=val3 封装一个函数 getParam(‘key’) 通过key获得相应等号后面的值.</p>
+
+
+
+<pre class="prettyprint with-line-number hljs-light"><code class="hljs qml"><span class="hljs-comment line-number">1.</span> <span class="hljs-comment">//</span><br><span class="hljs-comment line-number">2.</span>    <span class="hljs-built_in">String</span>.prototype.getParam=<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{<br><span class="hljs-comment line-number">3.</span>        <span class="hljs-built_in">var</span>  str=<span class="hljs-keyword">this</span>.split(<span class="hljs-string">"?"</span>)[<span class="hljs-number">1</span>];<br><span class="hljs-comment line-number">4.</span>        str=str.replace(<span class="hljs-regexp">/&amp;/g</span>,<span class="hljs-string">"',"</span>);<br><span class="hljs-comment line-number">5.</span>        str=str.replace(<span class="hljs-regexp">/=/g</span>,<span class="hljs-string">":'"</span>);<br><span class="hljs-comment line-number">6.</span>        <span class="hljs-built_in">var</span> obj=<span class="hljs-built_in">eval</span>(<span class="hljs-string">"({"</span> + str + <span class="hljs-string">"'})"</span>);<br><span class="hljs-comment line-number">7.</span>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">var</span> x <span class="hljs-keyword">in</span> obj){<br><span class="hljs-comment line-number">8.</span>            <span class="hljs-keyword">if</span>(key==x){<br><span class="hljs-comment line-number">9.</span>                <span class="hljs-keyword">return</span> obj[key];<br><span class="hljs-comment line-number">10.</span>            }<br><span class="hljs-comment line-number">11.</span>        }<br><span class="hljs-comment line-number">12.</span>    };<br><span class="hljs-comment line-number">13.</span>    <span class="hljs-built_in">var</span> <span class="hljs-built_in">url</span>=<span class="hljs-string">"locallhost?key1=val1&amp;key2=val2&amp;key3=val3"</span>;<br><span class="hljs-comment line-number">14.</span>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">url</span>.getParam(<span class="hljs-string">"key3"</span>));<br><span class="hljs-comment line-number">15.</span><br><span class="hljs-comment line-number">16.</span><br><span class="hljs-comment line-number">17.</span>    <span class="hljs-built_in">String</span>.prototype.getParam=<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{<br><span class="hljs-comment line-number">18.</span>        <span class="hljs-built_in">var</span> reg=<span class="hljs-keyword">new</span>  <span class="hljs-built_in">RegExp</span>(key+<span class="hljs-string">"=(\\w+)"</span>);<br><span class="hljs-comment line-number">19.</span>        <span class="hljs-keyword">return</span> reg.exec(<span class="hljs-keyword">this</span>)[<span class="hljs-number">1</span>];<br><span class="hljs-comment line-number">20.</span>    };<br><span class="hljs-comment line-number">21.</span>    <span class="hljs-built_in">url</span>.getParam(<span class="hljs-string">"key3"</span>);<br><span class="hljs-comment line-number">22.</span>    <span class="hljs-built_in">String</span>.prototype.getParam=<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{<br><span class="hljs-comment line-number">23.</span>        <span class="hljs-built_in">var</span> val=<span class="hljs-literal">null</span>;<br><span class="hljs-comment line-number">24.</span>        <span class="hljs-keyword">this</span>.replace(<span class="hljs-regexp">/(\w+)=(\w+)/g</span>,<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{<br><span class="hljs-comment line-number">25.</span>            <span class="hljs-keyword">if</span>(<span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>]==key)<br><span class="hljs-comment line-number">26.</span>                val=<span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>];<br><span class="hljs-comment line-number">27.</span>        });<br><span class="hljs-comment line-number">28.</span>       <span class="hljs-keyword">return</span> val;<br><span class="hljs-comment line-number">29.</span>    };<br><span class="hljs-comment line-number">30.</span>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">url</span>.getParam(<span class="hljs-string">"key3"</span>));<span class="hljs-comment">//val3</span><br><span class="hljs-comment line-number">31.</span><br></code></pre>
+
+<p>7、封装一个函数 getForm(form元素) 如何将里面的各个表单的值放到一个对象里面，并且返回。</p>
+
+
+
+<pre class="prettyprint with-line-number hljs-light"><code class="hljs php"><span class="hljs-comment line-number">1.</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getForm</span><span class="hljs-params">(form)</span> </span>{<br><span class="hljs-comment line-number">2.</span>    <span class="hljs-keyword">var</span> inputs=form.getElementsByTagName(<span class="hljs-string">"input"</span>);<br><span class="hljs-comment line-number">3.</span>    <span class="hljs-keyword">var</span> selects=form.getElementsByTagName(<span class="hljs-string">"select"</span>);<br><span class="hljs-comment line-number">4.</span>    <span class="hljs-keyword">var</span> obj={};<br><span class="hljs-comment line-number">5.</span>    <span class="hljs-keyword">var</span> ary=[].concat.apply([],inputs);<br><span class="hljs-comment line-number">6.</span>    ary=ary.concat.apply(ary,selects);<br><span class="hljs-comment line-number">7.</span>    ary.<span class="hljs-keyword">forEach</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{<br><span class="hljs-comment line-number">8.</span>        <span class="hljs-comment">//this==window;</span><br><span class="hljs-comment line-number">9.</span>        obj[item.name]=item.value;<br><span class="hljs-comment line-number">10.</span>    });<br><span class="hljs-comment line-number">11.</span>    <span class="hljs-keyword">return</span> obj;<br><span class="hljs-comment line-number">12.</span>}<br></code></pre>
+
+<p>8、你有什么想问我的么? <br>
+9、你想找个什么样的工作? <br>
+10、vue如何保证js之间互相不影响? <br>
+11、localStorage和sessionStorage区别</p>
+
+
+
+<pre class="prettyprint with-line-number hljs-light"><code class="hljs bash"><span class="hljs-comment line-number">1.</span><span class="hljs-built_in">local</span>Storage和sessionStorage一样都是用来存储客户端临时信息的对象。<br><span class="hljs-comment line-number">2.</span><br><span class="hljs-comment line-number">3.</span>他们均只能存储字符串类型的对象（虽然规范中可以存储其他原生类型的对象，但是目前为止没有浏览器对其进行实现）。<br><span class="hljs-comment line-number">4.</span><br><span class="hljs-comment line-number">5.</span><span class="hljs-built_in">local</span>Storage生命周期是永久，这意味着除非用户显示在浏览器提供的UI上清除<span class="hljs-built_in">local</span>Storage信息，否则这些信息将永远存在。<br><span class="hljs-comment line-number">6.</span><br><span class="hljs-comment line-number">7.</span>sessionStorage生命周期为当前窗口或标签页，一旦窗口或标签页被永久关闭了，那么所有通过sessionStorage存储的数据也就被清空了。<br><span class="hljs-comment line-number">8.</span><br><span class="hljs-comment line-number">9.</span>不同浏览器无法共享<span class="hljs-built_in">local</span>Storage或sessionStorage中的信息。相同浏览器的不同页面间可以共享相同的 <span class="hljs-built_in">local</span>Storage（页面属于相同域名和端口），但是不同页面或标签页间无法共享sessionStorage的信息。这里需要注意的是，页面及标 签页仅指顶级窗口，如果一个标签页包含多个iframe标签且他们属于同源页面，那么他们之间是可以共享sessionStorage的。<br></code></pre></div></body></html>

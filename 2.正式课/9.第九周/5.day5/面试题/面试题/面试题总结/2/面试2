@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><title>2345.com</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h2 id="2345com">2345.com</h2>
+
+
+
+<h3 id="web前端笔试45分钟">web前端笔试(45分钟)</h3>
+
+
+
+<h4 id="选择题">选择题</h4>
+
+<p>1.你认为最合理的定义标题的方法: <br>
+A.<code>&lt;span class='heading'&gt;标题&lt;/span&gt;</code> <br>
+B.<code>&lt;p&gt;标题&lt;/p&gt;</code> <br>
+C.<code>&lt;h1&gt;标题&lt;/h1&gt;</code> <br>
+D.<code>&lt;strong&gt;标题&lt;/strong&gt;</code></p>
+
+<p>2.页面中有按钮button,通过哪种JS方式,可以改变hover的样式 <br>
+A.onMouseOver=’className=btnPic’ <br>
+B.onMouseOver=’this.className=btnPic’ <br>
+C.onMouseOver=’this.style.className=btnPic’ <br>
+D.this.btn.style.className=”btnPic’</p>
+
+<p>3.通过以下哪个css属性来为不同的宽度指定专用的样式 <br>
+A.@media  B.@import  C.@keyframes  D.@font.face</p>
+
+<p>4.以下css那个属性存在继承性 <br>
+A.border   B.width  C.padding  D.font-size</p>
+
+<p>5.以下哪一组属于块级元素 <br>
+A.div   p   a    B.h1  p  span    C.i  em  div    D.h3  p  div</p>
+
+<p>6.以下哪一个animation-fill-mode 属性来设置动画结束时的状态 <br>
+A.none    B.forwards  C.both   D.backwards</p>
+
+<h4 id="填空题">填空题</h4>
+
+<p>1.web标准推荐结构,样式,行为分离,结构是html,那么样式是<strong><em><strong>_</strong></em></strong>,行为是<strong><em>_</em></strong> <br>
+2.<strong><em><strong>____________________</strong></em></strong>方法可以获取页面中的id=’style’ 的dom对象 <br>
+3.border-width:1px;border-style:solid;border-color:#ff5500可以简化为<strong><em><strong>__________</strong></em></strong> <br>
+4.通过设置target<strong><em><strong>____</strong></em></strong>实现啊在新标签中打开连接 <br>
+5.css中的<strong><em><strong>_____</strong></em></strong>属性是可以控制图片尺寸的大小以及缩放 <br>
+6.设置css属性float的值为<strong><em><strong>__</strong></em></strong>时可以取消元素的浮动 <br>
+7.假设根元素html的font-size等于12px,那么2.5rem等于<strong><em><strong>___</strong></em></strong> <br>
+8.html5新增语义化标签中,<strong><em><strong>__</strong></em></strong>标签定义文档的头部,<strong><em><strong>_____</strong></em></strong>标签定义文档的导航</p>
+
+
+
+<h4 id="简答题">简答题</h4>
+
+<p>1.简述标准盒模型中width和height的计算方法,设置box-sizing什么值可以表现标准盒模型</p>
+
+<p>2.如何实现宽度为100px,高度为100px的容器垂直水平悬浮居中于页面里?</p>
+
+<p>3.编写轮播图核心html结构,用JQ为左右按钮绑定点击事件</p>
+
+<p>4.以下是有序列表(1)向<code>&lt;ol&gt;</code>最后增加一个<code>&lt;li&gt;</code> <br>
+(2)编写至少两种解决办法,设置第一个</p><li>的背景为红色 <br>
+<code> <br>
+&lt;ol class ='list' id='J_list'&gt; <br>
+       &lt;li&gt;&lt;/li&gt; <br>
+       &lt;li&gt;&lt;/li&gt; <br>
+&lt;/ol&gt;</code></li><p></p></div></body></html>

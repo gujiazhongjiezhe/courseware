@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="fn($event,100,200)">点击</button>
+    <input type="text" @keyup="fn">
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        // 1、绑定事件的时候可以加小括号，也可以不加
+        // 2、如果函数绑定的时候没有小括号，那第一个形参默认就是事件对象,如果加上小括号，而且不穿参，那事件对象句没了
+        // 3、如果需要事件对象，而且还要传参，那必须在绑定事件的时候用$event站位
+        fn(e, a, b) { // e事件对象
+          console.log(e, a, b)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

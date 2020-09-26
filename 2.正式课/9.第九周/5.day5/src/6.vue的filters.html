@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- {{fn(num1)}} -->
+
+    <!-- 管道符 -->
+    <!-- toFixed方法的传参：方法的参数会传递给filters里的函数的第二个形参 -->
+    {{num1 | toFixed(2)}}
+    {{num2 | toFixed(3) | addZero}}
+    {{num3 | addZero}}
+    {{num4 | addZero}}
+    <input type="text" v-model='text'>
+    <span>{{text|toUP|filterB}}</span>
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 写一个小于10就补零的方法
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        num1: 3.454654767,
+        num2: 3.34465656,
+        num3: 8,
+        num4: 12,
+        text:''
+      },
+      methods: {
+
+      },
+      filters: {
+        toFixed(val, index) {
+          // 1、函数的第一个形参val就是管道符前面的数据
+          // 2、index就是toFixed函数执行时传递过来的实参
+          // 3、函数return什么，那页面就显示什么
+          console.log(index)
+          return val.toFixed(index)
+        },
+        addZero(val) {
+          return val < 10 ? '0' + val : val
+        },
+        //=>设置过滤器：把需要在视图中渲染的数据进行二次或者多次的处理
+        toUP(value) {
+          //=>value:需要过滤的数据 return返回的是过滤后的结果
+          return value.replace(/\b[a-zA-Z]+\b/g, item => {
+            return item.charAt(0).toUpperCase() + item.substring(1);
+          });
+        },
+        filterB(value) {
+          return value.split('').reverse().join('');
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

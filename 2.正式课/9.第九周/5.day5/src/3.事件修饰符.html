@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="a">
+        <div  @click.self="fn1" style="width: 200px;height: 200px;background: orangered;">
+            outer
+            <div  @click="fn2">
+                innter
+                <div  @click="fn3">
+                    center
+                </div>
+            </div>
+        </div>
+        <input type="text" @keydown.alt.67="fn9">
+        <a href="http://www.zhufengpeixun.cn/" @click.prevent.stop='fn9'>666</a>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 原生：e.stopPropagation() // 阻止事件的冒泡
+        // 事件修饰符
+        // .stop:阻止事件的冒泡传播
+        // .prevent:阻止事件的默认行为
+        // .capture:控制事件在捕获阶段执行
+        // .once:当事件只触发一次
+        // .self:只有点击自己的时候函数才会执行
+        // .passive:修饰oscroll事件的，不会等到当前事件执行完，就会立马执行下一次事件,提高性能
+        // fun() 1
+        // fun() 2
+        // fun() 3
+
+        // 键盘事件修饰符
+        // .enter  .tab .delete .left .right  .top  .bottom  .esc 或者使用keycode也可以
+        // 组合按键：@keydown.alt.67 = 'xxx'  //=>ALT+C
+
+
+
+        // 捕获阶段(从外往里)-->目标阶段-->冒泡阶段(从里往外)
+        new Vue({
+            el:'#a',
+            data:{
+
+            },
+            methods:{
+                fn1(){
+                    console.log('outer')
+                },
+                fn2(){
+                    console.log('innter')
+                },
+                fn3(){
+                    console.log('center')
+                },
+                fn9(e){
+                    console.log(e)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title>珠峰培训 - 微信：18310612838</title>
+	<meta name="keyword"
+		content="技术体系：HTML5、CSS3、JAVASCRIPT、ES6、AJAX、NODE、VUE、REACT、小程序、FLUTTER等；课程体系：零基础就业课、在线框架课、全栈架构课；学前端就选珠峰，十年专注做前端！">
+</head>
+
+<body>
+	<div id="app">
+		<p>正常结果：{{text}}</p>
+		<p>反转结果：{{reverseMethod()}}</p>
+		<p>反转结果：{{reverseComputed}}</p>
+		<p>{{now2()}}</p>
+	</div>
+	<!-- IMPORT JS -->
+	<script src="../node_modules/vue/dist/vue.js"></script>
+	<script>
+		//=>真实项目中：我们一般用一个计算属性和某些响应式数据进行关联，响应式数据发生改变，计算属性的GETTER函数会重新执行，否则使用的是上一次计算出来的缓存结果
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				text: 'MY NAME IS ZHUFENG PEIXUN'
+			},
+			computed: {
+				//=>GETTER函数
+				reverseComputed() {
+					// console.log('computed');
+					return this.text.split('').reverse().join('');
+				},
+				now1() {
+					//=>计算属性中必须要关联一个响应式数据，否则GETTER函数只执行一次
+					return new Date();
+				}
+			},
+			methods: {
+				reverseMethod() {
+					// console.log('methods');
+					return this.text.split('').reverse().join('');
+				},
+				now2() {
+					return new Date();
+				}
+			}
+		});
+
+		let n = 0;
+		let timer = setInterval(() => {
+			n++;
+			if (n > 5) {
+				clearInterval(timer);
+				return;
+			}
+			if (n === 3) {
+				vm.text = 'WELCOME TO ZHUFENG';
+				return;
+			}
+			//=>强制更新视图的重新渲染
+			vm.$forceUpdate();
+		}, 1000);
+	</script>
+</body>
+
+</html>

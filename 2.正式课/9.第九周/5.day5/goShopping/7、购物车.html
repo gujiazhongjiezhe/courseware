@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="row">
+          <table class="table table-bordered">
+            <caption class="text-center text-danger h2">
+              板牙拖车
+            </caption>
+            <tr>
+              <td>
+                全选
+                <input type="checkbox" v-model="checkAll" @change="changeAll" />
+              </td>
+              <td>商品</td>
+              <td>单价</td>
+              <td>数量</td>
+              <td>小计</td>
+              <td>操作</td>
+            </tr>
+            <tr v-for="(item,index) in products">
+              <td>
+                <input
+                  type="checkbox"
+                  v-model="item.isSelected"
+                  @change="checkOne"
+                />
+              </td>
+              <td>
+                <img :src="item.productCover" alt="" />
+              </td>
+              <td>{{item.productPrice}}</td>
+              <td>
+                <input
+                  type="number"
+                  v-model="item.productCount"
+                  max="10"
+                  min="0"
+                />
+              </td>
+              <td>
+                {{item.productCount*item.productPrice | toFixed(2)}}
+              </td>
+              <td>
+                <button class="btn btn-warning" @click="remove(index)">
+                  删除
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="6">总计:￥{{sum() | toFixed(3)}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+            let ary = [{ num: 20 }, { num: 30 ,isSelected:true}, { num: 40 }];
+            let ss = ary.reduce((prev, next) => {
+              // 第一次  prev 0    next {第一个对象}
+              // 第二次  prev 20  next {第二个对象}
+              // 第三次  prev  50  next (第三个对象)
+              // 这一次return的值作为下一次prev的值   next就是数组的每一项
+            if(!next.isSelected){
+                 return prev+ next.num
+            }
+            else {
+               return prev
+            }
+             
+            }, 0);
+            console.log(ss)
+            let vm = new Vue({
+              el: "#app",
+              data: {
+                products: [],
+                checkAll: false
+              },
+              created() {
+                // created里的this也是当前vue实例
+                this.getData();
+              },
+              methods: {
+                getData() {
+                  // 通过axios请求，把请求回来的数据给到data中的products属性
+                  //this==>当前vue的实例
+                  axios.get("./carts.json").then(data => {
+                    this.products = data.data;
+                    this.checkOne();
+                  });
+                },
+
+                changeAll() {
+                  console.log(this.checkAll);
+                  // this-->当前vue的实例
+                  this.products.forEach(item => {
+                    // 让products中的每一项的isSelected的值都跟随全选框的值
+                    item.isSelected = this.checkAll;
+                  });
+                },
+                checkOne() {
+                  // 给当前每一个小选框绑定内容改变事件，当内容改变的时候去循环products的每一项，看看每一项的isSelected的值是否全部为true，如果全部为true，那就把全选框的值改为true，如果有一个为fasle，就把全选框的值改为false   (every)
+
+                  // 遍历数组，如果数组的每一项都return true，那最后的返回值就是true，如果有一项返回值是fasle，那最后的返回值就是fasle
+                  this.checkAll = this.products.every(item => {
+                    return item.isSelected;
+                  });
+                },
+                remove(id) {
+                  this.products = this.products.filter((item, index) => {
+                    return id !== index;
+                  });
+                  // this.products.splice(id,1)
+                },
+                sum() {
+                  return this.products.reduce((prev, next) => {
+                    // 第一次  prev 0    next {第一个对象}
+                    // 第二次  prev 上次return的和  next {第二个对象}
+
+                    // 这一次return的值作为下一次prev的值   next就是数组的每一项
+
+                    // 如果是true就参与求和
+                    if (next.isSelected) {
+                      return prev + next.productPrice * next.productCount;
+                    } else {
+                      // 把上一次求和的结果传递给下一次
+                      return prev;
+                    }
+                  }, 0);
+                }
+              },
+              filters: {
+                toFixed(val, index) {
+                  return val.toFixed(index);
+                }
+              }
+            });
+    </script>
+  </body>
+</html>

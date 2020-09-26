@@ -1,0 +1,51 @@
+##2345.com
+###web前端笔试(45分钟)
+####选择题
+1.你认为最合理的定义标题的方法:
+A.`<span class='heading'>标题</span>`
+B.`<p>标题</p>`
+C.`<h1>标题</h1>`
+D.`<strong>标题</strong>`
+
+2.页面中有按钮button,通过哪种JS方式,可以改变hover的样式
+A.onMouseOver='className=btnPic'
+B.onMouseOver='this.className=btnPic'
+C.onMouseOver='this.style.className=btnPic'
+D.this.btn.style.className=''btnPic'
+
+3.通过以下哪个css属性来为不同的宽度指定专用的样式
+A.@media  B.@import  C.@keyframes  D.@font.face
+
+4.以下css那个属性存在继承性
+A.border   B.width  C.padding  D.font-size
+
+5.以下哪一组属于块级元素
+A.div   p   a    B.h1  p  span    C.i  em  div    D.h3  p  div
+
+6.以下哪一个animation-fill-mode 属性来设置动画结束时的状态
+A.none    B.forwards  C.both   D.backwards
+
+####填空题
+1.web标准推荐结构,样式,行为分离,结构是html,那么样式是_________,行为是_________
+2.______________________________方法可以获取页面中的id='style' 的dom对象
+3.border-width:1px;border-style:solid;border-color:#ff5500可以简化为____________________
+4.通过设置target______________实现啊在新标签中打开连接
+5.css中的_______________属性是可以控制图片尺寸的大小以及缩放
+6.设置css属性float的值为____________时可以取消元素的浮动
+7.假设根元素html的font-size等于12px,那么2.5rem等于_____________
+8.html5新增语义化标签中,____________标签定义文档的头部,_______________标签定义文档的导航
+
+####简答题
+1.简述标准盒模型中width和height的计算方法,设置box-sizing什么值可以表现标准盒模型
+
+2.如何实现宽度为100px,高度为100px的容器垂直水平悬浮居中于页面里?
+
+3.编写轮播图核心html结构,用JQ为左右按钮绑定点击事件
+
+4.以下是有序列表(1)向`<ol>`最后增加一个`<li>`
+(2)编写至少两种解决办法,设置第一个<li>的背景为红色
+`
+<ol class ='list' id='J_list'>
+       <li></li>
+       <li></li>
+</ol>`

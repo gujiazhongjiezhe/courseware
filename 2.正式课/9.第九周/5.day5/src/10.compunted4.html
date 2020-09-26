@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title>珠峰培训 - 微信：18310612838</title>
+	<meta name="keyword"
+		content="技术体系：HTML5、CSS3、JAVASCRIPT、ES6、AJAX、NODE、VUE、REACT、小程序、FLUTTER等；课程体系：零基础就业课、在线框架课、全栈架构课；学前端就选珠峰，十年专注做前端！">
+</head>
+
+<body>
+	<div id="app">
+		<input type="checkbox" v-model='slected'>全选/非全选
+		<br>
+		<span v-for='item in hobbyList'>
+			<input type="checkbox" :id="item.id|handleID" :value="item.value" v-model='checkList'>
+			<label :for="item.id|handleID" v-text='item.name'></label>
+		</span>
+	</div>
+	<!-- IMPORT JS -->
+	<script src="../node_modules/vue/dist/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				hobbyList: [{
+					id: 1,
+					name: '唱歌',
+					value: 'song'
+				}, {
+					id: 2,
+					name: '跳舞',
+					value: 'dance'
+				}, {
+					id: 3,
+					name: '阅读',
+					value: 'read'
+				}, {
+					id: 4,
+					name: '睡觉',
+					value: 'sleep'
+				}],
+				//存储选中的兴趣爱好
+				checkList: [],
+			},
+			computed: {
+				//存储全选按钮的选中状态
+				slected: {
+					get() {
+						return this.checkList.length === this.hobbyList.length;
+					},
+					set(value) {
+						//=>点击全选框会修改slected的值
+						//=>VALUE存储的是选中的状态
+						if (value) {
+							this.hobbyList.forEach(item => {
+								this.checkList.push(item.value);
+							});
+							return;
+						}
+						this.checkList = [];
+					}
+				}
+			},
+			filters: {
+				handleID(value) {
+					return 'hobby' + value;
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

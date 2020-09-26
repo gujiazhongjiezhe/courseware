@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <title>珠峰培训 - 微信：18310612838</title>
+  <meta name="keyword"
+    content="技术体系：HTML5、CSS3、JAVASCRIPT、ES6、AJAX、NODE、VUE、REACT、小程序、FLUTTER等；课程体系：零基础就业课、在线框架课、全栈架构课；学前端就选珠峰，十年专注做前端！">
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model='text'>
+    <br>
+    <span v-text='toUP'></span>
+  </div>
+  <!-- IMPORT JS -->
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        text: ''
+      },
+      computed: {
+        //=>计算属性：它不是方法是一个属性，所以在视图中调取的时候不能加括号执行，toUP和DATA中的TEXT一样，都会挂载到实例上，它存储的值是对应方法返回的结果（getter函数处理的结果）
+        //=>计算属性有自己的缓存处理：第一次获取toUP属性值，会关联某个响应式数据(text)，当第一次结果获取后，会把这个结果缓存下来；后期视图重新渲染，首先看text值是否发生更改，如果发生更改，会重新计算toUP属性值，如果没有更改，则还会拿上次缓存的结果进行渲染;
+        toUP() {
+          return this.text.replace(/\b[a-zA-Z]+\b/g, item => {
+            return item.charAt(0).toUpperCase() + item.substring(1);
+          });
+        }
+      },
+      methods: {
+        /* toUP(value) {
+          return value.replace(/\b[a-zA-Z]+\b/g, item => {
+            return item.charAt(0).toUpperCase() + item.substring(1);
+          });
+        } */
+      }
+    });
+  </script>
+</body>
+
+</html>

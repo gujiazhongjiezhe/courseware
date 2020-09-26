@@ -1,0 +1,39 @@
+<!DOCTYPE html><html><head><title>用友</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h2 id="用友">用友</h2>
+
+
+
+<h3 id="笔试">笔试</h3>
+
+<p>1.写出以下代码运行的结果</p>
+
+
+
+<pre class="prettyprint with-line-number hljs-light"><code class="hljs javascript"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> fullName=<span class="hljs-string">'language'</span>;<br><span class="hljs-comment line-number">2.</span><span class="hljs-keyword">var</span> obj={<br><span class="hljs-comment line-number">3.</span>   fullName=<span class="hljs-string">'javascript'</span>,<br><span class="hljs-comment line-number">4.</span>   <span class="hljs-attr">prop</span>:{<br><span class="hljs-comment line-number">5.</span>      <span class="hljs-attr">getFullName</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br><span class="hljs-comment line-number">6.</span>         <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.fullName;<br><span class="hljs-comment line-number">7.</span>      }<br><span class="hljs-comment line-number">8.</span>   }<br><span class="hljs-comment line-number">9.</span>};<br><span class="hljs-comment line-number">10.</span><span class="hljs-built_in">console</span>.log(obj.prop.getFullName());<br><span class="hljs-comment line-number">11.</span><span class="hljs-keyword">var</span> test=obj.prop.getFullName;<br><span class="hljs-comment line-number">12.</span><span class="hljs-built_in">console</span>.log(test());<br></code></pre>
+
+<p>2.请写出以下代码运行结果</p>
+
+
+
+<pre class="prettyprint with-line-number hljs-light"><code class="hljs kotlin"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> name=<span class="hljs-string">'window'</span>;<br><span class="hljs-comment line-number">2.</span><span class="hljs-keyword">var</span> Tom={<br><span class="hljs-comment line-number">3.</span>   name:<span class="hljs-string">"Tom"</span>,<br><span class="hljs-comment line-number">4.</span>   show:function(){<br><span class="hljs-comment line-number">5.</span>      console.log(<span class="hljs-keyword">this</span>.name);<br><span class="hljs-comment line-number">6.</span>   },<br><span class="hljs-comment line-number">7.</span>   wait:function(){<br><span class="hljs-comment line-number">8.</span>      <span class="hljs-keyword">var</span> <span class="hljs-function"><span class="hljs-keyword">fun</span>=this.show;</span><br><span class="hljs-comment line-number">9.</span>      <span class="hljs-function"><span class="hljs-title">fun</span><span class="hljs-params">()</span></span>;<br><span class="hljs-comment line-number">10.</span>   }<br><span class="hljs-comment line-number">11.</span>};<br><span class="hljs-comment line-number">12.</span>Tom.wait();<br></code></pre>
+
+<p>3.在javascript对象上定义一个repeatify函数,这个函数接受一个整数参数,来明确子字符串需要重复几次,这个函数要求字符串重复指定的次数,比如:’abc’.repeatify(3);//”abcabcabc”</p>
+
+<p>4.<code>var str='hello&lt;img src="haha.png" alt="哈哈"/&gt;world';</code> <br>
+正确匹配输出’hello[哈哈]world’</p>
+
+<p>5.罗列出清除浮动的方法</p>
+
+<p>6.陈述zepto tap事件点透的原因及解决方案</p>
+
+<p>7.解析一下Javascript的同源策略,你所了解到的ajax跨域解决方案以及方案的优缺点</p>
+
+<p>8.罗列移动端目前常用的自适应解决方案</p>
+
+<p>9.cookie  localStorage   sessionStorage的三者优缺点,适用场景</p></div></body></html>

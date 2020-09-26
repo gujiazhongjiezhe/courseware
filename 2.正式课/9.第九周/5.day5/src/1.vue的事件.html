@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <!-- <div v-on:click="fn">点击</div> -->
+        <div @click="fn" @mousedown="fn1">点击</div>
+        <input type="text" @keydown="fn">
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // v-on:给元素绑定事件的指令
+        // v-on可以简写为@
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                // data里的数据都会挂载到vue实例身上
+             msg:6666,
+            //  fn:7777
+            },
+            // 给元素绑定事件方法，一般都放到methods里，而且不能和data的名字重合
+            methods:{
+                // 1、methods里存放的都是键值对
+                // 2、给元素绑定的方法都放到methods
+                // 3、事件对应的函数里的this是Vue实例
+                fn(){
+                    console.log(this)
+                    this.msg++
+                    console.log(11111)
+                },
+                fn1(){
+                    console.log(222)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
