@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="checkbox" v-model="selected" @change="fn">全选
+    <br>
+    <span v-for="item in ary">
+      <input type="checkbox" :value="item.value" v-model="checkList">{{item.name}}
+    </span>
+    <br>
+    {{r}}
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        ary: [
+          {
+            name: '铁架小宝',
+            value: 'tiejia'
+          },
+          {
+            name: '百变小樱魔术卡',
+            value: 'baibian'
+          },
+          {
+            name: '奥特曼',
+            value: 'aote'
+          }
+        ],
+        selected: false,
+        checkList: [],
+
+      },
+      methods: {
+        fn() {
+          if (this.selected) {
+            this.checkList = ['tiejia', 'baibian', 'aote']
+          }
+          else {
+            this.checkList = [];
+          }
+        }
+      },
+      filters: {
+
+      },
+      computed: {
+          r(){
+            let res = null;
+            setTimeout(()=>{
+              res =  this.selected ? 100:200;
+            },3000);
+            return res;
+           
+          }
+      },
+      watch: {
+        // watch是监听响应式数据的变化的(你所监听的诗句必须在data中进行初始化)
+        // 和computed类似，只不过有咱们的computed是单独的一个响应式的属性(不能和data中的数据重名)，而watch中的名字必须和data中的数据重名(监听data中同一个名字的属性)
+        
+        // computed不支持异步，watch里边可以写异步的代码
+        // selected(){
+        //    if(this.selected){
+        //      this.checkList = ['tiejia','baibian','aote']
+        //    }
+        //    else {
+        //     this.checkList = [];
+        //    }
+        // },
+        checkList() {
+          setTimeout(() => {
+            this.selected = this.checkList.length === 3 ? true : false;
+          }, 3000);
+          // console.log(this.checkList);
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

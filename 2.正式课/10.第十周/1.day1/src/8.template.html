@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app1"></div>
+
+  <div id="app2"></div>
+
+  <template id="first">
+    <div>
+      <h1>{{msg}}</h1>
+      <h2>333</h2>
+    </div>
+  </template>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 1.如果vue实例中有template模板，当初始化vue实例的时候，会把template属性对应的值进行编译，并且把#app进行调换
+
+    // 2、在template模板照片那个可以获取到data中的数据和methods中个的方法
+    // 3、template中只会有一个根元素
+    let vm1 = new Vue({
+      el:'#app1',
+      // template:'<h1 @click="fn">{{msg}}</h1><h2></h2>', // 这种是错误的
+      template: '#first',
+      data:{
+        msg:100
+      },
+      methods:{
+        fn(){
+          console.log(300);
+        }
+      }
+    });
+
+
+    let vm2 = new Vue({
+      el:'#app2',
+      // template:'<h1 @click="fn">{{msg}}</h1><h2></h2>', // 这种是错误的
+      template: '#first',
+      data:{
+        msg:900
+      },
+      methods:{
+        fn(){
+          console.log(300);
+        }
+      }
+    });
+
+    // template可以抽离公共的结构
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div></div>
+    {{num1 | toFixed}}
+    {{ss}}
+    <button @click="fn">点击</button>
+    {{num2}}
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 实现两个数的求和
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        num1: 10.97,
+        num2:20
+      },
+      methods: {
+        // 存放咱们的方法的
+        // this都是当前vue的实例
+        // sum(){
+        //   return this.num1+this.num2
+        // }
+        fn(){
+          this.num2++
+        }
+      },
+      filters: {
+        // 过滤器
+        // this都是当前vue的实例
+        //  sum(){
+        //   return this.num1+this.num2
+        // }
+        toFixed(value) {
+          console.log('toFixed');
+          return value.toFixed(1)
+        }
+      },
+      computed: {
+        // 存放的是属性(和data中的响应式的数据一样)不是方法
+        // 这里存放的是一个计算而来的属性，他可以使用缓存，当get执行以后会把当前得到的记过缓存下来，当视图下一次刷新的时候，他会看看当前属性依赖的数据有没有发生变化，如果变了，按就会重新计算，如果不变，那就走缓存
+        // 所以如果一个响应式的数据是依赖别的别的数据的变化而变化，那就用computed计算属性是最合适的
+        // ss(){
+        //   console.log('ss');
+        //   return this.num1.toFixed(1);
+        // }
+        ss:{
+          get(){
+            // get函数会被动的执行(依赖的值发生变化就会执行)
+            return this.num1.toFixed(1);
+          },
+          set(value){
+            // 当你设置当前的计算属性的时候就会执行
+            // value就是当前你所设置的值
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

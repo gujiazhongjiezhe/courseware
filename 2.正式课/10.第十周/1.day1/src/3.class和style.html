@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      color: red;
+      background: green;
+    }
+
+    .ss {
+      font-size: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 在vue里边可以动态的给元素添加类名，语法是{类名:data中的值}
+      如果data中的值转布尔是true，那当前类名就生效，如果转布尔是fasle，那当前类名就不生效
+    -->
+    <!-- <div :class="obj">中国足球</div> -->
+    <!-- <div :style="{fontSize:num+'px'}">中国足球</div> -->
+    <div :style="we">中国足球</div>
+    <button @click="fn">点击</button>
+    <!-- <ul>
+        <li v-for="(item,index) in ary" :class="{box:index%2}">
+          {{item}}
+        </li>
+      </ul> -->
+    <!-- vue中class的类名支持数组的格式,这种就是在data中拿类名 -->
+    <!-- <div :class=[...arr]>世界第一臭</div> -->
+ 
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    let vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          flag: true,
+          ary: [100, 200, 300, 400],
+          arr: ['c', 'd', 'e', 'f'],
+          obj: {
+            box:this.flag, ss: 1
+          },
+          num:60,
+          we:{color:'red',background:'black'}
+        }
+
+      },
+      methods: {
+        fn() {
+          // this.flag = !this.flag;
+          // this.arr = ['box', 'ss'];
+          this.num++
+        }
+      },
+      
+    })
+
+    
+  </script>
+</body>
+
+</html>

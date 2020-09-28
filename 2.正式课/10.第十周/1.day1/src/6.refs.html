@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="app">
+      <div ref="a">123</div>
+      <h1 ref="b">456</h1>
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 不关在什么时候写代码都要尽可能的少操作真实dom
+    // 如果咱们在使用vue框架的时候必须要操作dom了，vue给咱们提供了$refs属性，他会挂载到vue实例上
+    // 使用的时候在你想要得到的真实元素上行间写上一个ref属性,属性值随便写，然后vue实例上的$refs对象中就会出现你要得到的真实的dom元素,ref的名字不要重复
+    
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      // created(){
+      //   // document.getElementById('app')
+      // },
+      created:function(){
+
+      },
+      methods: {
+
+      }
+
+    })
+
+
+  </script>
+</body>
+
+</html>

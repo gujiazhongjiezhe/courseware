@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .tabBox {
+      box-sizing: border-box;
+      width: 600px;
+      margin: 20px auto;
+      /* border:1px solid red; */
+    }
+
+    .tabBox .tab {
+      display: flex;
+      position: relative;
+      top: 1px;
+    }
+
+    .tabBox .tab li {
+      border: 1px solid black;
+      margin-right: 10px;
+      line-height: 30px;
+      width: 100px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .tabBox .tab li.active {
+      border-bottom: 1px solid aliceblue;
+    }
+
+    .tabBox .content {
+      width: 600px;
+      height: 400px;
+      border: 1px solid black;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 400px;
+      display: block;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="tabBox">
+      <ul class="tab">
+        <li :class="{active:index === curIndex}" v-for="(item, index) in ary" @click="fn(index)">{{item.name}}</li>
+      </ul>
+
+      <div :class="{content:true}">{{content}}</div>
+    </div>
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    let ary = [
+      {
+        id: 1,
+        name: '一',
+        value: '我是第一个'
+      },
+      {
+        id: 2,
+        name: '二',
+        value: '我是第二个'
+      },
+      {
+        id: 3,
+        name: '三',
+        value: '我是第三个'
+      }
+    ]
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        ary,
+        curIndex: 0,
+        content:''
+      },
+      created(){
+          this.content = this.ary[this.curIndex].value;
+      },
+      methods: {
+        fn(index) {
+          this.curIndex = index;
+        }
+      },
+      computed:{
+        // content(){
+        //   return this.ary[this.curIndex].value;
+        // }
+      },
+      watch:{
+        curIndex(){
+          this.content = this.ary[this.curIndex].value;
+        }
+      }
+
+    })
+
+
+  </script>
+</body>
+
+</html>

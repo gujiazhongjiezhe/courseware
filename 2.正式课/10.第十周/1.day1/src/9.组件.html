@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <com1></com1>
+    <com1></com1>
+    <com1></com1>
+  </div>
+
+
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 组件化思想，
+    // 组件：就是对某一个小功能的封装，以后你想多次使用这个功能，就重复调用这个组件就 可以了
+
+    /* 
+    组件的特点
+      1、可复用
+      2、方便维护
+      3、每一个组件都是一个独立的个体，有自己的完整的生命周期、data数据、methods方法
+
+     */
+    // 在vue中组件分为全局组件和局部组件
+
+    // 这是全局组件
+    Vue.component('com1', {
+      data(){
+        return {
+          msg:789
+        }
+      },
+      methods: {
+        fn() {
+          console.log('123345')
+        }
+      },
+      beforeCreate() {
+        console.log('beforeCreate')
+      },
+      template: '<div @click="fn">{{msg}}</div>'
+    });
+
+
+    
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 100
+      },
+      methods: {
+        fn() {
+          console.log(300);
+        }
+      }
+    });
+
+
+
+
+
+  </script>
+</body>
+
+</html>
