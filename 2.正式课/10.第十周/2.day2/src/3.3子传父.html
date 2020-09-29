@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <style>
+    .container {
+      box-sizing: border-box;
+      margin: 20px auto;
+      width: 400px;
+      padding: 10px;
+      border: 1px solid red;
+    }
+
+    .container h2 {
+      font-size: 20px;
+      text-align: center;
+      border-bottom: 1px dashed gainsboro;
+      padding-bottom: 10px;
+      color: orangered;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="app">
+    <my-vote title='给汽车投票'></my-vote>
+    <!-- <my-vote title="给摩托车投票"></my-vote>
+    <my-vote  title="给轮椅投票"></my-vote> -->
+
+  </div>
+
+
+  <template id="vote">
+    <div class="container">
+      <h2>{{title}} (<span>{{num}}</span>)</h2>
+      <my-vote-content></my-vote-content>
+      <my-vote-footer @changparent="add" :add="add"></my-vote-footer>
+      <!-- 在事件池里订阅一个叫changparent的事件类型，对应的池子里的方法是add -->
+    </div>
+  </template>
+
+  <template id="voteContent">
+    <div class="content">
+      <p>支持人数：<span>0</span></p>
+      <p>反对人数：<span>0</span></p>
+      <p>支持率：<span>0%</span></p>
+    </div>
+  </template>
+
+  <template id="voteFooter">
+    <div class="footer">
+      <button type="button" class="btn btn-success" style="margin-right: 30px;" @click="add">支持</button>
+      <button type="button" class="btn btn-danger" @click="handle('no')">反对</button>
+    </div>
+  </template>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    let myVoteContent = {
+      template: '#voteContent',
+      data() {
+        return {
+
+        }
+      }
+    };
+
+    let myVoteFooter = {
+      template: '#voteFooter',
+      data() {
+        return {
+
+        }
+      },
+      props:['add'],
+      methods:{
+        handle(type){
+          console.log(type);
+          // this.$emit('changparent',type);
+          this.add()
+          // 发布changparent事件类型的池子里对应的方法
+          // type就是发布的时候传递给发布的函数的实参
+        }
+      }
+    };
+
+
+
+    let myVote = {
+      template: '#vote',
+      props: {
+        title: {
+          type: String,
+          default: '我是默认值' 
+        }
+      },
+      methods:{
+        add(type){
+          console.log(type,'add');
+          this.num++;
+        }
+      },
+      data() {
+        return {
+          num:0
+        }
+      },
+      components: {
+        myVoteContent,
+        myVoteFooter
+      }
+    };
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '我是父组件',
+        w: 100
+      },
+      components: {
+        myVote
+      }
+
+    });
+
+    // 1.可以利用发布订阅的思想进行传父的操作
+        // 1.在父组件里写一个改变数据的方法，然后在使用子组件的地方的行间利用自定义事件订阅一下，
+        // 2.以后就可以在子组件里利用$emit进行发布了
+    // 2.利用父传子的思想(prop)把父组件里的方法传递给子组件，子组件接收以后就可以直接使用了
+
+    // 兄弟组件之间的传递
+  </script>
+</body>
+
+</html>

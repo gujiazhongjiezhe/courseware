@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <span>{{msg}}</span>
+  </div>
+
+  <template id="first">
+    <div>
+      123
+    </div>
+  </template>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // beforeCreate
+    // created  // 在这里可以拿到data中的数据和methods中的方法(这里也不会引起视图的刷新)
+    // beforeMount // 当这个函数执行的时候，也可以按到响应式的数据，所以在这里也可以更改数据不会引起视图刷新(因为这是把模板挂载到真实dom上之前)
+
+    // mounted(这时候视图已经渲染完成，如果在这里修改数据，就会引起视图的刷新)
+    // 在页面初始化的时候就会执行
+
+    // beforeUpdate
+    // updated
+    // 在你更新data中的数据的时候就会执行
+
+
+    // beforeDestroy
+    // destroyed
+    // 在你手动销毁vue的时候就会执行，如果销毁了，那页面就没有响应式了
+
+      // $refs 就是让你在vue中快速获取原生DOM的
+      // template
+      let vm = new Vue({
+        el:'#app',
+        template:'#first'
+      })
+  </script>
+
+</body>
+</html>

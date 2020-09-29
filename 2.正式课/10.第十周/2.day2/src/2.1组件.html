@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <div>{{msg}}</div>
+    <!-- 
+      组件的调用：
+        1、双闭和标签，
+        2、单闭和标签，但是这种使用形式是不符合规范的，当前组件可以进行渲染，但是组件下边的东西就不给你渲染了
+
+        在组件调用的时候可以在组件标签的内部可以添加一个你的个性化配置，组件内部哪slot进行接收
+     -->
+    <index-item>
+      <!-- 使用插槽，如果是多个插槽，得给插槽指定名字 -->
+     <template v-slot:first><span>我是死亡芭比粉颜色的座椅</span> </template>
+     <template #second><span>铝合金轮毂</span> </template>
+    </index-item>
+
+    <!-- <index-item>
+      <span v-slot="first"> 我是原谅绿颜色的座椅</span>
+      <span v-slot="second">星空顶</span> 
+    </index-item> -->
+
+    <!-- <index-item/> -->
+    <div>11111</div>
+  </div>
+
+
+  <template id="first">
+    <div>
+      <!-- {{num}}
+      <br> -->
+      <slot name="first"></slot>
+      <button @click="fn">{{msg}}</button>
+      <slot name="second"></slot>
+      <com2></com2>
+    </div>
+  </template>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('com3',{
+      template:'<span>我是第三个组件</span>'
+    })
+    Vue.component('com2',{
+      template:'<span>我是第二个组件<com3></com3></span>'
+      
+    });
+      /* 
+      组件的特点：
+        1、可复用
+        2、好维护
+        3、每一个组件都有完整的生命周期
+
+       */
+    // 全局组件 局部组件
+    // Vue.component('组件名字',组件的配置选项)
+    // 1、给组件起名字的时候，如果组件名字开头大写，那使用的时候可以不区分大小写
+    // 2、组件名字不要大写
+    // 3、如果起名字的时候是驼峰命名法，那使用的时候以index-item的形式去使用
+    // 4、组件名字可以起index-item形式，使用的时候也是这么使用
+    // 5.组件名字不能和H5里的标签名一样
+    Vue.component('index-item',{
+        // template里只能有一个跟节点，
+        // 组件必须有template模板，要不然没办法渲染
+        // template里的dom元素也可以分离开，写到视图里
+        template:'#first',
+        data(){
+          return {
+            msg:'我是子组件的',
+            num:0
+            // 主要是为了生成一个类似闭包的形式，
+          }
+        },
+        methods:{
+          fn(){
+            // console.log(100);
+            this.num++
+          }
+        }
+    })
+
+    let vm = new Vue({
+      el:'#app',
+      data:{
+        msg:800
+      }
+    });
+  </script>
+</body>
+</html>

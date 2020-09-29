@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <style>
+    .container {
+      box-sizing: border-box;
+      margin: 20px auto;
+      width: 400px;
+      padding: 10px;
+      border: 1px solid red;
+    }
+
+    .container h2 {
+      font-size: 20px;
+      text-align: center;
+      border-bottom: 1px dashed gainsboro;
+      padding-bottom: 10px;
+      color: orangered;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="app">
+    <my-vote title='给汽车投票'></my-vote>
+    <my-vote title="给摩托车投票"></my-vote>
+    <my-vote  title="给轮椅投票"></my-vote>
+
+  </div>
+
+
+  <template id="vote">
+    <div class="container">
+      <h2>{{title}} (<span>{{num}}</span>)</h2>
+      <my-vote-content :event-bus="eventBus"></my-vote-content>
+      <my-vote-footer @changparent="add" :event-bus="eventBus"></my-vote-footer>
+
+    </div>
+  </template>
+
+  <template id="voteContent">
+    <div class="content">
+      <p>支持人数：<span>{{supportNum}}</span></p>
+      <p>反对人数：<span>{{opposeNum}}</span></p>
+      <p>支持率：<span>{{rate}}</span></p>
+    </div>
+  </template>
+
+  <template id="voteFooter">
+    <div class="footer">
+      <button type="button" class="btn btn-success" style="margin-right: 30px;" @click="handle('ok')">支持</button>
+      <button type="button" class="btn btn-danger" @click="handle('no')">反对</button>
+    </div>
+  </template>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // let eventBus = new Vue; // 创建一个第三方的事件总线(第三方的对象)
+    // Vue 的实例身上有$emit发布  和$on订阅方法
+    // let obj = {'change':[changeNum]};
+
+    let myVoteContent = {
+      template: '#voteContent',
+      data() {
+        return {
+          supportNum: 0,
+          opposeNum: 0
+        }
+      },
+      props:['eventBus'],
+      methods:{
+        changeNum(type){
+            if(type === 'ok'){
+              this.supportNum++;
+            }
+            else {
+              this.opposeNum++;
+            }
+        }
+      },
+      computed: {
+        rate() {
+          let total = this.supportNum + this.opposeNum;
+          if (total == 0) {
+            return '0%'
+          };
+          return (this.supportNum / total * 100).toFixed(2) + '%'
+        }
+      },
+      created(){
+        console.log(1);
+        // eventBus.$on('change',this.changeNum);
+        this.eventBus.$on('change',this.changeNum);
+      }
+    };
+
+    let myVoteFooter = {
+      template: '#voteFooter',
+      data() {
+        return {
+          
+        }
+      },
+      props: ['add','eventBus'],
+      methods: {
+        handle(type) {
+          this.$emit('changparent', type);
+
+          // eventBus.$emit('change',type)
+
+         this.eventBus.$emit('change',type)
+        }
+      }
+    };
+
+
+
+    let myVote = {
+      template: '#vote',
+      props: {
+        title: {
+          type: String,
+          default: '我是默认值'
+        }
+      },
+      methods: {
+        add(type) {
+          console.log(type, 'add');
+          this.num++;
+        }
+      },
+      data() {
+        return {
+          num: 0,
+          eventBus:new Vue
+        }
+      },
+      components: {
+        myVoteContent,
+        myVoteFooter
+      }
+    };
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '我是父组件',
+        w: 100
+      },
+      components: {
+        myVote
+      }
+
+    });
+  </script>
+</body>
+
+</html>

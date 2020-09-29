@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>我是大视图</div>
+    <com-index />
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 创建局部组件
+    // 在使用的大组件中注册组件
+    // 在大组件中使用组件
+
+    let com2 = {
+      template: '<div>我是com2组件</div>',
+      data() {
+        return {
+          msg: 'hello'
+        }
+      }
+    };
+    
+    let comIndex = {
+      template: '<div>我是com1组件{{msg}}<com2/></div>',
+      data() {
+        return {
+          msg: 'hello'
+        }
+      },
+      components:{
+        com2
+      }
+    };
+    // 局部组件也有自己的data数据和methods...还有生命周期
+
+
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      // 在这里的注册局部组件
+      components: {
+        // sss:com1 // 属性名和属性值一样，可以省略写一个就行了
+        // sss:comIndex
+        // 'com-index':comIndex
+        ComIndex: comIndex
+      }
+    });
+  </script>
+</body>
+
+</html>
