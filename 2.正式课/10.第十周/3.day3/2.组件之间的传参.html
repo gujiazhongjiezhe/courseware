@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <div>我是app根实例{{msg}}</div> -->
+    <!-- 
+        1.在组件行间写的属性，如果不加v-bind:的话，那通通都是字符串类型的，如果加上v-bind:，传的值如果是js类型值，那就是当前的那个值，如果不是js类型值，那就会去当前父亲身上找响应的属性
+       -->
+    <com :num="num" :add="add" @changefather="add" :event-bus="eventBus"></com>
+    <!-- 这就相当于往事件池子里订阅changefather类型的事件add -->
+    <com1 :event-bus="eventBus"></com1>
+    <div>我是最后</div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    let com = {
+      template: `<div>
+                    <div @click="fn">我是com组件{{num}}{{msg}}</div>
+                </div>`,
+      props: ['num','add','eventBus'], // 利用props接收的属性会直接挂载到当前组件实例上
+      // props:{
+      //   // num:[Number,String] // 这块是简要当前传递过来的属性的数据类型，如果类型不匹配，只会在控制台抛出错误，但是不会影响视图的刷新
+      //   num:{
+      //     type:[Number,String],
+      //     required:true, // 这是设置当前属性是否是毕传的
+      //     defalut: 100, // 如果用户不传递，那就走默认值
+      //     validator(value){
+      //       // 自定义校验，如果return true那就是校验成功，如果return false那就是校验失败
+      //     }
+      //   }
+      // },
+      methods:{
+        fn(){
+          // this.add(100)
+          this.$emit('changefather',100); // 发布changefather事件类的方法
+        },
+        changeMsg(value){
+          this.msg = value;
+        }
+      },
+      data() {
+        return {
+          msg: 'hello',
+          // num: 100
+        }
+      },
+
+      created() {
+        // this.num++; // num是从父级传递过来的，不要在儿子里直接改
+        // 如果想把父级的num改了，那就只能通知父亲去改，
+        this.eventBus.$on('change',this.changeMsg)
+      },
+      // beforeUpdate() {
+      //   console.log('son-beforeUpdate');
+      // },
+      // updated() {
+      //   console.log('son-updated');
+      // },
+    };
+
+    // vue中的数据流是单向的
+
+    // 子组件的视图刷新共有两种渠道：自己data中的数据刷新，传递过来的props属性刷新
+    let com1 = {
+      template:`<div @click="fn">我是子组件com1</div>`,
+      props:['eventBus'],
+      methods:{
+        fn(){
+          this.eventBus.$emit('change','我把你改了哈哈');
+         
+          this.$parent.msg = 900;
+          console.log(this.$parent)
+        }
+      }
+    }
+
+
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        num: 0,
+        msg:'hello',
+        eventBus:new Vue
+      },
+      components: {
+        com,
+        com1
+      },
+      methods:{
+        add(value){
+          console.log(value);
+          this.num++
+        }
+      },
+      // beforeUpdate() {
+      //   console.log('app-beforeUpdate');
+      // },
+      // updated() {
+      //   console.log('app-updated');
+      // }
+    })
+  </script>
+</body>
+
+</html>

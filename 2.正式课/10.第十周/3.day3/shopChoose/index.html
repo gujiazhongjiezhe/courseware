@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>珠峰培训</title>
+	<style type="text/css">
+		body {
+			font-size: 14px;
+			font-family: "Lantinghei SC Extralight", Arial;
+		}
+
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		img {
+			vertical-align: top;
+		}
+
+		#wrap {
+			width: 760px;
+			height: 260px;
+			margin: 20px auto;
+			padding: 145px 120px 95px;
+			background: url(img/bg.jpg) no-repeat 0 0;
+		}
+
+		#section {
+			width: 760px;
+			height: 260px;
+			-moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, .2);
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, .2);
+		}
+
+		#choose {
+			width: 760px;
+			height: 50px;
+			margin: 0 auto;
+			background: url(img/nav_bg.png) no-repeat 0 0;
+			line-height: 50px;
+			text-indent: 21px;
+		}
+
+		#type {
+			width: 100%;
+			height: 210px;
+			background: url(img/type_bg.png) no-repeat 0 0;
+			padding: 17px 0 16px 28px;
+		}
+
+		#type li {
+			height: 44px;
+			color: #8a8a8a;
+			line-height: 44px;
+		}
+
+		#type a {
+			margin: 0 12px 0 11px;
+			color: #000;
+		}
+
+		#choose mark {
+			position: relative;
+			display: inline-block;
+			height: 24px;
+			line-height: 24px;
+			border: 1px solid #28a5c4;
+			color: #28a5c4;
+			margin: 12px 5px 0;
+			background: none;
+			padding: 0 30px 0 6px;
+			text-indent: 0;
+		}
+
+		#choose mark a {
+			position: absolute;
+			top: 3px;
+			right: 2px;
+			display: inline-block;
+			width: 18px;
+			height: 18px;
+			background: #28a5c4;
+			color: #fff;
+			line-height: 18px;
+			font-size: 16px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<section id="section">
+			<nav id="choose">
+				你的选择：
+				<mark v-for="(item, index) in selectedAry">
+					<span>{{item.name}}</span>
+					<a href="javascript:;" @click="del(item.type)">X</a>
+				</mark>
+			</nav>
+			<ul id="type">
+					<li v-for="(item, index) in ary">
+						<span>{{item.text}}:</span>
+						<a href="javascript:;" v-for="(items, indexs) in item.content" @click="handle(item.type,items)">
+							{{items}}
+						</a>
+					</li>
+			</ul>
+		</section>
+	</div>
+
+	<!-- IMPORT JS -->
+	<script src="./node_modules/vue/dist/vue.js"></script>
+	<script>
+		//=>类别具体的分类数据
+		let ary = [
+			{
+				type:1,
+				text:'品牌',
+				content:['苹果','小米','华为','三星']
+			},
+			{
+				type:2,
+				text:'尺寸',
+				content:['3.0英寸','4.5英寸','3.7英寸']
+			},
+			{
+				type:3,
+				text:'系统',
+				content:['安卓','IOS','塞班','鸿蒙']
+			},
+			{
+				type:4,
+				text:'颜色',
+				content:['死亡粉','原谅绿','狗屎黄','狗血红']
+			}
+		]
+
+		//=>选中项的数据
+		let selectedAry = [
+
+		]
+
+
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				ary,
+				selectedAry
+			},
+			methods: {
+				del(type){
+					this.selectedAry = this.selectedAry.filter(item=>{
+						return item.type != type;
+					})
+				},
+				handle(type,name){
+					console.log(type,name);
+					// 你得判断一下，当前点击的类型在selectedAry中有没有，如果有那就把当前类型的name替换就行了，如果没有，那就新增当前类型
+					let flag = this.selectedAry.some(item=>{
+						return item.type == type
+					});
+					console.log(flag);
+					if(flag){
+						// 如果当前flag是true，那就是修改
+						this.selectedAry.forEach(item=>{
+							if(item.type == type){
+								item.name = name;
+							}
+						})
+					}
+					else{
+						// 如果flag是false那就是新增
+						this.selectedAry.push({
+							type,
+							name
+						});
+					}
+					this.selectedAry.sort((a,b)=>a.type - b.type);
+				}
+			},
+		});
+	</script>
+</body>
+
+</html>

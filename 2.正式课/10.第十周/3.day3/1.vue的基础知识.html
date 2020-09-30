@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{addZero(toFixed(num))}}
+    {{num | addZero | toFixed}}
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app', // vue监听器监听的范围，
+      data: {
+        num:9.357
+      }, // 存放响应式的数据的
+      methods: {
+        toFixed(value) {
+          return value.toFixed(2);
+        },
+        addZero(value) {
+          return value < 10 ? '0' + value : value;
+        }
+      }, // 存放方法的
+      computed: {}, // 存放计算属性的
+      watch: {}, // 存放监听data中的数据的方法
+      filters: {}, // 过滤器，在页面使用的时候可以用管道符
+      components: {} // 在当前组件(vue实例)中使用的组件注册的地方
+    });
+
+    // vue中的基础指令：
+      // v-html v-text 他俩都是防止页面渲染闪烁的，但是v-html可以识别字符串的标签，但是v-text不可以
+      // v-model : 视图和数据的双向数据绑定
+      // v-bind:   语法糖 :    给元素的内置属性或者自定义属绑定动态的数据
+      // v-on:    语法糖 @     给元素绑定内置事件或者自定义事件绑定方法
+      // v-for    循环数据渲染视图的
+      // v-once    让你的数据第一次渲染可以从data中取值，以后data中的值发生变化的时   候，视图不在变化
+      // v-slot:    #   插槽里使用的
+      // v-if  v-else  v-else-if   控制的是DOM元素的有无
+      // v-show   控制的是元素的样式 display的样式值
+
+
+      // .self:  只有元素本身才能触发当前的事件
+      // .stop 阻止冒泡的
+      // .prevent 阻止元素的默认行为
+      // .capture 阻止事件的捕获行为
+      // // 键盘上的每一个键或者建码
+      // .once 让事件只执行一次
+      // .lazy 是把inpout事件改为change
+      // .passive
+      // .trim 去空格
+      // .number 转数字
+
+
+
+      // computed：计算属性，他和data中的值是一样的，都是具有响应式的，计算的属性一般情况下都是依赖data中的某个值的变化才会去变化，
+      // 计算属性可以简写成一个函数的形式，(但是最后的值不是函数)，函数return啥，属性的值就是啥，而且之后依赖的属性发生变化，计算属性才会重新进行计算并渲染视图，如果视图刷新的时候，依赖的属性没发生变化，那就会走上一次缓存下来的值
+
+
+      // filters：过滤器  可以结合管道符的语法对一个值过滤多次
+      //  {{num | toFixed | addZero}} // 这个没有缓存之说，只要视图更新，他就重新执行
+
+      // 有的时候想对数据进行处理在methods中也可以处理，他在视图刷新的时候也会重新执行
+      // watch：他就是对data中的响应式数据进行监听的。watch中的名字要和data中的名字一致，如果监听的数据改变了，那对应的watch中的监听函数就会执行(可以写异步的代码)
+
+
+// function fn(){
+//   let res = null;
+//   setTimeout(()=>{
+//    res = 300;
+//   },3000);
+//   return res;
+// }
+
+// console.log(fn());
+
+// 组件
+// 全局组件 局部组件
+
+// Vue.component('com1',{
+//   // 组件里必须有模板 template
+// template模板里必须只有一个根元素
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div @click="fn">我是app根实例{{num}}</div>
+    <div ref = 'div'></div>
+    <com1 ref="ss"></com1>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    let com1 = {
+
+      template: '<div @click="fun">我是com1组件{{msg}}</div>',
+      data() {
+        return {
+          msg: '哈哈'
+        }
+      },
+      methods: {
+        fun() {
+          console.log(this.$parent);
+          // 如果没有父亲，那就是undefined
+          this.$parent.num = 100;
+        }
+      },
+      beforeCreate() {
+        // 在子组件中任何一个地方都可以拿到$parent
+        console.log(this.$parent, 'son-beforeCreate')
+      }
+
+    }
+
+    let vm = new Vue({
+      el: '#app',
+      components: {
+        com1
+      },
+      methods: {
+        fn() {
+          console.log(this.$children);
+          // this.$children是一个数组的形式展示的，因为儿子有可能不是一个，所有他拿数组进行存储 , 如果没有儿子，那就是空数组
+          this.$children[0].msg = '我从父亲那那你改了'
+        }
+      },
+      data: {
+        num: 0
+      },
+      mounted() {
+        // 在mounted执行之后才会拿到$children
+        // console.log(this.$children, 'mounted')
+        console.log(this.$refs)
+        this.$refs.ss.msg = '揍你'
+      },
+    });
+
+    // 如果在组件的行间写上ref，那就可以在$refs上获取当前的那个组件
+    // 如果在元素行间写上ref，那就可以在$refs上获取当前的原生DOM
+
+    // props属性传参
+    // 绑定自定义事件(发布订阅)
+    //  事件车(兄弟之间传递)
+    // $children   $parent
+    // ref
+
+  </script>
+</body>
+
+</html>
