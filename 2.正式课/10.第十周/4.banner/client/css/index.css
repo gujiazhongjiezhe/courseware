@@ -1,0 +1,34 @@
+.container {
+    padding: 0;
+    width: 720px;
+}
+
+.my-title {
+    position: relative;
+    height: 80px;
+    line-height: 80px;
+    border-bottom: 1px solid #999;
+}
+
+.my-title .btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-40%);
+}
+
+.nav-pills {
+    margin-bottom: 8px;
+}
+
+.modal-backdrop {
+    display: none;
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+textarea,
+input[type='time'],
+input[type='date'] {
+    display: inline-block;
+    width: 48%;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>珠峰培训 - 微信：18310612838</title>
+    <!-- IMPORT CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <!-- CONTAINER -->
+    <section class="container">
+        <!-- TITLE -->
+        <h4 class="my-title">
+            任务管理系统
+            <button type="button" class="btn btn-success">创建任务</button>
+        </h4>
+
+        <!-- NAVS -->
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="javascript:;">全部</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:;">未完成</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:;">已完成</a>
+            </li>
+        </ul>
+
+        <!-- TIPS -->
+        <div class="alert alert-warning">
+            温馨提示：没有获取到匹配的数据~~
+        </div>
+
+        <!-- TABLE -->
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">编号</th>
+                    <th scope="col" style="width:50%">任务描述</th>
+                    <th scope="col">状态</th>
+                    <th scope="col">完成时间</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>任务：掌握JQUERY，尤其是能读懂JQ源码，BAT等巨头互联网企业任你选，薪资￥25000起步不在话下</td>
+                    <td>未完成</td>
+                    <td>07-05 16:20</td>
+                    <td>
+                        <a href="javascript:;">删除</a>
+                        &nbsp;
+                        <a href="javascript:;">完成</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">创建新任务</h5>
+                    <button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>任务描述</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>完成日期</label>
+                        <br>
+                        <input type="date" class="form-control">
+                        <input type="time" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">创建任务</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop"></div>
+
+    <!-- IMPORT JS -->
+</body>
+
+</html>
