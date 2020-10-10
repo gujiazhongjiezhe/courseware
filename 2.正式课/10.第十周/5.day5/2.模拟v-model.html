@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="msg" id="input">
+    <br>
+    <span id="text"></span>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    let data = {
+      msg: 100
+    }
+    let ss = {
+      msg: data.msg
+    }
+
+    function render() {
+      // 更新视图的函数
+      input.value = ss.msg;
+      text.innerHTML = ss.msg
+    };
+    render();
+
+
+    Object.defineProperty(data, 'msg', {
+      set(value) {
+        // console.log(value);
+        // data.msg = value;
+        ss.msg = value; // 不会引起set函数的执行
+        render();
+      }
+    });
+    input.addEventListener('input', function () {
+    
+      data.msg = this.value; // 当用户更改视图的时候，会触发input事件，从而在input事件中给data中的msg赋值，引发set函数执行
+
+      // ss.msg = this.value;
+      // render();
+    })
+
+
+
+    // let vm = new Vue({
+    //   el:'#app',
+    //     data:{
+    //       msg:100
+    //     }
+    // });
+  </script>
+</body>
+
+</html>

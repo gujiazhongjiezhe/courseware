@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <com1></com1>
+    <com2></com2>
+
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+  <script>
+    // let data = {
+    //   msg:1
+    // }
+    // 你完全可以把vuex想象成一个大对象
+    let store = new Vuex.Store({
+      state: {
+        count: 0,
+        num: 1
+      },
+      mutations: {
+        // 这里存储的是给更状态的方法，函数的形参就是store中的state
+        // 想调用这里的方法，必须通过commit去调取
+        increment(state, payload) {
+          // state是store中的state，payload是commit派发的时候传递归来的值
+          console.log(payload);
+          state.count += payload
+        
+        }
+      }
+    });
+
+    const com1 = {
+      data() {
+        return {
+
+        }
+      },
+      template: `<div @click="fn">组件一{{count}}{{num}}</div>`,
+      computed: {
+        // count(){
+        //   return this.$store.state.count
+        // },
+        // num(){
+        //   return this.$store.state.num
+        // }
+        ss() { },
+        ...Vuex.mapState(['count', 'num'])
+        // Vuex.mapState(['count','num'])将vuex中的state中的状态映射到当前实例的计算属性上(就是上边的简写形式)，他的返回值是一个对象，所以要他把展开
+      },
+    // computed: Vuex.mapState(['count','num']),
+    methods: {
+      fn() {
+        this.$store.commit('increment', 10);
+        // commit执行是派发mutations里的动作，去更改store中的state状态，第一个参数是方法名字，第二个参数是从传递给方法的数据
+      }
+    }
+    };
+    const com2 = {
+      data() {
+        return {
+
+        }
+      },
+      template: `<div>组件二{{this.$store.state.count}}</div>`,
+      created() {
+        // console.log(this)
+      },
+    };
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      components: {
+        com1,
+        com2
+      },
+      store
+      // 他会给当前vue的实例和里边的每一个组件都加上一个$store的属性(这就是那个大对象)
+    });
+
+  </script>
+</body>
+
+</html>

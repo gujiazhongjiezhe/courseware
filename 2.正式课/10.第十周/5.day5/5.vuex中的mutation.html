@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <com1></com1>
+    <com2></com2>
+
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+  <script>
+    // 假设现在store中有一个状态是依赖别的状态的改变而改变的，这时候可以使用getter
+    const AASDFGHYUVH = 'aa';
+    let store = new Vuex.Store({
+      state: {
+        count: 0,
+        num: 1,
+        obj: {},
+        bannerList: [1]
+      },
+      getters: {
+        sex(state) {
+          // 这里的state就是store中的状态
+          return state.count % 2 === 0 ? '男' : '女';
+        }
+      },
+      mutations: {
+        // 触发这里的改变必须是commit
+        // 一条重要的原则就是要记住 mutation 必须是同步函数
+        // [AA](state,payload) {
+        //   console.log(payload);
+        //   state.count++
+        // }
+        add(state, payload) {
+          console.log(payload);
+          state.count++
+        },
+        changeBanner(state, payload) {
+          state.bannerList = payload.data;
+        }
+      },
+      actions: {
+        // 触发这里的改变必须是dispatch
+        changeBanner({ commit,state }, payload) {
+          // context是当期的store，可以利用解构赋值的语法把commit解构出来
+          setTimeout(() => {
+            commit('changeBanner', payload);
+          }, 3000);
+
+        }
+      }
+    });
+
+    const com1 = {
+      data() {
+        return {
+
+        }
+      },
+      template: `<div @click="add(1)">组件一{{count}}{{bannerList}}</div>`,
+      computed: {
+        ss() { },
+        ...Vuex.mapState(['count', 'num', 'bannerList'])
+      },
+      methods: {
+        // fn() {
+        //   // this.$store.commit('increment',{
+        //   //   a:10,
+        //   //   b:20
+        //   // });
+        //   this.$store.commit({
+        //     type:AASDFGHYUVH,
+        //     a:10,
+        //     b:20
+        //   })
+        // }
+        ...Vuex.mapMutations(['add']),
+        //  add(){
+        //   this.$store.commit('add')
+        // }
+        // 当触发commit的时候传递的载荷(payload最好是对象，这样可以传递多个值)
+        ...Vuex.mapActions(['changeBanner'])
+      },
+      created() {
+        setTimeout(() => {
+          // this.$store.commit('changeBanner', { data: [1, 2, 3, 4, 5] })
+          this.$store.dispatch('changeBanner', { data: [1, 2, 3, 4, 5] })
+        }, 5000);
+      },
+    };
+    // Vuex中提供了mapState mapGetters mapMutations mapActions，他们可以将store中的state、getters、mutations、actions映射到当前组件的computed或者methods中
+    const com2 = {
+      data() {
+        return {
+
+        }
+      },
+      computed: {
+        ...Vuex.mapGetters({
+          ss: 'sex'
+        })
+      },
+      template: `<div>组件二{{this.$store.state.count}}{{ss}}</div>`,
+    };
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      components: {
+        com1,
+        com2
+      },
+      store
+    });
+
+  </script>
+</body>
+
+</html>

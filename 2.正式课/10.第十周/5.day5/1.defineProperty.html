@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{msg}}
+    <br>
+    {{name}}
+    <br>
+    {{obj.name}}
+    <br>
+    {{arr}}
+  </div>
+  <script>
+      // Object.defineProperty 对一个对象的属性进行处理的方法
+      // let obj = {
+      //  age:18
+      // }
+      // Object.defineProperty(obj, 'name', {
+      //   // value是当前属性代表的值
+      //   value:'erYa',
+      //   // 控制当前属性是否允许被删除，默认值是false
+      //   configurable:true,
+      //   // 控制当前属性是否可以被枚举出来
+      //   enumerable:true,
+      //   // 控制当前的属性是否允许被更改
+      //   writable:false
+      // });
+      // // delete obj.name;
+      // obj.name = '哈哈'
+      // console.log(obj);
+      // for(let key in obj){
+      //   console.log(key);
+      // }
+
+      // 设置对象中属性的getter和setter，我们可以在set和get函数中监听当前属性被获取或者被更改的时候，我们做什么事，vue2中响应式的数据的原理就是(getter和setter)  vue3中使用的是proxy
+      let obj = {
+        age:18
+      };
+      Object.defineProperty(obj,'name',{
+        get(){
+          // 当你获取obj中的name的时候他就会执行，而且return啥，当前name就返回啥
+          console.log(222);
+          return 111
+        },
+        set(value){
+          console.log('setter',value);
+        }
+      });
+      Object.defineProperty(obj,'age',{
+        get(){
+          return 1111
+        },
+        set(value){
+          console.log(value);
+        }
+      });
+
+      
+  </script>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el:'#app',
+      data:{
+        // 在vue中的observer和defineRective函数会利用defineProperty把data中的属性进行遍历和递归，最后把所有的属性统统都加上getter和setter
+        // (这个过程在beforeCreate在之后，created之前做的)
+        msg:100,
+        obj:{
+          // name:
+        },
+        // data中的数组本身是有set和get函数的，但是数组里每一项是没有监听函数的,所以你更改数组的值的时候，是不能够去更新视图的，如果更改了数组的值以后想让视图重新渲染，那就使用vuye二次封装的方法去改数组里的数据(pop,push,reverse,sort,shift,unshift,splice)
+        arr:[1,2,3]
+      },
+      created() {
+        // this.msg = 200,
+        this.name = 100;
+      },
+      mounted() {
+        this.name = 800;
+        this.obj.name = '哈哈';
+      },
+    });
+
+  </script>
+</body>
+</html>
