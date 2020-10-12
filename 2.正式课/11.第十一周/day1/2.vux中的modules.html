@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <com1></com1>
+    <com2></com2>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+
+  <script>
+    let moduleA = { // 这是com1组件自己的仓库
+      // namespaced: true,
+      state: {
+        a: 1,
+        b:2
+      },
+      mutations: {
+        changeA(state) {
+          
+          state.a++
+        }
+      }
+    };
+    let moduleB = { // 这是com1组件自己的仓库
+      state: {
+        a: 1
+      },
+      mutations: {
+        changeB(state) {
+          state.b++
+        }
+      }
+    };
+
+    let store = new Vuex.Store({
+      state:{
+        // 这里存放的是公共的状态
+        count:100
+      },
+      modules: {
+        a: moduleA,
+        b: moduleB
+      }
+    });
+    let com1 = {
+      data() {
+        return {
+
+        }
+      },
+      created() {
+        console.log(this);
+      },
+      computed: {
+        ...Vuex.mapState(['a'])
+      },
+      methods: {
+        fn(){
+          this['a/changeA']()
+        },
+        ...Vuex.mapMutations(['a/changeA','changeB'])
+        // 默认情况下，模块内部的 action、mutation 和 getter 是注册在全局命名空间的——这样使得多个模块能够对同一 mutation 或 action 作出响应。
+      },
+      template: `<div @click="fn">我是组件一{{a.a}}{{a.b}}</div>`
+    };
+    let com2 = {
+      data() {
+        return {
+
+        }
+      },
+      created() {
+        // console.log(this,1);
+      },
+      computed: {},
+      methods: {
+      },
+      template: `<div>我是组件二{{this.$store.state.b.a}}</div>`
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      components: {
+        com1,
+        com2
+      },
+      store
+    })
+  </script>
+</body>
+
+</html>

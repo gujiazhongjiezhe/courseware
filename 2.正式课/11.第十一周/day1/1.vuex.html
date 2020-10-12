@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <com1></com1>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+
+  <script>
+    let store = new Vuex.Store({
+      state: {
+        count: 0
+      },
+      mutations: {
+        // 存放的是改变状态的行为
+        add(state, payload) {
+          console.log(payload);
+          state.count++;
+        },
+        min(state, payload) {
+        
+          state.count--;
+        }
+      },
+      getters: {
+        sex(state) {
+          return state.count % 2 === 0 ? '男' : '女'
+        }
+      },
+      actions: {
+        // 当你做一个异步的操作时，可以在actions中进行业务逻辑的书写
+        // 想在组件中执行actions中的行为，的使用store中的dispatch，
+
+        add({ state, commit ,actions}) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              commit('add');
+              resolve();
+              actions.min()
+            }, 5000)
+          });
+        },
+        min({ state, commit }){
+          commit('min')
+        }
+      }
+    })
+    let com1 = {
+      data() {
+        return {
+
+        }
+      },
+      created() {
+        console.log(this);
+      },
+      computed: {
+        // count(){
+        //   return this.$store.state.count
+        // }
+
+        ...Vuex.mapState(['count']),
+        ...Vuex.mapGetters(['sex']),
+        
+      },
+      methods: {
+        fn() {
+          // this.$store.commit('add', {
+          //   num: 10
+          // }),
+          this.$store.dispatch('add').then(()=>{
+            console.log('状态改完了');
+          })
+        }
+        // ...Vuex.mapActions(['add'])
+      },
+      template: `<div @click="fn">我是组件一{{count}}{{sex}}</div>`
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      components: {
+        com1
+      },
+      store
+    })
+  </script>
+</body>
+
+</html>
