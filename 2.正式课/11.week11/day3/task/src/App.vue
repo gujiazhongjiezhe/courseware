@@ -291,6 +291,7 @@ export default {
       if (this.type === 0) {
         return taskList;
       }
+      
       return taskList.filter((item) => {
         return item.state === this.type;
       });

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store/index.js' // 文件夹里的index.js可以省略不写
+import store from './store' // 文件夹里的index.js可以省略不写
 
 // 把elementUi中的所有组件全部引入到vue项目中
 // import ElementUI from 'element-ui';
