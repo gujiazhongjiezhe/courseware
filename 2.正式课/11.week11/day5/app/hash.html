@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      background: pink;
+      text-align: center;
+      line-height: 200px;
+      margin-bottom: 10px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="box1">我是组件一</div>
+  <div class="box" id="box2">我是组件二</div>
+  <button id="btn1">显示一组件</button>
+  <button id="btn2">显示二组件</button>
+  <script>
+    btn1.onclick = function () {
+      // let index = location.href.length;
+      // if (location.hash) {
+      //   index = location.href.indexOf('#')
+      // }
+      // location.href = location.href.substring(0, index) + '#a'
+        history.pushState({
+          state:1
+        },'a',location.origin + '/home')
+    }
+    btn2.onclick = function () {
+      let index = location.href.length;
+      if (location.hash) {
+        index = location.href.indexOf('#')
+      }
+      location.href = location.href.substring(0, index) + '#b'
+    }
+
+    window.onhashchange = function () {
+      render()
+    }
+    function render() {
+      let hash = location.hash;
+      if (hash === '#a') {
+        box1.style.display = 'block';
+        box2.style.display = 'none';
+      }
+      else {
+        box1.style.display = 'none';
+        box2.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+
+</html>
