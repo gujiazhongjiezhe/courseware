@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     activeIndex(){
+      
       let hash = location.hash;
       if(hash.includes('custom')){
         return '1';
