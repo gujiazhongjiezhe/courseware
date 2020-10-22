@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    div {
+      width: 2rem;
+      height: 2rem;
+      background: red;
+    }
+  </style>
+  
+  <script>
+    /* 
+    rem相对单位，相对于html字体大小的设置的样式单位
+    1.一般设计稿的尺寸是750px，进行样式页面开发的时候，所有的样式单位会从px转到rem(rem相对单位，首先给html设置font-size，  在750px下，html的font-size是100px)
+    2.当页面在不同尺寸的设备中进行渲染，我们首先获取当前屏幕的宽度，从而计算出当前屏幕下的html的font-size的值应该是多少，那这样页面中的样式也会跟着变化
+     */
+    function computed(){
+      let winW = document.documentElement.clientWidth; // 当前屏幕的宽度
+      let desW = 750;
+      document.documentElement.style.fontSize = winW*100/desW + 'px'
+    }
+    computed();
+    window.addEventListener('resize',computed)
+    
+  </script>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

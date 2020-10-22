@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 130px;
+            background: red;
+            /* word-break: break-all; */
+            /* word-wrap:break-word; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="B">
+        <header>fixed定位</header>
+        <main></main>
+        <footer>fixed定位</footer>
+    </div> -->
+
+    <!-- <header class="A">fixed定位</header>
+    <div class="B">
+        <main></main>
+    </div>
+    <footer class="C">fixed定位</footer> -->
+
+    <div>indestructible jdsjdis jdhsdh sdh</div>
+    <a href=":tel">122334455556</a>
+    <input type="number" max=0.5 step="1" min=0.1>
+    <script>
+        // 1、IOS端position: fixed吸底或吸顶时的滑动出现抖动
+
+        // 在项目中的需求是在顶部和底部都要有固定不动的元素，也就是说顶部和底部都会有fixed定位，中间的内容区域是可滑动的部分。采用的结构是头部、中间内容区、底部为同级元素并且拥有共同的父级元素（B模式，所有的元素都在B里边）。这样的布局在安卓下没有问题，但是在ios端下滑动页面时上下的fixed定位的元素会上下抖动
+        // 解决办法：把fixed定位的元素拿出来，跟中间内容区元素的父级成为兄弟元素（ABC模式， A为头部，C为底部），这样滑动中间内容区域时就不包括fixed定位的元素了
+    </script>
+
+
+    <script>
+        // 2、当swiper的loop属性设置为true时，第一张往前的那一页和最后一张往后的那一页点击onclick无效
+
+        // 我在每张banner图的dom元素上都绑定了click事件，但是有时候点击bannr的时候会出现点击无效的问题。
+        // 问题原因：当loop模式下slides前后会复制若干个slide，从而形成一个环路，但却不会复制绑定在dom上的click事件
+        // 解决办法：在new Swiper实例的时候，在第二个参数中写上如下代码
+        // this.mySwiper = new Swiper(swiperId, {
+        //     autoplay: {   // 自动滚动  
+        //         delay: delay,   // 停留时间  
+        //         disableOnInteraction: false //用户手动滑动banner后，aotuplay不会停止，还会自动轮播（如果设置成true，那当用户手动滑动banner后，自动轮播停止）  
+        //     },
+        //     loop: true,   // 无缝滚动  
+        //     speed: 1000,   // 滚动时间  
+        //     pagination: {
+        //         el: '.swiper-pagination'
+        //     },
+        //     on: {
+        //         tap: function (e) {// tap为移动端点击事件（点哪个banner就会触发相应banner的这个函数）【这里用click会有延时】  
+        //             let realIndex = this.realIndex;// 这是点击的当前banner的索引（从0开始）  
+        //             // let code = self.props.code;
+        //             // global.bdTrackEvent(code + '_' + (realIndex + 1));
+        //             // jumpBanner && jumpBanner(realIndex + 1);
+        //             setTimeout(() => {
+        //                 if (swiperId !== '#recommend-swiper-container') {
+        //                     // console.log(bannerList[realIndex].jumpUrl, 59);  
+        //                     window.location.href = hyphenate.concatChnQuery(bannerList[realIndex].jumpUrl)
+        //                 }
+        //             }, 100);
+        //         }
+        //     }
+        // });
+        // 这样就是利用swiper的自身的点击事件来触发相应banner上的操作，
+
+        // <swiper>
+        //     <div class="slider" onClick={this.jump}>1</div>
+        //     <div class="slider" onClick={this.jump}>2</div>
+        //     <div class="slider" onClick={this.jump}>3</div>
+        //     <div class="slider" >1</div>
+        // </swiper>
+
+        // let data = [
+        //     {
+        //         url: 'xxxx',
+        //         link: 'xxxxx',
+        //     },
+        //     {
+        //         url: 'xxxx',
+        //         link: 'xxxxx',
+        //     },
+        //     {
+        //         url: 'xxxx',
+        //         link: 'xxxxx',
+        //     }
+        // ]
+    </script>
+
+    <script>
+        // 3、主站加载完成后点击优惠，再切回首页，首页的底部会出现灰边（如下图）
+
+        // 在项目中无意发现当主站首页加载完成后，再切换到优惠列表页，在返回首页，首页的地步就会出现一个小灰边
+        // 问题原因：页面初次加载的时候这个灰边是没有的，iframe元素也是没有的，当切换到优惠之后再回来，iframe元素和灰边就出现了（优惠页有定位的逻辑，这个iframe是定位时百度地图产生的代码），也就是说灰边是iframe元素带来的（因为项目是单页面应用，所以ifame一直存在）
+        // 解决办法：在单页面css样式文件里标签选择器给ifrme加上display：none这个属性让其隐藏即可
+        // CFD9790D67A32EAC7F4E41E137AF10EA - 1.png
+        // 补充：人家可能会问，iframe这个标签是做什么用的，你了解吗
+        // 回答：iframe 元素会创建包含另外一个文档的内联框架（即行内框架）。在src属性里写地址
+        // inrame连接地址：https://www.cnblogs.com/lvhw/p/7107436.html
+    </script>
+    <script>
+        // 4、在iOS端个别浏览器中H5的video标签在初次加载时（视频没有首次播放前）拿不到视频总时长
+
+        // 还有以下事件也不会被触发，只有用户点击过播放后，这些回调才能被相应触发，才能获得视频总时长
+        // loadstart
+        // durationchange
+        // loadedmetadata
+        // loadeddata
+        // progress
+        // canplay
+        // canplaythrough
+
+        // 05: 00
+    </script>
+
+    <script>
+        // 5、切换组件过快，数据没有请求成功，切换回来，redux(vuex)数据为空，这时的页面就渲染不出来
+
+        // 解决办法：在willMount中再请求一次；
+
+        // componentWillMount(){
+        //     // 判断redux中到底有没有数据，如果没有就重新请求一次，如果有就不用了重新请求了
+        // }
+    </script>
+    <script>
+        // 6、IE10请求缓存，放一个时间戳作为参数；
+        // 项目登录成功以后获取当前登录者的信息(名字、头像)在头部展示，但是在IE10中退出登录，换个人登录以后项目里展示的还是上一次登录者的信息(名字，头像)，而且在打开控制台的情况下才会出现这种情况，
+        // 问题原因：肯定是走缓存了，(请求登录这信息的接口使用的是get请求)
+        // 解决问题：请求时在参数后拼接一个(时间戳、随机数)参数
+    </script>
+    <script>
+        // 先给input框赋值，然后在获取光标
+
+        // 渲染的时候给input框赋值，input框的光标在左边
+        // 1、执行input的focus(), 让其获取光标
+        // 2、把input的值置为空
+        // 3、在给input赋值(就跟你手写是一样的)
+        //     - -  这样就跟你在出现光标以后手动写值是一样的
+        // this.$refs.input.focus();
+        // this.setState({
+        //     inputValue: ''
+        // }, () => {
+        //     this.setState({
+        //         inputValue: name
+        //     })
+        // });
+
+
+    </script>
+    <script>
+        // ，word-break: break-all 例如div宽200px，它的内容就会到200px自动换行，如果该行末端有个英文单词很长（congratulationsssssss等），它会把单词截断，变成该行末端为conra(congratulation的前端部分) ，下一行为tulation（conguatulation）的后端部分了。
+        // word-break: keep-all;(这个选项也会让单词不截断)
+
+        // 2，word-wrap:break-word 例子与上面一样，但区别就是它会把congratulation整个单词看成一个整体，如果该行末端宽度不够显示整个单词，它会自动把整个单词放到下一行，而不会把单词截断掉的。
+
+        // 注意父元素的宽度不能在窄
+    </script>
+    <script>
+        // 移动端兼容 
+        // 20、圆角bug
+        // 某些Android或者ios手机圆角失效
+        // background-clip: padding-box;
+
+        // IOS中input键盘事件keyup、keydown、keypress支持不是很好，用oninput替代
+
+        // h5网页input 的type设置为number一般会产生三个问题，一个问题是maxlength属性不好用了。另外一个是form提交的时候，默认给取整了。三是部分安卓手机出现样式问题。
+
+
+        // 移动端点击300ms延迟   推荐两个js，一个是fastclick，一个是tap.js
+
+        // 移动端 HTML5 input date 不支持 placeholder 问题 如果placeholder不好用就自己写一个span元素。在span里协商提示文字，然后把span定位到input的上边，当用户输入内容的时候你把span隐藏
+
+
+        // 移动端 HTML5 audio autoplay 失效问题 
+        // 这个不是 BUG，由于自动播放网页中的音频或视频，会给用户带来一些困扰或者不必要的流量消耗，所以苹果系统和安卓系统通常都会禁止自动播放和使用 JS 的触发播放，必须由用户来触发才可以播放
+
+        // 解决办法
+        // 解决方法思路：先通过用户 touchstart 触碰，触发播放并暂停（音频开始加载，后面用 JS 再操作就没问题了）。
+
+        // 解决代码：
+
+        // document.addEventListener('touchstart',function() {
+
+        // document.getElementsByTagName('audio')[0].play();
+
+        // document.getElementsByTagName('audio')[0].pause();
+
+        // });
+
+        // click   tap  touchstart touchmove touchend
+
+
+
+        // 移动端的1px问题针对于border(边框)，px的边框在devicePixelRatio=2的移动显示屏下会显示成2px，
+
+        // p{
+        //     border: 1px solid #000;
+        // }
+
+        // @media(-webkit-min-device-pixel-ratio: 2) {
+        //     p{
+        //         border: 0.5px solid #000;
+        //     }
+        // }
+
+
+        // 在项目里引入flexible.js文件
+
+
+
+
+    </script>
+</body>
+
+</html>
