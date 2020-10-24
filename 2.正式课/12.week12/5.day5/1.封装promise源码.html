@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class MyPromise {
+
+      constructor(executor) { // 当new promise的时候constructor函数就会立马执行，而且还可以接收new promise时的实参，
+
+        // this-->当前promise的实例
+
+        // promise有三种状态(peding fulfilled rejected)，默认是peding
+        // promise的状态一旦发生变化，就会凝固，不可能再次变化
+        this.state = 'pending'; // 给当前实例添加一个初始化的状态
+        this.resolveEvent = []; // 成功的事件池
+        this.rejectEvent = []; // 失败的事件池
+
+        let resolve = (result) => {
+          if (this.state !== 'pending') return; // 如果当前的状态不是pending，说明在此之前状态就已经被改变了，就不能在改了，直接return停止代码运行
+          this.state = 'fulfilled';
+          setTimeout(() => {
+            this.resolveEvent.forEach(item => {
+              if (typeof item === 'function') {
+                item(result)
+              }
+            })
+          })
+
+        }
+        let reject = (result) => {
+          if (this.state !== 'pending') return;
+          this.state = 'rejected';
+          setTimeout(() => {
+            this.rejectEvent.forEach(item => {
+              if (typeof item === 'function') {
+                item(result)
+              }
+            })
+          })
+
+        }
+        try {
+          executor(resolve, reject);
+        } catch (e) {
+          reject(e)
+        }
+
+      }
+
+      // 往当前类的原型上增加方法
+      // then的作用就是往不同的事件池子里边订阅对应的方法
+      // promise里会有两个事件池子，一个事成功的池子，一个事失败的池子，then执行会把第一个回调函数订阅到成功的池子里边，把第二个回调函数订阅到失败的池子里边
+      then(resolveFn, rejectFn) {
+        // this -->p1 promise实例
+        if (!resolveFn) {
+          resolveFn = () => { }
+        }
+        if (!rejectFn) {
+          rejectFn = () => { }
+        }
+
+        this.resolveEvent.push(resolveFn); // 往成功的事件池子里订阅方法
+        this.rejectEvent.push(rejectFn);// 往失败的事件池子里订阅方法
+        // then函数的执行结果是promise的实例
+        return new MyPromise((resolve, reject) => { // 这就是第一个then函数的返回值p2
+          // this -->p1
+          // this.resolveEvent[0] = ()=>{...}
+          this.resolveEvent.push((result) => { // 往p1的成功的池子里增加方法
+            try {
+              let x = resolveFn(result); // x就是p3
+
+              x instanceof MyPromise ? x.then(resolve, reject) : resolve(x);
+              // x.then是在往p3的事件池子里增加方法，把p2的resolve和reject添加到了p3的事件池子里边
+              // p2的回调函数的执行要受p3的状态的影响(管控)
+
+              // x就是p3promise实例，他把p2的resolve和reject添加到自己的池子里边，利用p3的promise状态去影响p2的resolve和reject
+            } catch (e) {
+              reject(e)
+            }
+
+
+          });
+
+
+          this.rejectEvent.push((result) => {
+            try {
+              let x = rejectFn(result);
+              x instanceof MyPromise ? x.then(resolve, reject) : resolve(x);
+            } catch (e) {
+              reject(e)
+            }
+
+
+          })
+
+        })
+      }
+
+    }
+
+
+
+
+    let p1 = new MyPromise((resolve, reject) => { // 当new promise的时候，传递的这个实参会马上执行
+      // console.log(resolve,reject)
+      resolve(100)
+      // reject(900)
+      // console.log(a);
+    });
+
+
+    let p2 = p1.then((res) => {
+      console.log(res);
+      return new MyPromise((res, rej) => { res('w') }) // p3
+      // 这个promise(p3)实例要管控p2的状态的该改变
+    }, (res) => {
+      console.log(200, res);
+    });
+
+    p2.then((res) => {
+      console.log(res);
+    }, () => {
+      console.log(400);
+    });
+
+    // p1         p2(是第一个then函数的执行结果)
+    // p1对应的池子里的事件是第一个then里的方法
+    // p2对应的池子里的事件是第二个then里的方法
+
+    // 当前实例池子里的方法就是下边then里的方法
+
+    // then函数的执行结果是promise的实例
+
+    console.log(3000);
+
+
+
+
+
+
+
+      //--------------------------------------------------
+
+
+    // let p = new Promise((resolve,reject)=>{
+    //   resolve(100)
+    //   // console.log(a);
+    // })
+
+    // p.then((res)=>{
+    //   console.log(res);
+    //   return new Promise((res,rej)=>{rej()})
+    // },(res)=>{
+    //   console.log(res);
+    // }).then(()=>{
+    //     console.log(300);
+    // },()=>{
+    //     console.log(400);
+    // })
+  </script>
+</body>
+
+</html>
