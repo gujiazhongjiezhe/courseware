@@ -1,0 +1,20 @@
+<view class="class_box">
+    <view class="h1">课程中心</view>
+    <view class="list_one" wx:for="{{classList}}">
+      <view class="h2">{{item.title}}</view>
+      <navigator open-type="navigate" url="{{'/pages/detail/detail?title='+ ite.title+'&img=' + ite.img+ '&id=' + ite.id+ '&price='+ ite.price}}" class="item" wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="ite">
+          <view class="img_box">
+            <image class="" src="{{ite.img}}"></image>
+          </view>
+          <view class="content_box">
+            <view class="til">{{ite.title}}</view>
+             <view class="desc">你好{{ite.title}}</view>
+              <view class="bot_box">
+                <text>{{index == 0 ? '初级' : (index == 1? '中级' : '高级')}}</text>
+                <text>{{ite.count}}份</text>
+                <text>￥{{ite.price}}</text>
+              </view>
+          </view>
+      </navigator>
+    </view>
+</view>

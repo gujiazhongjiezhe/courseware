@@ -1,0 +1,6 @@
+/* pages/user/user.wxss */
+.item {
+  padding:20rpx;
+  border-bottom:1px solid black;
+  margin-bottom: 30rpx;
+}

@@ -1,0 +1,44 @@
+/* pages/index/index.wxss */
+.swiper_box {
+  width: 100%;
+  color:black;
+}
+.swiper_box .img {
+  width: 100%;
+  height: 100%;
+}
+.swiper_box .img image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 知道的样式 */
+.know_zf {
+  padding:20rpx 10rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+.know_zf .title {
+  font-size: 60rpx;
+  margin: 20rpx;
+  text-align: center;
+}
+.know_zf .video_box {
+  width: 100%;
+  position: relative;
+}
+.know_zf .video_box .play_icon {
+  position: absolute;
+  width: 100rpx;
+  height: 100rpx;
+  left:50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+}
+.know_zf .video_box .play_icon image {
+  width: 100%;
+  height: 100%;
+}
+video {
+  width: 100%;
+}

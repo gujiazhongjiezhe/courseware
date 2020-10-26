@@ -1,0 +1,6 @@
+<view class="container" bindtap="fn">
+<!-- 在小程序中bindtap支持冒泡  catchtap是不支持冒泡的-->
+  <view class="content" catchtap="fn2">
+    <slot></slot>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="item" wx:for="{{goodsList}}">
+    <image src="{{item.img}}"></image>
+    <view>{{item.title}}</view>
+    <view>单价：{{item.price}}</view>
+    <view>购买数量{{item.count}}</view>
+  </view>
+
+  <view>您当前的总计{{total}}</view>
+  <button>结算</button>
+</view>
