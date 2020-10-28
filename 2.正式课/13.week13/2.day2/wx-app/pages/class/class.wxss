@@ -1,0 +1,68 @@
+/* pages/class/class.wxss */
+.class_box {
+  padding:10rpx;
+  box-sizing: border-box;
+}
+.class_box .h1 {
+  font-size: 60rpx;
+  line-height: 80rpx;
+  border-bottom:1px solid black;
+  text-align: center;
+}
+.class_box .list_one {
+  padding:40rpx;
+  box-sizing: border-box;
+}
+.class_box .list_one .h2 {
+  font-size: 40rpx;
+  line-height: 60rpx;
+  border-bottom:1px solid black;
+  text-align: center;
+}
+.class_box .list_one .item {
+  display: flex;
+  height: 200rpx;
+  margin-top: 20rpx;
+}
+.class_box .list_one .item .img_box {
+  width: 200rpx;
+  height: 200rpx;
+}
+.class_box .list_one .item .img_box image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.class_box .list_one .item .content_box {
+  flex:1;
+  margin-left: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.class_box .list_one .item .content_box .til {
+  font-size: 40rpx;
+  line-height: 60rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.class_box .list_one .item .content_box .desc {
+  font-size: 30rpx;
+  line-height: 50rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.class_box .list_one .item .content_box .bot_box {
+  display: flex;
+  position: absolute;
+  bottom:0;
+  left:0;
+  width: 100%;
+}
+.class_box .list_one .item .content_box .bot_box text {
+  flex: 1;
+
+}
