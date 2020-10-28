@@ -1,0 +1,18 @@
+[
+  {
+    "img":"http://www.zhufengpeixun.cn/public/imgs/vuerouter.png",
+    "text":"手写vue路由"
+  },
+  {
+    "img":"http://www.zhufengpeixun.cn/skin/20142/img/g4.jpg",
+    "text":"九种跨域方式全揭秘,再也不担心跨域问题了"
+  },
+  {
+    "img":"http://www.zhufengpeixun.cn/skin/20142/img/g3.jpg",
+    "text":"MVVM原理剖析:数据劫持，观察者模式,模版编译 "
+  },
+  {
+    "img":"http://www.zhufengpeixun.cn/skin/20142/img/g2.jpg",
+    "text":"实现React虚拟DOM和DOM Diff"
+  }
+]
