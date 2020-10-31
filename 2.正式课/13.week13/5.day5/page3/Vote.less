@@ -1,0 +1,50 @@
+/*
+ * REACT不像VUE一样，基于SCOPED控制是自己组件私有的样式，所以在合并模块的时候，可能导致各版块之间的样式冲突 
+ *   1.基于额外的WEBPACK插件，在处理CSS的时候可以把组件样式控制为私有
+ *   2.或者自己基于CSS预编译语言，在写样式的时候就注意样式类的区分（公共的和私有的样式自己划分好）
+ *   ......
+ */
+.voteBox {
+	box-sizing: border-box;
+	margin: 20px auto;
+	padding: 10px;
+	width: 400px;
+	border: 1px solid lightblue;
+	border-radius: 5px;
+
+	.headerBox {
+		position: relative;
+		// display:flex;
+		height: 50px;
+		line-height: 50px;
+
+		h3 {
+			font-size: 16px;
+		}
+
+		span {
+			position: absolute;
+			top: 50%;
+			right: 5px;
+			transform: translateY(-50%);
+			font-size: 14px;
+		}
+	}
+
+	.mainBox {
+		p {
+			line-height: 35px;
+			font-size: 14px;
+		}
+	}
+
+	.footerBox {
+		line-height: 50px;
+
+		button {
+			margin-right: 15px;
+			width: 100px;
+			height: 35px;
+		}
+	}
+}
