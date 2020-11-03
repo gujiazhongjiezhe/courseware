@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="title"></div>
+  <div id="content"></div>
+  <script>
+    let state = {
+      title: { color: 'red', text: '别玩手机'},
+      content: { color: 'green', text: '谨记' }
+    }
+
+    function render() {
+      console.log(state.title.color);
+      let title = document.getElementById('title');
+      let content = document.getElementById('content');
+      title.style.color = state.title.color;
+      title.innerHTML = state.title.text;
+      content.style.color = state.content.color;
+      content.innerHTML = state.content.text;
+    }
+    render();
+    const TITLE_COLOR = 'TITLE_COLOR'; // 这是更改头部的颜色
+    const CONTENT_TEXT = 'CONTENT_TEXT'; // 这是更改内容的文案
+
+    function dispatch(action){
+        switch(action.type){
+          case TITLE_COLOR:
+            state = {...state,title:{...state.title,color:action.value}}
+          break;
+          case CONTENT_TEXT:
+            state = {...state,content:{...state.content,text:action.value}}
+          break;
+        }
+    }
+
+    setTimeout(()=>{
+      // state.title.color = 'black' 这样改是不允许的，想改仓库里的值必须去调用dispatch
+
+      dispatch({
+        type:TITLE_COLOR,
+        value:'black'
+      })
+      dispatch({
+        type:CONTENT_TEXT,
+        value:'偷到成功'
+      })
+      render()
+    },5000);
+  </script>
+</body>
+
+</html>

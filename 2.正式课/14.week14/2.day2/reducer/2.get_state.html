@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="title"></div>
+  <div id="content"></div>
+  <script>
+
+    const TITLE_COLOR = 'TITLE_COLOR'; // 这是更改头部的颜色
+    const CONTENT_TEXT = 'CONTENT_TEXT'; // 这是更改内容的文案
+
+
+
+    function render() {
+      // console.log(state.title.color);
+      let title = document.getElementById('title');
+      let content = document.getElementById('content');
+      title.style.color = store.getState().title.color;
+      title.innerHTML = store.getState().title.text;
+      content.style.color = store.getState().content.color;
+      content.innerHTML = store.getState().content.text;
+    }
+
+
+    // let store = new Vuex.store({ // 当前new的结果是一个对象，里边有state，dispatch
+    //   state: {}
+    // });
+    // store.state.num
+
+    function createStore(reducer) {
+      let state; // af0  "{num:0,ary:[1,2,3]}"
+      let getState = () => JSON.parse(JSON.stringify(state)); // 深克隆，为了避免用户直接改store里的值
+      ;
+      let dispatch = (action) => { // {}
+
+        // action就是用户执行dispatch传递过来的实参的值
+
+       state = reducer(state, action) // un {}
+       // reducer函数的返回值会对createStore内部的state进行覆盖
+
+      };
+      dispatch({}); // 此处函数执行就是为了给createStore里的state赋默认值
+
+      return {
+        getState,
+        dispatch
+      }
+    }
+
+
+    let initState = {
+      title: { color: 'red', text: '别玩手机' },
+      content: { color: 'green', text: '谨记' }
+    }
+
+    function reducer(state = initState, action) { // un {}
+
+      switch (action.type) { // un
+        case TITLE_COLOR:
+        return { ...state, title: { ...state.title, color: action.value } }
+          break;
+        case CONTENT_TEXT:
+        return  { ...state, content: { ...state.content, text: action.value } }
+          break;
+      }
+      return state;
+    }
+
+    let store = createStore(reducer); // 次函数执行返回一个对象，对象里有两个方法getState，dispatch，这个两个都是函数
+
+    // store.getState() // ==>{num:0}
+    // store.getState().num = 100;
+    // redux里的状态是不能够直接被改变的
+    render();
+
+
+
+
+    setTimeout(() => {
+
+      store.dispatch({
+        type: TITLE_COLOR,
+        value: 'black'
+      });
+      render()
+    }, 5000);
+  </script>
+</body>
+
+</html>
