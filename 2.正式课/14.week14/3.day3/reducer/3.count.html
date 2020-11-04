@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="add">+</button>
+  <span id="text">0</span>
+  <button id="min">-</button>
+</body>
+<script src="./reducer.js"></script>
+<script>
+  let add = document.getElementById('add');
+  let min = document.getElementById('min');
+  let text = document.getElementById('text');
+  const ADD_NUM = 'ADD_NUM'; // 加
+  const MIN_NUM = 'MIN_NUM'; // 减
+
+ 
+  function render() {
+    text.innerHTML = store.getState().value;
+  }
+//------------------------------
+  let initState = {
+    value: 0
+  }
+  function reducer(state = initState, action) {
+    switch (action.type) {
+      case ADD_NUM:
+        // 从之前的基础之上累加
+        return { value: state.value+action.payload }
+      case MIN_NUM:
+        return { value: state.value-action.payload }
+    }
+    return state;
+  }
+//----------------------------------------
+
+  let store = createStore(reducer);
+  //-----------------------------------
+  store.subscribe(render);
+  add.onclick = function () {
+    store.dispatch({
+      type:ADD_NUM,
+      payload:2
+    })
+  }
+  min.onclick = function () {
+    store.dispatch({
+      type:MIN_NUM,
+      payload:2
+    })
+  }
+
+</script>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="title"></div>
+  <div id="content"></div>
+  <script>
+
+    const TITLE_COLOR = 'TITLE_COLOR'; // 这是更改头部的颜色
+    const CONTENT_TEXT = 'CONTENT_TEXT'; // 这是更改内容的文案
+
+
+
+
+    function render() {
+      // console.log(state.title.color);
+      let title = document.getElementById('title');
+      let content = document.getElementById('content');
+      title.style.color = store.getState().title.color;
+      title.innerHTML =  store.getState().title.text;
+      content.style.color =  store.getState().content.color;
+      content.innerHTML =  store.getState().content.text;
+    }
+
+
+    let initState = {
+      title: { color: 'red', text: '头部' },
+      content: { color: 'green', text: '内容' }
+    }
+    function reducer(state = initState,action){ // {type:TITLE_COLOR,payload:'orange'}
+      switch(action.type){ // TITLE_COLOR
+          case TITLE_COLOR:
+  
+            return {...state,title:{...state.title,color:action.payload}}
+          break;
+          case CONTENT_TEXT:
+            return {...state,content:{...state.content,text:action.payload}}
+          break;
+      }
+      return state; // 给store中的state赋默认值的
+
+      // 当reducer函数执行的时候总会return一个对象
+    }
+
+      function createStore(reducer){
+        let listener = []; // 这是一个事件池子
+        let state; // un  af0
+        let getState = ()=>JSON.parse(JSON.stringify(state)); // 深克隆之后return出去
+        let dispatch = (action)=>{
+            // 去改state里的状态
+           state = reducer(state,action); // 把reducer的返回值直接给store内部的state赋值
+
+           // 当reducer改完状态以后就去发布listener事件池子里的方法
+           listener.forEach(item=>{
+              if(typeof item ==='function'){
+                item()
+              }
+           });
+        }
+        dispatch({}); // 作用就是给state赋默认值
+        let subscribe = (fn)=>{
+          // 这个函数就是给listener事件池去订阅方法的
+          listener.push(fn);
+          return ()=>{
+            // 这里的逻辑就是取消订阅的逻辑
+            listener = listener.filter(item=>{
+              if(item === fn){
+                return false
+              }
+              return true;
+            }) 
+          }
+        }
+        return {
+          getState,
+          dispatch,
+          subscribe
+        }
+      }
+   
+
+    let store = createStore(reducer);
+    // createStore的返回值是一个对象，里边包含getState，dispatch
+    let res = store.subscribe(render); // 就是往store中的listener事件池子里去订阅方法
+    res(); // 取消当前方法的订阅
+
+    render();
+    setTimeout(() => {
+      store.dispatch(
+        {
+        type:TITLE_COLOR,
+        payload:'orange'
+      }
+      )
+      // render(); // 更新视图
+    }, 5000);
+  </script>
+</body>
+
+</html>
