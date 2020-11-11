@@ -9,7 +9,13 @@
 
 <body>
   <div id="app">
-    <input type="text"  v-model="price">
+    
+    <div v-for="item,index in ary" v-if="item !== 1">
+      <div></div>
+        {{item}}
+    </div>
+  </div>
+    <!-- <input type="text"  v-model="price">
     <div>{{price/6.8}}</div>
 
     <div>{{msg}}</div>
@@ -17,7 +23,7 @@
     <button @click="add">点击</button>
   </div>
 
-  <div>{{msg}}</div>
+  <div>{{}}</div> -->
 
   <script src="../node_modules/vue/dist/vue.js"></script>
   <script>
@@ -27,7 +33,9 @@
       el: '#app', // 这就是监听器监听的视图范围
       data:{ // data中存放的就是数据，data中的属性名当做变量来说使用，data中的属性会挂在到当前vue的实例上
         msg:0,
-        price:0
+        price:0,
+        obj:{s:100},
+        ary:[1,2,3]
       },
       methods:{
         add(){

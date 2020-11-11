@@ -23,12 +23,14 @@
     <!-- <div>{{msg}}</div> -->
     <!-- <div>{{obj.name}}</div> -->
     <!-- <div>{{arr}}</div> -->
+    {{obj.m}}
   </div>
   <!-- <div>{name:1}</div> -->
 
   <!-- <div id="app2">
     {{msg2}}
   </div> -->
+
   <script src="../node_modules/vue/dist/vue.js"></script>
   <script>
     // 一个页面允许多个监听器存在，
@@ -37,13 +39,17 @@
       el: '#app',
       data:{
         msg:800,
-        obj:{},
+        obj:{m:null},
         arr:[1],
         flag:true,
         img:'ss.png'
       },
       methods:{
         add(){
+          this.obj.m = 10;
+          this.msg = 800; // 会触发视图的更新this.$forceUpdate()
+          this.obj = {m:10};
+          this.$set(this.obj,'m',10);
           return '你好'
         }
       }

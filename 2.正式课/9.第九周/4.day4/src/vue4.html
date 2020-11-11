@@ -16,7 +16,7 @@
 <body>
   <div id="app">
     <h1 @click="add">111111111111111111111</h1>
-    <div v-for="item in str">{{item}}</div>
+    <div v-for="item,index in str">{{item}}</div>
     <div v-for="item in arr">
       <span>姓名{{item.name}}</span><br>
       <span>年龄:{{item.age}}</span>

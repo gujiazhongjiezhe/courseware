@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{num | toFixed(2) | add(100)}}
+    {{dd(ss(num,2),100)}}
+    {{num1}}
+
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 写一个小于10就补零的方法
+
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        num: 3.454654767
+      },
+      methods: {
+        ss(val, index) {
+          return val.toFixed(index);
+        },
+        dd(val, item) {
+          return val + item
+        }
+      },
+      filters: {
+        toFixed(val, index) {
+          return val.toFixed(index)
+        },
+        add(val, item) {
+          // 当前方法是给指定的值加上指定的数值
+          return val + item
+        }
+      },
+      computed: {
+        // 计算属性，这里的属性都是有依赖性的，依赖去别的值的变化而变化，当刷新页面的时候，如果当前属性所依赖的值没有发生变化，那就会走上次的缓存，而不会重新计算
+        // 计算属性不支持异步，
+        // 计算属性一般依赖的值都是响应式的数据(data中的或者store中)
+        num1() {
+          return this.num.toFixed(2);
+        }
+      },
+      watch: {
+        // 监听的是this实例上的属性
+        num(value) {
+          let a = 100
+          setTimeout(() => {
+            a = 200
+            console.log(value, 2);
+          }, 2000);
+          console.log(a);
+        },
+        $route() {
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
