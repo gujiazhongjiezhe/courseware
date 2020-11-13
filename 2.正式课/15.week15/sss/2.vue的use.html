@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    // Vue.use(element-ui)
+
+    let myplugin = {
+      // 当use的时候，对象里的install会马上执行，还会给其传递一个实参，(实参就是当前Vue)
+      install(vm) {
+        // vm就是Vue类
+        console.log(vm);
+        // 拿vuex来说，把store挂载到每一个组件实例上就是在这里干的
+      }
+    }
+
+    Vue.use(myplugin);
+    Vue.use(myplugin);
+    Vue.use(myplugin);
+    // Vue.use((vm)=>{
+    //   console.log(vm);
+    // });
+    let vm = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+
+</html>

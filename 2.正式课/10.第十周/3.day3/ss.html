@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <child :msg="msg" :ss="ss" @myevent="ss"></child> -->
+    <!-- 给当前名为myEvent的事件池订阅方法ss -->
+
+    <!-- -------------------------------------------- -->
+    <child1 ref='child1' ></child1>
+    <child2 :child1="$refs"></child2>
+    <button @click="fn">父亲的按钮</button>
+  
+
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    // let child = {
+    //   props:['msg','ss'],
+    //   template:`<div>child{{msg}}<button @click="fn">点击</button></div>`,
+    //   methods:{
+    //     fn(){
+    //       // this.ss(800)
+    //       this.$emit('myevent',900)
+    //     }
+    //   }
+    // };
+
+    // let vm = new Vue({
+    //   el: '#app',
+    //   components:{
+    //     child
+    //   },
+    //   methods:{
+    //     ss(value){
+    //       this.msg = value
+    //     }
+    //   },
+    //   data: {
+    //     msg:100
+    //   }
+    // })
+  </script>
+  <script>
+    let eventBus = new Vue(); // 就相当于自己封装的一个发布订阅
+    let child1 = {
+      template: `<div>child1{{num1}}</div>`,
+      data(){
+        return {
+          num1:100
+        }
+      },
+      methods:{
+        
+        changeChild1(value){
+          this.num1 = value
+       
+        }
+      },
+      created(){
+        console.log(this);
+        setTimeout(()=>{
+          this.$parent.fn()
+        },3000)
+        // eventBus.$on('change',this.changeChild1);
+        //给eventBus里的change事件类型的池子订阅一个方法
+      }
+    }
+    let child2 = {
+      props:['child1'],
+      template: `<div>child2<button @click="fn">点击</button></div>`,
+      methods: {
+        fn(){
+          console.log(this);
+          this.child1.child1.num1 = 999
+          // eventBus.$emit('change',456)
+        }
+      },
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      components: {
+        child1,
+        child2
+      },
+      methods:{
+        fn(){
+          console.log(11111);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

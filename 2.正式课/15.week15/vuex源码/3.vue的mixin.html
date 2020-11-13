@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <child>
+      
+    </child>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    // mixin可以往组件里注入data属性，钩子函数或者事件。。。
+    // 如果是注入的构子函数在组件里有，先执行注入的，后执行自己的(构子函数里的this，注入到哪个组件里，当前的this就是谁)
+    // 如果注入的是data属性，而且自己的data也有相同的属性，保留自己的
+    // 还可以注入methods里的方法,如果和自己的方法同名，那保留自己的
+    // Vue.mixin({
+    //   beforeCreate() {
+    //     console.log(this);
+    //     this.$store = 100;
+    //     console.log('mixin-beforeCreate');
+    //   },
+    //   data() {
+    //     return {
+    //       num: 800
+    //     }
+    //   },
+    //   methods: {
+    //     fn() {
+    //       console.log(100);
+    //     }
+    //   }
+
+    // })
+
+    let obj= {
+      beforeCreate() {
+        console.log(100);
+      },
+    }
+    let son = {
+      mixins:[obj],
+      template:`<div>son</div>`
+    }
+    let child = {
+      data() {
+        return {
+          msg: 200
+        }
+      },
+      mixins:[obj],
+      beforeCreate() {
+        console.log('child-beforeCreate');
+      },
+      components:{
+        son
+      },
+      methods: {
+        fn(){
+          console.log(200);
+        }
+      },
+      template: `<div @click="fn">child<son></son></div>`
+    }
+    let vm = new Vue({
+      el: '#app',
+      // beforeCreate() {
+      //   console.log('vm-beforeCreate');
+      // },
+      data: {
+        num: 100
+      },
+      mixins:[obj],
+      components: {
+        child
+      }
+    });
+
+
+
+  </script>
+</body>
+
+</html>

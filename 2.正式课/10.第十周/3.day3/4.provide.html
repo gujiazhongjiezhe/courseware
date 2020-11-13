@@ -54,12 +54,14 @@
       data: {
         r:{
           num:0
-        }
+        },
+        s:100
       },
       provide() {
         return {
           r: this.r,
-          fn:this.fn
+          fn:this.fn,
+          s:this.s
         }
       },
       methods:{

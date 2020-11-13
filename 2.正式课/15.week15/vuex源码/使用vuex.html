@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{num}}
+    {{w}}
+    {{$store.getters.sex}}
+    <child></child>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./vuex.js"></script>
+
+  <script>
+    // ...Vuex.mapState()
+    // this.$store.dispatch()/commit()
+  
+    let store = new Vuex.Store({
+        state:{
+          num:100,
+          msg:'好汉'
+        },
+        getters:{
+          sex(state){
+            return state.num%2 === 0 ? '男':'女';
+          },
+          ss(state){
+            return state.num%2 === 0 ? '1':'2';
+          }
+        },
+        mutations:{
+          add(state,payload){
+            console.log(this); // store
+            state.num = state.num + payload
+          }
+        },
+        actions:{
+          add(store,payload){
+            console.log(this); // store
+           store.commit('add',payload);
+          }
+        }
+    });
+    // 每一个组件里的$store就是当前的store实例
+    // 实例都是对象数据类型的{state:{...},dispatch,commit}
+    Vue.use(Vuex);// 他会默认让Vuex的install执行
+
+    let child = {
+
+      template:`<div>child <button @click="add(1)">点击</button>{{$store.state.num}}</div>`,
+      methods:{
+        // fn(){
+        //   // this.$store.commit('add',100)
+        //   this.$store.dispatch('add',1)
+        // },
+        // // add(value){
+        // //   this.$store.commit('add',value)
+        // // }
+        ...Vuex.mapActions(['add'])
+      }
+    }
+    
+    let vm = new Vue({
+      el: '#app',
+      methods:{},
+      components:{
+        child
+      },
+      computed:{
+        num(){
+          return this.$store.state.num
+        },
+        ...Vuex.mapState(['num','msg']),
+        w:()=>{
+            console.log(this,80);
+            return 1
+        }
+      },
+      store:store,
+      ss:100
+      // 在这里写的属性都会跑到当前实例的$options对象里去
+    })
+    // console.log(vm);
+    
+  </script>
+</body>
+
+</html>

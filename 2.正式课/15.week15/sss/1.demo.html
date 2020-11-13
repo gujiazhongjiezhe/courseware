@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{num}}
+    {{$store.getters.sex}}
+    <child></child> 
+    <button @click="fn">点击</button>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+  <script>
+  let store = new Vuex.Store({
+      state:{
+        num:1,
+        msg:200,
+        s:300
+      },
+      getters:{
+        sex(state){
+          return state.num%2 === 0? '男':'女' 
+        }
+      },
+      mutations:{
+        add(state,payload){
+            state.num = state.num + payload 
+        }
+      },
+      actions:{
+        // 这里支持异步的写法
+        add({commit},payload){
+          setTimeout(()=>{
+            commit('add',payload)
+          },2000)
+        }
+      }
+  });
+  // store是一个对象：state
+  console.log(store);
+
+
+  let child = {
+    template:`<div>child{{$store.state.num}}</div>`
+  }
+  let vm = new Vue({
+    el:'#app',
+    store:store, // 把当前的store挂载到一个组件上，以属性$store接收
+    data(){
+      // data中的对象只是一个容器
+      // 把store中的数据放到这里是没有响应式的
+      return {
+        // num:this.$store.state.num
+      }
+      
+    },
+    computed:{
+      // num(){
+      //   return this.$store.state.num
+      // },
+      ...Vuex.mapState(['num','msg','s'])
+    },
+    components:{
+      child
+    },
+    methods:{
+      fn(){
+        // this.$store.commit('add',1)
+        this.$store.dispatch('add',1)
+      },
+      ...Vuex.mapActions(['add']),
+      add(value){
+        this.$store.dispatch('add',value)
+      }
+    }
+  })
+  </script>
+</body>
+</html>
